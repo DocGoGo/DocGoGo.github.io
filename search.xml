@@ -1,6 +1,261 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>Linux RHCE-124（第一章节）</title>
+    <url>/2025/02/27/hello-world/</url>
+    <content><![CDATA[<p>欢迎阅览我的文章，本章节将介绍什么是Linux，演示环境为RedHat-9</p>
+<h2 id="为什么要了解Linux？"><a href="#为什么要了解Linux？" class="headerlink" title="为什么要了解Linux？"></a>为什么要了解Linux？</h2><p>​	Linux是IT专业人士必须了解的关键技术。</p>
+<p>​	Linux目前在全球范围得到广泛的使用。互联网上的用户每天通过万维网浏览各式各样的网页，例如此刻您正在通过互联网访问我的博客网站，与Linux应用和Web服务器系统进行交互。</p>
+<p>​	在现代互联网时代，Linux和Windows是主要的操作系统。随着Linux广泛在企业、云等领域的采用，您有许多理由学习Linux</p>
+<ul>
+<li>Windows用户需要与Linux上托管的服务进行交互。</li>
+<li>应用开发中，Linux常托管应用及运行。</li>
+<li>云计算中，私有云或公有云实例都在使用Linux作为操作系统</li>
+<li>移动应用及移动设备等通常都运行在Linux上</li>
+</ul>
+<h3 id="Linux的优点"><a href="#Linux的优点" class="headerlink" title="Linux的优点"></a>Linux的优点</h3><ul>
+<li><p>Linux是开源软件</p>
+<ul>
+<li>开源意味着免费，您可以彻底了解程序或系统的工作方式，并且可以对其进行更改，并将他分享给他人使用，从而加快创新速度。</li>
+</ul>
+</li>
+<li><p>Linux提供命令行（CLI），不仅访问便捷，并且具有强大的脚本化功能。</p>
+<ul>
+<li>Linux构建时的设计理念是用户可以通过CLI执行所有管理任务。它能够轻松实现自动化、部署和配置，并简化本地和远程系统的管理，从而实现易用性和稳定性。</li>
+</ul>
+</li>
+<li><p>Linux是一种模块化的操作系统，管理员可以轻松替换或删除组件</p>
+<ul>
+<li>需要时，可以对系统组件进行升级和更新，Linux是一个通用开发工作站，也可以是特意精简化的软件设备</li>
+</ul>
+</li>
+</ul>
+<h3 id="RedHat是谁？"><a href="#RedHat是谁？" class="headerlink" title="RedHat是谁？"></a>RedHat是谁？</h3><p>​	RedHat翻译过来就是红色的帽子，同时它的LoGo也是一顶红色的帽子，在国内统称为红帽。</p>
+<p>​	红帽是目前世界领先的开源软件解决方案供应商，使用社区驱动的方式提供可靠和高性能的云、Linux、中间件、存储和虚拟化技术。</p>
+<h3 id="什么是Linux发行版"><a href="#什么是Linux发行版" class="headerlink" title="什么是Linux发行版"></a>什么是Linux发行版</h3><p>​	Linux发行版是有一种可安装的操作系统，由Linux内核以及提供支持的用户程序和库构建而成。完整的Linux系统又多个独立的开发社区开发，这些社区协同处理各个组件。发行版让用户能够轻松安装和管理正常运行的Linux系统。</p>
+<p>​	1991年，名为Linus Torvalds的人开发了Unix内核，将其命名为Linux，作为开源软件进行授权。内核是操作系统的核心，它管理着硬件、内存以及运行中的程序调度。Linux内核可通过其他开源软件加以补充，如来自GNU项目的实用工具和程序、来自MIT的X window Systen的图形界面或Apache HTTP Web服务器等其他开源组件，以构建成一个完整、开源的类Unix操作系统</p>
+<h2 id="访问命令行"><a href="#访问命令行" class="headerlink" title="访问命令行"></a>访问命令行</h2><h3 id="Bash-Shell简介"><a href="#Bash-Shell简介" class="headerlink" title="Bash Shell简介"></a>Bash Shell简介</h3><p>​		命令行是基于文本的界面，可用于向计算机系统输入指令。Linux命令行由名为Shell的程序提供。</p>
+<p>​		红帽 Linux中为用户提供的默认shell是GNU Bourne-Again Shell简称(bash)。bash shell是UNIX系统上原始 Bourne shell简称(sh)的改进版本。</p>
+<p>​		Shell在等待用户输入时会显示有一个字符串，称为Shell提示符。当普通用户启用Shell时，提示符为（$）美元符结尾的字符。kiosk则为当前所使用的用户名，foundation0则为当前您操作的主机名称</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[kiosk@foundation0 ~]$</span><br></pre></td></tr></table></figure>
+
+
+
+<p>​		如果以超级用户root运行Shell，则美元符则会被替换为（#）井号字符。次字符表明当前是在超级用户下进行操作Shell，有助于避免权限过大导致的误操作，从而影响到整个系统的异常破坏。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[root@foundation0 ~]# </span><br></pre></td></tr></table></figure>
+
+
+
+<p>​		bash命令是非常强大的。bash shell提供了脚本语言，可支持自动化任务。同时shell还可以实现图形化工具难以规模化完成的操作。</p>
+<h3 id="Shell基础知识"><a href="#Shell基础知识" class="headerlink" title="Shell基础知识"></a>Shell基础知识</h3><p>在shell提示符下输入的命令需要由三个基本部分组成：</p>
+<ul>
+<li>要运行的命令</li>
+<li>用于命令的行为选项</li>
+<li>通常作为命令的目标参数</li>
+</ul>
+<p>命令是也要运行的程序名称。其后可能跟着一个或多个选项，用于表示该命令的行为或作用。选项通常以一个或两个破折号开头（例如：-a或 –all），有一个破折号代表选项简写，两个代表选项全称。命令和后面可能会跟着一个或多个参数，这些参数通常用于指明应在其中运行命令的目标。</p>
+<p>例如：usermod -L user01，usermod是命令，-L是选项，而user01则是参数。此命令用于锁定user01用户账号的密码。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[root@foundation0 home]# usermod -L user01</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="登录远程系统"><a href="#登录远程系统" class="headerlink" title="登录远程系统"></a>登录远程系统</h3><p>​		Linux与用户和管理员通常需要通过网络连接到远程系统来获得对远程系统的shell访问权限。</p>
+<p>​		在Linux中，获取远程系统上的shell提示符最常用的方式是使用Secure Shell（SSH）。大多数Linux系统都会默认提供SSH的命令行程序来满足这样一用途需求。</p>
+<p>​		在以下示例中，在计算机上的shell提示符中使用sshmingl以student用户身份远程登录Linux系统名为servera的主机</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[student@workstation ~]$ ssh servera@student</span><br><span class="line">The authenticity of host <span class="string">&#x27;servera (172.25.250.10)&#x27;</span> can<span class="string">&#x27;t be established.</span></span><br><span class="line"><span class="string">ED25519 key fingerprint is SHA256:peUGgfxFNw6Jt6WK4CB2rs+jql1/LhA32M1+8zBawLI.</span></span><br><span class="line"><span class="string">This key is not known by any other names</span></span><br><span class="line"><span class="string"># 验证指纹</span></span><br><span class="line"><span class="string">Are you sure you want to continue connecting (yes/no/[fingerprint])? yes</span></span><br><span class="line"><span class="string">Warning: Permanently added &#x27;</span>servera<span class="string">&#x27; (ED25519) to the list of known hosts.</span></span><br><span class="line"><span class="string">student@servera&#x27;</span>s password:  <span class="comment"># 输入远程服务器的student用户密码</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>​		ssh命令通过加密连接来防止同学被窃听或截获密码和内容。</p>
+<p>​		在一些场景中，不允许ssh使用密码进行登录，以加强安全性，在不输入密码的情况下对远程计算机进行身份验证的另一种方式是利用公元幺身份验证。</p>
+<p>​		使用这种身份验证时，用户需要拥有内含私钥的的特殊身份文件，这相当于与用户的加密密码。在远程服务器上的账户配置有匹配的公钥，公钥不是保密的。在登录时，用户可以指定ssh私钥，如果该远程服务器上的对应账户中安装了他们的匹配公钥就会在不询问密码的情况下让用户登录</p>
+<p>​		以下示例中，计算机使用shell提示符的用户通过ssh使用公钥身份验证的方式以student用户身份登录servera主机。ssh是命令，-i选项可用于只用你当前主机的私钥文件，即.ssh&#x2F;lab_rsa。当该私钥用于远程主机servera下的student用户所拥有的公钥相互匹配，则无需密码，可直接登录到servera的shell提示符中</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[student@workstation ~]$ ssh -i .ssh/lab_rsa servera</span><br><span class="line">Activate the web console with: systemctl <span class="built_in">enable</span> --now cockpit.socket</span><br><span class="line"></span><br><span class="line">Register this system with Red Hat Insights: insights-client --register</span><br><span class="line">Create an account or view all your systems at https://red.ht/insights-dashboard</span><br><span class="line">Last login: Wed Feb 26 05:09:03 2025 from 172.25.250.9</span><br><span class="line">[student@servera ~]$ </span><br></pre></td></tr></table></figure>
+
+
+
+<p>​		为保证连接正常，只有拥有该私钥文件的用户才能读取私钥文件。在上述示例中，私钥位于.ssh&#x2F;lab_rsa文件中，可以使用chmod 600 .ssh&#x2F;lab_rsa来确保只有其所有者才能够读取该文件。后面的文章将会详细讨论如何设置文件权限。</p>
+<p>​		此外，用户还可能配置了无需指定私钥的方式，省略上述示例中 -i 指定私钥的操作，在后续章节也会陆续详细讨论。</p>
+<h3 id="从远程系统中注销退出"><a href="#从远程系统中注销退出" class="headerlink" title="从远程系统中注销退出"></a>从远程系统中注销退出</h3><p>​	当您对ssh远程主机的操作完成后，想退出远程主机的shell时，可以悬着以下方式来结束本次远程会话。</p>
+<ul>
+<li>快捷键：Ctrl+D来结束会话</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[student@servera ~]$ </span><br><span class="line"><span class="built_in">logout</span></span><br><span class="line">Connection to servera closed.</span><br><span class="line">[student@workstation ~]$</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>命令行：exit</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[student@servera ~]$ <span class="built_in">exit</span></span><br><span class="line"><span class="built_in">logout</span></span><br><span class="line">Connection to servera closed.</span><br><span class="line">[student@workstation ~]$ </span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h2 id="使用Bash-Shell执行命令"><a href="#使用Bash-Shell执行命令" class="headerlink" title="使用Bash Shell执行命令"></a>使用Bash Shell执行命令</h2><h3 id="基本命令语法"><a href="#基本命令语法" class="headerlink" title="基本命令语法"></a>基本命令语法</h3><p>​	GNU Bourne-Again Shell（bash）这个程序可以理解为用户输入的命令窗口。输入到shell中的每一个字符串最多有三个部分：命令、选项（通常以-或–开头）、参数。输入到Shell中的每个单词通过空格与其他单次间隔开。命令则是系统中安装的程序名称。每个命令都具有自己的选项和参数。</p>
+<p>​	在单独的行上输入每个命令。系统会显示命令的输出结果，然后显示下一行shell提示符。此命令是输出当前使用的用户名称。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[kiosk@foundation0 ~]$ <span class="built_in">whoami</span> </span><br><span class="line">kiosk</span><br><span class="line">[kiosk@foundation0 ~]$</span><br></pre></td></tr></table></figure>
+
+
+
+<p>​	如果要在一行shell提示符中输入多个命令，则可以使用分号进行分割（;）。分号是一类成为元字符的字符成员，对于bash具有特殊的解读作用。这时系统会分别执行你输入的多个命令，并分别显示多个命令的输出结果，最后显示下一行shell提示符。</p>
+<p>​	whoami为第一个命令，（;）分号分割，hostname为第二个命令，作用输输出当前主机名称</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[kiosk@foundation0 ~]$ <span class="built_in">whoami</span> ; hostname</span><br><span class="line">kiosk</span><br><span class="line">foundation0.ilt.example.com</span><br><span class="line">[kiosk@foundation0 ~]$ </span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h3 id="编写简单命令"><a href="#编写简单命令" class="headerlink" title="编写简单命令"></a>编写简单命令</h3><p>​	date命令可显示当前的日期和时间。超级用户或者特权用户也可以使用date来设置系统时钟。使用（+）号作为参数，指定日期命令的格式字符串。</p>
+<p>​	下列示例分别使用date命令显示当前时间，以及date加参数+%R指定输出格式，只输出时、分。以及+%x显示年月日。+%Y-%m-%d:%H-%M-%S则是按照你给出的参数分别自定义日期输出格式。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[kiosk@foundation0 ~]$ <span class="built_in">date</span></span><br><span class="line">Thu Feb 27 10:48:35 AM CST 2025</span><br><span class="line">[kiosk@foundation0 ~]$ <span class="built_in">date</span> +%R</span><br><span class="line">10:48</span><br><span class="line">[kiosk@foundation0 ~]$ <span class="built_in">date</span> +%x</span><br><span class="line">02/27/2025</span><br><span class="line">[kiosk@foundation0 ~]$ <span class="built_in">date</span> +%Y-%m-%d:%H-%M-%S</span><br><span class="line">2025-02-27:10-49-03</span><br><span class="line">[kiosk@foundation0 ~]$ </span><br></pre></td></tr></table></figure>
+
+
+
+<p>​	不带选项的passwd命令将更改当前用户的密码。若要更改密码，请先指定账户原始密码（当前密码）。默认情况passwd命令配置为需要强密码，其包含小写字母、大写字母、数字呵呵字符，并且不以字典中的标准单词为基础。超级用户或者特权用户可以使用passwd命令更改其他用户的密码。</p>
+<p>​	输入当前密码以及新密码时，你的输入不会在shell窗口显示，所以修改避免输入错误，建议在外部将密码粘贴进来</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[kiosk@foundation0 ~]$ passwd </span><br><span class="line">Changing password <span class="keyword">for</span> user kiosk.</span><br><span class="line">Current password: <span class="comment"># redhat</span></span><br><span class="line">New password: <span class="comment"># Rey@183dv</span></span><br><span class="line">Retype new password: <span class="comment"># Rey@183dv</span></span><br><span class="line">passwd: all authentication tokens updated successfully.</span><br><span class="line">[kiosk@foundation0 ~]$</span><br></pre></td></tr></table></figure>
+
+
+
+<p>​	如果输入的密码安全级别过低，是无法正常进行修改的，例如下方示例：</p>
+<p>​		1、输入的密码少于8为字符，修改失败</p>
+<p>​		2、密码存在于标准字典中，安全级别过低，修改失败</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[kiosk@foundation0 ~]$ passwd </span><br><span class="line">Changing password <span class="keyword">for</span> user kiosk.</span><br><span class="line">Current password: <span class="comment"># redhat</span></span><br><span class="line">New password: <span class="comment"># redhat1</span></span><br><span class="line">BAD PASSWORD: The password is shorter than 8 characters</span><br><span class="line">passwd: Authentication token manipulation error</span><br><span class="line"></span><br><span class="line">[kiosk@foundation0 ~]$ passwd </span><br><span class="line">Changing password <span class="keyword">for</span> user kiosk.</span><br><span class="line">Current password: <span class="comment"># redhat</span></span><br><span class="line">New password: <span class="comment"># 1q2w3e4r</span></span><br><span class="line">BAD PASSWORD: The password fails the dictionary check - it is based on a dictionary word</span><br><span class="line">passwd: Authentication token manipulation error</span><br></pre></td></tr></table></figure>
+
+
+
+<p>​	Linux中不需要文件扩展名来区分文件类型。file命令扫描文件的已编译标头中的2位数字magic number，并显示其类型。文本文件可被识别，因为它们没有经过编译。</p>
+<p>​	如下示例，分别查看了三个文件的类型，第一个为txt文本类型，第二个可执行文件，第三个为文件夹（目录）</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[kiosk@foundation0 ~]$ file /etc/passwd</span><br><span class="line">/etc/passwd: ASCII text</span><br><span class="line">[kiosk@foundation0 ~]$ file /bin/passwd </span><br><span class="line">/bin/passwd: setuid ELF 64-bit LSB pie executable, x86-64, version 1 (SYSV), dynamically linked, interpreter /lib64/ld-linux-x86-64.so.2, BuildID[sha1]=a467cb9c8fa7306d41b96a820b0178f3a9c66055, <span class="keyword">for</span> GNU/Linux 3.2.0, stripped</span><br><span class="line">[kiosk@foundation0 ~]$ file /home/</span><br><span class="line">/home/: directory</span><br><span class="line">[kiosk@foundation0 ~]$ </span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<p>​	magic number是什么，可以理解为你的文本文件里面的内容，它是的编码格式是什么，然后file命令就会根据你文本内容的前两个数值去分辨你当前的文件属于什么类型</p>
+<p>​	例如，我当前的ssh.sh里面是一些字符串，我的fiel命令解释改文本属于txt文本类型。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[kiosk@foundation0 ~]$ <span class="built_in">cat</span> ssh.sh </span><br><span class="line">afadsad</span><br><span class="line">[kiosk@foundation0 ~]$ file ssh.sh </span><br><span class="line">ssh.sh: ASCII text</span><br></pre></td></tr></table></figure>
+
+<p>​	那么我对改文本的内容进行修改，修改为了标准的shell脚本格式，此时fiile命令就会解释该文本是一个可执行文件，类似于Windows的.exe文件</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[kiosk@foundation0 ~]$ <span class="built_in">cat</span> ssh.sh </span><br><span class="line"><span class="comment">#!/bin/bash</span></span><br><span class="line">[kiosk@foundation0 ~]$ file ssh.sh </span><br><span class="line">ssh.sh: Bourne-Again shell script, ASCII text executable</span><br><span class="line">[kiosk@foundation0 ~]$</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="查看文件的内容"><a href="#查看文件的内容" class="headerlink" title="查看文件的内容"></a>查看文件的内容</h3><p>​	Linux中最简单最常用的命令是cat命令。通过这个命令您可以创建单个或多个文件以及查看文件内容，串联不同文件中的内容，以及文件内容重定向到终端或文件内。</p>
+<p>​	以下示例演示如何查看&#x2F;etc&#x2F;passwd文件的内容</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[kiosk@foundation0 ~]$ <span class="built_in">cat</span> /etc/passwd</span><br><span class="line">root:x:0:0:root:/root:/bin/bash</span><br><span class="line">bin:x:1:1:bin:/bin:/sbin/nologin</span><br><span class="line">daemon:x:2:2:daemon:/sbin:/sbin/nologin</span><br><span class="line">adm:x:3:4:adm:/var/adm:/sbin/nologin</span><br><span class="line">lp:x:4:7:lp:/var/spool/lpd:/sbin/nologin</span><br><span class="line"><span class="built_in">sync</span>:x:5:0:<span class="built_in">sync</span>:/sbin:/bin/sync</span><br><span class="line">shutdown:x:6:0:shutdown:/sbin:/sbin/shutdown</span><br><span class="line">halt:x:7:0:halt:/sbin:/sbin/halt</span><br><span class="line">mail:x:8:12:mail:/var/spool/mail:/sbin/nologin</span><br><span class="line">operator:x:11:0:operator:/root:/sbin/nologin</span><br><span class="line">games:x:12:100:games:/usr/games:/sbin/nologin</span><br><span class="line">......省略......</span><br></pre></td></tr></table></figure>
+
+
+
+<p>​	如果要显示多个文件的内容，请再cat命令后将文件名作为参数进行传入</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">kiosk@foundation0 ~]$ <span class="built_in">cat</span> file1 file2 </span><br><span class="line">HHA</span><br><span class="line">XIXIXI</span><br><span class="line">[kiosk@foundation0 ~]$ </span><br></pre></td></tr></table></figure>
+
+
+
+<p>​	如果一些文件内容较长，可能比shell终端提供的显示空间还要多很多，cat命令不会将文件的内容显示为多个页面。这时您可以使用less命令一次显示文件的一个页面，然后通过鼠标滚轮或键盘的上下键来进行翻页查看，键盘按q退出查看。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">[kiosk@foundation0 ~]$ less file1 </span><br></pre></td></tr></table></figure>
+
+
+
+<p>​	head和tail命令分别显示文件的开头和结尾部分。默认情况下这两个命令显示文件的开头10行或结尾10行，但您可以通过它的选项-n 来指定一次显示自定义行数。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[kiosk@foundation0 ~]$ <span class="built_in">head</span> -n 2 /etc/passwd</span><br><span class="line">root:x:0:0:root:/root:/bin/bash</span><br><span class="line">bin:x:1:1:bin:/bin:/sbin/nologin</span><br><span class="line"></span><br><span class="line">[kiosk@foundation0 ~]$ <span class="built_in">tail</span> -n 5 /etc/passwd</span><br><span class="line">systemd-oom:x:977:977:systemd Userspace OOM Killer:/:/usr/sbin/nologin</span><br><span class="line">kiosk:x:1000:1000::/home/kiosk:/bin/bash</span><br><span class="line">apache:x:48:48:Apache:/usr/share/httpd:/sbin/nologin</span><br><span class="line">named:x:25:25:Named:/var/named:/sbin/nologin</span><br><span class="line">dhcpd:x:177:177:DHCP server:/:/sbin/nologin</span><br></pre></td></tr></table></figure>
+
+
+
+<p>​	wc命令可计算文件中的行、字和字符数量。使用-l、-w或-c选项，分别可以仅显示行数、字数或字符数</p>
+<p>​	以下示例中，我们可以看到file1文件中有一行数据，Ha Xi分别两个字数，以及加上他俩中间的空格分割符，共5个字符。分别对应上wc输出的1、2、6。这时你可能会有疑问，该文件里我怎么数都是5个字母，怎么会统计出6个字符数呢？</p>
+<p>​	那是因为wc也是通过类似cat这样的命令去先去输出了文本里的内容，然后进行统计的，cat这样输出的内容会自带一个换行符，所以我们肉眼是看不出来的，但是换行符实际是存在的。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[kiosk@foundation0 ~]$ <span class="built_in">cat</span> file1 </span><br><span class="line">Ha Xi</span><br><span class="line">[kiosk@foundation0 ~]$ <span class="built_in">wc</span> file1 </span><br><span class="line">1 2 6 file1</span><br><span class="line">[kiosk@foundation0 ~]$</span><br></pre></td></tr></table></figure>
+
+<p>​	如果您想把这个换行符去掉，可以使用如下命令，其中|符号，称为管道符，作用是将它前面命令的输出结果，传递到后面的命令中去使用，tr -d ‘\n’则表示删除换行符。这些目前在后面的章节会陆续进行详细讨论，目前知道我们wc时，所统计的字符数为什么会多一个的原理即可。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">[kiosk@foundation0 ~]$ cat file1 | tr -d &#x27;\n&#x27; | wc </span><br><span class="line">      0       2       5</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="了解Tab补全"><a href="#了解Tab补全" class="headerlink" title="了解Tab补全"></a>了解Tab补全</h3><p>​	通过之后的学习，我们将会遇到许多命令，包括一些命令、选项、参数等很多很长，做为人很难全部一个字符都不差的记住，这时就得用上我们的Tab补全功能，这对我们记命令、找命令的帮助是很大的，它可以帮助你快速的找到你想找的命令。</p>
+<p>​	例如：我们要修改密码，但是我只知道它是pa开头的，后面的字母我记不清了，那么我们则可以通过输入pa，随后快速按两下键盘上的Tab键，他会在你主机的众多软件命令中找关于pa开头的命令，如果你主机众多软件里只有一个pa开头的，那么直接会给你把后面的字母全部自动补充上来，如果存在多个，则它会将pa开头的命令列出来，您则可以根据你的记忆去寻找相似的，勾起你粉红色的回忆。</p>
+<p>​	此时，它会列出pa开头的相关命令，然后我们就在里面找，找了一圈发现，我的回忆勾起来一些了，好像是pas后面的我又记不起来了，那么我就继续pas加TAB，缩小范围，这是选择的范围就小了，目前只出现三个pas相关的了，我一看到passwd的单词就是密码的意思，我的回忆被完全勾起来了，那就再pas的基础上再加上s，pass+TAB+TAB，再主机命令中唯一了，剩下的wd就自动给补充到shell提示符中了</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[kiosk@foundation0 ~]$ pa <span class="comment"># 快速按两下TAB+TAB</span></span><br><span class="line">pacat                 pam_timestamp_check   parted</span><br><span class="line">pack200               pango-list            partprobe</span><br><span class="line">packer                pango-segmentation    partx</span><br><span class="line">pacmd                 pango-view            passwd</span><br><span class="line">pactl                 paperconf             <span class="built_in">paste</span></span><br><span class="line">page_owner_sort       paperconfig           pasuspender</span><br><span class="line">pam_console_apply     paplay                patch</span><br><span class="line">pam_namespace_helper  parec                 <span class="built_in">pathchk</span></span><br><span class="line">pamon                 parecord              pax11publish</span><br><span class="line">[kiosk@foundation0 ~]$ pas  <span class="comment"># 快速按两下TAB+TAB</span></span><br><span class="line">passwd       <span class="built_in">paste</span>        pasuspender  </span><br><span class="line">[kiosk@foundation0 ~]$ pass <span class="comment"># 快速按两下TAB+TAB</span></span><br><span class="line">[kiosk@foundation0 ~]$ passwd <span class="comment"># pass唯一了，则剩下的全部字符都自动补充上来了</span></span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<p>​	相同，每个命令的选项很多我们也是可以通过Tab的方式查找补充，TAB功能很强大，强烈建于不管现在还是工作中尽量都使用Tab进行命令、选项、参数的补充，这样可以减少我们手动输入导致的很多执行错误的问题。</p>
+<p>​	我们输入命令后，选项是由一个或多个减号（-）组成的，所以我们打上一个或两个减号，在按两下tab，则可以列出该命令的全部选项，同样也支持–g这样的模糊搜索示例如下：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[kiosk@foundation0 ~]$ useradd --  <span class="comment"># 列出useradd所有的选项</span></span><br><span class="line">--badnames              --<span class="built_in">help</span>                  --prefix</span><br><span class="line">--base-dir              --home-dir              --root</span><br><span class="line">--btrfs-subvolume-home  --inactive              --selinux-user</span><br><span class="line">--comment               --key                   --shell</span><br><span class="line">--create-home           --no-create-home        --skel</span><br><span class="line">--defaults              --no-log-init           --system</span><br><span class="line">--expiredate            --non-unique            --uid</span><br><span class="line">--gid                   --no-user-group         --user-group</span><br><span class="line">--<span class="built_in">groups</span>                --password              </span><br><span class="line">[kiosk@foundation0 ~]$ useradd --g  <span class="comment"># 列出useradd --g开头选项</span></span><br><span class="line">--gid     --<span class="built_in">groups</span>  </span><br><span class="line">[kiosk@foundation0 ~]$ useradd --g</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="在Shell上编辑多行长命令"><a href="#在Shell上编辑多行长命令" class="headerlink" title="在Shell上编辑多行长命令"></a>在Shell上编辑多行长命令</h3><p>​	在以后的学习及工作中，我们可能会遇到命令+多个选项、参数组成的一个很长的执行命令，在一行Shell提示符中无法一次展示，且阅读性很差。这时我们可以选择将该命令分成多行来书写，我们直接回车换行，回车的含义（作用）是执行，这样我们的命令就直接被执行，无法达到换行书写的效果。</p>
+<p>​	这时我们可以通过反斜杠（\）也称为转义符，它在Linux中的作用是忽略后续字符的含义，所有我们在需要换行书写的结尾接上反斜杠（\）我们的回车执行的含义就会被忽略，也就达到了换行书写的效果。</p>
+<p>​	以下示例中，head -n 3表示查询文件内容的头3行，通过反斜杠（\）将我们之后要回车执行的含义给忽略掉，这样我们的命令行就切换到了下一行，我们接着写了两个路径较长的文件，查看这两个文件的内容，当我们要执行的时候最后一行不加反斜杠（\）则就是回车原本在Linux中的含义（执行）</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[kiosk@foundation0 ~]$ <span class="built_in">head</span> -n 3 \</span><br><span class="line">&gt; /usr/share/dict/words \</span><br><span class="line">&gt; /usr/share/dict/linux.words </span><br><span class="line"><span class="comment"># 以下是head查询出来的文件内容输出</span></span><br><span class="line">==&gt; /usr/share/dict/words &lt;==</span><br><span class="line">1080</span><br><span class="line">10-point</span><br><span class="line">10th</span><br><span class="line"></span><br><span class="line">==&gt; /usr/share/dict/linux.words &lt;==</span><br><span class="line">1080</span><br><span class="line">10-point</span><br><span class="line">10th</span><br><span class="line">[kiosk@foundation0 ~]$</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h3 id="显示命令历史记录"><a href="#显示命令历史记录" class="headerlink" title="显示命令历史记录"></a>显示命令历史记录</h3><p>​	在学习和工作中我们可能会遇到重复的命令需要重复用到的情况，但是又不想老是重复输入较长的命令，以及我想看看我之前都执行了哪些命令等情况。这时我们就可能需要用到历史命令记录功能，方法又两种可以查看到我们的历史命令。</p>
+<ul>
+<li><p>​	方法一：在shell提示符中，使用键盘中的 <code>↑</code>【PgUp】或 <code>↓</code>【PgDn】，上下箭头来翻页查找之前输入过的命令。</p>
+</li>
+<li><p>方法二：通过history命令，可以将您输入的命令以结果输出的方式展示出来，并且带有每条命令的number序号</p>
+<p>我们通过history查看到历史命令后，我们还可以通过<code>!String</code>命令或<code>!number</code>序号，去直接执行最近或指定的命令。</p>
+<p><code>!String</code>命令是执行你最近一次执行过的类似命令。</p>
+<p>​	例如：<code>!ls</code>，则是执行您最近一次执行过的 <code>!ls</code> 的命令。</p>
+<p><code>!number </code>则是根据你history命令查询出来的每条命令的序号指定执行。</p>
+<p>​	例如：<code>!46</code>则是执行你history结果中的序号46的命令</p>
+</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">kiosk@foundation0 ~]$ <span class="built_in">history</span> </span><br><span class="line">  ...忽略...</span><br><span class="line">   46  <span class="built_in">date</span>+%x</span><br><span class="line">   47  <span class="built_in">date</span> +%x</span><br><span class="line">   48  <span class="built_in">date</span> +%Y-%m-%d:%H-%M-%S</span><br><span class="line">   49  passwd </span><br><span class="line">   50  ll</span><br><span class="line">   51  file History-7.x.txt </span><br><span class="line">   52  file Foundation-20221114.tgz </span><br><span class="line">   53  <span class="built_in">ls</span> -a</span><br><span class="line">   54  <span class="built_in">ls</span> -la</span><br><span class="line">   55  <span class="built_in">ls</span> -n</span><br><span class="line">   56  file Foundation-20221114.tgz</span><br><span class="line">  ...忽略...</span><br><span class="line">  [kiosk@foundation0 home]$ !<span class="built_in">ls</span>  </span><br><span class="line"><span class="built_in">ls</span> -n  <span class="comment"># 我最近执行的ls命令是ls -n</span></span><br><span class="line">total 4</span><br><span class="line">drwx------. 18 1000 1000 4096 Feb 27 15:08 kiosk</span><br><span class="line"></span><br><span class="line">[kiosk@foundation0 home]$ !47</span><br><span class="line"><span class="built_in">date</span> +%x  <span class="comment"># 我的序号47是date +%x的命令</span></span><br><span class="line">02/27/2025</span><br><span class="line">[kiosk@foundation0 home]$</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="编辑命令行"><a href="#编辑命令行" class="headerlink" title="编辑命令行"></a>编辑命令行</h3><p>​	以交互方式使用时，bash具有命令行编辑功能。使用文本编辑器命令在当前输入的命令内移动并且进行修改，使用箭头键可以在当前命令内移动，也可以访问历史命令，在本章的界面部分以及做了介绍。下列表格中将介绍更强大的编辑命令方式，学会它可以帮助您在编辑命令时更加游刃有余，编辑命令更加娴熟、迅速。</p>
+<table>
+<thead>
+<tr>
+<th>快捷键</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Ctrl+A</td>
+<td>光标跳到命令行开头</td>
+</tr>
+<tr>
+<td>Ctrl+E</td>
+<td>光标跳到命令行末尾</td>
+</tr>
+<tr>
+<td>Ctrl+U</td>
+<td>将光标处到命令行开头的内容删除</td>
+</tr>
+<tr>
+<td>Ctrl+K</td>
+<td>将给光标处到命令行末尾内容删除</td>
+</tr>
+<tr>
+<td>Ctrl+LeftArrow（<code>←</code>）</td>
+<td>以当前光标为起点跳到命令行前一个字的开头</td>
+</tr>
+<tr>
+<td>Ctrl+RightArrow（<code>→</code>）</td>
+<td>以当前光标为起点跳到命令行后一个字的末尾</td>
+</tr>
+<tr>
+<td>Ctrl+R</td>
+<td>在历史命令记录列表中搜索模糊搜索历史命令</td>
+</tr>
+<tr>
+<td>Ctrl+W</td>
+<td>删除光标前的一个字</td>
+</tr>
+</tbody></table>
+]]></content>
+      <categories>
+        <category>RHCE</category>
+      </categories>
+      <tags>
+        <tag>RHCE</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Linux根目录磁盘扩容</title>
     <url>/2025/02/26/Linux%E6%A0%B9%E6%8C%82%E8%BD%BD%E7%9B%98%E6%89%A9%E5%AE%B9/</url>
     <content><![CDATA[<h2 id="Linux根目录磁盘扩容"><a href="#Linux根目录磁盘扩容" class="headerlink" title="Linux根目录磁盘扩容"></a>Linux根目录磁盘扩容</h2><h3 id="环境准备"><a href="#环境准备" class="headerlink" title="环境准备"></a>环境准备</h3><p>假设目前我们的根目录磁盘使用率已达到100%，此刻我们的磁盘总容量为95G，并且通过lsblk发现了我新插入，即将要用于扩容到根目录的50G磁盘【nvme0n2】，环境已具备，即将开始扩容操作</p>
@@ -32,30 +287,6 @@
       </categories>
       <tags>
         <tag>Linux常见问题</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Hello World</title>
-    <url>/2025/02/21/hello-world/</url>
-    <content><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
-]]></content>
-      <categories>
-        <category>RHCE</category>
-      </categories>
-      <tags>
-        <tag>RHCE</tag>
       </tags>
   </entry>
 </search>
