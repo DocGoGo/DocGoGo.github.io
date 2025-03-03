@@ -1,8 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>Linux RHCE-124（第二章节）</title>
+    <url>/2025/03/01/Linux%20RHCE-124(%E7%AC%AC%E4%BA%8C%E7%AB%A0%E8%8A%82)/</url>
+    <content><![CDATA[<h2 id="从命令行管理文件"><a href="#从命令行管理文件" class="headerlink" title="从命令行管理文件"></a>从命令行管理文件</h2><p>​	</p>
+<p>欢迎阅览我的文章，本章节将介绍什么是Linux，演示环境为RedHat-9</p>
+<h3 id="描述Linux文件系统层次结构概念"><a href="#描述Linux文件系统层次结构概念" class="headerlink" title="描述Linux文件系统层次结构概念"></a>描述Linux文件系统层次结构概念</h3><p>​	Linux系统中的所有文件存储在文件系统中，他们被组织到一颗上下颠倒的树中，称为文件系统层次结构。这个层次结构是上下颠倒的树，因为树根在顶部，树根下方延伸处目录和子目录的分支。</p>
+<p>​	</p>
+<p>![RHCE-124-2-1.png](Linux RHCE-124(第二章节)&#x2F;RHCE-124-2-1.png)</p>
+]]></content>
+      <categories>
+        <category>RHCE</category>
+      </categories>
+      <tags>
+        <tag>RHCE</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Linux RHCE-124（第一章节）</title>
-    <url>/2025/02/27/hello-world/</url>
+    <url>/2025/02/27/Linux%20RHCE-124%EF%BC%88%E7%AC%AC%E4%B8%80%E7%AB%A0%E8%8A%82%EF%BC%89/</url>
     <content><![CDATA[<p>欢迎阅览我的文章，本章节将介绍什么是Linux，演示环境为RedHat-9</p>
 <h2 id="为什么要了解Linux？"><a href="#为什么要了解Linux？" class="headerlink" title="为什么要了解Linux？"></a>为什么要了解Linux？</h2><p>​	Linux是IT专业人士必须了解的关键技术。</p>
 <p>​	Linux目前在全球范围得到广泛的使用。互联网上的用户每天通过万维网浏览各式各样的网页，例如此刻您正在通过互联网访问我的博客网站，与Linux应用和Web服务器系统进行交互。</p>
@@ -256,6 +272,21 @@
       </tags>
   </entry>
   <entry>
+    <title>Linux RHCE-124（第二章节）</title>
+    <url>/2025/03/01/Linux%20RHCE-124%EF%BC%88%E7%AC%AC%E4%BA%8C%E7%AB%A0%E8%8A%82%EF%BC%89/</url>
+    <content><![CDATA[<h2 id="从命令行管理文件"><a href="#从命令行管理文件" class="headerlink" title="从命令行管理文件"></a>从命令行管理文件</h2><p>​	</p>
+<p>欢迎阅览我的文章，本章节将介绍什么是Linux，演示环境为RedHat-9</p>
+<h3 id="描述Linux文件系统层次结构概念"><a href="#描述Linux文件系统层次结构概念" class="headerlink" title="描述Linux文件系统层次结构概念"></a>描述Linux文件系统层次结构概念</h3><p>​	Linux系统中的所有文件存储在文件系统中，他们被组织到一颗上下颠倒的树中，称为文件系统层次结构。这个层次结构是上下颠倒的树，因为树根在顶部，树根下方延伸处目录和子目录的分支。</p>
+<p>![RHCE-124-2-1.png](Linux RHCE-124(第二章节)&#x2F;RHCE-124-2-1.png)</p>
+]]></content>
+      <categories>
+        <category>RHCE</category>
+      </categories>
+      <tags>
+        <tag>RHCE</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Linux根目录磁盘扩容</title>
     <url>/2025/02/26/Linux%E6%A0%B9%E6%8C%82%E8%BD%BD%E7%9B%98%E6%89%A9%E5%AE%B9/</url>
     <content><![CDATA[<h2 id="Linux根目录磁盘扩容"><a href="#Linux根目录磁盘扩容" class="headerlink" title="Linux根目录磁盘扩容"></a>Linux根目录磁盘扩容</h2><h3 id="环境准备"><a href="#环境准备" class="headerlink" title="环境准备"></a>环境准备</h3><p>假设目前我们的根目录磁盘使用率已达到100%，此刻我们的磁盘总容量为95G，并且通过lsblk发现了我新插入，即将要用于扩容到根目录的50G磁盘【nvme0n2】，环境已具备，即将开始扩容操作</p>
@@ -288,5 +319,10 @@
       <tags>
         <tag>Linux常见问题</tag>
       </tags>
+  </entry>
+  <entry>
+    <title>doc-test</title>
+    <url>/2025/03/03/doc-test/</url>
+    <content><![CDATA[<img src="/2025/03/03/doc-test/03/03/doc-test/RHCE-124-2-1.png" class title="RHCE-124-2-1.png">]]></content>
   </entry>
 </search>
