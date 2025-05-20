@@ -35,6 +35,223 @@
       </tags>
   </entry>
   <entry>
+    <title>Linux-RHCE-124-第三章节</title>
+    <url>/2025/03/07/01-RHCE/Linux-RHCE-124-%E7%AC%AC%E4%B8%89%E7%AB%A0%E8%8A%82/</url>
+    <content><![CDATA[<h1 id="在红帽企业Linux中获取帮助"><a href="#在红帽企业Linux中获取帮助" class="headerlink" title="在红帽企业Linux中获取帮助"></a>在红帽企业Linux中获取帮助</h1><h2 id="阅读手册页"><a href="#阅读手册页" class="headerlink" title="阅读手册页"></a>阅读手册页</h2><h3 id="Linux手册页简介"><a href="#Linux手册页简介" class="headerlink" title="Linux手册页简介"></a>Linux手册页简介</h3><p>​	本地系统上通常可用的文档来源之一是系统手册页或man page。软件包随附这些页面来提供文档，您可以使用man命令从命令行访问这些文档。页面存储在&#x2F;usr&#x2F;share&#x2F;man 目录的子目录中。</p>
+<p>​	man page 源自过去的Linux程序员手册，该手册篇幅很长，足以划分多个章节。每个章节包含有特定主题信息。</p>
+<table>
+<thead>
+<tr>
+<th>章节</th>
+<th>内容类型</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1</td>
+<td>用户命令</td>
+<td>可执行命令和shell程序</td>
+</tr>
+<tr>
+<td>2</td>
+<td>系统调用</td>
+<td>从用户空间调用的内核例程</td>
+</tr>
+<tr>
+<td>3</td>
+<td>库函数</td>
+<td>有程序库提供</td>
+</tr>
+<tr>
+<td>4</td>
+<td>特殊文件</td>
+<td>例如设备文件</td>
+</tr>
+<tr>
+<td>5</td>
+<td>文件格式</td>
+<td>用于许多配置文件和结构</td>
+</tr>
+<tr>
+<td>6</td>
+<td>游戏和屏保</td>
+<td>过去的趣味程序章节</td>
+</tr>
+<tr>
+<td>7</td>
+<td>惯例、标准和其他</td>
+<td>协议、文件系统</td>
+</tr>
+<tr>
+<td>8</td>
+<td>系统管理和特权命令</td>
+<td>维护任务</td>
+</tr>
+<tr>
+<td>9</td>
+<td>Linux内核API</td>
+<td>内部内核调用</td>
+</tr>
+</tbody></table>
+<p>​	为区分不同章节中相同的主题名称，man page参考中在主题后附上章节编号（用括号括起）。例如：passwd(1)介绍更改密码的命令，而passwd(5)说明用于存储本地用户账户的&#x2F;etc&#x2F;passwd配置文件相关格式。</p>
+<p>​	若要读取具体的man page，请使用man topic命令。man page一次显示一屏内容。man命令按照字母数字顺序搜索手册章节。例如：man passwd默认情况下只显示passwd(1)。要显示特定章节中的man page主题，您可以使用man section topic 命令。例如：man 5 passwd会显示passwd(5)。</p>
+<p>​	常见的系统管理主题在第一章（用户命令）、第五章（文件格式）和第八章（管理命令）中。采用特定故障排除工具的管理员页可以使用第二章（系统调用）。剩余的章节供内核开发等人员参考或用于高级管理。</p>
+<h3 id="阅览和搜索-Man-Page"><a href="#阅览和搜索-Man-Page" class="headerlink" title="阅览和搜索 Man Page"></a>阅览和搜索 Man Page</h3><p>​	高校的搜索主题并在man page中导航是一项非常重要的管理技能。您可以使用GUI管理goon根据来配置常见系统资源，但使用命令行界面依然更为高效。更有效的在命令行中找到所需man page信息。</p>
+<p>​	下表列出在查看man page时基本的导航命令：</p>
+<table>
+<thead>
+<tr>
+<th>命令</th>
+<th>结果</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Spacebar（空格）</td>
+<td>向前（向下）滚动一屏</td>
+</tr>
+<tr>
+<td>PageDown（下键）</td>
+<td>向前（向下）滚动一屏</td>
+</tr>
+<tr>
+<td>Pageup（上键）</td>
+<td>向后（向上）滚动一屏</td>
+</tr>
+<tr>
+<td>D</td>
+<td>向前（向下）滚动半屏</td>
+</tr>
+<tr>
+<td>U</td>
+<td>向后（向上）滚动半屏</td>
+</tr>
+<tr>
+<td>&#x2F;string</td>
+<td>在man page中搜索string内容</td>
+</tr>
+<tr>
+<td>N</td>
+<td>在man page中重复向前（向下）搜索</td>
+</tr>
+<tr>
+<td>Shift+N</td>
+<td>在man page中重复向后（向上）搜索</td>
+</tr>
+<tr>
+<td>G</td>
+<td>转到man page的开头</td>
+</tr>
+<tr>
+<td>shift+G</td>
+<td>转到man page的末尾</td>
+</tr>
+<tr>
+<td>Q</td>
+<td>退出man，并返回命令行</td>
+</tr>
+</tbody></table>
+<h3 id="阅读Man-Page"><a href="#阅读Man-Page" class="headerlink" title="阅读Man Page"></a>阅读Man Page</h3><p>​	man page将各个主题划分为几个部分。大多数主题共享相同的标题，并以相同的顺序显示。通常，主题不包含所有标题，因为并非所有标题都使用所有主题。</p>
+<p>​	常见的标题如下：</p>
+<table>
+<thead>
+<tr>
+<th>标题</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>NAME</td>
+<td>主题名称。通常是命令或文件名。简短的描述</td>
+</tr>
+<tr>
+<td>SYNOPSIS</td>
+<td>命令语法概要</td>
+</tr>
+<tr>
+<td>DESCRIPTION</td>
+<td>提供对主题的基本理解和描述</td>
+</tr>
+<tr>
+<td>OPTIONS</td>
+<td>命令执行选项说明</td>
+</tr>
+<tr>
+<td>EXAMPLES</td>
+<td>有关如何使用命令、功能或文件的示例</td>
+</tr>
+<tr>
+<td>FILES</td>
+<td>与man page相关的文件和目录的列表。</td>
+</tr>
+<tr>
+<td>SEE ALSO</td>
+<td>相关的信息，通常是其他man page 主题。</td>
+</tr>
+<tr>
+<td>BUGS</td>
+<td>软件中已知错误。</td>
+</tr>
+<tr>
+<td>AUTHOR</td>
+<td>有关草鱼撰写该主题的人员信息。</td>
+</tr>
+</tbody></table>
+<h3 id="根据关键字搜索man-page"><a href="#根据关键字搜索man-page" class="headerlink" title="根据关键字搜索man page"></a>根据关键字搜索man page</h3><p>​	使用man命令 -k（小写）选项（等同于apropos选项）可在man page的标题和描述中搜索关键字。关键字搜索的结果中显示与关键字匹配的man page 主题和章节编号列表。例如以下命令可搜索含词语passwd的man page。</p>
+<p>​	<code>注意：关键字搜索依赖于mandb(8)命令生成的索引，该命令必须以root身份允许。在安装含有man page软件包是，man-db-cache-update访问会自动允许mandb命令，如果您通过man -k 无法搜索相应标题，则可能需要您手动执行一个mandb。</code></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[root@foundation0 ~]# man -k passwd</span><br><span class="line">chgpasswd (8)        - update group passwords <span class="keyword">in</span> batch mode</span><br><span class="line">chpasswd (8)         - update passwords <span class="keyword">in</span> batch mode</span><br><span class="line">fgetpwent_r (3)      - get passwd file entry reentrantly</span><br><span class="line">getpwent_r (3)       - get passwd file entry reentrantly</span><br><span class="line">gpasswd (1)          - administer /etc/group and /etc/gshadow</span><br><span class="line">grub2-mkpasswd-pbkdf2 (1) - Generate a PBKDF2 password <span class="built_in">hash</span>.</span><br><span class="line">htpasswd (1)         - Manage user files <span class="keyword">for</span> basic authentication</span><br><span class="line">lpasswd (1)          - Change group or user password</span><br><span class="line">openssl-passwd (1ossl) - compute password hashes</span><br><span class="line">pam_localuser (8)    - require <span class="built_in">users</span> to be listed <span class="keyword">in</span> /etc/passwd</span><br><span class="line">passwd (1)           - update user<span class="string">&#x27;s authentication tokens</span></span><br><span class="line"><span class="string">passwd (1ossl)       - OpenSSL application commands</span></span><br><span class="line"><span class="string">passwd (5)           - password file</span></span><br><span class="line"><span class="string">passwd2des (3)       - RFS password encryption</span></span><br><span class="line"><span class="string">pwhistory_helper (8) - Helper binary that transfers password hashes from passwd or shadow to opasswd</span></span><br><span class="line"><span class="string">saslpasswd2 (8)      - set a user&#x27;</span>s sasl password</span><br><span class="line">smbpasswd (5)        - The Samba encrypted password file</span><br><span class="line">vncpasswd (1)        - change the VNC password</span><br><span class="line">[root@foundation0 ~]# </span><br></pre></td></tr></table></figure>
+
+
+
+<p>​	man -K（大写）选项可在全文页面中搜索关键字，而补仅仅是在标题和描述中搜索。全文搜索使用更多的系统资源，耗费更长的时间。</p>
+<p>​	使用全文页面搜索时，man 命令显示含有匹配项的第一页。按Q退出第一页，man命令则可显示下一页。</p>
+<p>​	在本示例中，man显示每个匹配项，同时允许您查看或跳过每个匹配项。<code>man page页按Q退出，Ctrl+D（跳过该匹配项），Ctrl+c（退出匹配）</code></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[root@foundation0 ~]# man -K passwd</span><br><span class="line">--Man-- next: <span class="built_in">cut</span>(1p) [ view (<span class="built_in">return</span>) | skip (Ctrl-D) | quit (Ctrl-C) ]</span><br><span class="line"></span><br><span class="line">--Man-- next: <span class="built_in">logname</span>(1p) [ view (<span class="built_in">return</span>) | skip (Ctrl-D) | quit (Ctrl-C) ]</span><br><span class="line"></span><br><span class="line">--Man-- next: <span class="built_in">sort</span>(1p) [ view (<span class="built_in">return</span>) | skip (Ctrl-D) | quit (Ctrl-C) ]</span><br><span class="line"></span><br><span class="line">--Man-- next: xargs(1) [ view (<span class="built_in">return</span>) | skip (Ctrl-D) | quit (Ctrl-C) ]</span><br><span class="line">^C</span><br><span class="line">[root@foundation0 ~]# </span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="模拟操作练习"><a href="#模拟操作练习" class="headerlink" title="模拟操作练习"></a>模拟操作练习</h2><p>​	请根据下列要求完成用户创建，以及用户密码修改</p>
+<ul>
+<li>查询su命令使用方法，将当前shell（kiosk）用户切换为root用户。</li>
+<li>查询useradd命令使用方法，使用该命令创建一个名为redhat01的用户。</li>
+<li>查询passwd命令使用方法，使用该命令为redhat01用户更新密码。</li>
+</ul>
+<h2 id="模拟练习讲解"><a href="#模拟练习讲解" class="headerlink" title="模拟练习讲解"></a>模拟练习讲解</h2><p>​	根据题目已知，我们首先要使用man page查询关于su命令的一个使用方法，并且使用su命令将我们从kiosk用户切换到root用户的shell提示符。</p>
+<p>​	方式一：通过man -k 来查找su的page页，但这样会找出很多有关su的page页，在我们已知我们要查找su的用户命令时，不推荐使用</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[kiosk@foundation0 ~]$ man -k su</span><br><span class="line">.....忽略.....</span><br><span class="line">strspn (3)           - get length of a prefix substring</span><br><span class="line">strspn (3p)          - get length of a substring</span><br><span class="line">strstr (3)           - locate a substring</span><br><span class="line">strstr (3p)          - find a substring</span><br><span class="line">su (1)               - run a <span class="built_in">command</span> with substitute user and group ID</span><br><span class="line">Sub::Exporter (3pm)  - a sophisticated exporter <span class="keyword">for</span> custom-</span><br><span class="line">.....忽略.....</span><br><span class="line">[kiosk@foundation0 ~]$ man 1 su</span><br></pre></td></tr></table></figure>
+
+
+
+<p>​	方式二：已知我们要找su的用户命令，用户命令的编号是 (1)，就可以直接使用，man 1 su 或者 man su，man su在没有指定page编号时，默认是打开序号（1）的用户命令页。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[kiosk@foundation0 ~]$ man su</span><br></pre></td></tr></table></figure>
+
+
+
+<p>​	打开page页后，即可开始阅读su命令相关文档了。name命令的名称，synopsis命令使用的语法格式，description命令详细作用、功能描述，options命令可使用的选项即描述。可从他的语法格式中看出，该命令是试用【su [选项] [-] [用户名作为参数]】 ,方括号内表示选填项。</p>
+<img src="/2025/03/07/01-RHCE/Linux-RHCE-124-%E7%AC%AC%E4%B8%89%E7%AB%A0%E8%8A%82/03/07/01-RHCE/Linux-RHCE-124-%E7%AC%AC%E4%B8%89%E7%AB%A0%E8%8A%82/image-20250310104018905.png" class title="image-20250310104018905">
+
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[kiosk@foundation0 ~]$ su - root</span><br><span class="line">Password: </span><br><span class="line">Last login: Fri Mar  7 17:46:32 CST 2025 on pts/0</span><br><span class="line">Last failed login: Mon Mar 10 14:34:10 CST 2025 on pts/0</span><br><span class="line">There was 1 failed login attempt since the last successful login.</span><br><span class="line">[root@foundation0 ~]#</span><br></pre></td></tr></table></figure>
+
+
+
+<p>​	成功切换到root后，继续查看useradd命令是如何使用。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">[root@foundation0 ~]# man useradd</span><br><span class="line">[root@foundation0 ~]# useradd redhat01</span><br></pre></td></tr></table></figure>
+
+<p>​	更新redhat01用的密码</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[root@foundation0 ~]# man passwd</span><br><span class="line">[root@foundation0 ~]# passwd redhat01 </span><br><span class="line">Changing password <span class="keyword">for</span> user redhat01.</span><br><span class="line">New password: </span><br><span class="line">BAD PASSWORD: The password is shorter than 8 characters</span><br><span class="line">Retype new password: </span><br><span class="line">passwd: all authentication tokens updated successfully.</span><br><span class="line">[root@foundation0 ~]#</span><br></pre></td></tr></table></figure>
+
+<p>​	您可以使用man命令-t选项，将你man page写入到你的文档文件中，并使用file命令验证识别文件类型为document文档。例如下方示例。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">[root@foundation0 ~]# man -t passwd &gt; passwd.ps</span><br><span class="line">[root@foundation0 ~]# file passwd.ps </span><br><span class="line">passwd.ps: PostScript document text conforming DSC level 3.0</span><br><span class="line">[root@foundation0 ~]#</span><br></pre></td></tr></table></figure>
+
+<p>​	最后您可以通过evince命令，调用操作系统的文档工具打开该文档进行可视化阅览。</p>
+<img src="/2025/03/07/01-RHCE/Linux-RHCE-124-%E7%AC%AC%E4%B8%89%E7%AB%A0%E8%8A%82/03/07/01-RHCE/Linux-RHCE-124-%E7%AC%AC%E4%B8%89%E7%AB%A0%E8%8A%82/image-20250310161829513.png" class title="image-20250310161829513">]]></content>
+      <categories>
+        <category>RHCE</category>
+      </categories>
+      <tags>
+        <tag>RHCE</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Linux RHCE-124(第一章节)</title>
     <url>/2025/02/27/01-RHCE/Linux-RHCE-124(%E7%AC%AC%E4%B8%80%E7%AB%A0%E8%8A%82)/</url>
     <content><![CDATA[<h1 id="红帽企业Linux入门"><a href="#红帽企业Linux入门" class="headerlink" title="红帽企业Linux入门"></a>红帽企业Linux入门</h1><h2 id="为什么要了解Linux？"><a href="#为什么要了解Linux？" class="headerlink" title="为什么要了解Linux？"></a>为什么要了解Linux？</h2><p>​	Linux是IT专业人士必须了解的关键技术。</p>
@@ -289,215 +506,340 @@
       </tags>
   </entry>
   <entry>
-    <title>Linux-RHCE-124-第三章节</title>
-    <url>/2025/03/07/01-RHCE/Linux-RHCE-124-%E7%AC%AC%E4%B8%89%E7%AB%A0%E8%8A%82/</url>
-    <content><![CDATA[<h1 id="在红帽企业Linux中获取帮助"><a href="#在红帽企业Linux中获取帮助" class="headerlink" title="在红帽企业Linux中获取帮助"></a>在红帽企业Linux中获取帮助</h1><h2 id="阅读手册页"><a href="#阅读手册页" class="headerlink" title="阅读手册页"></a>阅读手册页</h2><h3 id="Linux手册页简介"><a href="#Linux手册页简介" class="headerlink" title="Linux手册页简介"></a>Linux手册页简介</h3><p>​	本地系统上通常可用的文档来源之一是系统手册页或man page。软件包随附这些页面来提供文档，您可以使用man命令从命令行访问这些文档。页面存储在&#x2F;usr&#x2F;share&#x2F;man 目录的子目录中。</p>
-<p>​	man page 源自过去的Linux程序员手册，该手册篇幅很长，足以划分多个章节。每个章节包含有特定主题信息。</p>
-<table>
-<thead>
-<tr>
-<th>章节</th>
-<th>内容类型</th>
-<th>描述</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>1</td>
-<td>用户命令</td>
-<td>可执行命令和shell程序</td>
-</tr>
-<tr>
-<td>2</td>
-<td>系统调用</td>
-<td>从用户空间调用的内核例程</td>
-</tr>
-<tr>
-<td>3</td>
-<td>库函数</td>
-<td>有程序库提供</td>
-</tr>
-<tr>
-<td>4</td>
-<td>特殊文件</td>
-<td>例如设备文件</td>
-</tr>
-<tr>
-<td>5</td>
-<td>文件格式</td>
-<td>用于许多配置文件和结构</td>
-</tr>
-<tr>
-<td>6</td>
-<td>游戏和屏保</td>
-<td>过去的趣味程序章节</td>
-</tr>
-<tr>
-<td>7</td>
-<td>惯例、标准和其他</td>
-<td>协议、文件系统</td>
-</tr>
-<tr>
-<td>8</td>
-<td>系统管理和特权命令</td>
-<td>维护任务</td>
-</tr>
-<tr>
-<td>9</td>
-<td>Linux内核API</td>
-<td>内部内核调用</td>
-</tr>
-</tbody></table>
-<p>​	为区分不同章节中相同的主题名称，man page参考中在主题后附上章节编号（用括号括起）。例如：passwd(1)介绍更改密码的命令，而passwd(5)说明用于存储本地用户账户的&#x2F;etc&#x2F;passwd配置文件相关格式。</p>
-<p>​	若要读取具体的man page，请使用man topic命令。man page一次显示一屏内容。man命令按照字母数字顺序搜索手册章节。例如：man passwd默认情况下只显示passwd(1)。要显示特定章节中的man page主题，您可以使用man section topic 命令。例如：man 5 passwd会显示passwd(5)。</p>
-<p>​	常见的系统管理主题在第一章（用户命令）、第五章（文件格式）和第八章（管理命令）中。采用特定故障排除工具的管理员页可以使用第二章（系统调用）。剩余的章节供内核开发等人员参考或用于高级管理。</p>
-<h3 id="阅览和搜索-Man-Page"><a href="#阅览和搜索-Man-Page" class="headerlink" title="阅览和搜索 Man Page"></a>阅览和搜索 Man Page</h3><p>​	高校的搜索主题并在man page中导航是一项非常重要的管理技能。您可以使用GUI管理goon根据来配置常见系统资源，但使用命令行界面依然更为高效。更有效的在命令行中找到所需man page信息。</p>
-<p>​	下表列出在查看man page时基本的导航命令：</p>
-<table>
-<thead>
-<tr>
-<th>命令</th>
-<th>结果</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>Spacebar（空格）</td>
-<td>向前（向下）滚动一屏</td>
-</tr>
-<tr>
-<td>PageDown（下键）</td>
-<td>向前（向下）滚动一屏</td>
-</tr>
-<tr>
-<td>Pageup（上键）</td>
-<td>向后（向上）滚动一屏</td>
-</tr>
-<tr>
-<td>D</td>
-<td>向前（向下）滚动半屏</td>
-</tr>
-<tr>
-<td>U</td>
-<td>向后（向上）滚动半屏</td>
-</tr>
-<tr>
-<td>&#x2F;string</td>
-<td>在man page中搜索string内容</td>
-</tr>
-<tr>
-<td>N</td>
-<td>在man page中重复向前（向下）搜索</td>
-</tr>
-<tr>
-<td>Shift+N</td>
-<td>在man page中重复向后（向上）搜索</td>
-</tr>
-<tr>
-<td>G</td>
-<td>转到man page的开头</td>
-</tr>
-<tr>
-<td>shift+G</td>
-<td>转到man page的末尾</td>
-</tr>
-<tr>
-<td>Q</td>
-<td>退出man，并返回命令行</td>
-</tr>
-</tbody></table>
-<h3 id="阅读Man-Page"><a href="#阅读Man-Page" class="headerlink" title="阅读Man Page"></a>阅读Man Page</h3><p>​	man page将各个主题划分为几个部分。大多数主题共享相同的标题，并以相同的顺序显示。通常，主题不包含所有标题，因为并非所有标题都使用所有主题。</p>
-<p>​	常见的标题如下：</p>
-<table>
-<thead>
-<tr>
-<th>标题</th>
-<th>描述</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>NAME</td>
-<td>主题名称。通常是命令或文件名。简短的描述</td>
-</tr>
-<tr>
-<td>SYNOPSIS</td>
-<td>命令语法概要</td>
-</tr>
-<tr>
-<td>DESCRIPTION</td>
-<td>提供对主题的基本理解和描述</td>
-</tr>
-<tr>
-<td>OPTIONS</td>
-<td>命令执行选项说明</td>
-</tr>
-<tr>
-<td>EXAMPLES</td>
-<td>有关如何使用命令、功能或文件的示例</td>
-</tr>
-<tr>
-<td>FILES</td>
-<td>与man page相关的文件和目录的列表。</td>
-</tr>
-<tr>
-<td>SEE ALSO</td>
-<td>相关的信息，通常是其他man page 主题。</td>
-</tr>
-<tr>
-<td>BUGS</td>
-<td>软件中已知错误。</td>
-</tr>
-<tr>
-<td>AUTHOR</td>
-<td>有关草鱼撰写该主题的人员信息。</td>
-</tr>
-</tbody></table>
-<h3 id="根据关键字搜索man-page"><a href="#根据关键字搜索man-page" class="headerlink" title="根据关键字搜索man page"></a>根据关键字搜索man page</h3><p>​	使用man命令 -k（小写）选项（等同于apropos选项）可在man page的标题和描述中搜索关键字。关键字搜索的结果中显示与关键字匹配的man page 主题和章节编号列表。例如以下命令可搜索含词语passwd的man page。</p>
-<p>​	<code>注意：关键字搜索依赖于mandb(8)命令生成的索引，该命令必须以root身份允许。在安装含有man page软件包是，man-db-cache-update访问会自动允许mandb命令，如果您通过man -k 无法搜索相应标题，则可能需要您手动执行一个mandb。</code></p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[root@foundation0 ~]# man -k passwd</span><br><span class="line">chgpasswd (8)        - update group passwords <span class="keyword">in</span> batch mode</span><br><span class="line">chpasswd (8)         - update passwords <span class="keyword">in</span> batch mode</span><br><span class="line">fgetpwent_r (3)      - get passwd file entry reentrantly</span><br><span class="line">getpwent_r (3)       - get passwd file entry reentrantly</span><br><span class="line">gpasswd (1)          - administer /etc/group and /etc/gshadow</span><br><span class="line">grub2-mkpasswd-pbkdf2 (1) - Generate a PBKDF2 password <span class="built_in">hash</span>.</span><br><span class="line">htpasswd (1)         - Manage user files <span class="keyword">for</span> basic authentication</span><br><span class="line">lpasswd (1)          - Change group or user password</span><br><span class="line">openssl-passwd (1ossl) - compute password hashes</span><br><span class="line">pam_localuser (8)    - require <span class="built_in">users</span> to be listed <span class="keyword">in</span> /etc/passwd</span><br><span class="line">passwd (1)           - update user<span class="string">&#x27;s authentication tokens</span></span><br><span class="line"><span class="string">passwd (1ossl)       - OpenSSL application commands</span></span><br><span class="line"><span class="string">passwd (5)           - password file</span></span><br><span class="line"><span class="string">passwd2des (3)       - RFS password encryption</span></span><br><span class="line"><span class="string">pwhistory_helper (8) - Helper binary that transfers password hashes from passwd or shadow to opasswd</span></span><br><span class="line"><span class="string">saslpasswd2 (8)      - set a user&#x27;</span>s sasl password</span><br><span class="line">smbpasswd (5)        - The Samba encrypted password file</span><br><span class="line">vncpasswd (1)        - change the VNC password</span><br><span class="line">[root@foundation0 ~]# </span><br></pre></td></tr></table></figure>
-
-
-
-<p>​	man -K（大写）选项可在全文页面中搜索关键字，而补仅仅是在标题和描述中搜索。全文搜索使用更多的系统资源，耗费更长的时间。</p>
-<p>​	使用全文页面搜索时，man 命令显示含有匹配项的第一页。按Q退出第一页，man命令则可显示下一页。</p>
-<p>​	在本示例中，man显示每个匹配项，同时允许您查看或跳过每个匹配项。<code>man page页按Q退出，Ctrl+D（跳过该匹配项），Ctrl+c（退出匹配）</code></p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[root@foundation0 ~]# man -K passwd</span><br><span class="line">--Man-- next: <span class="built_in">cut</span>(1p) [ view (<span class="built_in">return</span>) | skip (Ctrl-D) | quit (Ctrl-C) ]</span><br><span class="line"></span><br><span class="line">--Man-- next: <span class="built_in">logname</span>(1p) [ view (<span class="built_in">return</span>) | skip (Ctrl-D) | quit (Ctrl-C) ]</span><br><span class="line"></span><br><span class="line">--Man-- next: <span class="built_in">sort</span>(1p) [ view (<span class="built_in">return</span>) | skip (Ctrl-D) | quit (Ctrl-C) ]</span><br><span class="line"></span><br><span class="line">--Man-- next: xargs(1) [ view (<span class="built_in">return</span>) | skip (Ctrl-D) | quit (Ctrl-C) ]</span><br><span class="line">^C</span><br><span class="line">[root@foundation0 ~]# </span><br></pre></td></tr></table></figure>
-
-
-
-<h2 id="模拟操作练习"><a href="#模拟操作练习" class="headerlink" title="模拟操作练习"></a>模拟操作练习</h2><p>​	请根据下列要求完成用户创建，以及用户密码修改</p>
+    <title>Linux-RHCE-124-第二章节</title>
+    <url>/2025/03/01/01-RHCE/Linux-RHCE-124-%E7%AC%AC%E4%BA%8C%E7%AB%A0%E8%8A%82/</url>
+    <content><![CDATA[<h1 id="从命令行管理文件"><a href="#从命令行管理文件" class="headerlink" title="从命令行管理文件"></a>从命令行管理文件</h1><p>​	</p>
+<p>欢迎阅览我的文章，本章节将介绍什么是Linux，演示环境为RedHat-9</p>
+<h3 id="描述Linux文件系统层次结构概念"><a href="#描述Linux文件系统层次结构概念" class="headerlink" title="描述Linux文件系统层次结构概念"></a>描述Linux文件系统层次结构概念</h3><p>​	Linux系统中的所有文件存储在文件系统中，他们被组织到一颗上下颠倒的树中，称为文件系统层次结构。这个层次结构是上下颠倒的树，因为树根在顶部，树根下方延伸处目录和子目录的分支。</p>
+<p><img src="/2025/03/01/01-RHCE/Linux-RHCE-124-%E7%AC%AC%E4%BA%8C%E7%AB%A0%E8%8A%82/image-20250520165728913.png" alt="image-20250520165728913"></p>
+<p>​	&#x2F; 目录是根目录，位于文件系统层次结构的顶部。&#x2F; 字符还用做文件名中的目录分隔符。例如：如果etc是&#x2F; 根目录的子目录，则可将该目录指代为 &#x2F;etc。类似的，如果&#x2F;etc目录包含一个名为issue的文件，可以将该文件指代为&#x2F;etc&#x2F;issue。</p>
+<p>​	&#x2F; 的子目录用于标准化用途，以便根据类型和用途整理文件，从而更加轻松的找到文件，例如：在根目录中，子目录&#x2F;boot用于存储启动系统所需的文件。</p>
 <ul>
-<li>查询su命令使用方法，将当前shell（kiosk）用户切换为root用户。</li>
-<li>查询useradd命令使用方法，使用该命令创建一个名为redhat01的用户。</li>
-<li>查询passwd命令使用方法，使用该命令为redhat01用户更新密码。</li>
+<li><table>
+<thead>
+<tr>
+<th align="left">位置</th>
+<th>用途</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">&#x2F;boot</td>
+<td>操作系统启动过程所需文件</td>
+</tr>
+<tr>
+<td align="left">&#x2F;dev</td>
+<td>供操作系统访问硬件的特殊设备文件</td>
+</tr>
+<tr>
+<td align="left">&#x2F;etc</td>
+<td>供系统及软件的配置文件</td>
+</tr>
+<tr>
+<td align="left">&#x2F;home</td>
+<td>供普通用户存储其个人数据及配置文件的主目录</td>
+</tr>
+<tr>
+<td align="left">&#x2F;root</td>
+<td>供超级用户root存储其个人数据及配置文件的主目录</td>
+</tr>
+<tr>
+<td align="left">&#x2F;run</td>
+<td>自上一次系统启动以来启动的进程的运行时数据。这些数据包括进程ID文件和锁定文件。此目录中的内容在重启时重新创建。所以该目录的数据在重启后，存放在该目录下的数据就会丢失。</td>
+</tr>
+<tr>
+<td align="left">&#x2F;tmp</td>
+<td>供临时文件使用的全局可写空间，天内未曾访问、更改或者修改的文件将自动从该目录中删除。&#x2F;var&#x2F;tmp目录也是一个临时目录，其中的文件如果在30天内为曾访问、更改或者修改过，将被自动删除</td>
+</tr>
+<tr>
+<td align="left">&#x2F;usr</td>
+<td>安装的软件、共享的库（包括文件）和只读程序数据。重要的子目录有：                                                                                       - &#x2F;usr&#x2F;bin：用户命令                                                                            - &#x2F;usr&#x2F;sbin：系统管理命令                                                               - &#x2F;usr&#x2F;local：本地自定义软件</td>
+</tr>
+<tr>
+<td align="left">&#x2F;var</td>
+<td>特定于系统的可变数据应在系统启动之间保持永久性。动态变化的文件（如数据库、缓存目录、日志文件、打印机后台处理文档和网页内容）可在&#x2F;var下找到</td>
+</tr>
+</tbody></table>
+</li>
 </ul>
-<h2 id="模拟练习讲解"><a href="#模拟练习讲解" class="headerlink" title="模拟练习讲解"></a>模拟练习讲解</h2><p>​	根据题目已知，我们首先要使用man page查询关于su命令的一个使用方法，并且使用su命令将我们从kiosk用户切换到root用户的shell提示符。</p>
-<p>​	方式一：通过man -k 来查找su的page页，但这样会找出很多有关su的page页，在我们已知我们要查找su的用户命令时，不推荐使用</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[kiosk@foundation0 ~]$ man -k su</span><br><span class="line">.....忽略.....</span><br><span class="line">strspn (3)           - get length of a prefix substring</span><br><span class="line">strspn (3p)          - get length of a substring</span><br><span class="line">strstr (3)           - locate a substring</span><br><span class="line">strstr (3p)          - find a substring</span><br><span class="line">su (1)               - run a <span class="built_in">command</span> with substitute user and group ID</span><br><span class="line">Sub::Exporter (3pm)  - a sophisticated exporter <span class="keyword">for</span> custom-</span><br><span class="line">.....忽略.....</span><br><span class="line">[kiosk@foundation0 ~]$ man 1 su</span><br></pre></td></tr></table></figure>
+<h2 id="通过名称指定文件"><a href="#通过名称指定文件" class="headerlink" title="通过名称指定文件"></a>通过名称指定文件</h2><h3 id="绝对路径和相对路径"><a href="#绝对路径和相对路径" class="headerlink" title="绝对路径和相对路径"></a>绝对路径和相对路径</h3><p>​	文件或目录的路径指定其唯一的文件系统位置。跟随文件路径会遍历出一个或多个指定的子目录，用正斜杠 (&#x2F;) 分隔，直到达到目标位置。目录也称之为文件夹，可以包含其文件和其他子目录。目录的引用方式可以与文件相同</p>
+<p>​	<code>注意：Linux文件名中可以接收空格字符。但是shell也使用空格来分割命令行上的选项和参数。如果命令中包含了名称带有空格的文件，则shell可能会误解释该参数，并认为该文件名是多个参数。为避免这样的情况，请将此类文件名括在引号中，以便shell激昂名称解释为单个参数。当然最好避免在文件中名中使用空格是最好的。</code></p>
+<h3 id="绝对路径"><a href="#绝对路径" class="headerlink" title="绝对路径"></a>绝对路径</h3><p>​	绝对路径是一个完全限定名称，用于指定文件在文件系统层次结构中的确切位置。绝对路径从根 (&#x2F;) 目录开始寻找目标文件或目录，并包括到达特定文件所必须遍历的每个子目录。文件系统中的每个文件都有一个唯一绝对路径名，可通过一个简单的规则识别：第一个字符是正斜杠 (&#x2F;) 的路径名是绝对路径名。</p>
+<p>​	例如，系统消息日志文件的绝对路径名是 &#x2F;var&#x2F;log&#x2F;messages。绝对路径名输入起来可能会太长，所以也可以通过相对于shell提示符当前工作目录的位置来查找文件</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[root@workstation ~]# <span class="built_in">ls</span> /var/log/messages</span><br><span class="line">/var/log/messages</span><br><span class="line">[root@workstation ~]# </span><br></pre></td></tr></table></figure>
 
 
 
-<p>​	方式二：已知我们要找su的用户命令，用户命令的编号是 (1)，就可以直接使用，man 1 su 或者 man su，man su在没有指定page编号时，默认是打开序号（1）的用户命令页。</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[kiosk@foundation0 ~]$ man su</span><br></pre></td></tr></table></figure>
+<h3 id="当前工作目录和相对路径"><a href="#当前工作目录和相对路径" class="headerlink" title="当前工作目录和相对路径"></a>当前工作目录和相对路径</h3><p>​	当用户登录并打开shell命令提示符时，初始位置通常是该用户的主目录。系统进程也有一个初始目录。用户和进程根据需要更改到其他目录。属于工作目录和当前目录指它们的当前位置</p>
+<p>​	与绝对路径类似，相对路径也是标识唯一文件，但仅指定从工作目录到达文件所需的路径。相对路径遵循一个简单原则：第一字符是正斜杠之外的其他字符的路径名就是相对路径名。例如：我当前工作目录为&#x2F;var，我要找到消息日志文件则是：log&#x2F;messages</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[root@workstation var]# <span class="built_in">ls</span> <span class="built_in">log</span>/messages</span><br><span class="line"><span class="built_in">log</span>/messages</span><br><span class="line">[root@workstation var]# </span><br></pre></td></tr></table></figure>
+
+<p>​	Linux文件系统（包括ext4、XFS、GFS2和GlusterFS）是区分大小写的。在同一目录中创建FileCase.txt和filecase.txt文件将会生成两个不同的文件。</p>
+<p>​	非Linux文件系统的工作方式可能会有所不同。例如：VFAT、Microsoft的NTFS和Apple的HFS+具有大小写保留行为。虽然这些文件系统不区分大小写，它们确实使用文件的原始大小写形式显示的文件名。如果在VFAT文件系统上创建上述示例中的文件，这两个名称指向同一文件，而部署指向两个不同的文件。</p>
+<h3 id="浏览文件系统中的路径"><a href="#浏览文件系统中的路径" class="headerlink" title="浏览文件系统中的路径"></a>浏览文件系统中的路径</h3><p>​	pwd命令显示改shell的当前工作目录的完整路径名。此命令可帮助您却独使用当前相对路径来访问文件的语法。ls命令列出指定目录的目录内容。如果未指定目录，则列出当前工作目录的内容</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[root@workstation var]# <span class="built_in">pwd</span></span><br><span class="line">/var</span><br><span class="line">[root@workstation var]# <span class="built_in">ls</span></span><br><span class="line">account  cache  db     ftp    kerberos  <span class="built_in">local</span>  <span class="built_in">log</span>   nis  preserve  spool  yp</span><br><span class="line">adm      crash  empty  games  lib       lock   mail  opt  run       tmp</span><br><span class="line">[root@workstation var]# </span><br></pre></td></tr></table></figure>
 
 
 
-<p>​	打开page页后，即可开始阅读su命令相关文档了。name命令的名称，synopsis命令使用的语法格式，description命令详细作用、功能描述，options命令可使用的选项即描述。可从他的语法格式中看出，该命令是试用【su [选项] [-] [用户名作为参数]】 ,方括号内表示选填项。</p>
-<img src="/2025/03/07/01-RHCE/Linux-RHCE-124-%E7%AC%AC%E4%B8%89%E7%AB%A0%E8%8A%82/03/07/01-RHCE/Linux-RHCE-124-%E7%AC%AC%E4%B8%89%E7%AB%A0%E8%8A%82/image-20250310104018905.png" class title="image-20250310104018905">
+<p>​	使用cd命令可更改shell当前工作目录。如果没有未该命令指定任何参数，它将切换到您用户的主目录。</p>
+<p>​	以下示例中，cd命令混用绝对路径和相对路径，以更改shell当前工作目录。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># pwd查看当前工作目录</span></span><br><span class="line">[student@workstation ~]$ <span class="built_in">pwd</span></span><br><span class="line">/home/student</span><br><span class="line"><span class="comment"># 通过相对路径进去主目录的test1</span></span><br><span class="line">[student@workstation ~]$ <span class="built_in">cd</span> test1/</span><br><span class="line">[student@workstation test1]$ <span class="built_in">pwd</span></span><br><span class="line">/home/student/test1</span><br><span class="line">[student@workstation test1]$ <span class="built_in">cd</span> </span><br><span class="line">[student@workstation ~]$ <span class="built_in">pwd</span></span><br><span class="line">/home/student</span><br><span class="line"><span class="comment"># 通过绝对路径到主目录下的test3</span></span><br><span class="line">[student@workstation ~]$ <span class="built_in">cd</span> /home/student/test3</span><br><span class="line">[student@workstation test2]$ <span class="built_in">pwd</span></span><br><span class="line">/home/student/test3</span><br><span class="line"><span class="comment"># 通过相对路径进去主目录的test2</span></span><br><span class="line">[student@workstation test1]$ <span class="built_in">cd</span> </span><br><span class="line">[student@workstation ~]$ <span class="built_in">cd</span> test2/</span><br><span class="line">[student@workstation test2]$ <span class="built_in">pwd</span></span><br><span class="line">/home/student/test2</span><br><span class="line"><span class="comment"># 通过cd不加参数，返回主目录</span></span><br><span class="line">[student@workstation test2]$ <span class="built_in">cd</span> </span><br><span class="line">[student@workstation ~]$ <span class="built_in">pwd</span></span><br><span class="line">/home/student</span><br><span class="line">[student@workstation ~]$</span><br></pre></td></tr></table></figure>
 
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[kiosk@foundation0 ~]$ su - root</span><br><span class="line">Password: </span><br><span class="line">Last login: Fri Mar  7 17:46:32 CST 2025 on pts/0</span><br><span class="line">Last failed login: Mon Mar 10 14:34:10 CST 2025 on pts/0</span><br><span class="line">There was 1 failed login attempt since the last successful login.</span><br><span class="line">[root@foundation0 ~]#</span><br></pre></td></tr></table></figure>
+<p>​	在上述示例中，默认shell提示符还显示当前工作目录绝对路径的最后一个目录。例如，对于&#x2F;home&#x2F;student&#x2F;test1目录，仅显示test1。当您的当前目录是主目录时，提示符显示波浪号字符 (~)。</p>
+<p>​	touch 命令可将文件的时间戳更新为当前日期和时间，而不进行其他修改。此命令同时也可以用于创建空的文件，因为使用touch命令加上不存在的文件名参数就会导致创建该文件。在以下示例中，touch命令在Videos子目录中创建文件，以及修改文件更新时间。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># touch 接上一个不存在的文件名参数，则创建文件</span></span><br><span class="line">[kiosk@foundation0 Videos]$ <span class="built_in">touch</span> test1.txt</span><br><span class="line">[kiosk@foundation0 Videos]$ <span class="built_in">ls</span> -l</span><br><span class="line">total 0</span><br><span class="line">-rw-rw-r--. 1 kiosk kiosk 0 Mar  4 17:35 test1.txt</span><br><span class="line"><span class="comment"># 向该文件添加内容</span></span><br><span class="line">[kiosk@foundation0 Videos]$ <span class="built_in">echo</span> hahaah &gt; test1.txt</span><br><span class="line">[kiosk@foundation0 Videos]$ <span class="built_in">cat</span> test1.txt </span><br><span class="line">hahaah</span><br><span class="line"><span class="comment"># 修改时间为17:36</span></span><br><span class="line">[kiosk@foundation0 Videos]$ <span class="built_in">ls</span> -l</span><br><span class="line">total 4</span><br><span class="line">-rw-rw-r--. 1 kiosk kiosk 7 Mar  4 17:36 test1.txt</span><br><span class="line"><span class="comment"># 当touch 接上已存在的文件名参数，则最新修改时间更新</span></span><br><span class="line">[kiosk@foundation0 Videos]$ <span class="built_in">touch</span>  test1.txt </span><br><span class="line"><span class="comment"># 修改时间为：17:38</span></span><br><span class="line">[kiosk@foundation0 Videos]$ <span class="built_in">ls</span> -l</span><br><span class="line">total 4</span><br><span class="line">-rw-rw-r--. 1 kiosk kiosk 7 Mar  4 17:38 test1.txt</span><br><span class="line"><span class="comment"># 切文件的内容未作更改</span></span><br><span class="line">[kiosk@foundation0 Videos]$ <span class="built_in">cat</span> test1.txt </span><br><span class="line">hahaah</span><br><span class="line">[kiosk@foundation0 Videos]$ </span><br></pre></td></tr></table></figure>
 
 
 
-<p>​	成功切换到root后，继续查看useradd命令是如何使用。</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">[root@foundation0 ~]# man useradd</span><br><span class="line">[root@foundation0 ~]# useradd redhat01</span><br></pre></td></tr></table></figure>
+<p>​	ls 命令具有多个选项，用于显示文件的属性。最常的选项是 -l （长列表格式）、-a（包含隐藏文件在内的所有文件），以及 -R （递归方式，包含所有子目录的内容）。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 长格式显示目录或指定目录下的内容</span></span><br><span class="line">[kiosk@foundation0 Videos]$ <span class="built_in">ls</span> -l</span><br><span class="line">total 4</span><br><span class="line">drwxrwxr-x. 2 kiosk kiosk 6 Mar  4 17:45 dir1</span><br><span class="line">-rw-rw-r--. 1 kiosk kiosk 0 Mar  4 17:45 dir-1.txt</span><br><span class="line">drwxrwxr-x. 2 kiosk kiosk 6 Mar  4 17:45 dir2</span><br><span class="line">-rw-rw-r--. 1 kiosk kiosk 0 Mar  4 17:45 dir-2.txt</span><br><span class="line">-rw-rw-r--. 1 kiosk kiosk 7 Mar  4 17:38 test1.txt</span><br><span class="line"><span class="comment"># 长格式显示，并且显示包含隐藏文件（.haha.txt）</span></span><br><span class="line">[kiosk@foundation0 Videos]$ <span class="built_in">ls</span> -la</span><br><span class="line">total 8</span><br><span class="line">drwxr-xr-x.  4 kiosk kiosk   98 Mar  4 17:45 .</span><br><span class="line">drwx------. 18 kiosk kiosk 4096 Feb 27 15:08 ..</span><br><span class="line">drwxrwxr-x.  2 kiosk kiosk    6 Mar  4 17:45 dir1</span><br><span class="line">-rw-rw-r--.  1 kiosk kiosk    0 Mar  4 17:45 dir-1.txt</span><br><span class="line">drwxrwxr-x.  2 kiosk kiosk    6 Mar  4 17:45 dir2</span><br><span class="line">-rw-rw-r--.  1 kiosk kiosk    0 Mar  4 17:45 dir-2.txt</span><br><span class="line">-rw-rw-r--.  1 kiosk kiosk    0 Mar  4 17:45 .haha.txt</span><br><span class="line">-rw-rw-r--.  1 kiosk kiosk    7 Mar  4 17:38 test1.txt</span><br><span class="line"><span class="comment"># 长格式及递归显示dir1目录下的内容</span></span><br><span class="line">[kiosk@foundation0 Videos]$ <span class="built_in">ls</span> -lR dir1/</span><br><span class="line"><span class="comment"># dir1下具有test-dir、test-dir-2目录</span></span><br><span class="line">dir1/:</span><br><span class="line">total 0</span><br><span class="line">drwxrwxr-x. 2 kiosk kiosk 23 Mar  4 17:50 test-dir</span><br><span class="line">drwxrwxr-x. 2 kiosk kiosk 23 Mar  4 17:50 test-dir-2</span><br><span class="line"><span class="comment"># test-dir目录下具有test1.txt文件</span></span><br><span class="line">dir1/test-dir:</span><br><span class="line">total 0</span><br><span class="line">-rw-rw-r--. 1 kiosk kiosk 0 Mar  4 17:50 test1.txt</span><br><span class="line"><span class="comment"># test-dir-2目录下具有test2.txt文件</span></span><br><span class="line">dir1/test-dir-2:</span><br><span class="line">total 0</span><br><span class="line">-rw-rw-r--. 1 kiosk kiosk 0 Mar  4 17:50 test2.txt</span><br><span class="line">[kiosk@foundation0 Videos]$ </span><br></pre></td></tr></table></figure>
 
-<p>​	更新redhat01用的密码</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[root@foundation0 ~]# man passwd</span><br><span class="line">[root@foundation0 ~]# passwd redhat01 </span><br><span class="line">Changing password <span class="keyword">for</span> user redhat01.</span><br><span class="line">New password: </span><br><span class="line">BAD PASSWORD: The password is shorter than 8 characters</span><br><span class="line">Retype new password: </span><br><span class="line">passwd: all authentication tokens updated successfully.</span><br><span class="line">[root@foundation0 ~]#</span><br></pre></td></tr></table></figure>
+<p>​	ls -la中的显示了所有的目录，包括隐藏目录，其中顶部具有两个特殊的目录。一个圆点（.）代表当前目录，两个原点（..）则代表父级目录，也就是当前目录的上一级目录。这些特殊目录存在于系统中的每一个目录中，在使用文件管理命令时非常有用。</p>
+<p>​	<code>重要：开头为圆点（.）的文件名表示为隐藏文件；在使用ls和其他命令时，无法在普通视图中看到这些文件。此行为并非一种安全功能。因为ls -a加上选项还是可以很轻松的看到该文件。隐藏文件主要还是用于必要的用户配置文件让主目录凌乱不堪，同时也可以避免重要的配置文件被误操作，复制到其他目录或被修改、删除掉。</code></p>
+<p>​	您也可以讲波浪号（~）特殊字符于其他命令组合使用，以促进于主目录的交互。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 从当前工作目录/var，通过波浪号查看主目录内容</span></span><br><span class="line">[kiosk@foundation0 var]$ <span class="built_in">ls</span> -l ~</span><br><span class="line">total 152588</span><br><span class="line">-rw-rw-r--. 1 kiosk kiosk       127 Oct  9  2023 <span class="string">&#x27;\&#x27;</span></span><br><span class="line">-rw-rw-r--. 2 kiosk kiosk     33577 Sep 16  2022  ClassPrep.txt</span><br><span class="line">-rw-rw-r--. 2 kiosk kiosk     10853 Nov 16  2021  ClassRHAPrep.txt</span><br><span class="line">-rw-rw-r--. 2 kiosk kiosk     18852 Jul  7  2022  ClassroomReset.txt</span><br><span class="line">****忽略****</span><br><span class="line">-rw-rw-r--. 2 kiosk kiosk      7900 Nov 22  2022  History.txt</span><br><span class="line">drwxr-xr-x. 2 kiosk kiosk         6 Feb  1  2023  Music</span><br><span class="line">drwxr-xr-x. 2 kiosk kiosk         6 Feb  1  2023  Pictures</span><br><span class="line">drwxr-xr-x. 2 kiosk kiosk         6 Feb  1  2023  Public</span><br><span class="line">-rwxrwxrwx. 1 kiosk kiosk        12 Feb 27 11:35  ssh.sh</span><br><span class="line">drwxrwxr-x. 2 kiosk kiosk        72 Jan 31  2023  survey</span><br><span class="line">drwxr-xr-x. 2 kiosk kiosk         6 Feb  1  2023  Templates</span><br><span class="line">drwxr-xr-x. 4 kiosk kiosk        98 Mar  4 17:45  Videos</span><br><span class="line">[kiosk@foundation0 var]$ </span><br></pre></td></tr></table></figure>
 
-<p>​	您可以使用man命令-t选项，将你man page写入到你的文档文件中，并使用file命令验证识别文件类型为document文档。例如下方示例。</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">[root@foundation0 ~]# man -t passwd &gt; passwd.ps</span><br><span class="line">[root@foundation0 ~]# file passwd.ps </span><br><span class="line">passwd.ps: PostScript document text conforming DSC level 3.0</span><br><span class="line">[root@foundation0 ~]#</span><br></pre></td></tr></table></figure>
 
-<p>​	最后您可以通过evince命令，调用操作系统的文档工具打开该文档进行可视化阅览。</p>
-<img src="/2025/03/07/01-RHCE/Linux-RHCE-124-%E7%AC%AC%E4%B8%89%E7%AB%A0%E8%8A%82/03/07/01-RHCE/Linux-RHCE-124-%E7%AC%AC%E4%B8%89%E7%AB%A0%E8%8A%82/image-20250310161829513.png" class title="image-20250310161829513">]]></content>
+
+<p>​	cd 命令同样有着许多选项。其中一些实用的应该尽早熟悉使用，要形成一种肌肉记忆。cd - 命令可更改到用户在进入当前目录之前所处的目录。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 通过cd - 命令，迅速返回到之前所处的目录</span></span><br><span class="line">[kiosk@foundation0 var]$ <span class="built_in">cd</span> -</span><br><span class="line">/home/kiosk</span><br><span class="line">[kiosk@foundation0 ~]$ <span class="built_in">pwd</span></span><br><span class="line">/home/kiosk</span><br><span class="line">[kiosk@foundation0 ~]$ </span><br></pre></td></tr></table></figure>
+
+
+
+<p>​	<code>cd ..</code> 命令使用（..）隐藏目录上移一个级别，进入当前目录的父目录，而不必知道确切的父目录名称。其他隐藏目录（.）可为当前位置是来源或者目标参数的命令指定当前目录，以此免除输入目录绝对路径名的必要。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 返回上级目录</span></span><br><span class="line">[kiosk@foundation0 ~]$ <span class="built_in">cd</span> ..</span><br><span class="line">[kiosk@foundation0 home]$ <span class="built_in">pwd</span></span><br><span class="line">/home</span><br><span class="line"><span class="comment"># cd -返回上次所在目录</span></span><br><span class="line">[kiosk@foundation0 home]$ <span class="built_in">cd</span> -</span><br><span class="line">/home/kiosk</span><br><span class="line"><span class="comment"># 执行当前目录下的test.sh脚本文件</span></span><br><span class="line">[kiosk@foundation0 ~]$ bash ./test.sh </span><br><span class="line">Hello World</span><br><span class="line">[kiosk@foundation0 ~]$ </span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="使用命令行工具管理文件"><a href="#使用命令行工具管理文件" class="headerlink" title="使用命令行工具管理文件"></a>使用命令行工具管理文件</h2><h3 id="命令行文件管理"><a href="#命令行文件管理" class="headerlink" title="命令行文件管理"></a>命令行文件管理</h3><p>​	创建、删除、复制和移动文件和目录，是系统管理员的常用操作。不带选项时，一些命令讲用于文件交互，或者可以通过相应的选项集来操作目录。</p>
+<p>​	请注意运行命令时使用的选项。某些选项的含义可能因命令而异。</p>
+<h3 id="创建目录"><a href="#创建目录" class="headerlink" title="创建目录"></a>创建目录</h3><p>​	mkdir 命令可创建一个或多个目录或子目录。他取您要创建的目录的路径列表作为参数。</p>
+<p>​	以下实例，将在&#x2F;home&#x2F;kiosk&#x2F;Documents目录下。使用mkdir命令和空格分割的目录名称列表来一次性创建多个目录。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[kiosk@foundation0 Documents]$ <span class="built_in">pwd</span></span><br><span class="line">/home/kiosk/Documents</span><br><span class="line">[kiosk@foundation0 Documents]$ <span class="built_in">mkdir</span> ProjectX ProjectY ProjectZ</span><br><span class="line">[kiosk@foundation0 Documents]$ <span class="built_in">ls</span></span><br><span class="line">ProjectX  ProjectY  ProjectZ</span><br><span class="line">[kiosk@foundation0 Documents]$</span><br></pre></td></tr></table></figure>
+
+<p>​	如果创建的目录参数已存在，或者您尝试创建的目录的父目录不存在，则mkdir命令将失败显示错误。</p>
+<p>​	mkdir 命令 -p（父级）选项将为请求的目标位置创建缺失的父目录。在以下示例中，mkdir命令可以在缺少父级目录的情况下，用一个命令创建三个ChapterN子目录。 -p 选项可创建缺失的父目录Thesis。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">kiosk@foundation0 Documents]$ <span class="built_in">mkdir</span> -p Thesis/Chapter1 Thesis/Chapter2 Thesis/Chapter3</span><br><span class="line">[kiosk@foundation0 Documents]$ <span class="built_in">ls</span> -R Thesis/</span><br><span class="line">Thesis/:</span><br><span class="line">Chapter1  Chapter2  Chapter3</span><br><span class="line"></span><br><span class="line">Thesis/Chapter1:</span><br><span class="line"></span><br><span class="line">Thesis/Chapter2:</span><br><span class="line"></span><br><span class="line">Thesis/Chapter3:</span><br><span class="line">[kiosk@foundation0 Documents]$</span><br></pre></td></tr></table></figure>
+
+<p>​	请谨慎使用mkdir 命令的 -p 选项，因为在错误的拼写中可能会创建非预期的目录，不会因为对于您是非预期的目录，而生成错误消息。在以下示例中，假设您试图在Videos中创建一个Watched子目录，但在mkdir命令中不小心遗漏了Videos中的字母 “s”。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[kiosk@foundation0 ~]$ <span class="built_in">mkdir</span> Video/Watched</span><br><span class="line"><span class="built_in">mkdir</span>: cannot create directory ‘Video/Watched’: No such file or directory</span><br><span class="line"><span class="comment"># 加入-p选项，Watched目录将会创建在错误父目录中</span></span><br><span class="line">[kiosk@foundation0 ~]$ <span class="built_in">mkdir</span> -p Video/Watched</span><br><span class="line">[kiosk@foundation0 ~]$ <span class="built_in">ls</span> -R Video</span><br><span class="line">Video:</span><br><span class="line">Watched</span><br><span class="line"></span><br><span class="line">Video/Watched:</span><br><span class="line">[kiosk@foundation0 ~]$ </span><br></pre></td></tr></table></figure>
+
+<p>​	mkdir 命令失败，因为Video目录不存在。如果您使用带有-p 选项的mkdir 命令，则会无意中创建Video目录。Watched子目录将会在不正确的目录中创建。</p>
+<h3 id="复制文件和目录"><a href="#复制文件和目录" class="headerlink" title="复制文件和目录"></a>复制文件和目录</h3><p>​	cp 命令可以复制文件，并在当前目录或者其他指定目录中创建一个文件。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[kiosk@foundation0 ~]$ <span class="built_in">cd</span> Videos/</span><br><span class="line">[kiosk@foundation0 Videos]$ <span class="built_in">ls</span></span><br><span class="line">test1.txt</span><br><span class="line">[kiosk@foundation0 Videos]$ <span class="built_in">cp</span> test1.txt test2.txt </span><br><span class="line">[kiosk@foundation0 Videos]$ <span class="built_in">ls</span></span><br><span class="line">test1.txt  test2.txt</span><br><span class="line">[kiosk@foundation0 Videos]$</span><br></pre></td></tr></table></figure>
+
+<p>​	也可以使用cp命令将多个文件复制到某一目录中。这种情况下，最后一个参数必须是目录。复制的文件在新目录中保留其原有名称。如果目标目录中存在同名的文件，则会覆盖原有文件。默认情况下，cp 命令不复制目录，而是会忽略它。</p>
+<p>​	以下示例中列出两个目录作为参数，即Thesis和ProjecrX目录。最后一个参数（ProjecrX目录）是目标，可用作目的地。cp命令忽略了Thesis参数，因为它是要复制的对象是一个目录。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[kiosk@foundation0 Documents]$ <span class="built_in">ls</span> </span><br><span class="line">ProjecrX  text1.txt  text2.txt  Thesis</span><br><span class="line">[kiosk@foundation0 Documents]$ <span class="built_in">cp</span> text1.txt text2.txt Thesis ProjecrX</span><br><span class="line"><span class="built_in">cp</span>: -r not specified; omitting directory <span class="string">&#x27;Thesis&#x27;</span></span><br><span class="line">[kiosk@foundation0 Documents]$ <span class="built_in">ls</span> Thesis ProjecrX</span><br><span class="line">ProjecrX:</span><br><span class="line">text1.txt  text2.txt</span><br><span class="line"></span><br><span class="line">Thesis:</span><br><span class="line">Chapter1  Chapter2  Chapter3</span><br><span class="line">[kiosk@foundation0 Documents]$ </span><br></pre></td></tr></table></figure>
+
+<p>​	Thesis目录复制失败，但test1.txt和test2.txt文件复制成功。</p>
+<p>​	您可以使用cp 命令 -r 选项复制目录及其内容，请记住，您可以在命令组合中使用.和..特殊目录。在以下示例中，Thesis目录及其内容复制到ProjecrX目录。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[kiosk@foundation0 Documents]$ <span class="built_in">cd</span> ProjecrX/</span><br><span class="line"><span class="comment"># cp 复制， ../上级目录的Thesis目录， .目的地当前所在工作目录</span></span><br><span class="line">[kiosk@foundation0 ProjecrX]$ <span class="built_in">cp</span> -r ../Thesis/ .</span><br><span class="line">[kiosk@foundation0 ProjecrX]$ <span class="built_in">ls</span></span><br><span class="line">text1.txt  text2.txt  Thesis</span><br><span class="line">[kiosk@foundation0 ProjecrX]$ <span class="built_in">ls</span> -R Thesis/</span><br><span class="line">Thesis/:</span><br><span class="line">Chapter1  Chapter2  Chapter3</span><br><span class="line"></span><br><span class="line">Thesis/Chapter1:</span><br><span class="line"></span><br><span class="line">Thesis/Chapter2:</span><br><span class="line"></span><br><span class="line">Thesis/Chapter3:</span><br><span class="line">[kiosk@foundation0 ProjecrX]$ </span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="移动文件和目录"><a href="#移动文件和目录" class="headerlink" title="移动文件和目录"></a>移动文件和目录</h3><p>​	mv 命令可将文件从一个位置移动到另一个位置。如果您将文件的绝对路径视为它的全名，那么移动文件实际上和重命名文件名一样。文件内容正在移动后保持不变。</p>
+<p>​	使用mv命令来重命名文件。以下示例中，mv text1.txt命令将目录中的text1.txt 文件重命名为 text2.txt</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[kiosk@foundation0 ProjecrX]$ <span class="built_in">ls</span></span><br><span class="line">text1.txt  Thesis</span><br><span class="line">[kiosk@foundation0 ProjecrX]$ <span class="built_in">mv</span> text1.txt text2.txt </span><br><span class="line">[kiosk@foundation0 ProjecrX]$ <span class="built_in">ls</span></span><br><span class="line">text2.txt  Thesis</span><br><span class="line">[kiosk@foundation0 ProjecrX]$</span><br></pre></td></tr></table></figure>
+
+<p>​	使用mv 命令将文件移动到另一个目录。再以下示例中，text2.txt 文件从<del>&#x2F;Documents&#x2F;ProjecrX目录移动到</del>&#x2F;Documents&#x2F;Thesis&#x2F;Chapter1目录中。您可以使用mv命令 -v选项来显示命令操作的详细输出</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[kiosk@foundation0 ProjecrX]$ <span class="built_in">ls</span> ../Thesis/Chapter1/</span><br><span class="line">[kiosk@foundation0 ProjecrX]$ <span class="built_in">mv</span> -v text2.txt ../Thesis/Chapter1/</span><br><span class="line">renamed <span class="string">&#x27;text2.txt&#x27;</span> -&gt; <span class="string">&#x27;../Thesis/Chapter1/text2.txt&#x27;</span></span><br><span class="line">[kiosk@foundation0 ProjecrX]$ <span class="built_in">ls</span> ../Thesis/Chapter1/</span><br><span class="line">text2.txt</span><br><span class="line">[kiosk@foundation0 ProjecrX]$ </span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="删除文件和目录"><a href="#删除文件和目录" class="headerlink" title="删除文件和目录"></a>删除文件和目录</h3><p>​	rm 命令可删除文件。默认情况下，rm不会删除目录。您可以使用rm命令的 -r或 –recursive选项，使rm命令删除目录及其内容（文件）。rm -r命令首先遍历每个子目录，并在删除每个目录之前逐一删除其中的文件。</p>
+<p>​	在以下示例中，不带选项时rm 命令会删除test1.txt文件，但若要删除Thesis&#x2F;Chhapter1目录，您必须添加-r 选项。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[kiosk@foundation0 ~]$ <span class="built_in">ls</span> Documents/Thesis/Chapter1/</span><br><span class="line">test1.txt</span><br><span class="line">[kiosk@foundation0 ~]$ <span class="built_in">rm</span> Documents/Thesis/Chapter1/test1.txt </span><br><span class="line">[kiosk@foundation0 ~]$ <span class="built_in">ls</span> Documents/Thesis/Chapter1/</span><br><span class="line">[kiosk@foundation0 ~]$ <span class="built_in">rm</span> Documents/Thesis/Chapter1/</span><br><span class="line"><span class="built_in">rm</span>: cannot remove <span class="string">&#x27;Documents/Thesis/Chapter1/&#x27;</span>: Is a directory</span><br><span class="line">[kiosk@foundation0 ~]$ <span class="built_in">rm</span> -r  Documents/Thesis/Chapter1/</span><br><span class="line">[kiosk@foundation0 ~]$ <span class="built_in">ls</span> Documents/Thesis/Chapter1/</span><br><span class="line"><span class="built_in">ls</span>: cannot access <span class="string">&#x27;Documents/Thesis/Chapter1/&#x27;</span>: No such file or directory</span><br><span class="line">[kiosk@foundation0 ~]$ <span class="built_in">ls</span> Documents/Thesis</span><br><span class="line">Chapter2  Chapter3</span><br><span class="line">[kiosk@foundation0 ~]$ </span><br></pre></td></tr></table></figure>
+
+<p>​	<code>重要：红帽Linux不提供命令行取消删除功能，也没有可从中恢复报关被删除文件的“垃圾桶”。垃圾桶是桌面环境（如：GNOME）的一个组件，但是不供从shell运行的命令使用。所有在使用相对路径删除文件或目录之前，最好先使用pwd命令验证您当前的工作目录。</code></p>
+<p>​	您可以使用rm命令 -i 选项以交互式提示确认后再删除。这基本上与使用rm命令-f选项相反，-f选项强制删除并且不提示用户进行确认。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[kiosk@foundation0 Documents]$ <span class="built_in">rm</span> -ri Thesis/</span><br><span class="line"><span class="built_in">rm</span>: descend into directory <span class="string">&#x27;Thesis/&#x27;</span>? y</span><br><span class="line"><span class="built_in">rm</span>: remove directory <span class="string">&#x27;Thesis/Chapter2&#x27;</span>? y</span><br><span class="line"><span class="built_in">rm</span>: remove directory <span class="string">&#x27;Thesis/Chapter3&#x27;</span>? y</span><br><span class="line"><span class="built_in">rm</span>: remove directory <span class="string">&#x27;Thesis/&#x27;</span>? y</span><br><span class="line">[kiosk@foundation0 Documents]$ <span class="built_in">rm</span> -rf ProjecrX/</span><br><span class="line">[kiosk@foundation0 Documents]$ </span><br></pre></td></tr></table></figure>
+
+<p>​	<code>注意：如果同时使用-i和-f选项，-f选项将具有优先权，所以再rm删除文件之前，不会提示您进行确认。</code></p>
+<p>​	您也可以使用rmdir命令来删除空目录。使用rm命令-r选项可删除非空目录</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># dir1目录非空，dir2空目录，rmdir命令无法删除非空目录，rm -r可删除非空目录</span></span><br><span class="line">[kiosk@foundation0 Documents]$ <span class="built_in">ls</span> dir1/</span><br><span class="line">text1.txt</span><br><span class="line">[kiosk@foundation0 Documents]$ <span class="built_in">ls</span> dir2</span><br><span class="line">[kiosk@foundation0 Documents]$ <span class="built_in">rmdir</span> dir1/</span><br><span class="line"><span class="built_in">rmdir</span>: failed to remove <span class="string">&#x27;dir1/&#x27;</span>: Directory not empty</span><br><span class="line">[kiosk@foundation0 Documents]$ <span class="built_in">rmdir</span> dir2/</span><br><span class="line">[kiosk@foundation0 Documents]$ <span class="built_in">ls</span></span><br><span class="line">dir1</span><br><span class="line">[kiosk@foundation0 Documents]$ </span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="制作文件间的链接"><a href="#制作文件间的链接" class="headerlink" title="制作文件间的链接"></a>制作文件间的链接</h2><h3 id="管理文件间的链接"><a href="#管理文件间的链接" class="headerlink" title="管理文件间的链接"></a>管理文件间的链接</h3><p>​	您可以创建指向同一文件的多个文件名。这些文件名称为链接。</p>
+<p>​	您可以创建的两种类型的链接：硬链接或符号链接（同时也称为软链接）。每种方法各有利弊。</p>
+<h3 id="创建硬链接"><a href="#创建硬链接" class="headerlink" title="创建硬链接"></a>创建硬链接</h3><p>​	从初始名称到文件系统上的数据，每个文件都以一个硬链接开始。当创建指向文件的硬链接时，也会创建另一个指向同一数据的名称。新的硬链接与原始文件名的作用完全相同。创建之后，新的硬链接与文件的原始名称毫无二致。</p>
+<p>​	您可以使用ls -l命令来确认文件是否具有多个硬链接。他报告的项目之一就是每个文件的链接数，即文件所具有的硬链接数。再下面的示例中，newfile.txt的链接数位1。它恰好有一个绝对路径，即&#x2F;home&#x2F;kiosk&#x2F;newfile.txt。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[kiosk@foundation0 ~]$ <span class="built_in">ls</span> -l newfile.txt </span><br><span class="line">-rw-rw-r--. 1 kiosk kiosk 6 Mar  5 16:47 newfile.txt</span><br><span class="line">[kiosk@foundation0 ~]$</span><br></pre></td></tr></table></figure>
+
+<p>​	您可以使用ln命令来创建一个指向现有文件的硬链接（也就是指向该文件的另一个名称）。该命令至少需要两个参数：现有文件的路径，以及要创建的硬链接的路径。</p>
+<p>​	以下示例将为现有文件newfile.txt，在&#x2F;tmp目录中创建一个名为newfile-hlink2.txt的硬链接。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[kiosk@foundation0 ~]$ <span class="built_in">cat</span> newfile.txt </span><br><span class="line">hahah</span><br><span class="line"><span class="comment"># 创建硬链接</span></span><br><span class="line">[kiosk@foundation0 ~]$ <span class="built_in">ln</span> newfile.txt /tmp/newfile-hlink2.txt</span><br><span class="line"><span class="comment"># 硬链接已生成</span></span><br><span class="line">[kiosk@foundation0 ~]$ <span class="built_in">ls</span> -l /tmp/newfile-hlink2.txt</span><br><span class="line">-rw-rw-r--. 2 kiosk kiosk 6 Mar  5 16:47 /tmp/newfile-hlink2.txt</span><br><span class="line"><span class="comment"># 硬链接与原始文件具有相同的数据</span></span><br><span class="line">[kiosk@foundation0 ~]$ <span class="built_in">cat</span> /tmp/newfile-hlink2.txt</span><br><span class="line">hahah</span><br><span class="line"><span class="comment"># 修改原始文件内容的同时，硬链接的内容也同时随原文件更新</span></span><br><span class="line">[kiosk@foundation0 ~]$ <span class="built_in">echo</span> xixixi &gt; newfile.txt </span><br><span class="line">[kiosk@foundation0 ~]$ <span class="built_in">cat</span> /tmp/newfile-hlink2.txt</span><br><span class="line">xixixi</span><br><span class="line">[kiosk@foundation0 ~]$ </span><br></pre></td></tr></table></figure>
+
+<p>​	要确定两个文件是否被硬链接，请使用ls命令配合-i 选项列出每个文件索引节点编码。如果两个文件位于同一文件系统上，而且他们的索引节点编号相同，那么这两个文件就是指向同一数据的硬链接。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[kiosk@foundation0 ~]$ <span class="built_in">ls</span> -li newfile.txt /tmp/newfile-hlink2.txt</span><br><span class="line">269337410 -rw-rw-r--. 2 kiosk kiosk 7 Mar  5 16:55 newfile.txt</span><br><span class="line">269337410 -rw-rw-r--. 2 kiosk kiosk 7 Mar  5 16:55 /tmp/newfile-hlink2.txt</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>​	<code>重要：引用同一文件的硬链接具有相同的链接数、访问权限、用户和组所有权、时间戳，以及文件内容。当一个硬链接的内容发生更改，同一文件的其他硬链接也会显示更新后的新内容。这是因为每个硬链接都指向存储设备中的同一数据</code></p>
+<p>​	即使原始文件被删除，只要还存在至少一个硬链接，该文件的内容就依然可用。只有最后一个硬链接被删除时，数据才会从存储中删除，从而使任何硬链接都不会引用该文件内容。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[kiosk@foundation0 ~]$ <span class="built_in">rm</span> -rf newfile.txt </span><br><span class="line">[kiosk@foundation0 ~]$ <span class="built_in">ls</span> -li /tmp/newfile-hlink2.txt </span><br><span class="line">269337410 -rw-rw-r--. 1 kiosk kiosk 7 Mar  5 16:55 /tmp/newfile-hlink2.txt</span><br><span class="line">[kiosk@foundation0 ~]$ <span class="built_in">cat</span> /tmp/newfile-hlink2.txt</span><br><span class="line">xixixi</span><br><span class="line">[kiosk@foundation0 ~]$ </span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="硬链接的局限性"><a href="#硬链接的局限性" class="headerlink" title="硬链接的局限性"></a>硬链接的局限性</h3><p>​	硬链接存在一些局限性。首先，您只能将硬链接用于常规文件。无法使用ln命令来创建指向目录或特殊文件的硬链接。</p>
+<p>​	其次，只有当两个文件位于同一文件系统上时，您才能使用硬链接。文件系统层次结构可以由多个存储设备组成。当切换到新目录时，该目录及其内容可能会存储在不同的文件系统中，具体取决于您的系统配置。</p>
+<p>​	您可用使用df命令来列出位于不同文件系统上的目录。例如，您可能会看到以下输出：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[kiosk@foundation0 ~]$ <span class="built_in">df</span> </span><br><span class="line">Filesystem     1K-blocks     Used Available Use% Mounted on</span><br><span class="line">devtmpfs         8155384        0   8155384   0% /dev</span><br><span class="line">tmpfs            8175032        0   8175032   0% /dev/shm</span><br><span class="line">tmpfs            3270016    10264   3259752   1% /run</span><br><span class="line">/dev/nvme0n1p3 191037300 70391952 120645348  37% /</span><br><span class="line">/dev/loop2       7866562  7866562         0 100% /content/rhel9.0/x86_64/rhel8-additional</span><br><span class="line">/dev/loop1           456      456         0 100% /content/rhel9.0/x86_64/rhcsa-practice</span><br><span class="line">/dev/nvme0n1p1   2086912   971540   1115372  47% /boot</span><br><span class="line">/dev/loop0       8377364  8377364         0 100% /content/rhel9.0/x86_64/dvd</span><br><span class="line">tmpfs            1635004      104   1634900   1% /run/user/1000</span><br></pre></td></tr></table></figure>
+
+<p>​	两个不同的目录及其子目录中的文件位于不同的文件系统上。因此，本示例中的系统而言，您可以在<code>/tmp/newfile-hlink2.txt</code>和<code>/home/kiosk/newfile.txt</code> 文件之间创建一个硬链接，因为它们都说 &#x2F; 目录的子目录，而不是列表中其他任何目录的子目录。但是您不能在<code>/boot</code>和<code>/home/kiosk/newfile.txt</code> 之间建立硬链接，因为第一个文件位于&#x2F;boot目录下的子目录并且在<code>/dev/nvme0n1p1</code>文件系统中，而第二个文件在<code>/dev/nvme0n1p3</code>文件系统中</p>
+<h3 id="创建符号链接"><a href="#创建符号链接" class="headerlink" title="创建符号链接"></a>创建符号链接</h3><p>​	ln 命令 -s 选项可创建符号链接，也称为“软链接”。符号链接不是常规文件，而是指向现有文件或目录的特殊类型的文件。</p>
+<p>​	符号链接相比硬链接有着一定的优势：</p>
+<ul>
+<li>符号链接可以链接位于不同文件系统上的两个文件。</li>
+<li>符号链接可以指向目录或特殊文件，而不仅限于常规文件。</li>
+</ul>
+<p>​	在以下示例中，ln -s命令为&#x2F;home&#x2F;kiosk&#x2F;newfile.txt文件创建符号链接。符号链接在名称是&#x2F;tmp&#x2F;newfile-symlink.txt</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[kiosk@foundation0 ~]$ <span class="built_in">ln</span> -s /home/kiosk/newfile.txt /tmp/newfile-symlink.txt</span><br><span class="line">[kiosk@foundation0 ~]$ <span class="built_in">ls</span> -l newfile.txt /tmp/newfile-symlink.txt </span><br><span class="line">-rw-r--r--. 1 kiosk kiosk  6 Mar  5 17:46 newfile.txt</span><br><span class="line">lrwxrwxrwx. 1 kiosk kiosk 23 Mar  5 17:48 /tmp/newfile-symlink.txt -&gt; /home/kiosk/newfile.txt</span><br><span class="line">[kiosk@foundation0 ~]$ <span class="built_in">cat</span> /tmp/newfile-symlink.txt</span><br><span class="line">hahah</span><br><span class="line">[kiosk@foundation0 ~]$ </span><br></pre></td></tr></table></figure>
+
+<p>​	在上面示例中，&#x2F;tmp&#x2F;newfile-symlink.txt文件的长列表的第一个字符是l（字母 l）而不是 - 。这个字符表示该文件是符号链接而非常规文件。</p>
+<p>​	当原始常规文件被删除后，符号链接会指向原始文件，但目标已消失。指向缺少文件的符号链接称为“悬空符号链接”。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[kiosk@foundation0 ~]$ <span class="built_in">rm</span> -f newfile.txt </span><br><span class="line">[kiosk@foundation0 ~]$ <span class="built_in">ls</span> -l /tmp/newfile-symlink.txt </span><br><span class="line">lrwxrwxrwx. 1 kiosk kiosk 23 Mar  5 17:48 /tmp/newfile-symlink.txt -&gt; /home/kiosk/newfile.txt</span><br><span class="line">[kiosk@foundation0 ~]$ <span class="built_in">cat</span> /tmp/newfile-symlink.txt</span><br><span class="line"><span class="built_in">cat</span>: /tmp/newfile-symlink.txt: No such file or directory</span><br><span class="line">[kiosk@foundation0 ~]$ </span><br></pre></td></tr></table></figure>
+
+<p>​	<code>重要：在上述示例中，悬空符号链接有个副作用，那就是：如果您稍后创建了一个与删除文件同名的新文件（/home/kiosk/newfile.txt），那么符号链接将不再“悬空”，而是指向这个新文件，硬链接的工作方式却不是这样的。如果您删除硬链接，然后使用常规工具（而不是ln）创建一个同名的文件，那么新文件将不会链接到旧文件，不妨通过以下方式比较硬链接和符号链接，以了解它们的工作原理：</code></p>
+<ul>
+<li><code>硬链接是将名称指向存储设备上的数据。</code></li>
+<li><code>符号链接是将名称指向另一个名称，原文件指向存储设备上的数据。</code></li>
+</ul>
+<p>​	符合链接可以指向目录，而且，符号链接发挥目录一样的作用。如果使用cd进入到符合链接的目录，则当前工作目录将变为被链接的目录。有些工具可以跟踪您如何通过软链接到达这个目录的。例如，默认情况下，cd将使用符号链接的名称（而非实际的名称）来更新当前工作目录。如果要使用实际目录的名称更新当前工作目录，则可以使用 -P 选项。</p>
+<p>​	以下示例将创建&#x2F;home&#x2F;kiosk&#x2F;configfiles的不好链接，它将指向&#x2F;etc目录。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[kiosk@foundation0 ~]$ <span class="built_in">ln</span> -s /etc/ /home/kiosk/configfiles</span><br><span class="line">[kiosk@foundation0 ~]$ <span class="built_in">cd</span> /home/kiosk/configfiles</span><br><span class="line">[kiosk@foundation0 configfiles]$ <span class="built_in">pwd</span></span><br><span class="line">/home/kiosk/configfiles</span><br><span class="line">[kiosk@foundation0 configfiles]$ <span class="built_in">cd</span> -P /home/kiosk/configfiles</span><br><span class="line">[kiosk@foundation0 etc]$ <span class="built_in">pwd</span></span><br><span class="line">/etc</span><br><span class="line">[kiosk@foundation0 etc]$ </span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="使用shell扩展匹配文件名"><a href="#使用shell扩展匹配文件名" class="headerlink" title="使用shell扩展匹配文件名"></a>使用shell扩展匹配文件名</h2><h3 id="命令行扩展"><a href="#命令行扩展" class="headerlink" title="命令行扩展"></a>命令行扩展</h3><p>​	当您在Bash shell提示符中键入命令时，shell在运行该命令行之前通过多个扩展对其进行处理。您可以使用这些shell扩展来执行原本很难或不可能完成的复杂任务。</p>
+<p>​	Bash执行的主要扩展有：</p>
+<ul>
+<li>大括号扩展，可以生成多个字符串。</li>
+<li>波浪号扩展，扩展至用户主目录路径。</li>
+<li>变量扩展，将文本替换为shell变量中存储的值。</li>
+<li>命令替换，加ing文本替换为命令的输出。</li>
+<li>路径名扩展，帮助按模式匹配选择一个或多个文件。</li>
+</ul>
+<p>​	路径名扩展也称为通配符，是Bash最有用的功能之一。使用此功能，可以更加轻松地管理多个文件。使用“扩展”的元字符来匹配要寻找的文件名和路径名，可以一次性针对集中的一组文件执行命令。</p>
+<h3 id="路径名扩展和模式匹配"><a href="#路径名扩展和模式匹配" class="headerlink" title="路径名扩展和模式匹配"></a>路径名扩展和模式匹配</h3><p>​	路径名扩展将表示为通配符或字符类别的特殊字符模式扩展为该模式匹配的文件名列表。在shell运行您的命令之前，它会将模式替换为匹配的文件名列表。如果该模式与任何内容都不匹配，则shell将尝试使用该模式作为其运行命令的字面参数。下表列出了用于模式匹配的常见元字符和模式类型。</p>
+<table>
+<thead>
+<tr>
+<th>模式</th>
+<th>匹配项</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>*</td>
+<td>由零个或跟多字符组成的任意字符串。</td>
+</tr>
+<tr>
+<td>?</td>
+<td>任何一个字符。</td>
+</tr>
+<tr>
+<td>[abc…]</td>
+<td>括起的类型（位于两个方括号之间）中的任何一个字符。</td>
+</tr>
+<tr>
+<td>[!abc…]</td>
+<td>不在括起的类型中的任意字符。</td>
+</tr>
+<tr>
+<td>[^abc…]</td>
+<td>不在括起的类型中的任意字符。</td>
+</tr>
+<tr>
+<td>[[:alpha:]]</td>
+<td>任何字母字符</td>
+</tr>
+<tr>
+<td>[[:lower:]]</td>
+<td>任何小写字符</td>
+</tr>
+<tr>
+<td>[[:upper:]]</td>
+<td>任何大写字符</td>
+</tr>
+<tr>
+<td>[[:alnum:]]</td>
+<td>任何字母字符或数字</td>
+</tr>
+<tr>
+<td>[[:punct:]]</td>
+<td>除空格和字母数字意外的任何可打印字符。</td>
+</tr>
+<tr>
+<td>[[:digit:]]</td>
+<td>从0到9的任何单个数字。</td>
+</tr>
+<tr>
+<td>[[:space:]]</td>
+<td>任何单个空格字符，可能包括制表符、换行符、回车符、换页符或空格。</td>
+</tr>
+</tbody></table>
+<p>​	便于演示，以下命令创建一些示例文件：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[kiosk@foundation0 Videos]$ <span class="built_in">mkdir</span> glob; <span class="built_in">cd</span> glob</span><br><span class="line">[kiosk@foundation0 glob]$ <span class="built_in">touch</span> alpha bravo charlie dalta <span class="built_in">echo</span> able baker cast dog easy Able Aplha Cast 123</span><br><span class="line">[kiosk@foundation0 glob]$ <span class="built_in">ls</span></span><br><span class="line">able  alpha  baker  bravo  cast  charlie  dalta  dog  easy  <span class="built_in">echo</span></span><br><span class="line">[kiosk@foundation0 glob]$</span><br></pre></td></tr></table></figure>
+
+<p>​	以下示例中，前面两个命令通过星号（*）使用简单模式匹配，分别匹配以“a”开头的所有文件名和包含“a”的所有文件名。第三个命令使用星号和方括号匹配以“a”或“c”开头的所有文件名。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[kiosk@foundation0 glob]$ <span class="built_in">ls</span> a*</span><br><span class="line">able  alpha</span><br><span class="line">[kiosk@foundation0 glob]$ <span class="built_in">ls</span> *a*</span><br><span class="line">able  alpha  baker  bravo  cast  charlie  dalta  easy</span><br><span class="line">[kiosk@foundation0 glob]$ <span class="built_in">ls</span> [ac]*</span><br><span class="line">able  alpha  cast  charlie</span><br><span class="line">[kiosk@foundation0 glob]$ </span><br></pre></td></tr></table></figure>
+
+<p>​	第一、二个命令，开头不包括“a”或“c”的文件。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">[kiosk@foundation0 glob]$ ls [!ac]*</span><br><span class="line">baker  bravo  dalta  dog  easy  echo</span><br><span class="line">[kiosk@foundation0 glob]$ ls [^ac]*</span><br><span class="line">baker  bravo  dalta  dog  easy  echo</span><br><span class="line">[kiosk@foundation0 glob]$ </span><br></pre></td></tr></table></figure>
+
+<p>​	过滤出文件内任何字母字符的内容。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[kiosk@foundation0 glob]$ <span class="built_in">cat</span> able </span><br><span class="line">daf</span><br><span class="line">fasfa</span><br><span class="line">154512</span><br><span class="line"></span><br><span class="line">fadfa</span><br><span class="line"></span><br><span class="line">fa</span><br><span class="line">dggf</span><br><span class="line">gf</span><br><span class="line">fgd</span><br><span class="line">eq</span><br><span class="line">bnv</span><br><span class="line"></span><br><span class="line">cz</span><br><span class="line">rew</span><br><span class="line">vbc`:</span><br><span class="line"></span><br><span class="line">[kiosk@foundation0 glob]$ grep [[:alpha:]] able </span><br><span class="line">daf</span><br><span class="line">fasfa</span><br><span class="line">fadfa</span><br><span class="line">fa</span><br><span class="line">dggf</span><br><span class="line">gf</span><br><span class="line">fgd</span><br><span class="line">eq</span><br><span class="line">bnv</span><br><span class="line">cz</span><br><span class="line">rew</span><br><span class="line">vbc`:</span><br><span class="line">[kiosk@foundation0 glob]$ </span><br></pre></td></tr></table></figure>
+
+<p>​	以下示例中也可以使用问号 “？”来匹配其中的一些文件名，这两个命令分别仅匹配长度为四个和五个字符的文件名。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[kiosk@foundation0 glob]$ <span class="built_in">ls</span> ????</span><br><span class="line">able  cast  easy  <span class="built_in">echo</span></span><br><span class="line">[kiosk@foundation0 glob]$ <span class="built_in">ls</span> ?????</span><br><span class="line">alpha  baker  bravo  dalta</span><br><span class="line">[kiosk@foundation0 glob]$ </span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="大括号扩展"><a href="#大括号扩展" class="headerlink" title="大括号扩展"></a>大括号扩展</h3><p>​	大括号扩展用于生成任意字符串。大括号包含字符串的都好分割列表或顺序表达式。结果包含大括号定义之前或之后的文本。大括号扩展可以相互嵌套。您也可以使用双点语法（..），它将扩展为一个顺序序列。例如，大括号内的{a..d}双点语法扩展为 b c d。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[kiosk@foundation0 glob]$ <span class="built_in">touch</span> &#123;tmp,nginx,docker,kubelet&#125;.<span class="built_in">log</span></span><br><span class="line">[kiosk@foundation0 glob]$ <span class="built_in">ls</span></span><br><span class="line">docker.log  kubelet.log  nginx.log  tmp.log</span><br><span class="line">[kiosk@foundation0 glob]$ <span class="built_in">touch</span> file&#123;a..c&#125;.txt</span><br><span class="line">[kiosk@foundation0 glob]$ <span class="built_in">ls</span> file*</span><br><span class="line">filea.txt  fileb.txt  filec.txt</span><br><span class="line">[kiosk@foundation0 glob]$ <span class="built_in">touch</span> file&#123;a..c&#125;&#123;1..3&#125;.txt</span><br><span class="line">[kiosk@foundation0 glob]$ <span class="built_in">ls</span></span><br><span class="line">filea1.txt  filea2.txt  filea3.txt  fileb1.txt  fileb2.txt  fileb3.txt  filec1.txt  filec2.txt  filec3.txt</span><br><span class="line">[kiosk@foundation0 glob]$ </span><br></pre></td></tr></table></figure>
+
+<p>​	可以通过大括号扩展的方式去快速创建多个文件或目录及查找等操作。</p>
+<h3 id="波形符扩展"><a href="#波形符扩展" class="headerlink" title="波形符扩展"></a>波形符扩展</h3><p>​	波形符（<del>）可匹配当前用户的主目录。如果波形符后为斜杠（&#x2F;）以外的字符串，shell就会将波形符之后的字符串解释为用户名。如果存在匹配项，则用该用户的主目录绝对路径来替换字符串。如果找不到匹配的用户名，shell将使用实际波形符加上该字符串完整输出。如果您以（</del>&#x2F;）开头，shell就会将该解释为当前用户的主目录，在它之后的字符串就是当前用户主目录下的子目录。</p>
+<p>​	一下示例中，echo命令用于显示波形字符最终输出的值。也可以使用echo命令来显示大括号和变量扩展字符等的值。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># root的主目录绝对路径</span></span><br><span class="line">[kiosk@foundation0 glob]$ <span class="built_in">echo</span> ~root</span><br><span class="line">/root</span><br><span class="line"><span class="comment"># kiosk的主目录绝对路径</span></span><br><span class="line">[kiosk@foundation0 glob]$ <span class="built_in">echo</span> ~kiosk/</span><br><span class="line">/home/kiosk/</span><br><span class="line"><span class="comment"># ~/当前用户主目录，glob主目录下的子目录</span></span><br><span class="line">[kiosk@foundation0 glob]$ <span class="built_in">echo</span> ~/glob</span><br><span class="line">/home/kiosk/glob</span><br><span class="line"><span class="comment"># 匹配不到则将参数完整输出</span></span><br><span class="line">[kiosk@foundation0 glob]$ <span class="built_in">echo</span> ~ahahha</span><br><span class="line">~ahahha</span><br><span class="line">[kiosk@foundation0 glob]$ </span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="变量扩展"><a href="#变量扩展" class="headerlink" title="变量扩展"></a>变量扩展</h3><p>​	变量的作用类似于可以在内存中存储值的命名容器。通过变量，可以从命令行或shell脚本内轻松访问和修改存储的数据。</p>
+<p>​	您可以通过以下语法蒋数据作为值分配给变量：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[kiosk@foundation0 glob]$ VARIABLENAME=value</span><br></pre></td></tr></table></figure>
+
+<p>​	可以使用变量扩展蒋变量名转换为命令行上的值。如果字符串以美元符号（$）开头，那么shell就会尝试将该字符串的其余部分用作变量名称，并将它替换为变量中包含的任何值。也就是说美元符可以将它后面的字符串解释（标记）为这是一个变量，而非普通的字符串。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 定义一个名为：USERNAME的变量，它的值为：Asimov</span></span><br><span class="line"><span class="comment"># 他们是一个键值对的关系</span></span><br><span class="line">[kiosk@foundation0 glob]$ USERNAME=Asimov</span><br><span class="line"><span class="comment"># $打入开头关键字同样也可以TAB为您补全上来</span></span><br><span class="line">[kiosk@foundation0 glob]$ <span class="built_in">echo</span> <span class="variable">$USER</span></span><br><span class="line"><span class="variable">$USER</span>      <span class="variable">$USERNAME</span>  </span><br><span class="line">[kiosk@foundation0 glob]$ <span class="built_in">echo</span> <span class="variable">$USERNAME</span></span><br><span class="line">Asimov</span><br><span class="line">[kiosk@foundation0 glob]$ </span><br></pre></td></tr></table></figure>
+
+
+
+<p>​	为了预防您取的变量名于其他shell扩展名其冲突而引起错误，您可以将变量的名称放在大括号中，如：${VARIABLENAME}</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[kiosk@foundation0 glob]$ USERNAME=LiWeiHu</span><br><span class="line">[kiosk@foundation0 glob]$ <span class="built_in">echo</span> <span class="variable">$&#123;USER&#125;</span></span><br><span class="line"><span class="variable">$&#123;USER&#125;</span>      <span class="variable">$&#123;USERNAME&#125;</span>  </span><br><span class="line">[kiosk@foundation0 glob]$ <span class="built_in">echo</span> <span class="variable">$&#123;USERNAME&#125;</span></span><br><span class="line">LiWeiHu</span><br><span class="line">[kiosk@foundation0 glob]$ </span><br></pre></td></tr></table></figure>
+
+<p>​	变量名只能包含字母（大小写均可）、数字和下划线。变量名称区分大小写，不能以数字开头。</p>
+<h3 id="命令替换"><a href="#命令替换" class="headerlink" title="命令替换"></a>命令替换</h3><p>​	命令替换允许命令的输出替换命令行上的命令本身。当命令阔在括号中并且前面有美元符号（$）时，会发生命令替换。$(command) 形式可以互相嵌套多个命令扩展。</p>
+<p>​	将date +%A这个原本的命令，用它输出的值去替换这个命令，去输出今天是星期几，于我们没带命令替换的普通字符串，形成一段完整的输出内容。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[kiosk@foundation0 glob]$ <span class="built_in">echo</span> Today is $(<span class="built_in">date</span> +%A)</span><br><span class="line">Today is Thursday</span><br><span class="line">[kiosk@foundation0 glob]$ <span class="built_in">echo</span> Today <span class="keyword">time</span> is  $(<span class="built_in">date</span> +%M) minutes past $(<span class="built_in">date</span> +%l%p).</span><br><span class="line">Today <span class="keyword">time</span> is 18 minutes past 4PM.</span><br><span class="line">[kiosk@foundation0 glob]$ </span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="防止参数被扩展"><a href="#防止参数被扩展" class="headerlink" title="防止参数被扩展"></a>防止参数被扩展</h3><p>​	在Bash shell中，许多字符有着特殊含义。为防止命令行的某些部分上执行shell扩展，您可以为字符和字符串加引号或执行转义。</p>
+<p>​	反斜杠（\）是bash shell中的转义字符。它可以防止其后的字符被扩展。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 未被转义时，$HOME将作为变量去输出key值</span></span><br><span class="line">[kiosk@foundation0 ~]$ <span class="built_in">echo</span> <span class="variable">$HOME</span></span><br><span class="line">/home/kiosk</span><br><span class="line"><span class="comment"># 通过转义符，$HOME它就是一个普通的字符串输出</span></span><br><span class="line">[kiosk@foundation0 ~]$ <span class="built_in">echo</span> \<span class="variable">$HOME</span></span><br><span class="line"><span class="variable">$HOME</span></span><br><span class="line">[kiosk@foundation0 ~]$ </span><br></pre></td></tr></table></figure>
+
+
+
+<p>​	在上面的示例中，保护美元符免于扩展，bash将其视为常规字符，因此也就未在$HOME上执行变量扩展。</p>
+<p>​	如果要保护较长的字符串，则使用单引号 （’）或双引号（”）来括起字符串。它们的作用略有不同。单引号将阻止所有shell扩展。双引号则阻止大部分shell扩展。</p>
+<p>​	双引号可抑制美元符号（ $ ）、反斜杠（ \ ）、反引号（ &#96; ）和感叹号（ ! ）以外的特殊字符，在引用文本内发挥作用。这回阻止路径名扩展，但仍允许命令替换和变量扩展。</p>
+<p>​	以下示例中，演示了双引号无法抑制变量扩展，依然会输出变量具有的值。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[kiosk@foundation0 ~]$ <span class="built_in">echo</span> <span class="variable">$&#123;HOSTNAME&#125;</span></span><br><span class="line">foundation0.ilt.example.com</span><br><span class="line">[kiosk@foundation0 ~]$ <span class="built_in">echo</span> <span class="string">&quot;****** hostname is <span class="variable">$&#123;HOSTNAME&#125;</span> ********&quot;</span></span><br><span class="line">****** hostname is foundation0.ilt.example.com ********</span><br><span class="line">[kiosk@foundation0 ~]$ </span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<p>​	使用单引号则可以按字面解释抑制引号内所有的特殊字符，以文本输出。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[kiosk@foundation0 ~]$ <span class="built_in">echo</span> <span class="variable">$&#123;HOSTNAME&#125;</span></span><br><span class="line">foundation0.ilt.example.com</span><br><span class="line">[kiosk@foundation0 ~]$ <span class="built_in">echo</span> <span class="string">&#x27;****** hostname is $&#123;HOSTNAME&#125; ********&#x27;</span></span><br><span class="line">****** hostname is <span class="variable">$&#123;HOSTNAME&#125;</span> ********</span><br><span class="line">[kiosk@foundation0 ~]$ </span><br></pre></td></tr></table></figure>
+
+]]></content>
       <categories>
         <category>RHCE</category>
       </categories>
@@ -849,348 +1191,6 @@
 
 
 
-
-]]></content>
-      <categories>
-        <category>RHCE</category>
-      </categories>
-      <tags>
-        <tag>RHCE</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Linux-RHCE-124-第二章节</title>
-    <url>/2025/03/01/01-RHCE/Linux-RHCE-124-%E7%AC%AC%E4%BA%8C%E7%AB%A0%E8%8A%82/</url>
-    <content><![CDATA[<h1 id="从命令行管理文件"><a href="#从命令行管理文件" class="headerlink" title="从命令行管理文件"></a>从命令行管理文件</h1><p>​	</p>
-<p>欢迎阅览我的文章，本章节将介绍什么是Linux，演示环境为RedHat-9</p>
-<h3 id="描述Linux文件系统层次结构概念"><a href="#描述Linux文件系统层次结构概念" class="headerlink" title="描述Linux文件系统层次结构概念"></a>描述Linux文件系统层次结构概念</h3><p>​	Linux系统中的所有文件存储在文件系统中，他们被组织到一颗上下颠倒的树中，称为文件系统层次结构。这个层次结构是上下颠倒的树，因为树根在顶部，树根下方延伸处目录和子目录的分支。</p>
-<p><img src="/2025/03/01/01-RHCE/Linux-RHCE-124-%E7%AC%AC%E4%BA%8C%E7%AB%A0%E8%8A%82/image-20250520165728913.png" alt="image-20250520165728913"></p>
-<p>​	&#x2F; 目录是根目录，位于文件系统层次结构的顶部。&#x2F; 字符还用做文件名中的目录分隔符。例如：如果etc是&#x2F; 根目录的子目录，则可将该目录指代为 &#x2F;etc。类似的，如果&#x2F;etc目录包含一个名为issue的文件，可以将该文件指代为&#x2F;etc&#x2F;issue。</p>
-<p>​	&#x2F; 的子目录用于标准化用途，以便根据类型和用途整理文件，从而更加轻松的找到文件，例如：在根目录中，子目录&#x2F;boot用于存储启动系统所需的文件。</p>
-<ul>
-<li><table>
-<thead>
-<tr>
-<th align="left">位置</th>
-<th>用途</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="left">&#x2F;boot</td>
-<td>操作系统启动过程所需文件</td>
-</tr>
-<tr>
-<td align="left">&#x2F;dev</td>
-<td>供操作系统访问硬件的特殊设备文件</td>
-</tr>
-<tr>
-<td align="left">&#x2F;etc</td>
-<td>供系统及软件的配置文件</td>
-</tr>
-<tr>
-<td align="left">&#x2F;home</td>
-<td>供普通用户存储其个人数据及配置文件的主目录</td>
-</tr>
-<tr>
-<td align="left">&#x2F;root</td>
-<td>供超级用户root存储其个人数据及配置文件的主目录</td>
-</tr>
-<tr>
-<td align="left">&#x2F;run</td>
-<td>自上一次系统启动以来启动的进程的运行时数据。这些数据包括进程ID文件和锁定文件。此目录中的内容在重启时重新创建。所以该目录的数据在重启后，存放在该目录下的数据就会丢失。</td>
-</tr>
-<tr>
-<td align="left">&#x2F;tmp</td>
-<td>供临时文件使用的全局可写空间，天内未曾访问、更改或者修改的文件将自动从该目录中删除。&#x2F;var&#x2F;tmp目录也是一个临时目录，其中的文件如果在30天内为曾访问、更改或者修改过，将被自动删除</td>
-</tr>
-<tr>
-<td align="left">&#x2F;usr</td>
-<td>安装的软件、共享的库（包括文件）和只读程序数据。重要的子目录有：                                                                                       - &#x2F;usr&#x2F;bin：用户命令                                                                            - &#x2F;usr&#x2F;sbin：系统管理命令                                                               - &#x2F;usr&#x2F;local：本地自定义软件</td>
-</tr>
-<tr>
-<td align="left">&#x2F;var</td>
-<td>特定于系统的可变数据应在系统启动之间保持永久性。动态变化的文件（如数据库、缓存目录、日志文件、打印机后台处理文档和网页内容）可在&#x2F;var下找到</td>
-</tr>
-</tbody></table>
-</li>
-</ul>
-<h2 id="通过名称指定文件"><a href="#通过名称指定文件" class="headerlink" title="通过名称指定文件"></a>通过名称指定文件</h2><h3 id="绝对路径和相对路径"><a href="#绝对路径和相对路径" class="headerlink" title="绝对路径和相对路径"></a>绝对路径和相对路径</h3><p>​	文件或目录的路径指定其唯一的文件系统位置。跟随文件路径会遍历出一个或多个指定的子目录，用正斜杠 (&#x2F;) 分隔，直到达到目标位置。目录也称之为文件夹，可以包含其文件和其他子目录。目录的引用方式可以与文件相同</p>
-<p>​	<code>注意：Linux文件名中可以接收空格字符。但是shell也使用空格来分割命令行上的选项和参数。如果命令中包含了名称带有空格的文件，则shell可能会误解释该参数，并认为该文件名是多个参数。为避免这样的情况，请将此类文件名括在引号中，以便shell激昂名称解释为单个参数。当然最好避免在文件中名中使用空格是最好的。</code></p>
-<h3 id="绝对路径"><a href="#绝对路径" class="headerlink" title="绝对路径"></a>绝对路径</h3><p>​	绝对路径是一个完全限定名称，用于指定文件在文件系统层次结构中的确切位置。绝对路径从根 (&#x2F;) 目录开始寻找目标文件或目录，并包括到达特定文件所必须遍历的每个子目录。文件系统中的每个文件都有一个唯一绝对路径名，可通过一个简单的规则识别：第一个字符是正斜杠 (&#x2F;) 的路径名是绝对路径名。</p>
-<p>​	例如，系统消息日志文件的绝对路径名是 &#x2F;var&#x2F;log&#x2F;messages。绝对路径名输入起来可能会太长，所以也可以通过相对于shell提示符当前工作目录的位置来查找文件</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[root@workstation ~]# <span class="built_in">ls</span> /var/log/messages</span><br><span class="line">/var/log/messages</span><br><span class="line">[root@workstation ~]# </span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="当前工作目录和相对路径"><a href="#当前工作目录和相对路径" class="headerlink" title="当前工作目录和相对路径"></a>当前工作目录和相对路径</h3><p>​	当用户登录并打开shell命令提示符时，初始位置通常是该用户的主目录。系统进程也有一个初始目录。用户和进程根据需要更改到其他目录。属于工作目录和当前目录指它们的当前位置</p>
-<p>​	与绝对路径类似，相对路径也是标识唯一文件，但仅指定从工作目录到达文件所需的路径。相对路径遵循一个简单原则：第一字符是正斜杠之外的其他字符的路径名就是相对路径名。例如：我当前工作目录为&#x2F;var，我要找到消息日志文件则是：log&#x2F;messages</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[root@workstation var]# <span class="built_in">ls</span> <span class="built_in">log</span>/messages</span><br><span class="line"><span class="built_in">log</span>/messages</span><br><span class="line">[root@workstation var]# </span><br></pre></td></tr></table></figure>
-
-<p>​	Linux文件系统（包括ext4、XFS、GFS2和GlusterFS）是区分大小写的。在同一目录中创建FileCase.txt和filecase.txt文件将会生成两个不同的文件。</p>
-<p>​	非Linux文件系统的工作方式可能会有所不同。例如：VFAT、Microsoft的NTFS和Apple的HFS+具有大小写保留行为。虽然这些文件系统不区分大小写，它们确实使用文件的原始大小写形式显示的文件名。如果在VFAT文件系统上创建上述示例中的文件，这两个名称指向同一文件，而部署指向两个不同的文件。</p>
-<h3 id="浏览文件系统中的路径"><a href="#浏览文件系统中的路径" class="headerlink" title="浏览文件系统中的路径"></a>浏览文件系统中的路径</h3><p>​	pwd命令显示改shell的当前工作目录的完整路径名。此命令可帮助您却独使用当前相对路径来访问文件的语法。ls命令列出指定目录的目录内容。如果未指定目录，则列出当前工作目录的内容</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[root@workstation var]# <span class="built_in">pwd</span></span><br><span class="line">/var</span><br><span class="line">[root@workstation var]# <span class="built_in">ls</span></span><br><span class="line">account  cache  db     ftp    kerberos  <span class="built_in">local</span>  <span class="built_in">log</span>   nis  preserve  spool  yp</span><br><span class="line">adm      crash  empty  games  lib       lock   mail  opt  run       tmp</span><br><span class="line">[root@workstation var]# </span><br></pre></td></tr></table></figure>
-
-
-
-<p>​	使用cd命令可更改shell当前工作目录。如果没有未该命令指定任何参数，它将切换到您用户的主目录。</p>
-<p>​	以下示例中，cd命令混用绝对路径和相对路径，以更改shell当前工作目录。</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># pwd查看当前工作目录</span></span><br><span class="line">[student@workstation ~]$ <span class="built_in">pwd</span></span><br><span class="line">/home/student</span><br><span class="line"><span class="comment"># 通过相对路径进去主目录的test1</span></span><br><span class="line">[student@workstation ~]$ <span class="built_in">cd</span> test1/</span><br><span class="line">[student@workstation test1]$ <span class="built_in">pwd</span></span><br><span class="line">/home/student/test1</span><br><span class="line">[student@workstation test1]$ <span class="built_in">cd</span> </span><br><span class="line">[student@workstation ~]$ <span class="built_in">pwd</span></span><br><span class="line">/home/student</span><br><span class="line"><span class="comment"># 通过绝对路径到主目录下的test3</span></span><br><span class="line">[student@workstation ~]$ <span class="built_in">cd</span> /home/student/test3</span><br><span class="line">[student@workstation test2]$ <span class="built_in">pwd</span></span><br><span class="line">/home/student/test3</span><br><span class="line"><span class="comment"># 通过相对路径进去主目录的test2</span></span><br><span class="line">[student@workstation test1]$ <span class="built_in">cd</span> </span><br><span class="line">[student@workstation ~]$ <span class="built_in">cd</span> test2/</span><br><span class="line">[student@workstation test2]$ <span class="built_in">pwd</span></span><br><span class="line">/home/student/test2</span><br><span class="line"><span class="comment"># 通过cd不加参数，返回主目录</span></span><br><span class="line">[student@workstation test2]$ <span class="built_in">cd</span> </span><br><span class="line">[student@workstation ~]$ <span class="built_in">pwd</span></span><br><span class="line">/home/student</span><br><span class="line">[student@workstation ~]$</span><br></pre></td></tr></table></figure>
-
-<p>​	在上述示例中，默认shell提示符还显示当前工作目录绝对路径的最后一个目录。例如，对于&#x2F;home&#x2F;student&#x2F;test1目录，仅显示test1。当您的当前目录是主目录时，提示符显示波浪号字符 (~)。</p>
-<p>​	touch 命令可将文件的时间戳更新为当前日期和时间，而不进行其他修改。此命令同时也可以用于创建空的文件，因为使用touch命令加上不存在的文件名参数就会导致创建该文件。在以下示例中，touch命令在Videos子目录中创建文件，以及修改文件更新时间。</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># touch 接上一个不存在的文件名参数，则创建文件</span></span><br><span class="line">[kiosk@foundation0 Videos]$ <span class="built_in">touch</span> test1.txt</span><br><span class="line">[kiosk@foundation0 Videos]$ <span class="built_in">ls</span> -l</span><br><span class="line">total 0</span><br><span class="line">-rw-rw-r--. 1 kiosk kiosk 0 Mar  4 17:35 test1.txt</span><br><span class="line"><span class="comment"># 向该文件添加内容</span></span><br><span class="line">[kiosk@foundation0 Videos]$ <span class="built_in">echo</span> hahaah &gt; test1.txt</span><br><span class="line">[kiosk@foundation0 Videos]$ <span class="built_in">cat</span> test1.txt </span><br><span class="line">hahaah</span><br><span class="line"><span class="comment"># 修改时间为17:36</span></span><br><span class="line">[kiosk@foundation0 Videos]$ <span class="built_in">ls</span> -l</span><br><span class="line">total 4</span><br><span class="line">-rw-rw-r--. 1 kiosk kiosk 7 Mar  4 17:36 test1.txt</span><br><span class="line"><span class="comment"># 当touch 接上已存在的文件名参数，则最新修改时间更新</span></span><br><span class="line">[kiosk@foundation0 Videos]$ <span class="built_in">touch</span>  test1.txt </span><br><span class="line"><span class="comment"># 修改时间为：17:38</span></span><br><span class="line">[kiosk@foundation0 Videos]$ <span class="built_in">ls</span> -l</span><br><span class="line">total 4</span><br><span class="line">-rw-rw-r--. 1 kiosk kiosk 7 Mar  4 17:38 test1.txt</span><br><span class="line"><span class="comment"># 切文件的内容未作更改</span></span><br><span class="line">[kiosk@foundation0 Videos]$ <span class="built_in">cat</span> test1.txt </span><br><span class="line">hahaah</span><br><span class="line">[kiosk@foundation0 Videos]$ </span><br></pre></td></tr></table></figure>
-
-
-
-<p>​	ls 命令具有多个选项，用于显示文件的属性。最常的选项是 -l （长列表格式）、-a（包含隐藏文件在内的所有文件），以及 -R （递归方式，包含所有子目录的内容）。</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 长格式显示目录或指定目录下的内容</span></span><br><span class="line">[kiosk@foundation0 Videos]$ <span class="built_in">ls</span> -l</span><br><span class="line">total 4</span><br><span class="line">drwxrwxr-x. 2 kiosk kiosk 6 Mar  4 17:45 dir1</span><br><span class="line">-rw-rw-r--. 1 kiosk kiosk 0 Mar  4 17:45 dir-1.txt</span><br><span class="line">drwxrwxr-x. 2 kiosk kiosk 6 Mar  4 17:45 dir2</span><br><span class="line">-rw-rw-r--. 1 kiosk kiosk 0 Mar  4 17:45 dir-2.txt</span><br><span class="line">-rw-rw-r--. 1 kiosk kiosk 7 Mar  4 17:38 test1.txt</span><br><span class="line"><span class="comment"># 长格式显示，并且显示包含隐藏文件（.haha.txt）</span></span><br><span class="line">[kiosk@foundation0 Videos]$ <span class="built_in">ls</span> -la</span><br><span class="line">total 8</span><br><span class="line">drwxr-xr-x.  4 kiosk kiosk   98 Mar  4 17:45 .</span><br><span class="line">drwx------. 18 kiosk kiosk 4096 Feb 27 15:08 ..</span><br><span class="line">drwxrwxr-x.  2 kiosk kiosk    6 Mar  4 17:45 dir1</span><br><span class="line">-rw-rw-r--.  1 kiosk kiosk    0 Mar  4 17:45 dir-1.txt</span><br><span class="line">drwxrwxr-x.  2 kiosk kiosk    6 Mar  4 17:45 dir2</span><br><span class="line">-rw-rw-r--.  1 kiosk kiosk    0 Mar  4 17:45 dir-2.txt</span><br><span class="line">-rw-rw-r--.  1 kiosk kiosk    0 Mar  4 17:45 .haha.txt</span><br><span class="line">-rw-rw-r--.  1 kiosk kiosk    7 Mar  4 17:38 test1.txt</span><br><span class="line"><span class="comment"># 长格式及递归显示dir1目录下的内容</span></span><br><span class="line">[kiosk@foundation0 Videos]$ <span class="built_in">ls</span> -lR dir1/</span><br><span class="line"><span class="comment"># dir1下具有test-dir、test-dir-2目录</span></span><br><span class="line">dir1/:</span><br><span class="line">total 0</span><br><span class="line">drwxrwxr-x. 2 kiosk kiosk 23 Mar  4 17:50 test-dir</span><br><span class="line">drwxrwxr-x. 2 kiosk kiosk 23 Mar  4 17:50 test-dir-2</span><br><span class="line"><span class="comment"># test-dir目录下具有test1.txt文件</span></span><br><span class="line">dir1/test-dir:</span><br><span class="line">total 0</span><br><span class="line">-rw-rw-r--. 1 kiosk kiosk 0 Mar  4 17:50 test1.txt</span><br><span class="line"><span class="comment"># test-dir-2目录下具有test2.txt文件</span></span><br><span class="line">dir1/test-dir-2:</span><br><span class="line">total 0</span><br><span class="line">-rw-rw-r--. 1 kiosk kiosk 0 Mar  4 17:50 test2.txt</span><br><span class="line">[kiosk@foundation0 Videos]$ </span><br></pre></td></tr></table></figure>
-
-<p>​	ls -la中的显示了所有的目录，包括隐藏目录，其中顶部具有两个特殊的目录。一个圆点（.）代表当前目录，两个原点（..）则代表父级目录，也就是当前目录的上一级目录。这些特殊目录存在于系统中的每一个目录中，在使用文件管理命令时非常有用。</p>
-<p>​	<code>重要：开头为圆点（.）的文件名表示为隐藏文件；在使用ls和其他命令时，无法在普通视图中看到这些文件。此行为并非一种安全功能。因为ls -a加上选项还是可以很轻松的看到该文件。隐藏文件主要还是用于必要的用户配置文件让主目录凌乱不堪，同时也可以避免重要的配置文件被误操作，复制到其他目录或被修改、删除掉。</code></p>
-<p>​	您也可以讲波浪号（~）特殊字符于其他命令组合使用，以促进于主目录的交互。</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 从当前工作目录/var，通过波浪号查看主目录内容</span></span><br><span class="line">[kiosk@foundation0 var]$ <span class="built_in">ls</span> -l ~</span><br><span class="line">total 152588</span><br><span class="line">-rw-rw-r--. 1 kiosk kiosk       127 Oct  9  2023 <span class="string">&#x27;\&#x27;</span></span><br><span class="line">-rw-rw-r--. 2 kiosk kiosk     33577 Sep 16  2022  ClassPrep.txt</span><br><span class="line">-rw-rw-r--. 2 kiosk kiosk     10853 Nov 16  2021  ClassRHAPrep.txt</span><br><span class="line">-rw-rw-r--. 2 kiosk kiosk     18852 Jul  7  2022  ClassroomReset.txt</span><br><span class="line">****忽略****</span><br><span class="line">-rw-rw-r--. 2 kiosk kiosk      7900 Nov 22  2022  History.txt</span><br><span class="line">drwxr-xr-x. 2 kiosk kiosk         6 Feb  1  2023  Music</span><br><span class="line">drwxr-xr-x. 2 kiosk kiosk         6 Feb  1  2023  Pictures</span><br><span class="line">drwxr-xr-x. 2 kiosk kiosk         6 Feb  1  2023  Public</span><br><span class="line">-rwxrwxrwx. 1 kiosk kiosk        12 Feb 27 11:35  ssh.sh</span><br><span class="line">drwxrwxr-x. 2 kiosk kiosk        72 Jan 31  2023  survey</span><br><span class="line">drwxr-xr-x. 2 kiosk kiosk         6 Feb  1  2023  Templates</span><br><span class="line">drwxr-xr-x. 4 kiosk kiosk        98 Mar  4 17:45  Videos</span><br><span class="line">[kiosk@foundation0 var]$ </span><br></pre></td></tr></table></figure>
-
-
-
-<p>​	cd 命令同样有着许多选项。其中一些实用的应该尽早熟悉使用，要形成一种肌肉记忆。cd - 命令可更改到用户在进入当前目录之前所处的目录。</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 通过cd - 命令，迅速返回到之前所处的目录</span></span><br><span class="line">[kiosk@foundation0 var]$ <span class="built_in">cd</span> -</span><br><span class="line">/home/kiosk</span><br><span class="line">[kiosk@foundation0 ~]$ <span class="built_in">pwd</span></span><br><span class="line">/home/kiosk</span><br><span class="line">[kiosk@foundation0 ~]$ </span><br></pre></td></tr></table></figure>
-
-
-
-<p>​	<code>cd ..</code> 命令使用（..）隐藏目录上移一个级别，进入当前目录的父目录，而不必知道确切的父目录名称。其他隐藏目录（.）可为当前位置是来源或者目标参数的命令指定当前目录，以此免除输入目录绝对路径名的必要。</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 返回上级目录</span></span><br><span class="line">[kiosk@foundation0 ~]$ <span class="built_in">cd</span> ..</span><br><span class="line">[kiosk@foundation0 home]$ <span class="built_in">pwd</span></span><br><span class="line">/home</span><br><span class="line"><span class="comment"># cd -返回上次所在目录</span></span><br><span class="line">[kiosk@foundation0 home]$ <span class="built_in">cd</span> -</span><br><span class="line">/home/kiosk</span><br><span class="line"><span class="comment"># 执行当前目录下的test.sh脚本文件</span></span><br><span class="line">[kiosk@foundation0 ~]$ bash ./test.sh </span><br><span class="line">Hello World</span><br><span class="line">[kiosk@foundation0 ~]$ </span><br></pre></td></tr></table></figure>
-
-
-
-<h2 id="使用命令行工具管理文件"><a href="#使用命令行工具管理文件" class="headerlink" title="使用命令行工具管理文件"></a>使用命令行工具管理文件</h2><h3 id="命令行文件管理"><a href="#命令行文件管理" class="headerlink" title="命令行文件管理"></a>命令行文件管理</h3><p>​	创建、删除、复制和移动文件和目录，是系统管理员的常用操作。不带选项时，一些命令讲用于文件交互，或者可以通过相应的选项集来操作目录。</p>
-<p>​	请注意运行命令时使用的选项。某些选项的含义可能因命令而异。</p>
-<h3 id="创建目录"><a href="#创建目录" class="headerlink" title="创建目录"></a>创建目录</h3><p>​	mkdir 命令可创建一个或多个目录或子目录。他取您要创建的目录的路径列表作为参数。</p>
-<p>​	以下实例，将在&#x2F;home&#x2F;kiosk&#x2F;Documents目录下。使用mkdir命令和空格分割的目录名称列表来一次性创建多个目录。</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[kiosk@foundation0 Documents]$ <span class="built_in">pwd</span></span><br><span class="line">/home/kiosk/Documents</span><br><span class="line">[kiosk@foundation0 Documents]$ <span class="built_in">mkdir</span> ProjectX ProjectY ProjectZ</span><br><span class="line">[kiosk@foundation0 Documents]$ <span class="built_in">ls</span></span><br><span class="line">ProjectX  ProjectY  ProjectZ</span><br><span class="line">[kiosk@foundation0 Documents]$</span><br></pre></td></tr></table></figure>
-
-<p>​	如果创建的目录参数已存在，或者您尝试创建的目录的父目录不存在，则mkdir命令将失败显示错误。</p>
-<p>​	mkdir 命令 -p（父级）选项将为请求的目标位置创建缺失的父目录。在以下示例中，mkdir命令可以在缺少父级目录的情况下，用一个命令创建三个ChapterN子目录。 -p 选项可创建缺失的父目录Thesis。</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">kiosk@foundation0 Documents]$ <span class="built_in">mkdir</span> -p Thesis/Chapter1 Thesis/Chapter2 Thesis/Chapter3</span><br><span class="line">[kiosk@foundation0 Documents]$ <span class="built_in">ls</span> -R Thesis/</span><br><span class="line">Thesis/:</span><br><span class="line">Chapter1  Chapter2  Chapter3</span><br><span class="line"></span><br><span class="line">Thesis/Chapter1:</span><br><span class="line"></span><br><span class="line">Thesis/Chapter2:</span><br><span class="line"></span><br><span class="line">Thesis/Chapter3:</span><br><span class="line">[kiosk@foundation0 Documents]$</span><br></pre></td></tr></table></figure>
-
-<p>​	请谨慎使用mkdir 命令的 -p 选项，因为在错误的拼写中可能会创建非预期的目录，不会因为对于您是非预期的目录，而生成错误消息。在以下示例中，假设您试图在Videos中创建一个Watched子目录，但在mkdir命令中不小心遗漏了Videos中的字母 “s”。</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[kiosk@foundation0 ~]$ <span class="built_in">mkdir</span> Video/Watched</span><br><span class="line"><span class="built_in">mkdir</span>: cannot create directory ‘Video/Watched’: No such file or directory</span><br><span class="line"><span class="comment"># 加入-p选项，Watched目录将会创建在错误父目录中</span></span><br><span class="line">[kiosk@foundation0 ~]$ <span class="built_in">mkdir</span> -p Video/Watched</span><br><span class="line">[kiosk@foundation0 ~]$ <span class="built_in">ls</span> -R Video</span><br><span class="line">Video:</span><br><span class="line">Watched</span><br><span class="line"></span><br><span class="line">Video/Watched:</span><br><span class="line">[kiosk@foundation0 ~]$ </span><br></pre></td></tr></table></figure>
-
-<p>​	mkdir 命令失败，因为Video目录不存在。如果您使用带有-p 选项的mkdir 命令，则会无意中创建Video目录。Watched子目录将会在不正确的目录中创建。</p>
-<h3 id="复制文件和目录"><a href="#复制文件和目录" class="headerlink" title="复制文件和目录"></a>复制文件和目录</h3><p>​	cp 命令可以复制文件，并在当前目录或者其他指定目录中创建一个文件。</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[kiosk@foundation0 ~]$ <span class="built_in">cd</span> Videos/</span><br><span class="line">[kiosk@foundation0 Videos]$ <span class="built_in">ls</span></span><br><span class="line">test1.txt</span><br><span class="line">[kiosk@foundation0 Videos]$ <span class="built_in">cp</span> test1.txt test2.txt </span><br><span class="line">[kiosk@foundation0 Videos]$ <span class="built_in">ls</span></span><br><span class="line">test1.txt  test2.txt</span><br><span class="line">[kiosk@foundation0 Videos]$</span><br></pre></td></tr></table></figure>
-
-<p>​	也可以使用cp命令将多个文件复制到某一目录中。这种情况下，最后一个参数必须是目录。复制的文件在新目录中保留其原有名称。如果目标目录中存在同名的文件，则会覆盖原有文件。默认情况下，cp 命令不复制目录，而是会忽略它。</p>
-<p>​	以下示例中列出两个目录作为参数，即Thesis和ProjecrX目录。最后一个参数（ProjecrX目录）是目标，可用作目的地。cp命令忽略了Thesis参数，因为它是要复制的对象是一个目录。</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[kiosk@foundation0 Documents]$ <span class="built_in">ls</span> </span><br><span class="line">ProjecrX  text1.txt  text2.txt  Thesis</span><br><span class="line">[kiosk@foundation0 Documents]$ <span class="built_in">cp</span> text1.txt text2.txt Thesis ProjecrX</span><br><span class="line"><span class="built_in">cp</span>: -r not specified; omitting directory <span class="string">&#x27;Thesis&#x27;</span></span><br><span class="line">[kiosk@foundation0 Documents]$ <span class="built_in">ls</span> Thesis ProjecrX</span><br><span class="line">ProjecrX:</span><br><span class="line">text1.txt  text2.txt</span><br><span class="line"></span><br><span class="line">Thesis:</span><br><span class="line">Chapter1  Chapter2  Chapter3</span><br><span class="line">[kiosk@foundation0 Documents]$ </span><br></pre></td></tr></table></figure>
-
-<p>​	Thesis目录复制失败，但test1.txt和test2.txt文件复制成功。</p>
-<p>​	您可以使用cp 命令 -r 选项复制目录及其内容，请记住，您可以在命令组合中使用.和..特殊目录。在以下示例中，Thesis目录及其内容复制到ProjecrX目录。</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[kiosk@foundation0 Documents]$ <span class="built_in">cd</span> ProjecrX/</span><br><span class="line"><span class="comment"># cp 复制， ../上级目录的Thesis目录， .目的地当前所在工作目录</span></span><br><span class="line">[kiosk@foundation0 ProjecrX]$ <span class="built_in">cp</span> -r ../Thesis/ .</span><br><span class="line">[kiosk@foundation0 ProjecrX]$ <span class="built_in">ls</span></span><br><span class="line">text1.txt  text2.txt  Thesis</span><br><span class="line">[kiosk@foundation0 ProjecrX]$ <span class="built_in">ls</span> -R Thesis/</span><br><span class="line">Thesis/:</span><br><span class="line">Chapter1  Chapter2  Chapter3</span><br><span class="line"></span><br><span class="line">Thesis/Chapter1:</span><br><span class="line"></span><br><span class="line">Thesis/Chapter2:</span><br><span class="line"></span><br><span class="line">Thesis/Chapter3:</span><br><span class="line">[kiosk@foundation0 ProjecrX]$ </span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="移动文件和目录"><a href="#移动文件和目录" class="headerlink" title="移动文件和目录"></a>移动文件和目录</h3><p>​	mv 命令可将文件从一个位置移动到另一个位置。如果您将文件的绝对路径视为它的全名，那么移动文件实际上和重命名文件名一样。文件内容正在移动后保持不变。</p>
-<p>​	使用mv命令来重命名文件。以下示例中，mv text1.txt命令将目录中的text1.txt 文件重命名为 text2.txt</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[kiosk@foundation0 ProjecrX]$ <span class="built_in">ls</span></span><br><span class="line">text1.txt  Thesis</span><br><span class="line">[kiosk@foundation0 ProjecrX]$ <span class="built_in">mv</span> text1.txt text2.txt </span><br><span class="line">[kiosk@foundation0 ProjecrX]$ <span class="built_in">ls</span></span><br><span class="line">text2.txt  Thesis</span><br><span class="line">[kiosk@foundation0 ProjecrX]$</span><br></pre></td></tr></table></figure>
-
-<p>​	使用mv 命令将文件移动到另一个目录。再以下示例中，text2.txt 文件从<del>&#x2F;Documents&#x2F;ProjecrX目录移动到</del>&#x2F;Documents&#x2F;Thesis&#x2F;Chapter1目录中。您可以使用mv命令 -v选项来显示命令操作的详细输出</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[kiosk@foundation0 ProjecrX]$ <span class="built_in">ls</span> ../Thesis/Chapter1/</span><br><span class="line">[kiosk@foundation0 ProjecrX]$ <span class="built_in">mv</span> -v text2.txt ../Thesis/Chapter1/</span><br><span class="line">renamed <span class="string">&#x27;text2.txt&#x27;</span> -&gt; <span class="string">&#x27;../Thesis/Chapter1/text2.txt&#x27;</span></span><br><span class="line">[kiosk@foundation0 ProjecrX]$ <span class="built_in">ls</span> ../Thesis/Chapter1/</span><br><span class="line">text2.txt</span><br><span class="line">[kiosk@foundation0 ProjecrX]$ </span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="删除文件和目录"><a href="#删除文件和目录" class="headerlink" title="删除文件和目录"></a>删除文件和目录</h3><p>​	rm 命令可删除文件。默认情况下，rm不会删除目录。您可以使用rm命令的 -r或 –recursive选项，使rm命令删除目录及其内容（文件）。rm -r命令首先遍历每个子目录，并在删除每个目录之前逐一删除其中的文件。</p>
-<p>​	在以下示例中，不带选项时rm 命令会删除test1.txt文件，但若要删除Thesis&#x2F;Chhapter1目录，您必须添加-r 选项。</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[kiosk@foundation0 ~]$ <span class="built_in">ls</span> Documents/Thesis/Chapter1/</span><br><span class="line">test1.txt</span><br><span class="line">[kiosk@foundation0 ~]$ <span class="built_in">rm</span> Documents/Thesis/Chapter1/test1.txt </span><br><span class="line">[kiosk@foundation0 ~]$ <span class="built_in">ls</span> Documents/Thesis/Chapter1/</span><br><span class="line">[kiosk@foundation0 ~]$ <span class="built_in">rm</span> Documents/Thesis/Chapter1/</span><br><span class="line"><span class="built_in">rm</span>: cannot remove <span class="string">&#x27;Documents/Thesis/Chapter1/&#x27;</span>: Is a directory</span><br><span class="line">[kiosk@foundation0 ~]$ <span class="built_in">rm</span> -r  Documents/Thesis/Chapter1/</span><br><span class="line">[kiosk@foundation0 ~]$ <span class="built_in">ls</span> Documents/Thesis/Chapter1/</span><br><span class="line"><span class="built_in">ls</span>: cannot access <span class="string">&#x27;Documents/Thesis/Chapter1/&#x27;</span>: No such file or directory</span><br><span class="line">[kiosk@foundation0 ~]$ <span class="built_in">ls</span> Documents/Thesis</span><br><span class="line">Chapter2  Chapter3</span><br><span class="line">[kiosk@foundation0 ~]$ </span><br></pre></td></tr></table></figure>
-
-<p>​	<code>重要：红帽Linux不提供命令行取消删除功能，也没有可从中恢复报关被删除文件的“垃圾桶”。垃圾桶是桌面环境（如：GNOME）的一个组件，但是不供从shell运行的命令使用。所有在使用相对路径删除文件或目录之前，最好先使用pwd命令验证您当前的工作目录。</code></p>
-<p>​	您可以使用rm命令 -i 选项以交互式提示确认后再删除。这基本上与使用rm命令-f选项相反，-f选项强制删除并且不提示用户进行确认。</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[kiosk@foundation0 Documents]$ <span class="built_in">rm</span> -ri Thesis/</span><br><span class="line"><span class="built_in">rm</span>: descend into directory <span class="string">&#x27;Thesis/&#x27;</span>? y</span><br><span class="line"><span class="built_in">rm</span>: remove directory <span class="string">&#x27;Thesis/Chapter2&#x27;</span>? y</span><br><span class="line"><span class="built_in">rm</span>: remove directory <span class="string">&#x27;Thesis/Chapter3&#x27;</span>? y</span><br><span class="line"><span class="built_in">rm</span>: remove directory <span class="string">&#x27;Thesis/&#x27;</span>? y</span><br><span class="line">[kiosk@foundation0 Documents]$ <span class="built_in">rm</span> -rf ProjecrX/</span><br><span class="line">[kiosk@foundation0 Documents]$ </span><br></pre></td></tr></table></figure>
-
-<p>​	<code>注意：如果同时使用-i和-f选项，-f选项将具有优先权，所以再rm删除文件之前，不会提示您进行确认。</code></p>
-<p>​	您也可以使用rmdir命令来删除空目录。使用rm命令-r选项可删除非空目录</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># dir1目录非空，dir2空目录，rmdir命令无法删除非空目录，rm -r可删除非空目录</span></span><br><span class="line">[kiosk@foundation0 Documents]$ <span class="built_in">ls</span> dir1/</span><br><span class="line">text1.txt</span><br><span class="line">[kiosk@foundation0 Documents]$ <span class="built_in">ls</span> dir2</span><br><span class="line">[kiosk@foundation0 Documents]$ <span class="built_in">rmdir</span> dir1/</span><br><span class="line"><span class="built_in">rmdir</span>: failed to remove <span class="string">&#x27;dir1/&#x27;</span>: Directory not empty</span><br><span class="line">[kiosk@foundation0 Documents]$ <span class="built_in">rmdir</span> dir2/</span><br><span class="line">[kiosk@foundation0 Documents]$ <span class="built_in">ls</span></span><br><span class="line">dir1</span><br><span class="line">[kiosk@foundation0 Documents]$ </span><br></pre></td></tr></table></figure>
-
-
-
-<h2 id="制作文件间的链接"><a href="#制作文件间的链接" class="headerlink" title="制作文件间的链接"></a>制作文件间的链接</h2><h3 id="管理文件间的链接"><a href="#管理文件间的链接" class="headerlink" title="管理文件间的链接"></a>管理文件间的链接</h3><p>​	您可以创建指向同一文件的多个文件名。这些文件名称为链接。</p>
-<p>​	您可以创建的两种类型的链接：硬链接或符号链接（同时也称为软链接）。每种方法各有利弊。</p>
-<h3 id="创建硬链接"><a href="#创建硬链接" class="headerlink" title="创建硬链接"></a>创建硬链接</h3><p>​	从初始名称到文件系统上的数据，每个文件都以一个硬链接开始。当创建指向文件的硬链接时，也会创建另一个指向同一数据的名称。新的硬链接与原始文件名的作用完全相同。创建之后，新的硬链接与文件的原始名称毫无二致。</p>
-<p>​	您可以使用ls -l命令来确认文件是否具有多个硬链接。他报告的项目之一就是每个文件的链接数，即文件所具有的硬链接数。再下面的示例中，newfile.txt的链接数位1。它恰好有一个绝对路径，即&#x2F;home&#x2F;kiosk&#x2F;newfile.txt。</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[kiosk@foundation0 ~]$ <span class="built_in">ls</span> -l newfile.txt </span><br><span class="line">-rw-rw-r--. 1 kiosk kiosk 6 Mar  5 16:47 newfile.txt</span><br><span class="line">[kiosk@foundation0 ~]$</span><br></pre></td></tr></table></figure>
-
-<p>​	您可以使用ln命令来创建一个指向现有文件的硬链接（也就是指向该文件的另一个名称）。该命令至少需要两个参数：现有文件的路径，以及要创建的硬链接的路径。</p>
-<p>​	以下示例将为现有文件newfile.txt，在&#x2F;tmp目录中创建一个名为newfile-hlink2.txt的硬链接。</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[kiosk@foundation0 ~]$ <span class="built_in">cat</span> newfile.txt </span><br><span class="line">hahah</span><br><span class="line"><span class="comment"># 创建硬链接</span></span><br><span class="line">[kiosk@foundation0 ~]$ <span class="built_in">ln</span> newfile.txt /tmp/newfile-hlink2.txt</span><br><span class="line"><span class="comment"># 硬链接已生成</span></span><br><span class="line">[kiosk@foundation0 ~]$ <span class="built_in">ls</span> -l /tmp/newfile-hlink2.txt</span><br><span class="line">-rw-rw-r--. 2 kiosk kiosk 6 Mar  5 16:47 /tmp/newfile-hlink2.txt</span><br><span class="line"><span class="comment"># 硬链接与原始文件具有相同的数据</span></span><br><span class="line">[kiosk@foundation0 ~]$ <span class="built_in">cat</span> /tmp/newfile-hlink2.txt</span><br><span class="line">hahah</span><br><span class="line"><span class="comment"># 修改原始文件内容的同时，硬链接的内容也同时随原文件更新</span></span><br><span class="line">[kiosk@foundation0 ~]$ <span class="built_in">echo</span> xixixi &gt; newfile.txt </span><br><span class="line">[kiosk@foundation0 ~]$ <span class="built_in">cat</span> /tmp/newfile-hlink2.txt</span><br><span class="line">xixixi</span><br><span class="line">[kiosk@foundation0 ~]$ </span><br></pre></td></tr></table></figure>
-
-<p>​	要确定两个文件是否被硬链接，请使用ls命令配合-i 选项列出每个文件索引节点编码。如果两个文件位于同一文件系统上，而且他们的索引节点编号相同，那么这两个文件就是指向同一数据的硬链接。</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[kiosk@foundation0 ~]$ <span class="built_in">ls</span> -li newfile.txt /tmp/newfile-hlink2.txt</span><br><span class="line">269337410 -rw-rw-r--. 2 kiosk kiosk 7 Mar  5 16:55 newfile.txt</span><br><span class="line">269337410 -rw-rw-r--. 2 kiosk kiosk 7 Mar  5 16:55 /tmp/newfile-hlink2.txt</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>​	<code>重要：引用同一文件的硬链接具有相同的链接数、访问权限、用户和组所有权、时间戳，以及文件内容。当一个硬链接的内容发生更改，同一文件的其他硬链接也会显示更新后的新内容。这是因为每个硬链接都指向存储设备中的同一数据</code></p>
-<p>​	即使原始文件被删除，只要还存在至少一个硬链接，该文件的内容就依然可用。只有最后一个硬链接被删除时，数据才会从存储中删除，从而使任何硬链接都不会引用该文件内容。</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[kiosk@foundation0 ~]$ <span class="built_in">rm</span> -rf newfile.txt </span><br><span class="line">[kiosk@foundation0 ~]$ <span class="built_in">ls</span> -li /tmp/newfile-hlink2.txt </span><br><span class="line">269337410 -rw-rw-r--. 1 kiosk kiosk 7 Mar  5 16:55 /tmp/newfile-hlink2.txt</span><br><span class="line">[kiosk@foundation0 ~]$ <span class="built_in">cat</span> /tmp/newfile-hlink2.txt</span><br><span class="line">xixixi</span><br><span class="line">[kiosk@foundation0 ~]$ </span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="硬链接的局限性"><a href="#硬链接的局限性" class="headerlink" title="硬链接的局限性"></a>硬链接的局限性</h3><p>​	硬链接存在一些局限性。首先，您只能将硬链接用于常规文件。无法使用ln命令来创建指向目录或特殊文件的硬链接。</p>
-<p>​	其次，只有当两个文件位于同一文件系统上时，您才能使用硬链接。文件系统层次结构可以由多个存储设备组成。当切换到新目录时，该目录及其内容可能会存储在不同的文件系统中，具体取决于您的系统配置。</p>
-<p>​	您可用使用df命令来列出位于不同文件系统上的目录。例如，您可能会看到以下输出：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[kiosk@foundation0 ~]$ <span class="built_in">df</span> </span><br><span class="line">Filesystem     1K-blocks     Used Available Use% Mounted on</span><br><span class="line">devtmpfs         8155384        0   8155384   0% /dev</span><br><span class="line">tmpfs            8175032        0   8175032   0% /dev/shm</span><br><span class="line">tmpfs            3270016    10264   3259752   1% /run</span><br><span class="line">/dev/nvme0n1p3 191037300 70391952 120645348  37% /</span><br><span class="line">/dev/loop2       7866562  7866562         0 100% /content/rhel9.0/x86_64/rhel8-additional</span><br><span class="line">/dev/loop1           456      456         0 100% /content/rhel9.0/x86_64/rhcsa-practice</span><br><span class="line">/dev/nvme0n1p1   2086912   971540   1115372  47% /boot</span><br><span class="line">/dev/loop0       8377364  8377364         0 100% /content/rhel9.0/x86_64/dvd</span><br><span class="line">tmpfs            1635004      104   1634900   1% /run/user/1000</span><br></pre></td></tr></table></figure>
-
-<p>​	两个不同的目录及其子目录中的文件位于不同的文件系统上。因此，本示例中的系统而言，您可以在<code>/tmp/newfile-hlink2.txt</code>和<code>/home/kiosk/newfile.txt</code> 文件之间创建一个硬链接，因为它们都说 &#x2F; 目录的子目录，而不是列表中其他任何目录的子目录。但是您不能在<code>/boot</code>和<code>/home/kiosk/newfile.txt</code> 之间建立硬链接，因为第一个文件位于&#x2F;boot目录下的子目录并且在<code>/dev/nvme0n1p1</code>文件系统中，而第二个文件在<code>/dev/nvme0n1p3</code>文件系统中</p>
-<h3 id="创建符号链接"><a href="#创建符号链接" class="headerlink" title="创建符号链接"></a>创建符号链接</h3><p>​	ln 命令 -s 选项可创建符号链接，也称为“软链接”。符号链接不是常规文件，而是指向现有文件或目录的特殊类型的文件。</p>
-<p>​	符号链接相比硬链接有着一定的优势：</p>
-<ul>
-<li>符号链接可以链接位于不同文件系统上的两个文件。</li>
-<li>符号链接可以指向目录或特殊文件，而不仅限于常规文件。</li>
-</ul>
-<p>​	在以下示例中，ln -s命令为&#x2F;home&#x2F;kiosk&#x2F;newfile.txt文件创建符号链接。符号链接在名称是&#x2F;tmp&#x2F;newfile-symlink.txt</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[kiosk@foundation0 ~]$ <span class="built_in">ln</span> -s /home/kiosk/newfile.txt /tmp/newfile-symlink.txt</span><br><span class="line">[kiosk@foundation0 ~]$ <span class="built_in">ls</span> -l newfile.txt /tmp/newfile-symlink.txt </span><br><span class="line">-rw-r--r--. 1 kiosk kiosk  6 Mar  5 17:46 newfile.txt</span><br><span class="line">lrwxrwxrwx. 1 kiosk kiosk 23 Mar  5 17:48 /tmp/newfile-symlink.txt -&gt; /home/kiosk/newfile.txt</span><br><span class="line">[kiosk@foundation0 ~]$ <span class="built_in">cat</span> /tmp/newfile-symlink.txt</span><br><span class="line">hahah</span><br><span class="line">[kiosk@foundation0 ~]$ </span><br></pre></td></tr></table></figure>
-
-<p>​	在上面示例中，&#x2F;tmp&#x2F;newfile-symlink.txt文件的长列表的第一个字符是l（字母 l）而不是 - 。这个字符表示该文件是符号链接而非常规文件。</p>
-<p>​	当原始常规文件被删除后，符号链接会指向原始文件，但目标已消失。指向缺少文件的符号链接称为“悬空符号链接”。</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[kiosk@foundation0 ~]$ <span class="built_in">rm</span> -f newfile.txt </span><br><span class="line">[kiosk@foundation0 ~]$ <span class="built_in">ls</span> -l /tmp/newfile-symlink.txt </span><br><span class="line">lrwxrwxrwx. 1 kiosk kiosk 23 Mar  5 17:48 /tmp/newfile-symlink.txt -&gt; /home/kiosk/newfile.txt</span><br><span class="line">[kiosk@foundation0 ~]$ <span class="built_in">cat</span> /tmp/newfile-symlink.txt</span><br><span class="line"><span class="built_in">cat</span>: /tmp/newfile-symlink.txt: No such file or directory</span><br><span class="line">[kiosk@foundation0 ~]$ </span><br></pre></td></tr></table></figure>
-
-<p>​	<code>重要：在上述示例中，悬空符号链接有个副作用，那就是：如果您稍后创建了一个与删除文件同名的新文件（/home/kiosk/newfile.txt），那么符号链接将不再“悬空”，而是指向这个新文件，硬链接的工作方式却不是这样的。如果您删除硬链接，然后使用常规工具（而不是ln）创建一个同名的文件，那么新文件将不会链接到旧文件，不妨通过以下方式比较硬链接和符号链接，以了解它们的工作原理：</code></p>
-<ul>
-<li><code>硬链接是将名称指向存储设备上的数据。</code></li>
-<li><code>符号链接是将名称指向另一个名称，原文件指向存储设备上的数据。</code></li>
-</ul>
-<p>​	符合链接可以指向目录，而且，符号链接发挥目录一样的作用。如果使用cd进入到符合链接的目录，则当前工作目录将变为被链接的目录。有些工具可以跟踪您如何通过软链接到达这个目录的。例如，默认情况下，cd将使用符号链接的名称（而非实际的名称）来更新当前工作目录。如果要使用实际目录的名称更新当前工作目录，则可以使用 -P 选项。</p>
-<p>​	以下示例将创建&#x2F;home&#x2F;kiosk&#x2F;configfiles的不好链接，它将指向&#x2F;etc目录。</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[kiosk@foundation0 ~]$ <span class="built_in">ln</span> -s /etc/ /home/kiosk/configfiles</span><br><span class="line">[kiosk@foundation0 ~]$ <span class="built_in">cd</span> /home/kiosk/configfiles</span><br><span class="line">[kiosk@foundation0 configfiles]$ <span class="built_in">pwd</span></span><br><span class="line">/home/kiosk/configfiles</span><br><span class="line">[kiosk@foundation0 configfiles]$ <span class="built_in">cd</span> -P /home/kiosk/configfiles</span><br><span class="line">[kiosk@foundation0 etc]$ <span class="built_in">pwd</span></span><br><span class="line">/etc</span><br><span class="line">[kiosk@foundation0 etc]$ </span><br></pre></td></tr></table></figure>
-
-
-
-<h2 id="使用shell扩展匹配文件名"><a href="#使用shell扩展匹配文件名" class="headerlink" title="使用shell扩展匹配文件名"></a>使用shell扩展匹配文件名</h2><h3 id="命令行扩展"><a href="#命令行扩展" class="headerlink" title="命令行扩展"></a>命令行扩展</h3><p>​	当您在Bash shell提示符中键入命令时，shell在运行该命令行之前通过多个扩展对其进行处理。您可以使用这些shell扩展来执行原本很难或不可能完成的复杂任务。</p>
-<p>​	Bash执行的主要扩展有：</p>
-<ul>
-<li>大括号扩展，可以生成多个字符串。</li>
-<li>波浪号扩展，扩展至用户主目录路径。</li>
-<li>变量扩展，将文本替换为shell变量中存储的值。</li>
-<li>命令替换，加ing文本替换为命令的输出。</li>
-<li>路径名扩展，帮助按模式匹配选择一个或多个文件。</li>
-</ul>
-<p>​	路径名扩展也称为通配符，是Bash最有用的功能之一。使用此功能，可以更加轻松地管理多个文件。使用“扩展”的元字符来匹配要寻找的文件名和路径名，可以一次性针对集中的一组文件执行命令。</p>
-<h3 id="路径名扩展和模式匹配"><a href="#路径名扩展和模式匹配" class="headerlink" title="路径名扩展和模式匹配"></a>路径名扩展和模式匹配</h3><p>​	路径名扩展将表示为通配符或字符类别的特殊字符模式扩展为该模式匹配的文件名列表。在shell运行您的命令之前，它会将模式替换为匹配的文件名列表。如果该模式与任何内容都不匹配，则shell将尝试使用该模式作为其运行命令的字面参数。下表列出了用于模式匹配的常见元字符和模式类型。</p>
-<table>
-<thead>
-<tr>
-<th>模式</th>
-<th>匹配项</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>*</td>
-<td>由零个或跟多字符组成的任意字符串。</td>
-</tr>
-<tr>
-<td>?</td>
-<td>任何一个字符。</td>
-</tr>
-<tr>
-<td>[abc…]</td>
-<td>括起的类型（位于两个方括号之间）中的任何一个字符。</td>
-</tr>
-<tr>
-<td>[!abc…]</td>
-<td>不在括起的类型中的任意字符。</td>
-</tr>
-<tr>
-<td>[^abc…]</td>
-<td>不在括起的类型中的任意字符。</td>
-</tr>
-<tr>
-<td>[[:alpha:]]</td>
-<td>任何字母字符</td>
-</tr>
-<tr>
-<td>[[:lower:]]</td>
-<td>任何小写字符</td>
-</tr>
-<tr>
-<td>[[:upper:]]</td>
-<td>任何大写字符</td>
-</tr>
-<tr>
-<td>[[:alnum:]]</td>
-<td>任何字母字符或数字</td>
-</tr>
-<tr>
-<td>[[:punct:]]</td>
-<td>除空格和字母数字意外的任何可打印字符。</td>
-</tr>
-<tr>
-<td>[[:digit:]]</td>
-<td>从0到9的任何单个数字。</td>
-</tr>
-<tr>
-<td>[[:space:]]</td>
-<td>任何单个空格字符，可能包括制表符、换行符、回车符、换页符或空格。</td>
-</tr>
-</tbody></table>
-<p>​	便于演示，以下命令创建一些示例文件：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[kiosk@foundation0 Videos]$ <span class="built_in">mkdir</span> glob; <span class="built_in">cd</span> glob</span><br><span class="line">[kiosk@foundation0 glob]$ <span class="built_in">touch</span> alpha bravo charlie dalta <span class="built_in">echo</span> able baker cast dog easy Able Aplha Cast 123</span><br><span class="line">[kiosk@foundation0 glob]$ <span class="built_in">ls</span></span><br><span class="line">able  alpha  baker  bravo  cast  charlie  dalta  dog  easy  <span class="built_in">echo</span></span><br><span class="line">[kiosk@foundation0 glob]$</span><br></pre></td></tr></table></figure>
-
-<p>​	以下示例中，前面两个命令通过星号（*）使用简单模式匹配，分别匹配以“a”开头的所有文件名和包含“a”的所有文件名。第三个命令使用星号和方括号匹配以“a”或“c”开头的所有文件名。</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[kiosk@foundation0 glob]$ <span class="built_in">ls</span> a*</span><br><span class="line">able  alpha</span><br><span class="line">[kiosk@foundation0 glob]$ <span class="built_in">ls</span> *a*</span><br><span class="line">able  alpha  baker  bravo  cast  charlie  dalta  easy</span><br><span class="line">[kiosk@foundation0 glob]$ <span class="built_in">ls</span> [ac]*</span><br><span class="line">able  alpha  cast  charlie</span><br><span class="line">[kiosk@foundation0 glob]$ </span><br></pre></td></tr></table></figure>
-
-<p>​	第一、二个命令，开头不包括“a”或“c”的文件。</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">[kiosk@foundation0 glob]$ ls [!ac]*</span><br><span class="line">baker  bravo  dalta  dog  easy  echo</span><br><span class="line">[kiosk@foundation0 glob]$ ls [^ac]*</span><br><span class="line">baker  bravo  dalta  dog  easy  echo</span><br><span class="line">[kiosk@foundation0 glob]$ </span><br></pre></td></tr></table></figure>
-
-<p>​	过滤出文件内任何字母字符的内容。</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[kiosk@foundation0 glob]$ <span class="built_in">cat</span> able </span><br><span class="line">daf</span><br><span class="line">fasfa</span><br><span class="line">154512</span><br><span class="line"></span><br><span class="line">fadfa</span><br><span class="line"></span><br><span class="line">fa</span><br><span class="line">dggf</span><br><span class="line">gf</span><br><span class="line">fgd</span><br><span class="line">eq</span><br><span class="line">bnv</span><br><span class="line"></span><br><span class="line">cz</span><br><span class="line">rew</span><br><span class="line">vbc`:</span><br><span class="line"></span><br><span class="line">[kiosk@foundation0 glob]$ grep [[:alpha:]] able </span><br><span class="line">daf</span><br><span class="line">fasfa</span><br><span class="line">fadfa</span><br><span class="line">fa</span><br><span class="line">dggf</span><br><span class="line">gf</span><br><span class="line">fgd</span><br><span class="line">eq</span><br><span class="line">bnv</span><br><span class="line">cz</span><br><span class="line">rew</span><br><span class="line">vbc`:</span><br><span class="line">[kiosk@foundation0 glob]$ </span><br></pre></td></tr></table></figure>
-
-<p>​	以下示例中也可以使用问号 “？”来匹配其中的一些文件名，这两个命令分别仅匹配长度为四个和五个字符的文件名。</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[kiosk@foundation0 glob]$ <span class="built_in">ls</span> ????</span><br><span class="line">able  cast  easy  <span class="built_in">echo</span></span><br><span class="line">[kiosk@foundation0 glob]$ <span class="built_in">ls</span> ?????</span><br><span class="line">alpha  baker  bravo  dalta</span><br><span class="line">[kiosk@foundation0 glob]$ </span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="大括号扩展"><a href="#大括号扩展" class="headerlink" title="大括号扩展"></a>大括号扩展</h3><p>​	大括号扩展用于生成任意字符串。大括号包含字符串的都好分割列表或顺序表达式。结果包含大括号定义之前或之后的文本。大括号扩展可以相互嵌套。您也可以使用双点语法（..），它将扩展为一个顺序序列。例如，大括号内的{a..d}双点语法扩展为 b c d。</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[kiosk@foundation0 glob]$ <span class="built_in">touch</span> &#123;tmp,nginx,docker,kubelet&#125;.<span class="built_in">log</span></span><br><span class="line">[kiosk@foundation0 glob]$ <span class="built_in">ls</span></span><br><span class="line">docker.log  kubelet.log  nginx.log  tmp.log</span><br><span class="line">[kiosk@foundation0 glob]$ <span class="built_in">touch</span> file&#123;a..c&#125;.txt</span><br><span class="line">[kiosk@foundation0 glob]$ <span class="built_in">ls</span> file*</span><br><span class="line">filea.txt  fileb.txt  filec.txt</span><br><span class="line">[kiosk@foundation0 glob]$ <span class="built_in">touch</span> file&#123;a..c&#125;&#123;1..3&#125;.txt</span><br><span class="line">[kiosk@foundation0 glob]$ <span class="built_in">ls</span></span><br><span class="line">filea1.txt  filea2.txt  filea3.txt  fileb1.txt  fileb2.txt  fileb3.txt  filec1.txt  filec2.txt  filec3.txt</span><br><span class="line">[kiosk@foundation0 glob]$ </span><br></pre></td></tr></table></figure>
-
-<p>​	可以通过大括号扩展的方式去快速创建多个文件或目录及查找等操作。</p>
-<h3 id="波形符扩展"><a href="#波形符扩展" class="headerlink" title="波形符扩展"></a>波形符扩展</h3><p>​	波形符（<del>）可匹配当前用户的主目录。如果波形符后为斜杠（&#x2F;）以外的字符串，shell就会将波形符之后的字符串解释为用户名。如果存在匹配项，则用该用户的主目录绝对路径来替换字符串。如果找不到匹配的用户名，shell将使用实际波形符加上该字符串完整输出。如果您以（</del>&#x2F;）开头，shell就会将该解释为当前用户的主目录，在它之后的字符串就是当前用户主目录下的子目录。</p>
-<p>​	一下示例中，echo命令用于显示波形字符最终输出的值。也可以使用echo命令来显示大括号和变量扩展字符等的值。</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># root的主目录绝对路径</span></span><br><span class="line">[kiosk@foundation0 glob]$ <span class="built_in">echo</span> ~root</span><br><span class="line">/root</span><br><span class="line"><span class="comment"># kiosk的主目录绝对路径</span></span><br><span class="line">[kiosk@foundation0 glob]$ <span class="built_in">echo</span> ~kiosk/</span><br><span class="line">/home/kiosk/</span><br><span class="line"><span class="comment"># ~/当前用户主目录，glob主目录下的子目录</span></span><br><span class="line">[kiosk@foundation0 glob]$ <span class="built_in">echo</span> ~/glob</span><br><span class="line">/home/kiosk/glob</span><br><span class="line"><span class="comment"># 匹配不到则将参数完整输出</span></span><br><span class="line">[kiosk@foundation0 glob]$ <span class="built_in">echo</span> ~ahahha</span><br><span class="line">~ahahha</span><br><span class="line">[kiosk@foundation0 glob]$ </span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="变量扩展"><a href="#变量扩展" class="headerlink" title="变量扩展"></a>变量扩展</h3><p>​	变量的作用类似于可以在内存中存储值的命名容器。通过变量，可以从命令行或shell脚本内轻松访问和修改存储的数据。</p>
-<p>​	您可以通过以下语法蒋数据作为值分配给变量：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[kiosk@foundation0 glob]$ VARIABLENAME=value</span><br></pre></td></tr></table></figure>
-
-<p>​	可以使用变量扩展蒋变量名转换为命令行上的值。如果字符串以美元符号（$）开头，那么shell就会尝试将该字符串的其余部分用作变量名称，并将它替换为变量中包含的任何值。也就是说美元符可以将它后面的字符串解释（标记）为这是一个变量，而非普通的字符串。</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 定义一个名为：USERNAME的变量，它的值为：Asimov</span></span><br><span class="line"><span class="comment"># 他们是一个键值对的关系</span></span><br><span class="line">[kiosk@foundation0 glob]$ USERNAME=Asimov</span><br><span class="line"><span class="comment"># $打入开头关键字同样也可以TAB为您补全上来</span></span><br><span class="line">[kiosk@foundation0 glob]$ <span class="built_in">echo</span> <span class="variable">$USER</span></span><br><span class="line"><span class="variable">$USER</span>      <span class="variable">$USERNAME</span>  </span><br><span class="line">[kiosk@foundation0 glob]$ <span class="built_in">echo</span> <span class="variable">$USERNAME</span></span><br><span class="line">Asimov</span><br><span class="line">[kiosk@foundation0 glob]$ </span><br></pre></td></tr></table></figure>
-
-
-
-<p>​	为了预防您取的变量名于其他shell扩展名其冲突而引起错误，您可以将变量的名称放在大括号中，如：${VARIABLENAME}</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[kiosk@foundation0 glob]$ USERNAME=LiWeiHu</span><br><span class="line">[kiosk@foundation0 glob]$ <span class="built_in">echo</span> <span class="variable">$&#123;USER&#125;</span></span><br><span class="line"><span class="variable">$&#123;USER&#125;</span>      <span class="variable">$&#123;USERNAME&#125;</span>  </span><br><span class="line">[kiosk@foundation0 glob]$ <span class="built_in">echo</span> <span class="variable">$&#123;USERNAME&#125;</span></span><br><span class="line">LiWeiHu</span><br><span class="line">[kiosk@foundation0 glob]$ </span><br></pre></td></tr></table></figure>
-
-<p>​	变量名只能包含字母（大小写均可）、数字和下划线。变量名称区分大小写，不能以数字开头。</p>
-<h3 id="命令替换"><a href="#命令替换" class="headerlink" title="命令替换"></a>命令替换</h3><p>​	命令替换允许命令的输出替换命令行上的命令本身。当命令阔在括号中并且前面有美元符号（$）时，会发生命令替换。$(command) 形式可以互相嵌套多个命令扩展。</p>
-<p>​	将date +%A这个原本的命令，用它输出的值去替换这个命令，去输出今天是星期几，于我们没带命令替换的普通字符串，形成一段完整的输出内容。</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[kiosk@foundation0 glob]$ <span class="built_in">echo</span> Today is $(<span class="built_in">date</span> +%A)</span><br><span class="line">Today is Thursday</span><br><span class="line">[kiosk@foundation0 glob]$ <span class="built_in">echo</span> Today <span class="keyword">time</span> is  $(<span class="built_in">date</span> +%M) minutes past $(<span class="built_in">date</span> +%l%p).</span><br><span class="line">Today <span class="keyword">time</span> is 18 minutes past 4PM.</span><br><span class="line">[kiosk@foundation0 glob]$ </span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="防止参数被扩展"><a href="#防止参数被扩展" class="headerlink" title="防止参数被扩展"></a>防止参数被扩展</h3><p>​	在Bash shell中，许多字符有着特殊含义。为防止命令行的某些部分上执行shell扩展，您可以为字符和字符串加引号或执行转义。</p>
-<p>​	反斜杠（\）是bash shell中的转义字符。它可以防止其后的字符被扩展。</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 未被转义时，$HOME将作为变量去输出key值</span></span><br><span class="line">[kiosk@foundation0 ~]$ <span class="built_in">echo</span> <span class="variable">$HOME</span></span><br><span class="line">/home/kiosk</span><br><span class="line"><span class="comment"># 通过转义符，$HOME它就是一个普通的字符串输出</span></span><br><span class="line">[kiosk@foundation0 ~]$ <span class="built_in">echo</span> \<span class="variable">$HOME</span></span><br><span class="line"><span class="variable">$HOME</span></span><br><span class="line">[kiosk@foundation0 ~]$ </span><br></pre></td></tr></table></figure>
-
-
-
-<p>​	在上面的示例中，保护美元符免于扩展，bash将其视为常规字符，因此也就未在$HOME上执行变量扩展。</p>
-<p>​	如果要保护较长的字符串，则使用单引号 （’）或双引号（”）来括起字符串。它们的作用略有不同。单引号将阻止所有shell扩展。双引号则阻止大部分shell扩展。</p>
-<p>​	双引号可抑制美元符号（ $ ）、反斜杠（ \ ）、反引号（ &#96; ）和感叹号（ ! ）以外的特殊字符，在引用文本内发挥作用。这回阻止路径名扩展，但仍允许命令替换和变量扩展。</p>
-<p>​	以下示例中，演示了双引号无法抑制变量扩展，依然会输出变量具有的值。</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[kiosk@foundation0 ~]$ <span class="built_in">echo</span> <span class="variable">$&#123;HOSTNAME&#125;</span></span><br><span class="line">foundation0.ilt.example.com</span><br><span class="line">[kiosk@foundation0 ~]$ <span class="built_in">echo</span> <span class="string">&quot;****** hostname is <span class="variable">$&#123;HOSTNAME&#125;</span> ********&quot;</span></span><br><span class="line">****** hostname is foundation0.ilt.example.com ********</span><br><span class="line">[kiosk@foundation0 ~]$ </span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-
-
-<p>​	使用单引号则可以按字面解释抑制引号内所有的特殊字符，以文本输出。</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[kiosk@foundation0 ~]$ <span class="built_in">echo</span> <span class="variable">$&#123;HOSTNAME&#125;</span></span><br><span class="line">foundation0.ilt.example.com</span><br><span class="line">[kiosk@foundation0 ~]$ <span class="built_in">echo</span> <span class="string">&#x27;****** hostname is $&#123;HOSTNAME&#125; ********&#x27;</span></span><br><span class="line">****** hostname is <span class="variable">$&#123;HOSTNAME&#125;</span> ********</span><br><span class="line">[kiosk@foundation0 ~]$ </span><br></pre></td></tr></table></figure>
 
 ]]></content>
       <categories>
