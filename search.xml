@@ -35,223 +35,6 @@
       </tags>
   </entry>
   <entry>
-    <title>Linux-RHCE-124-第三章节</title>
-    <url>/2025/03/07/01-RHCE/Linux-RHCE-124-%E7%AC%AC%E4%B8%89%E7%AB%A0%E8%8A%82/</url>
-    <content><![CDATA[<h1 id="在红帽企业Linux中获取帮助"><a href="#在红帽企业Linux中获取帮助" class="headerlink" title="在红帽企业Linux中获取帮助"></a>在红帽企业Linux中获取帮助</h1><h2 id="阅读手册页"><a href="#阅读手册页" class="headerlink" title="阅读手册页"></a>阅读手册页</h2><h3 id="Linux手册页简介"><a href="#Linux手册页简介" class="headerlink" title="Linux手册页简介"></a>Linux手册页简介</h3><p>​	本地系统上通常可用的文档来源之一是系统手册页或man page。软件包随附这些页面来提供文档，您可以使用man命令从命令行访问这些文档。页面存储在&#x2F;usr&#x2F;share&#x2F;man 目录的子目录中。</p>
-<p>​	man page 源自过去的Linux程序员手册，该手册篇幅很长，足以划分多个章节。每个章节包含有特定主题信息。</p>
-<table>
-<thead>
-<tr>
-<th>章节</th>
-<th>内容类型</th>
-<th>描述</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>1</td>
-<td>用户命令</td>
-<td>可执行命令和shell程序</td>
-</tr>
-<tr>
-<td>2</td>
-<td>系统调用</td>
-<td>从用户空间调用的内核例程</td>
-</tr>
-<tr>
-<td>3</td>
-<td>库函数</td>
-<td>有程序库提供</td>
-</tr>
-<tr>
-<td>4</td>
-<td>特殊文件</td>
-<td>例如设备文件</td>
-</tr>
-<tr>
-<td>5</td>
-<td>文件格式</td>
-<td>用于许多配置文件和结构</td>
-</tr>
-<tr>
-<td>6</td>
-<td>游戏和屏保</td>
-<td>过去的趣味程序章节</td>
-</tr>
-<tr>
-<td>7</td>
-<td>惯例、标准和其他</td>
-<td>协议、文件系统</td>
-</tr>
-<tr>
-<td>8</td>
-<td>系统管理和特权命令</td>
-<td>维护任务</td>
-</tr>
-<tr>
-<td>9</td>
-<td>Linux内核API</td>
-<td>内部内核调用</td>
-</tr>
-</tbody></table>
-<p>​	为区分不同章节中相同的主题名称，man page参考中在主题后附上章节编号（用括号括起）。例如：passwd(1)介绍更改密码的命令，而passwd(5)说明用于存储本地用户账户的&#x2F;etc&#x2F;passwd配置文件相关格式。</p>
-<p>​	若要读取具体的man page，请使用man topic命令。man page一次显示一屏内容。man命令按照字母数字顺序搜索手册章节。例如：man passwd默认情况下只显示passwd(1)。要显示特定章节中的man page主题，您可以使用man section topic 命令。例如：man 5 passwd会显示passwd(5)。</p>
-<p>​	常见的系统管理主题在第一章（用户命令）、第五章（文件格式）和第八章（管理命令）中。采用特定故障排除工具的管理员页可以使用第二章（系统调用）。剩余的章节供内核开发等人员参考或用于高级管理。</p>
-<h3 id="阅览和搜索-Man-Page"><a href="#阅览和搜索-Man-Page" class="headerlink" title="阅览和搜索 Man Page"></a>阅览和搜索 Man Page</h3><p>​	高校的搜索主题并在man page中导航是一项非常重要的管理技能。您可以使用GUI管理goon根据来配置常见系统资源，但使用命令行界面依然更为高效。更有效的在命令行中找到所需man page信息。</p>
-<p>​	下表列出在查看man page时基本的导航命令：</p>
-<table>
-<thead>
-<tr>
-<th>命令</th>
-<th>结果</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>Spacebar（空格）</td>
-<td>向前（向下）滚动一屏</td>
-</tr>
-<tr>
-<td>PageDown（下键）</td>
-<td>向前（向下）滚动一屏</td>
-</tr>
-<tr>
-<td>Pageup（上键）</td>
-<td>向后（向上）滚动一屏</td>
-</tr>
-<tr>
-<td>D</td>
-<td>向前（向下）滚动半屏</td>
-</tr>
-<tr>
-<td>U</td>
-<td>向后（向上）滚动半屏</td>
-</tr>
-<tr>
-<td>&#x2F;string</td>
-<td>在man page中搜索string内容</td>
-</tr>
-<tr>
-<td>N</td>
-<td>在man page中重复向前（向下）搜索</td>
-</tr>
-<tr>
-<td>Shift+N</td>
-<td>在man page中重复向后（向上）搜索</td>
-</tr>
-<tr>
-<td>G</td>
-<td>转到man page的开头</td>
-</tr>
-<tr>
-<td>shift+G</td>
-<td>转到man page的末尾</td>
-</tr>
-<tr>
-<td>Q</td>
-<td>退出man，并返回命令行</td>
-</tr>
-</tbody></table>
-<h3 id="阅读Man-Page"><a href="#阅读Man-Page" class="headerlink" title="阅读Man Page"></a>阅读Man Page</h3><p>​	man page将各个主题划分为几个部分。大多数主题共享相同的标题，并以相同的顺序显示。通常，主题不包含所有标题，因为并非所有标题都使用所有主题。</p>
-<p>​	常见的标题如下：</p>
-<table>
-<thead>
-<tr>
-<th>标题</th>
-<th>描述</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>NAME</td>
-<td>主题名称。通常是命令或文件名。简短的描述</td>
-</tr>
-<tr>
-<td>SYNOPSIS</td>
-<td>命令语法概要</td>
-</tr>
-<tr>
-<td>DESCRIPTION</td>
-<td>提供对主题的基本理解和描述</td>
-</tr>
-<tr>
-<td>OPTIONS</td>
-<td>命令执行选项说明</td>
-</tr>
-<tr>
-<td>EXAMPLES</td>
-<td>有关如何使用命令、功能或文件的示例</td>
-</tr>
-<tr>
-<td>FILES</td>
-<td>与man page相关的文件和目录的列表。</td>
-</tr>
-<tr>
-<td>SEE ALSO</td>
-<td>相关的信息，通常是其他man page 主题。</td>
-</tr>
-<tr>
-<td>BUGS</td>
-<td>软件中已知错误。</td>
-</tr>
-<tr>
-<td>AUTHOR</td>
-<td>有关草鱼撰写该主题的人员信息。</td>
-</tr>
-</tbody></table>
-<h3 id="根据关键字搜索man-page"><a href="#根据关键字搜索man-page" class="headerlink" title="根据关键字搜索man page"></a>根据关键字搜索man page</h3><p>​	使用man命令 -k（小写）选项（等同于apropos选项）可在man page的标题和描述中搜索关键字。关键字搜索的结果中显示与关键字匹配的man page 主题和章节编号列表。例如以下命令可搜索含词语passwd的man page。</p>
-<p>​	<code>注意：关键字搜索依赖于mandb(8)命令生成的索引，该命令必须以root身份允许。在安装含有man page软件包是，man-db-cache-update访问会自动允许mandb命令，如果您通过man -k 无法搜索相应标题，则可能需要您手动执行一个mandb。</code></p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[root@foundation0 ~]# man -k passwd</span><br><span class="line">chgpasswd (8)        - update group passwords <span class="keyword">in</span> batch mode</span><br><span class="line">chpasswd (8)         - update passwords <span class="keyword">in</span> batch mode</span><br><span class="line">fgetpwent_r (3)      - get passwd file entry reentrantly</span><br><span class="line">getpwent_r (3)       - get passwd file entry reentrantly</span><br><span class="line">gpasswd (1)          - administer /etc/group and /etc/gshadow</span><br><span class="line">grub2-mkpasswd-pbkdf2 (1) - Generate a PBKDF2 password <span class="built_in">hash</span>.</span><br><span class="line">htpasswd (1)         - Manage user files <span class="keyword">for</span> basic authentication</span><br><span class="line">lpasswd (1)          - Change group or user password</span><br><span class="line">openssl-passwd (1ossl) - compute password hashes</span><br><span class="line">pam_localuser (8)    - require <span class="built_in">users</span> to be listed <span class="keyword">in</span> /etc/passwd</span><br><span class="line">passwd (1)           - update user<span class="string">&#x27;s authentication tokens</span></span><br><span class="line"><span class="string">passwd (1ossl)       - OpenSSL application commands</span></span><br><span class="line"><span class="string">passwd (5)           - password file</span></span><br><span class="line"><span class="string">passwd2des (3)       - RFS password encryption</span></span><br><span class="line"><span class="string">pwhistory_helper (8) - Helper binary that transfers password hashes from passwd or shadow to opasswd</span></span><br><span class="line"><span class="string">saslpasswd2 (8)      - set a user&#x27;</span>s sasl password</span><br><span class="line">smbpasswd (5)        - The Samba encrypted password file</span><br><span class="line">vncpasswd (1)        - change the VNC password</span><br><span class="line">[root@foundation0 ~]# </span><br></pre></td></tr></table></figure>
-
-
-
-<p>​	man -K（大写）选项可在全文页面中搜索关键字，而补仅仅是在标题和描述中搜索。全文搜索使用更多的系统资源，耗费更长的时间。</p>
-<p>​	使用全文页面搜索时，man 命令显示含有匹配项的第一页。按Q退出第一页，man命令则可显示下一页。</p>
-<p>​	在本示例中，man显示每个匹配项，同时允许您查看或跳过每个匹配项。<code>man page页按Q退出，Ctrl+D（跳过该匹配项），Ctrl+c（退出匹配）</code></p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[root@foundation0 ~]# man -K passwd</span><br><span class="line">--Man-- next: <span class="built_in">cut</span>(1p) [ view (<span class="built_in">return</span>) | skip (Ctrl-D) | quit (Ctrl-C) ]</span><br><span class="line"></span><br><span class="line">--Man-- next: <span class="built_in">logname</span>(1p) [ view (<span class="built_in">return</span>) | skip (Ctrl-D) | quit (Ctrl-C) ]</span><br><span class="line"></span><br><span class="line">--Man-- next: <span class="built_in">sort</span>(1p) [ view (<span class="built_in">return</span>) | skip (Ctrl-D) | quit (Ctrl-C) ]</span><br><span class="line"></span><br><span class="line">--Man-- next: xargs(1) [ view (<span class="built_in">return</span>) | skip (Ctrl-D) | quit (Ctrl-C) ]</span><br><span class="line">^C</span><br><span class="line">[root@foundation0 ~]# </span><br></pre></td></tr></table></figure>
-
-
-
-<h2 id="模拟操作练习"><a href="#模拟操作练习" class="headerlink" title="模拟操作练习"></a>模拟操作练习</h2><p>​	请根据下列要求完成用户创建，以及用户密码修改</p>
-<ul>
-<li>查询su命令使用方法，将当前shell（kiosk）用户切换为root用户。</li>
-<li>查询useradd命令使用方法，使用该命令创建一个名为redhat01的用户。</li>
-<li>查询passwd命令使用方法，使用该命令为redhat01用户更新密码。</li>
-</ul>
-<h2 id="模拟练习讲解"><a href="#模拟练习讲解" class="headerlink" title="模拟练习讲解"></a>模拟练习讲解</h2><p>​	根据题目已知，我们首先要使用man page查询关于su命令的一个使用方法，并且使用su命令将我们从kiosk用户切换到root用户的shell提示符。</p>
-<p>​	方式一：通过man -k 来查找su的page页，但这样会找出很多有关su的page页，在我们已知我们要查找su的用户命令时，不推荐使用</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[kiosk@foundation0 ~]$ man -k su</span><br><span class="line">.....忽略.....</span><br><span class="line">strspn (3)           - get length of a prefix substring</span><br><span class="line">strspn (3p)          - get length of a substring</span><br><span class="line">strstr (3)           - locate a substring</span><br><span class="line">strstr (3p)          - find a substring</span><br><span class="line">su (1)               - run a <span class="built_in">command</span> with substitute user and group ID</span><br><span class="line">Sub::Exporter (3pm)  - a sophisticated exporter <span class="keyword">for</span> custom-</span><br><span class="line">.....忽略.....</span><br><span class="line">[kiosk@foundation0 ~]$ man 1 su</span><br></pre></td></tr></table></figure>
-
-
-
-<p>​	方式二：已知我们要找su的用户命令，用户命令的编号是 (1)，就可以直接使用，man 1 su 或者 man su，man su在没有指定page编号时，默认是打开序号（1）的用户命令页。</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[kiosk@foundation0 ~]$ man su</span><br></pre></td></tr></table></figure>
-
-
-
-<p>​	打开page页后，即可开始阅读su命令相关文档了。name命令的名称，synopsis命令使用的语法格式，description命令详细作用、功能描述，options命令可使用的选项即描述。可从他的语法格式中看出，该命令是试用【su [选项] [-] [用户名作为参数]】 ,方括号内表示选填项。</p>
-<img src="/2025/03/07/01-RHCE/Linux-RHCE-124-%E7%AC%AC%E4%B8%89%E7%AB%A0%E8%8A%82/03/07/01-RHCE/Linux-RHCE-124-%E7%AC%AC%E4%B8%89%E7%AB%A0%E8%8A%82/image-20250310104018905.png" class title="image-20250310104018905">
-
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[kiosk@foundation0 ~]$ su - root</span><br><span class="line">Password: </span><br><span class="line">Last login: Fri Mar  7 17:46:32 CST 2025 on pts/0</span><br><span class="line">Last failed login: Mon Mar 10 14:34:10 CST 2025 on pts/0</span><br><span class="line">There was 1 failed login attempt since the last successful login.</span><br><span class="line">[root@foundation0 ~]#</span><br></pre></td></tr></table></figure>
-
-
-
-<p>​	成功切换到root后，继续查看useradd命令是如何使用。</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">[root@foundation0 ~]# man useradd</span><br><span class="line">[root@foundation0 ~]# useradd redhat01</span><br></pre></td></tr></table></figure>
-
-<p>​	更新redhat01用的密码</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[root@foundation0 ~]# man passwd</span><br><span class="line">[root@foundation0 ~]# passwd redhat01 </span><br><span class="line">Changing password <span class="keyword">for</span> user redhat01.</span><br><span class="line">New password: </span><br><span class="line">BAD PASSWORD: The password is shorter than 8 characters</span><br><span class="line">Retype new password: </span><br><span class="line">passwd: all authentication tokens updated successfully.</span><br><span class="line">[root@foundation0 ~]#</span><br></pre></td></tr></table></figure>
-
-<p>​	您可以使用man命令-t选项，将你man page写入到你的文档文件中，并使用file命令验证识别文件类型为document文档。例如下方示例。</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">[root@foundation0 ~]# man -t passwd &gt; passwd.ps</span><br><span class="line">[root@foundation0 ~]# file passwd.ps </span><br><span class="line">passwd.ps: PostScript document text conforming DSC level 3.0</span><br><span class="line">[root@foundation0 ~]#</span><br></pre></td></tr></table></figure>
-
-<p>​	最后您可以通过evince命令，调用操作系统的文档工具打开该文档进行可视化阅览。</p>
-<img src="/2025/03/07/01-RHCE/Linux-RHCE-124-%E7%AC%AC%E4%B8%89%E7%AB%A0%E8%8A%82/03/07/01-RHCE/Linux-RHCE-124-%E7%AC%AC%E4%B8%89%E7%AB%A0%E8%8A%82/image-20250310161829513.png" class title="image-20250310161829513">]]></content>
-      <categories>
-        <category>RHCE</category>
-      </categories>
-      <tags>
-        <tag>RHCE</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Linux RHCE-124(第一章节)</title>
     <url>/2025/02/27/01-RHCE/Linux-RHCE-124(%E7%AC%AC%E4%B8%80%E7%AB%A0%E8%8A%82)/</url>
     <content><![CDATA[<h1 id="红帽企业Linux入门"><a href="#红帽企业Linux入门" class="headerlink" title="红帽企业Linux入门"></a>红帽企业Linux入门</h1><h2 id="为什么要了解Linux？"><a href="#为什么要了解Linux？" class="headerlink" title="为什么要了解Linux？"></a>为什么要了解Linux？</h2><p>​	Linux是IT专业人士必须了解的关键技术。</p>
@@ -498,6 +281,223 @@
 </tr>
 </tbody></table>
 ]]></content>
+      <categories>
+        <category>RHCE</category>
+      </categories>
+      <tags>
+        <tag>RHCE</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Linux-RHCE-124-第三章节</title>
+    <url>/2025/03/07/01-RHCE/Linux-RHCE-124-%E7%AC%AC%E4%B8%89%E7%AB%A0%E8%8A%82/</url>
+    <content><![CDATA[<h1 id="在红帽企业Linux中获取帮助"><a href="#在红帽企业Linux中获取帮助" class="headerlink" title="在红帽企业Linux中获取帮助"></a>在红帽企业Linux中获取帮助</h1><h2 id="阅读手册页"><a href="#阅读手册页" class="headerlink" title="阅读手册页"></a>阅读手册页</h2><h3 id="Linux手册页简介"><a href="#Linux手册页简介" class="headerlink" title="Linux手册页简介"></a>Linux手册页简介</h3><p>​	本地系统上通常可用的文档来源之一是系统手册页或man page。软件包随附这些页面来提供文档，您可以使用man命令从命令行访问这些文档。页面存储在&#x2F;usr&#x2F;share&#x2F;man 目录的子目录中。</p>
+<p>​	man page 源自过去的Linux程序员手册，该手册篇幅很长，足以划分多个章节。每个章节包含有特定主题信息。</p>
+<table>
+<thead>
+<tr>
+<th>章节</th>
+<th>内容类型</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1</td>
+<td>用户命令</td>
+<td>可执行命令和shell程序</td>
+</tr>
+<tr>
+<td>2</td>
+<td>系统调用</td>
+<td>从用户空间调用的内核例程</td>
+</tr>
+<tr>
+<td>3</td>
+<td>库函数</td>
+<td>有程序库提供</td>
+</tr>
+<tr>
+<td>4</td>
+<td>特殊文件</td>
+<td>例如设备文件</td>
+</tr>
+<tr>
+<td>5</td>
+<td>文件格式</td>
+<td>用于许多配置文件和结构</td>
+</tr>
+<tr>
+<td>6</td>
+<td>游戏和屏保</td>
+<td>过去的趣味程序章节</td>
+</tr>
+<tr>
+<td>7</td>
+<td>惯例、标准和其他</td>
+<td>协议、文件系统</td>
+</tr>
+<tr>
+<td>8</td>
+<td>系统管理和特权命令</td>
+<td>维护任务</td>
+</tr>
+<tr>
+<td>9</td>
+<td>Linux内核API</td>
+<td>内部内核调用</td>
+</tr>
+</tbody></table>
+<p>​	为区分不同章节中相同的主题名称，man page参考中在主题后附上章节编号（用括号括起）。例如：passwd(1)介绍更改密码的命令，而passwd(5)说明用于存储本地用户账户的&#x2F;etc&#x2F;passwd配置文件相关格式。</p>
+<p>​	若要读取具体的man page，请使用man topic命令。man page一次显示一屏内容。man命令按照字母数字顺序搜索手册章节。例如：man passwd默认情况下只显示passwd(1)。要显示特定章节中的man page主题，您可以使用man section topic 命令。例如：man 5 passwd会显示passwd(5)。</p>
+<p>​	常见的系统管理主题在第一章（用户命令）、第五章（文件格式）和第八章（管理命令）中。采用特定故障排除工具的管理员页可以使用第二章（系统调用）。剩余的章节供内核开发等人员参考或用于高级管理。</p>
+<h3 id="阅览和搜索-Man-Page"><a href="#阅览和搜索-Man-Page" class="headerlink" title="阅览和搜索 Man Page"></a>阅览和搜索 Man Page</h3><p>​	高校的搜索主题并在man page中导航是一项非常重要的管理技能。您可以使用GUI管理goon根据来配置常见系统资源，但使用命令行界面依然更为高效。更有效的在命令行中找到所需man page信息。</p>
+<p>​	下表列出在查看man page时基本的导航命令：</p>
+<table>
+<thead>
+<tr>
+<th>命令</th>
+<th>结果</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Spacebar（空格）</td>
+<td>向前（向下）滚动一屏</td>
+</tr>
+<tr>
+<td>PageDown（下键）</td>
+<td>向前（向下）滚动一屏</td>
+</tr>
+<tr>
+<td>Pageup（上键）</td>
+<td>向后（向上）滚动一屏</td>
+</tr>
+<tr>
+<td>D</td>
+<td>向前（向下）滚动半屏</td>
+</tr>
+<tr>
+<td>U</td>
+<td>向后（向上）滚动半屏</td>
+</tr>
+<tr>
+<td>&#x2F;string</td>
+<td>在man page中搜索string内容</td>
+</tr>
+<tr>
+<td>N</td>
+<td>在man page中重复向前（向下）搜索</td>
+</tr>
+<tr>
+<td>Shift+N</td>
+<td>在man page中重复向后（向上）搜索</td>
+</tr>
+<tr>
+<td>G</td>
+<td>转到man page的开头</td>
+</tr>
+<tr>
+<td>shift+G</td>
+<td>转到man page的末尾</td>
+</tr>
+<tr>
+<td>Q</td>
+<td>退出man，并返回命令行</td>
+</tr>
+</tbody></table>
+<h3 id="阅读Man-Page"><a href="#阅读Man-Page" class="headerlink" title="阅读Man Page"></a>阅读Man Page</h3><p>​	man page将各个主题划分为几个部分。大多数主题共享相同的标题，并以相同的顺序显示。通常，主题不包含所有标题，因为并非所有标题都使用所有主题。</p>
+<p>​	常见的标题如下：</p>
+<table>
+<thead>
+<tr>
+<th>标题</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>NAME</td>
+<td>主题名称。通常是命令或文件名。简短的描述</td>
+</tr>
+<tr>
+<td>SYNOPSIS</td>
+<td>命令语法概要</td>
+</tr>
+<tr>
+<td>DESCRIPTION</td>
+<td>提供对主题的基本理解和描述</td>
+</tr>
+<tr>
+<td>OPTIONS</td>
+<td>命令执行选项说明</td>
+</tr>
+<tr>
+<td>EXAMPLES</td>
+<td>有关如何使用命令、功能或文件的示例</td>
+</tr>
+<tr>
+<td>FILES</td>
+<td>与man page相关的文件和目录的列表。</td>
+</tr>
+<tr>
+<td>SEE ALSO</td>
+<td>相关的信息，通常是其他man page 主题。</td>
+</tr>
+<tr>
+<td>BUGS</td>
+<td>软件中已知错误。</td>
+</tr>
+<tr>
+<td>AUTHOR</td>
+<td>有关草鱼撰写该主题的人员信息。</td>
+</tr>
+</tbody></table>
+<h3 id="根据关键字搜索man-page"><a href="#根据关键字搜索man-page" class="headerlink" title="根据关键字搜索man page"></a>根据关键字搜索man page</h3><p>​	使用man命令 -k（小写）选项（等同于apropos选项）可在man page的标题和描述中搜索关键字。关键字搜索的结果中显示与关键字匹配的man page 主题和章节编号列表。例如以下命令可搜索含词语passwd的man page。</p>
+<p>​	<code>注意：关键字搜索依赖于mandb(8)命令生成的索引，该命令必须以root身份允许。在安装含有man page软件包是，man-db-cache-update访问会自动允许mandb命令，如果您通过man -k 无法搜索相应标题，则可能需要您手动执行一个mandb。</code></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[root@foundation0 ~]# man -k passwd</span><br><span class="line">chgpasswd (8)        - update group passwords <span class="keyword">in</span> batch mode</span><br><span class="line">chpasswd (8)         - update passwords <span class="keyword">in</span> batch mode</span><br><span class="line">fgetpwent_r (3)      - get passwd file entry reentrantly</span><br><span class="line">getpwent_r (3)       - get passwd file entry reentrantly</span><br><span class="line">gpasswd (1)          - administer /etc/group and /etc/gshadow</span><br><span class="line">grub2-mkpasswd-pbkdf2 (1) - Generate a PBKDF2 password <span class="built_in">hash</span>.</span><br><span class="line">htpasswd (1)         - Manage user files <span class="keyword">for</span> basic authentication</span><br><span class="line">lpasswd (1)          - Change group or user password</span><br><span class="line">openssl-passwd (1ossl) - compute password hashes</span><br><span class="line">pam_localuser (8)    - require <span class="built_in">users</span> to be listed <span class="keyword">in</span> /etc/passwd</span><br><span class="line">passwd (1)           - update user<span class="string">&#x27;s authentication tokens</span></span><br><span class="line"><span class="string">passwd (1ossl)       - OpenSSL application commands</span></span><br><span class="line"><span class="string">passwd (5)           - password file</span></span><br><span class="line"><span class="string">passwd2des (3)       - RFS password encryption</span></span><br><span class="line"><span class="string">pwhistory_helper (8) - Helper binary that transfers password hashes from passwd or shadow to opasswd</span></span><br><span class="line"><span class="string">saslpasswd2 (8)      - set a user&#x27;</span>s sasl password</span><br><span class="line">smbpasswd (5)        - The Samba encrypted password file</span><br><span class="line">vncpasswd (1)        - change the VNC password</span><br><span class="line">[root@foundation0 ~]# </span><br></pre></td></tr></table></figure>
+
+
+
+<p>​	man -K（大写）选项可在全文页面中搜索关键字，而补仅仅是在标题和描述中搜索。全文搜索使用更多的系统资源，耗费更长的时间。</p>
+<p>​	使用全文页面搜索时，man 命令显示含有匹配项的第一页。按Q退出第一页，man命令则可显示下一页。</p>
+<p>​	在本示例中，man显示每个匹配项，同时允许您查看或跳过每个匹配项。<code>man page页按Q退出，Ctrl+D（跳过该匹配项），Ctrl+c（退出匹配）</code></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[root@foundation0 ~]# man -K passwd</span><br><span class="line">--Man-- next: <span class="built_in">cut</span>(1p) [ view (<span class="built_in">return</span>) | skip (Ctrl-D) | quit (Ctrl-C) ]</span><br><span class="line"></span><br><span class="line">--Man-- next: <span class="built_in">logname</span>(1p) [ view (<span class="built_in">return</span>) | skip (Ctrl-D) | quit (Ctrl-C) ]</span><br><span class="line"></span><br><span class="line">--Man-- next: <span class="built_in">sort</span>(1p) [ view (<span class="built_in">return</span>) | skip (Ctrl-D) | quit (Ctrl-C) ]</span><br><span class="line"></span><br><span class="line">--Man-- next: xargs(1) [ view (<span class="built_in">return</span>) | skip (Ctrl-D) | quit (Ctrl-C) ]</span><br><span class="line">^C</span><br><span class="line">[root@foundation0 ~]# </span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="模拟操作练习"><a href="#模拟操作练习" class="headerlink" title="模拟操作练习"></a>模拟操作练习</h2><p>​	请根据下列要求完成用户创建，以及用户密码修改</p>
+<ul>
+<li>查询su命令使用方法，将当前shell（kiosk）用户切换为root用户。</li>
+<li>查询useradd命令使用方法，使用该命令创建一个名为redhat01的用户。</li>
+<li>查询passwd命令使用方法，使用该命令为redhat01用户更新密码。</li>
+</ul>
+<h2 id="模拟练习讲解"><a href="#模拟练习讲解" class="headerlink" title="模拟练习讲解"></a>模拟练习讲解</h2><p>​	根据题目已知，我们首先要使用man page查询关于su命令的一个使用方法，并且使用su命令将我们从kiosk用户切换到root用户的shell提示符。</p>
+<p>​	方式一：通过man -k 来查找su的page页，但这样会找出很多有关su的page页，在我们已知我们要查找su的用户命令时，不推荐使用</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[kiosk@foundation0 ~]$ man -k su</span><br><span class="line">.....忽略.....</span><br><span class="line">strspn (3)           - get length of a prefix substring</span><br><span class="line">strspn (3p)          - get length of a substring</span><br><span class="line">strstr (3)           - locate a substring</span><br><span class="line">strstr (3p)          - find a substring</span><br><span class="line">su (1)               - run a <span class="built_in">command</span> with substitute user and group ID</span><br><span class="line">Sub::Exporter (3pm)  - a sophisticated exporter <span class="keyword">for</span> custom-</span><br><span class="line">.....忽略.....</span><br><span class="line">[kiosk@foundation0 ~]$ man 1 su</span><br></pre></td></tr></table></figure>
+
+
+
+<p>​	方式二：已知我们要找su的用户命令，用户命令的编号是 (1)，就可以直接使用，man 1 su 或者 man su，man su在没有指定page编号时，默认是打开序号（1）的用户命令页。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[kiosk@foundation0 ~]$ man su</span><br></pre></td></tr></table></figure>
+
+
+
+<p>​	打开page页后，即可开始阅读su命令相关文档了。name命令的名称，synopsis命令使用的语法格式，description命令详细作用、功能描述，options命令可使用的选项即描述。可从他的语法格式中看出，该命令是试用【su [选项] [-] [用户名作为参数]】 ,方括号内表示选填项。</p>
+<img src="/2025/03/07/01-RHCE/Linux-RHCE-124-%E7%AC%AC%E4%B8%89%E7%AB%A0%E8%8A%82/03/07/01-RHCE/Linux-RHCE-124-%E7%AC%AC%E4%B8%89%E7%AB%A0%E8%8A%82/image-20250310104018905.png" class title="image-20250310104018905">
+
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[kiosk@foundation0 ~]$ su - root</span><br><span class="line">Password: </span><br><span class="line">Last login: Fri Mar  7 17:46:32 CST 2025 on pts/0</span><br><span class="line">Last failed login: Mon Mar 10 14:34:10 CST 2025 on pts/0</span><br><span class="line">There was 1 failed login attempt since the last successful login.</span><br><span class="line">[root@foundation0 ~]#</span><br></pre></td></tr></table></figure>
+
+
+
+<p>​	成功切换到root后，继续查看useradd命令是如何使用。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">[root@foundation0 ~]# man useradd</span><br><span class="line">[root@foundation0 ~]# useradd redhat01</span><br></pre></td></tr></table></figure>
+
+<p>​	更新redhat01用的密码</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[root@foundation0 ~]# man passwd</span><br><span class="line">[root@foundation0 ~]# passwd redhat01 </span><br><span class="line">Changing password <span class="keyword">for</span> user redhat01.</span><br><span class="line">New password: </span><br><span class="line">BAD PASSWORD: The password is shorter than 8 characters</span><br><span class="line">Retype new password: </span><br><span class="line">passwd: all authentication tokens updated successfully.</span><br><span class="line">[root@foundation0 ~]#</span><br></pre></td></tr></table></figure>
+
+<p>​	您可以使用man命令-t选项，将你man page写入到你的文档文件中，并使用file命令验证识别文件类型为document文档。例如下方示例。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">[root@foundation0 ~]# man -t passwd &gt; passwd.ps</span><br><span class="line">[root@foundation0 ~]# file passwd.ps </span><br><span class="line">passwd.ps: PostScript document text conforming DSC level 3.0</span><br><span class="line">[root@foundation0 ~]#</span><br></pre></td></tr></table></figure>
+
+<p>​	最后您可以通过evince命令，调用操作系统的文档工具打开该文档进行可视化阅览。</p>
+<img src="/2025/03/07/01-RHCE/Linux-RHCE-124-%E7%AC%AC%E4%B8%89%E7%AB%A0%E8%8A%82/03/07/01-RHCE/Linux-RHCE-124-%E7%AC%AC%E4%B8%89%E7%AB%A0%E8%8A%82/image-20250310161829513.png" class title="image-20250310161829513">]]></content>
       <categories>
         <category>RHCE</category>
       </categories>
