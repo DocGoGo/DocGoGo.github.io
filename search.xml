@@ -35,260 +35,6 @@
       </tags>
   </entry>
   <entry>
-    <title>Linux-RHCE-124-第一章节</title>
-    <url>/2025/02/27/01-RHCE/01-124/Linux-RHCE-124-%E7%AC%AC%E4%B8%80%E7%AB%A0%E8%8A%82/</url>
-    <content><![CDATA[<h1 id="红帽企业Linux入门"><a href="#红帽企业Linux入门" class="headerlink" title="红帽企业Linux入门"></a>红帽企业Linux入门</h1><h2 id="为什么要了解Linux？"><a href="#为什么要了解Linux？" class="headerlink" title="为什么要了解Linux？"></a>为什么要了解Linux？</h2><p>​	Linux是IT专业人士必须了解的关键技术。</p>
-<p>​	Linux目前在全球范围得到广泛的使用。互联网上的用户每天通过万维网浏览各式各样的网页，例如此刻您正在通过互联网访问我的博客网站，与Linux应用和Web服务器系统进行交互。</p>
-<p>​	在现代互联网时代，Linux和Windows是主要的操作系统。随着Linux广泛在企业、云等领域的采用，您有许多理由学习Linux</p>
-<ul>
-<li>Windows用户需要与Linux上托管的服务进行交互。</li>
-<li>应用开发中，Linux常托管应用及运行。</li>
-<li>云计算中，私有云或公有云实例都在使用Linux作为操作系统</li>
-<li>移动应用及移动设备等通常都运行在Linux上</li>
-</ul>
-<h3 id="Linux的优点"><a href="#Linux的优点" class="headerlink" title="Linux的优点"></a>Linux的优点</h3><ul>
-<li><p>Linux是开源软件</p>
-<ul>
-<li>开源意味着免费，您可以彻底了解程序或系统的工作方式，并且可以对其进行更改，并将他分享给他人使用，从而加快创新速度。</li>
-</ul>
-</li>
-<li><p>Linux提供命令行（CLI），不仅访问便捷，并且具有强大的脚本化功能。</p>
-<ul>
-<li>Linux构建时的设计理念是用户可以通过CLI执行所有管理任务。它能够轻松实现自动化、部署和配置，并简化本地和远程系统的管理，从而实现易用性和稳定性。</li>
-</ul>
-</li>
-<li><p>Linux是一种模块化的操作系统，管理员可以轻松替换或删除组件</p>
-<ul>
-<li>需要时，可以对系统组件进行升级和更新，Linux是一个通用开发工作站，也可以是特意精简化的软件设备</li>
-</ul>
-</li>
-</ul>
-<h3 id="RedHat是谁？"><a href="#RedHat是谁？" class="headerlink" title="RedHat是谁？"></a>RedHat是谁？</h3><p>​	RedHat翻译过来就是红色的帽子，同时它的LoGo也是一顶红色的帽子，在国内统称为红帽。</p>
-<p>​	红帽是目前世界领先的开源软件解决方案供应商，使用社区驱动的方式提供可靠和高性能的云、Linux、中间件、存储和虚拟化技术。</p>
-<h3 id="什么是Linux发行版"><a href="#什么是Linux发行版" class="headerlink" title="什么是Linux发行版"></a>什么是Linux发行版</h3><p>​	Linux发行版是有一种可安装的操作系统，由Linux内核以及提供支持的用户程序和库构建而成。完整的Linux系统又多个独立的开发社区开发，这些社区协同处理各个组件。发行版让用户能够轻松安装和管理正常运行的Linux系统。</p>
-<p>​	1991年，名为Linus Torvalds的人开发了Unix内核，将其命名为Linux，作为开源软件进行授权。内核是操作系统的核心，它管理着硬件、内存以及运行中的程序调度。Linux内核可通过其他开源软件加以补充，如来自GNU项目的实用工具和程序、来自MIT的X window Systen的图形界面或Apache HTTP Web服务器等其他开源组件，以构建成一个完整、开源的类Unix操作系统</p>
-<h2 id="访问命令行"><a href="#访问命令行" class="headerlink" title="访问命令行"></a>访问命令行</h2><h3 id="Bash-Shell简介"><a href="#Bash-Shell简介" class="headerlink" title="Bash Shell简介"></a>Bash Shell简介</h3><p>​		命令行是基于文本的界面，可用于向计算机系统输入指令。Linux命令行由名为Shell的程序提供。</p>
-<p>​		红帽 Linux中为用户提供的默认shell是GNU Bourne-Again Shell简称(bash)。bash shell是UNIX系统上原始 Bourne shell简称(sh)的改进版本。</p>
-<p>​		Shell在等待用户输入时会显示有一个字符串，称为Shell提示符。当普通用户启用Shell时，提示符为（$）美元符结尾的字符。kiosk则为当前所使用的用户名，foundation0则为当前您操作的主机名称</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[kiosk@foundation0 ~]$</span><br></pre></td></tr></table></figure>
-
-
-
-<p>​		如果以超级用户root运行Shell，则美元符则会被替换为（#）井号字符。次字符表明当前是在超级用户下进行操作Shell，有助于避免权限过大导致的误操作，从而影响到整个系统的异常破坏。</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[root@foundation0 ~]# </span><br></pre></td></tr></table></figure>
-
-
-
-<p>​		bash命令是非常强大的。bash shell提供了脚本语言，可支持自动化任务。同时shell还可以实现图形化工具难以规模化完成的操作。</p>
-<h3 id="Shell基础知识"><a href="#Shell基础知识" class="headerlink" title="Shell基础知识"></a>Shell基础知识</h3><p>在shell提示符下输入的命令需要由三个基本部分组成：</p>
-<ul>
-<li>要运行的命令</li>
-<li>用于命令的行为选项</li>
-<li>通常作为命令的目标参数</li>
-</ul>
-<p>命令是也要运行的程序名称。其后可能跟着一个或多个选项，用于表示该命令的行为或作用。选项通常以一个或两个破折号开头（例如：-a或 –all），有一个破折号代表选项简写，两个代表选项全称。命令和后面可能会跟着一个或多个参数，这些参数通常用于指明应在其中运行命令的目标。</p>
-<p>例如：usermod -L user01，usermod是命令，-L是选项，而user01则是参数。此命令用于锁定user01用户账号的密码。</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[root@foundation0 home]# usermod -L user01</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="登录远程系统"><a href="#登录远程系统" class="headerlink" title="登录远程系统"></a>登录远程系统</h3><p>​		Linux与用户和管理员通常需要通过网络连接到远程系统来获得对远程系统的shell访问权限。</p>
-<p>​		在Linux中，获取远程系统上的shell提示符最常用的方式是使用Secure Shell（SSH）。大多数Linux系统都会默认提供SSH的命令行程序来满足这样一用途需求。</p>
-<p>​		在以下示例中，在计算机上的shell提示符中使用sshmingl以student用户身份远程登录Linux系统名为servera的主机</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[student@workstation ~]$ ssh servera@student</span><br><span class="line">The authenticity of host <span class="string">&#x27;servera (172.25.250.10)&#x27;</span> can<span class="string">&#x27;t be established.</span></span><br><span class="line"><span class="string">ED25519 key fingerprint is SHA256:peUGgfxFNw6Jt6WK4CB2rs+jql1/LhA32M1+8zBawLI.</span></span><br><span class="line"><span class="string">This key is not known by any other names</span></span><br><span class="line"><span class="string"># 验证指纹</span></span><br><span class="line"><span class="string">Are you sure you want to continue connecting (yes/no/[fingerprint])? yes</span></span><br><span class="line"><span class="string">Warning: Permanently added &#x27;</span>servera<span class="string">&#x27; (ED25519) to the list of known hosts.</span></span><br><span class="line"><span class="string">student@servera&#x27;</span>s password:  <span class="comment"># 输入远程服务器的student用户密码</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>​		ssh命令通过加密连接来防止同学被窃听或截获密码和内容。</p>
-<p>​		在一些场景中，不允许ssh使用密码进行登录，以加强安全性，在不输入密码的情况下对远程计算机进行身份验证的另一种方式是利用公元幺身份验证。</p>
-<p>​		使用这种身份验证时，用户需要拥有内含私钥的的特殊身份文件，这相当于与用户的加密密码。在远程服务器上的账户配置有匹配的公钥，公钥不是保密的。在登录时，用户可以指定ssh私钥，如果该远程服务器上的对应账户中安装了他们的匹配公钥就会在不询问密码的情况下让用户登录</p>
-<p>​		以下示例中，计算机使用shell提示符的用户通过ssh使用公钥身份验证的方式以student用户身份登录servera主机。ssh是命令，-i选项可用于只用你当前主机的私钥文件，即.ssh&#x2F;lab_rsa。当该私钥用于远程主机servera下的student用户所拥有的公钥相互匹配，则无需密码，可直接登录到servera的shell提示符中</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[student@workstation ~]$ ssh -i .ssh/lab_rsa servera</span><br><span class="line">Activate the web console with: systemctl <span class="built_in">enable</span> --now cockpit.socket</span><br><span class="line"></span><br><span class="line">Register this system with Red Hat Insights: insights-client --register</span><br><span class="line">Create an account or view all your systems at https://red.ht/insights-dashboard</span><br><span class="line">Last login: Wed Feb 26 05:09:03 2025 from 172.25.250.9</span><br><span class="line">[student@servera ~]$ </span><br></pre></td></tr></table></figure>
-
-
-
-<p>​		为保证连接正常，只有拥有该私钥文件的用户才能读取私钥文件。在上述示例中，私钥位于.ssh&#x2F;lab_rsa文件中，可以使用chmod 600 .ssh&#x2F;lab_rsa来确保只有其所有者才能够读取该文件。后面的文章将会详细讨论如何设置文件权限。</p>
-<p>​		此外，用户还可能配置了无需指定私钥的方式，省略上述示例中 -i 指定私钥的操作，在后续章节也会陆续详细讨论。</p>
-<h3 id="从远程系统中注销退出"><a href="#从远程系统中注销退出" class="headerlink" title="从远程系统中注销退出"></a>从远程系统中注销退出</h3><p>​	当您对ssh远程主机的操作完成后，想退出远程主机的shell时，可以悬着以下方式来结束本次远程会话。</p>
-<ul>
-<li>快捷键：Ctrl+D来结束会话</li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[student@servera ~]$ </span><br><span class="line"><span class="built_in">logout</span></span><br><span class="line">Connection to servera closed.</span><br><span class="line">[student@workstation ~]$</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>命令行：exit</li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[student@servera ~]$ <span class="built_in">exit</span></span><br><span class="line"><span class="built_in">logout</span></span><br><span class="line">Connection to servera closed.</span><br><span class="line">[student@workstation ~]$ </span><br></pre></td></tr></table></figure>
-
-
-
-
-
-<h2 id="使用Bash-Shell执行命令"><a href="#使用Bash-Shell执行命令" class="headerlink" title="使用Bash Shell执行命令"></a>使用Bash Shell执行命令</h2><h3 id="基本命令语法"><a href="#基本命令语法" class="headerlink" title="基本命令语法"></a>基本命令语法</h3><p>​	GNU Bourne-Again Shell（bash）这个程序可以理解为用户输入的命令窗口。输入到shell中的每一个字符串最多有三个部分：命令、选项（通常以-或–开头）、参数。输入到Shell中的每个单词通过空格与其他单次间隔开。命令则是系统中安装的程序名称。每个命令都具有自己的选项和参数。</p>
-<p>​	在单独的行上输入每个命令。系统会显示命令的输出结果，然后显示下一行shell提示符。此命令是输出当前使用的用户名称。</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[kiosk@foundation0 ~]$ <span class="built_in">whoami</span> </span><br><span class="line">kiosk</span><br><span class="line">[kiosk@foundation0 ~]$</span><br></pre></td></tr></table></figure>
-
-
-
-<p>​	如果要在一行shell提示符中输入多个命令，则可以使用分号进行分割（;）。分号是一类成为元字符的字符成员，对于bash具有特殊的解读作用。这时系统会分别执行你输入的多个命令，并分别显示多个命令的输出结果，最后显示下一行shell提示符。</p>
-<p>​	whoami为第一个命令，（;）分号分割，hostname为第二个命令，作用输输出当前主机名称</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[kiosk@foundation0 ~]$ <span class="built_in">whoami</span> ; hostname</span><br><span class="line">kiosk</span><br><span class="line">foundation0.ilt.example.com</span><br><span class="line">[kiosk@foundation0 ~]$ </span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-
-
-
-
-<h3 id="编写简单命令"><a href="#编写简单命令" class="headerlink" title="编写简单命令"></a>编写简单命令</h3><p>​	date命令可显示当前的日期和时间。超级用户或者特权用户也可以使用date来设置系统时钟。使用（+）号作为参数，指定日期命令的格式字符串。</p>
-<p>​	下列示例分别使用date命令显示当前时间，以及date加参数+%R指定输出格式，只输出时、分。以及+%x显示年月日。+%Y-%m-%d:%H-%M-%S则是按照你给出的参数分别自定义日期输出格式。</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[kiosk@foundation0 ~]$ <span class="built_in">date</span></span><br><span class="line">Thu Feb 27 10:48:35 AM CST 2025</span><br><span class="line">[kiosk@foundation0 ~]$ <span class="built_in">date</span> +%R</span><br><span class="line">10:48</span><br><span class="line">[kiosk@foundation0 ~]$ <span class="built_in">date</span> +%x</span><br><span class="line">02/27/2025</span><br><span class="line">[kiosk@foundation0 ~]$ <span class="built_in">date</span> +%Y-%m-%d:%H-%M-%S</span><br><span class="line">2025-02-27:10-49-03</span><br><span class="line">[kiosk@foundation0 ~]$ </span><br></pre></td></tr></table></figure>
-
-
-
-<p>​	不带选项的passwd命令将更改当前用户的密码。若要更改密码，请先指定账户原始密码（当前密码）。默认情况passwd命令配置为需要强密码，其包含小写字母、大写字母、数字呵呵字符，并且不以字典中的标准单词为基础。超级用户或者特权用户可以使用passwd命令更改其他用户的密码。</p>
-<p>​	输入当前密码以及新密码时，你的输入不会在shell窗口显示，所以修改避免输入错误，建议在外部将密码粘贴进来</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[kiosk@foundation0 ~]$ passwd </span><br><span class="line">Changing password <span class="keyword">for</span> user kiosk.</span><br><span class="line">Current password: <span class="comment"># redhat</span></span><br><span class="line">New password: <span class="comment"># Rey@183dv</span></span><br><span class="line">Retype new password: <span class="comment"># Rey@183dv</span></span><br><span class="line">passwd: all authentication tokens updated successfully.</span><br><span class="line">[kiosk@foundation0 ~]$</span><br></pre></td></tr></table></figure>
-
-
-
-<p>​	如果输入的密码安全级别过低，是无法正常进行修改的，例如下方示例：</p>
-<p>​		1、输入的密码少于8为字符，修改失败</p>
-<p>​		2、密码存在于标准字典中，安全级别过低，修改失败</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[kiosk@foundation0 ~]$ passwd </span><br><span class="line">Changing password <span class="keyword">for</span> user kiosk.</span><br><span class="line">Current password: <span class="comment"># redhat</span></span><br><span class="line">New password: <span class="comment"># redhat1</span></span><br><span class="line">BAD PASSWORD: The password is shorter than 8 characters</span><br><span class="line">passwd: Authentication token manipulation error</span><br><span class="line"></span><br><span class="line">[kiosk@foundation0 ~]$ passwd </span><br><span class="line">Changing password <span class="keyword">for</span> user kiosk.</span><br><span class="line">Current password: <span class="comment"># redhat</span></span><br><span class="line">New password: <span class="comment"># 1q2w3e4r</span></span><br><span class="line">BAD PASSWORD: The password fails the dictionary check - it is based on a dictionary word</span><br><span class="line">passwd: Authentication token manipulation error</span><br></pre></td></tr></table></figure>
-
-
-
-<p>​	Linux中不需要文件扩展名来区分文件类型。file命令扫描文件的已编译标头中的2位数字magic number，并显示其类型。文本文件可被识别，因为它们没有经过编译。</p>
-<p>​	如下示例，分别查看了三个文件的类型，第一个为txt文本类型，第二个可执行文件，第三个为文件夹（目录）</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[kiosk@foundation0 ~]$ file /etc/passwd</span><br><span class="line">/etc/passwd: ASCII text</span><br><span class="line">[kiosk@foundation0 ~]$ file /bin/passwd </span><br><span class="line">/bin/passwd: setuid ELF 64-bit LSB pie executable, x86-64, version 1 (SYSV), dynamically linked, interpreter /lib64/ld-linux-x86-64.so.2, BuildID[sha1]=a467cb9c8fa7306d41b96a820b0178f3a9c66055, <span class="keyword">for</span> GNU/Linux 3.2.0, stripped</span><br><span class="line">[kiosk@foundation0 ~]$ file /home/</span><br><span class="line">/home/: directory</span><br><span class="line">[kiosk@foundation0 ~]$ </span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-
-
-<p>​	magic number是什么，可以理解为你的文本文件里面的内容，它是的编码格式是什么，然后file命令就会根据你文本内容的前两个数值去分辨你当前的文件属于什么类型</p>
-<p>​	例如，我当前的ssh.sh里面是一些字符串，我的fiel命令解释改文本属于txt文本类型。</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[kiosk@foundation0 ~]$ <span class="built_in">cat</span> ssh.sh </span><br><span class="line">afadsad</span><br><span class="line">[kiosk@foundation0 ~]$ file ssh.sh </span><br><span class="line">ssh.sh: ASCII text</span><br></pre></td></tr></table></figure>
-
-<p>​	那么我对改文本的内容进行修改，修改为了标准的shell脚本格式，此时fiile命令就会解释该文本是一个可执行文件，类似于Windows的.exe文件</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[kiosk@foundation0 ~]$ <span class="built_in">cat</span> ssh.sh </span><br><span class="line"><span class="comment">#!/bin/bash</span></span><br><span class="line">[kiosk@foundation0 ~]$ file ssh.sh </span><br><span class="line">ssh.sh: Bourne-Again shell script, ASCII text executable</span><br><span class="line">[kiosk@foundation0 ~]$</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="查看文件的内容"><a href="#查看文件的内容" class="headerlink" title="查看文件的内容"></a>查看文件的内容</h3><p>​	Linux中最简单最常用的命令是cat命令。通过这个命令您可以创建单个或多个文件以及查看文件内容，串联不同文件中的内容，以及文件内容重定向到终端或文件内。</p>
-<p>​	以下示例演示如何查看&#x2F;etc&#x2F;passwd文件的内容</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[kiosk@foundation0 ~]$ <span class="built_in">cat</span> /etc/passwd</span><br><span class="line">root:x:0:0:root:/root:/bin/bash</span><br><span class="line">bin:x:1:1:bin:/bin:/sbin/nologin</span><br><span class="line">daemon:x:2:2:daemon:/sbin:/sbin/nologin</span><br><span class="line">adm:x:3:4:adm:/var/adm:/sbin/nologin</span><br><span class="line">lp:x:4:7:lp:/var/spool/lpd:/sbin/nologin</span><br><span class="line"><span class="built_in">sync</span>:x:5:0:<span class="built_in">sync</span>:/sbin:/bin/sync</span><br><span class="line">shutdown:x:6:0:shutdown:/sbin:/sbin/shutdown</span><br><span class="line">halt:x:7:0:halt:/sbin:/sbin/halt</span><br><span class="line">mail:x:8:12:mail:/var/spool/mail:/sbin/nologin</span><br><span class="line">operator:x:11:0:operator:/root:/sbin/nologin</span><br><span class="line">games:x:12:100:games:/usr/games:/sbin/nologin</span><br><span class="line">......省略......</span><br></pre></td></tr></table></figure>
-
-
-
-<p>​	如果要显示多个文件的内容，请再cat命令后将文件名作为参数进行传入</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">kiosk@foundation0 ~]$ <span class="built_in">cat</span> file1 file2 </span><br><span class="line">HHA</span><br><span class="line">XIXIXI</span><br><span class="line">[kiosk@foundation0 ~]$ </span><br></pre></td></tr></table></figure>
-
-
-
-<p>​	如果一些文件内容较长，可能比shell终端提供的显示空间还要多很多，cat命令不会将文件的内容显示为多个页面。这时您可以使用less命令一次显示文件的一个页面，然后通过鼠标滚轮或键盘的上下键来进行翻页查看，键盘按q退出查看。</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">[kiosk@foundation0 ~]$ less file1 </span><br></pre></td></tr></table></figure>
-
-
-
-<p>​	head和tail命令分别显示文件的开头和结尾部分。默认情况下这两个命令显示文件的开头10行或结尾10行，但您可以通过它的选项-n 来指定一次显示自定义行数。</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[kiosk@foundation0 ~]$ <span class="built_in">head</span> -n 2 /etc/passwd</span><br><span class="line">root:x:0:0:root:/root:/bin/bash</span><br><span class="line">bin:x:1:1:bin:/bin:/sbin/nologin</span><br><span class="line"></span><br><span class="line">[kiosk@foundation0 ~]$ <span class="built_in">tail</span> -n 5 /etc/passwd</span><br><span class="line">systemd-oom:x:977:977:systemd Userspace OOM Killer:/:/usr/sbin/nologin</span><br><span class="line">kiosk:x:1000:1000::/home/kiosk:/bin/bash</span><br><span class="line">apache:x:48:48:Apache:/usr/share/httpd:/sbin/nologin</span><br><span class="line">named:x:25:25:Named:/var/named:/sbin/nologin</span><br><span class="line">dhcpd:x:177:177:DHCP server:/:/sbin/nologin</span><br></pre></td></tr></table></figure>
-
-
-
-<p>​	wc命令可计算文件中的行、字和字符数量。使用-l、-w或-c选项，分别可以仅显示行数、字数或字符数</p>
-<p>​	以下示例中，我们可以看到file1文件中有一行数据，Ha Xi分别两个字数，以及加上他俩中间的空格分割符，共5个字符。分别对应上wc输出的1、2、6。这时你可能会有疑问，该文件里我怎么数都是5个字母，怎么会统计出6个字符数呢？</p>
-<p>​	那是因为wc也是通过类似cat这样的命令去先去输出了文本里的内容，然后进行统计的，cat这样输出的内容会自带一个换行符，所以我们肉眼是看不出来的，但是换行符实际是存在的。</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[kiosk@foundation0 ~]$ <span class="built_in">cat</span> file1 </span><br><span class="line">Ha Xi</span><br><span class="line">[kiosk@foundation0 ~]$ <span class="built_in">wc</span> file1 </span><br><span class="line">1 2 6 file1</span><br><span class="line">[kiosk@foundation0 ~]$</span><br></pre></td></tr></table></figure>
-
-<p>​	如果您想把这个换行符去掉，可以使用如下命令，其中|符号，称为管道符，作用是将它前面命令的输出结果，传递到后面的命令中去使用，tr -d ‘\n’则表示删除换行符。这些目前在后面的章节会陆续进行详细讨论，目前知道我们wc时，所统计的字符数为什么会多一个的原理即可。</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">[kiosk@foundation0 ~]$ cat file1 | tr -d &#x27;\n&#x27; | wc </span><br><span class="line">      0       2       5</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="了解Tab补全"><a href="#了解Tab补全" class="headerlink" title="了解Tab补全"></a>了解Tab补全</h3><p>​	通过之后的学习，我们将会遇到许多命令，包括一些命令、选项、参数等很多很长，做为人很难全部一个字符都不差的记住，这时就得用上我们的Tab补全功能，这对我们记命令、找命令的帮助是很大的，它可以帮助你快速的找到你想找的命令。</p>
-<p>​	例如：我们要修改密码，但是我只知道它是pa开头的，后面的字母我记不清了，那么我们则可以通过输入pa，随后快速按两下键盘上的Tab键，他会在你主机的众多软件命令中找关于pa开头的命令，如果你主机众多软件里只有一个pa开头的，那么直接会给你把后面的字母全部自动补充上来，如果存在多个，则它会将pa开头的命令列出来，您则可以根据你的记忆去寻找相似的，勾起你粉红色的回忆。</p>
-<p>​	此时，它会列出pa开头的相关命令，然后我们就在里面找，找了一圈发现，我的回忆勾起来一些了，好像是pas后面的我又记不起来了，那么我就继续pas加TAB，缩小范围，这是选择的范围就小了，目前只出现三个pas相关的了，我一看到passwd的单词就是密码的意思，我的回忆被完全勾起来了，那就再pas的基础上再加上s，pass+TAB+TAB，再主机命令中唯一了，剩下的wd就自动给补充到shell提示符中了</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[kiosk@foundation0 ~]$ pa <span class="comment"># 快速按两下TAB+TAB</span></span><br><span class="line">pacat                 pam_timestamp_check   parted</span><br><span class="line">pack200               pango-list            partprobe</span><br><span class="line">packer                pango-segmentation    partx</span><br><span class="line">pacmd                 pango-view            passwd</span><br><span class="line">pactl                 paperconf             <span class="built_in">paste</span></span><br><span class="line">page_owner_sort       paperconfig           pasuspender</span><br><span class="line">pam_console_apply     paplay                patch</span><br><span class="line">pam_namespace_helper  parec                 <span class="built_in">pathchk</span></span><br><span class="line">pamon                 parecord              pax11publish</span><br><span class="line">[kiosk@foundation0 ~]$ pas  <span class="comment"># 快速按两下TAB+TAB</span></span><br><span class="line">passwd       <span class="built_in">paste</span>        pasuspender  </span><br><span class="line">[kiosk@foundation0 ~]$ pass <span class="comment"># 快速按两下TAB+TAB</span></span><br><span class="line">[kiosk@foundation0 ~]$ passwd <span class="comment"># pass唯一了，则剩下的全部字符都自动补充上来了</span></span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-
-
-<p>​	相同，每个命令的选项很多我们也是可以通过Tab的方式查找补充，TAB功能很强大，强烈建于不管现在还是工作中尽量都使用Tab进行命令、选项、参数的补充，这样可以减少我们手动输入导致的很多执行错误的问题。</p>
-<p>​	我们输入命令后，选项是由一个或多个减号（-）组成的，所以我们打上一个或两个减号，在按两下tab，则可以列出该命令的全部选项，同样也支持–g这样的模糊搜索示例如下：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[kiosk@foundation0 ~]$ useradd --  <span class="comment"># 列出useradd所有的选项</span></span><br><span class="line">--badnames              --<span class="built_in">help</span>                  --prefix</span><br><span class="line">--base-dir              --home-dir              --root</span><br><span class="line">--btrfs-subvolume-home  --inactive              --selinux-user</span><br><span class="line">--comment               --key                   --shell</span><br><span class="line">--create-home           --no-create-home        --skel</span><br><span class="line">--defaults              --no-log-init           --system</span><br><span class="line">--expiredate            --non-unique            --uid</span><br><span class="line">--gid                   --no-user-group         --user-group</span><br><span class="line">--<span class="built_in">groups</span>                --password              </span><br><span class="line">[kiosk@foundation0 ~]$ useradd --g  <span class="comment"># 列出useradd --g开头选项</span></span><br><span class="line">--gid     --<span class="built_in">groups</span>  </span><br><span class="line">[kiosk@foundation0 ~]$ useradd --g</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="在Shell上编辑多行长命令"><a href="#在Shell上编辑多行长命令" class="headerlink" title="在Shell上编辑多行长命令"></a>在Shell上编辑多行长命令</h3><p>​	在以后的学习及工作中，我们可能会遇到命令+多个选项、参数组成的一个很长的执行命令，在一行Shell提示符中无法一次展示，且阅读性很差。这时我们可以选择将该命令分成多行来书写，我们直接回车换行，回车的含义（作用）是执行，这样我们的命令就直接被执行，无法达到换行书写的效果。</p>
-<p>​	这时我们可以通过反斜杠（\）也称为转义符，它在Linux中的作用是忽略后续字符的含义，所有我们在需要换行书写的结尾接上反斜杠（\）我们的回车执行的含义就会被忽略，也就达到了换行书写的效果。</p>
-<p>​	以下示例中，head -n 3表示查询文件内容的头3行，通过反斜杠（\）将我们之后要回车执行的含义给忽略掉，这样我们的命令行就切换到了下一行，我们接着写了两个路径较长的文件，查看这两个文件的内容，当我们要执行的时候最后一行不加反斜杠（\）则就是回车原本在Linux中的含义（执行）</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[kiosk@foundation0 ~]$ <span class="built_in">head</span> -n 3 \</span><br><span class="line">&gt; /usr/share/dict/words \</span><br><span class="line">&gt; /usr/share/dict/linux.words </span><br><span class="line"><span class="comment"># 以下是head查询出来的文件内容输出</span></span><br><span class="line">==&gt; /usr/share/dict/words &lt;==</span><br><span class="line">1080</span><br><span class="line">10-point</span><br><span class="line">10th</span><br><span class="line"></span><br><span class="line">==&gt; /usr/share/dict/linux.words &lt;==</span><br><span class="line">1080</span><br><span class="line">10-point</span><br><span class="line">10th</span><br><span class="line">[kiosk@foundation0 ~]$</span><br></pre></td></tr></table></figure>
-
-
-
-
-
-<h3 id="显示命令历史记录"><a href="#显示命令历史记录" class="headerlink" title="显示命令历史记录"></a>显示命令历史记录</h3><p>​	在学习和工作中我们可能会遇到重复的命令需要重复用到的情况，但是又不想老是重复输入较长的命令，以及我想看看我之前都执行了哪些命令等情况。这时我们就可能需要用到历史命令记录功能，方法又两种可以查看到我们的历史命令。</p>
-<ul>
-<li><p>​	方法一：在shell提示符中，使用键盘中的 <code>↑</code>【PgUp】或 <code>↓</code>【PgDn】，上下箭头来翻页查找之前输入过的命令。</p>
-</li>
-<li><p>方法二：通过history命令，可以将您输入的命令以结果输出的方式展示出来，并且带有每条命令的number序号</p>
-<p>我们通过history查看到历史命令后，我们还可以通过<code>!String</code>命令或<code>!number</code>序号，去直接执行最近或指定的命令。</p>
-<p><code>!String</code>命令是执行你最近一次执行过的类似命令。</p>
-<p>​	例如：<code>!ls</code>，则是执行您最近一次执行过的 <code>!ls</code> 的命令。</p>
-<p><code>!number </code>则是根据你history命令查询出来的每条命令的序号指定执行。</p>
-<p>​	例如：<code>!46</code>则是执行你history结果中的序号46的命令</p>
-</li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">kiosk@foundation0 ~]$ <span class="built_in">history</span> </span><br><span class="line">  ...忽略...</span><br><span class="line">   46  <span class="built_in">date</span>+%x</span><br><span class="line">   47  <span class="built_in">date</span> +%x</span><br><span class="line">   48  <span class="built_in">date</span> +%Y-%m-%d:%H-%M-%S</span><br><span class="line">   49  passwd </span><br><span class="line">   50  ll</span><br><span class="line">   51  file History-7.x.txt </span><br><span class="line">   52  file Foundation-20221114.tgz </span><br><span class="line">   53  <span class="built_in">ls</span> -a</span><br><span class="line">   54  <span class="built_in">ls</span> -la</span><br><span class="line">   55  <span class="built_in">ls</span> -n</span><br><span class="line">   56  file Foundation-20221114.tgz</span><br><span class="line">  ...忽略...</span><br><span class="line">  [kiosk@foundation0 home]$ !<span class="built_in">ls</span>  </span><br><span class="line"><span class="built_in">ls</span> -n  <span class="comment"># 我最近执行的ls命令是ls -n</span></span><br><span class="line">total 4</span><br><span class="line">drwx------. 18 1000 1000 4096 Feb 27 15:08 kiosk</span><br><span class="line"></span><br><span class="line">[kiosk@foundation0 home]$ !47</span><br><span class="line"><span class="built_in">date</span> +%x  <span class="comment"># 我的序号47是date +%x的命令</span></span><br><span class="line">02/27/2025</span><br><span class="line">[kiosk@foundation0 home]$</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="编辑命令行"><a href="#编辑命令行" class="headerlink" title="编辑命令行"></a>编辑命令行</h3><p>​	以交互方式使用时，bash具有命令行编辑功能。使用文本编辑器命令在当前输入的命令内移动并且进行修改，使用箭头键可以在当前命令内移动，也可以访问历史命令，在本章的界面部分以及做了介绍。下列表格中将介绍更强大的编辑命令方式，学会它可以帮助您在编辑命令时更加游刃有余，编辑命令更加娴熟、迅速。</p>
-<table>
-<thead>
-<tr>
-<th>快捷键</th>
-<th>描述</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>Ctrl+A</td>
-<td>光标跳到命令行开头</td>
-</tr>
-<tr>
-<td>Ctrl+E</td>
-<td>光标跳到命令行末尾</td>
-</tr>
-<tr>
-<td>Ctrl+U</td>
-<td>将光标处到命令行开头的内容删除</td>
-</tr>
-<tr>
-<td>Ctrl+K</td>
-<td>将给光标处到命令行末尾内容删除</td>
-</tr>
-<tr>
-<td>Ctrl+LeftArrow（<code>←</code>）</td>
-<td>以当前光标为起点跳到命令行前一个字的开头</td>
-</tr>
-<tr>
-<td>Ctrl+RightArrow（<code>→</code>）</td>
-<td>以当前光标为起点跳到命令行后一个字的末尾</td>
-</tr>
-<tr>
-<td>Ctrl+R</td>
-<td>在历史命令记录列表中搜索模糊搜索历史命令</td>
-</tr>
-<tr>
-<td>Ctrl+W</td>
-<td>删除光标前的一个字</td>
-</tr>
-</tbody></table>
-]]></content>
-      <categories>
-        <category>RHCE</category>
-      </categories>
-      <tags>
-        <tag>RHCE</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Linux-RHCE-124-第二章节</title>
     <url>/2025/03/01/01-RHCE/01-124/Linux-RHCE-124-%E7%AC%AC%E4%BA%8C%E7%AB%A0%E8%8A%82/</url>
     <content><![CDATA[<h1 id="从命令行管理文件"><a href="#从命令行管理文件" class="headerlink" title="从命令行管理文件"></a>从命令行管理文件</h1><p>​	</p>
@@ -848,332 +594,251 @@
       </tags>
   </entry>
   <entry>
-    <title>Linux-RHCE-124-第五章节</title>
-    <url>/2025/04/03/01-RHCE/01-124/Linux-RHCE-124-%E7%AC%AC%E4%BA%94%E7%AB%A0%E8%8A%82/</url>
-    <content><![CDATA[<h1 id="管理本地用户和组"><a href="#管理本地用户和组" class="headerlink" title="管理本地用户和组"></a>管理本地用户和组</h1><h2 id="什么是用户？"><a href="#什么是用户？" class="headerlink" title="什么是用户？"></a>什么是用户？</h2><p>​	用户账户在可以运行命令的不同人员和程序之间提供安全界限。</p>
-<p>​	用户使用用户名想人类用户标识自己并加强操作的便利性。在内部，系统通过分配的唯一标识号（用户ID或UID）来区分不同的用户账户。在大多数情况下，如果有人使用用户账号，则系统会位改用户分配一个机密密码，以证明他们是登录的授权用户。</p>
-<p>​	用户账户构成了系统安全的基础。系统中的每个进程（运行的程序）都作为一个特定用户运行。每个文件都有一个特定用户作为其所有者。借助文件所有权，系统可以对文件的用户实施访问控制。与运行进程相关联的用户可确定该进程可访问的文件和目录。</p>
-<p>​	用户账户有以下三种主要类型：超级用户、系统用户和普通用户。</p>
+    <title>Linux-RHCE-124-第一章节</title>
+    <url>/2025/02/27/01-RHCE/01-124/Linux-RHCE-124-%E7%AC%AC%E4%B8%80%E7%AB%A0%E8%8A%82/</url>
+    <content><![CDATA[<h1 id="红帽企业Linux入门"><a href="#红帽企业Linux入门" class="headerlink" title="红帽企业Linux入门"></a>红帽企业Linux入门</h1><h2 id="为什么要了解Linux？"><a href="#为什么要了解Linux？" class="headerlink" title="为什么要了解Linux？"></a>为什么要了解Linux？</h2><p>​	Linux是IT专业人士必须了解的关键技术。</p>
+<p>​	Linux目前在全球范围得到广泛的使用。互联网上的用户每天通过万维网浏览各式各样的网页，例如此刻您正在通过互联网访问我的博客网站，与Linux应用和Web服务器系统进行交互。</p>
+<p>​	在现代互联网时代，Linux和Windows是主要的操作系统。随着Linux广泛在企业、云等领域的采用，您有许多理由学习Linux</p>
 <ul>
-<li>超级用户账户负责管理系统。超级用户的名称为root，其账户的UID为0.超级用户具有完全的系统访问权限。</li>
-<li>系统用户账户提供支持服务进程使用。这些进程（或守护进程）通常不需要以超级用户身份运行。系统会为它们分配非特权账户，确保其文件和其他资源不受彼此以及系统上普通用户的影响。用户无法使用系统用户账户以交互式登录。</li>
-<li>大多数用户都有用于日常工作的普通用户账户。与系统用户一样，普通用户对系统具有有限的访问权限。</li>
+<li>Windows用户需要与Linux上托管的服务进行交互。</li>
+<li>应用开发中，Linux常托管应用及运行。</li>
+<li>云计算中，私有云或公有云实例都在使用Linux作为操作系统</li>
+<li>移动应用及移动设备等通常都运行在Linux上</li>
 </ul>
-<p>​	使用id命令可显示有关当前已登录用户的信息。</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[kiosk@foundation0 ~]$ <span class="built_in">id</span></span><br><span class="line">uid=1000(kiosk) gid=1000(kiosk) <span class="built_in">groups</span>=1000(kiosk),982(libvirt) context=unconfined_u:unconfined_r:unconfined_t:s0-s0:c0.c1023</span><br><span class="line">[kiosk@foundation0 ~]$ </span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>​	要查看有关其他用户的基本信息，请将用户作为参数传递给id命令：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[kiosk@foundation0 home]$ <span class="built_in">id</span> redhat01 </span><br><span class="line">uid=1001(redhat01) gid=1001(redhat01) <span class="built_in">groups</span>=1001(redhat01)</span><br><span class="line">[kiosk@foundation0 home]$ </span><br></pre></td></tr></table></figure>
-
-<p>​	使用ls -l命令可查看文件的所有者。使用ls -ld命令可查看目录的所有者，而不是该目录的内容。在以下出书中，第三列显示所有者的用户名。</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[kiosk@foundation0 ~]$ <span class="built_in">ls</span> -l test1.txt </span><br><span class="line">-rw-r--r--. 1 kiosk kiosk 1 Mar  6 16:46 test1.txt</span><br><span class="line">[kiosk@foundation0 ~]$ <span class="built_in">ls</span> -ld Music/</span><br><span class="line">drwxr-xr-x. 2 kiosk kiosk 6 Feb  1  2023 Music/</span><br><span class="line">[kiosk@foundation0 ~]$ </span><br></pre></td></tr></table></figure>
-
-<p>​	使用ps命令可查看进程信息。默认为仅显示当前shell中的进程。使用ps命令-a选项可查看与某一终端相关的所有进程。使用ps命令-u选项可查看与进程关联的用户。在以下输出中，第一列显示用户名。</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[kiosk@foundation0 ~]$ ps -au</span><br><span class="line">USER         PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND</span><br><span class="line">kiosk       2342  0.0  0.0 374120  5872 tty2     Ssl+ 14:28   0:00 /usr/libexec/gdm-wayland-session --register-s</span><br><span class="line">kiosk       2352  0.0  0.1 521392 19632 tty2     Sl+  14:28   0:00 /usr/libexec/gnome-session-binary</span><br><span class="line">kiosk       3200  0.0  0.0 224212  5800 pts/0    Ss+  14:29   0:00 bash</span><br><span class="line">kiosk       4447  0.0  0.0 224228  5768 pts/6    Ss   14:35   0:00 -bash</span><br><span class="line">kiosk       4918  1.5  0.0 224096  5556 pts/7    Ss+  15:13   0:00 -bash</span><br><span class="line">kiosk       4952  0.0  0.0 225500  3648 pts/6    R+   15:13   0:00 ps -au</span><br></pre></td></tr></table></figure>
-
-<p>​	以上命令输出按名称显示用户名，但操作系统内部利用UID来跟踪用户。用户名到UID的映射在账户信息数据库中定义。默认情况下，系统使用&#x2F;etc&#x2F;passwd文件存储有关本地用户的信息。</p>
-<p>​	&#x2F;etc&#x2F;passwd文件的每一行都包含了有关某个用户的信息。该文件划分为7个以上的冒号分割的字段。以下是来自&#x2F;etc&#x2F;passwd行的示例。</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[kiosk@foundation0 ~]$ <span class="built_in">cat</span> /etc/passwd</span><br><span class="line">redhat01:x:1001:1001:User One:/home/redhat01:/bin/bash</span><br></pre></td></tr></table></figure>
-
-<p>​	代码块的每个部分，用冒号分割</p>
+<h3 id="Linux的优点"><a href="#Linux的优点" class="headerlink" title="Linux的优点"></a>Linux的优点</h3><ul>
+<li><p>Linux是开源软件</p>
 <ul>
-<li>redhat01：此为用户的用户名</li>
-<li>x：用户的加密密码历来存储在这里；但在此是一个占位符。</li>
-<li>1001：此用户账户的UID编号</li>
-<li>1001：此用户账户的主要组的GID编号。本章节稍后将对组进行讨论</li>
-<li>User One：此用户的简短注释、描述或真实姓名等。</li>
-<li>&#x2F;home&#x2F;redhat01：用户的主目录，以及登录shell启动时的初始工作目录。</li>
-<li>&#x2F;bin&#x2F;bash：此用户的默认shell程序，在登陆时运行，一些账户使用&#x2F;sbin&#x2F;nologin shell来禁止该用户使用交互式登录。</li>
+<li>开源意味着免费，您可以彻底了解程序或系统的工作方式，并且可以对其进行更改，并将他分享给他人使用，从而加快创新速度。</li>
 </ul>
-<h2 id="什么是组"><a href="#什么是组" class="headerlink" title="什么是组"></a>什么是组</h2><p>​	组是需要共享文件和其他系统资源访问权限的用户集合。组可用于向一组用户授予文件访问权限，而非向一个用户授予访问权限。</p>
-<p>​	与用户一样，组也具有组名以便识别。在内部，系统通过分配的唯一标识号（组ID或GID）来区分不同的组。组名到GID映射在组账户信息身份管理数据库中定义。默认情况下，系统使用&#x2F;etc&#x2F;group文件存储有关本地组的信息。</p>
-<p>​	&#x2F;etc&#x2F;group文件的每行都包含了有关某个组的信息。每个组条目被分为四个以冒号分割的字段。以下来自&#x2F;etc&#x2F;group行的示例：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">...忽略...</span><br><span class="line">redhat01:x:1001:user01,user02</span><br></pre></td></tr></table></figure>
-
-<p>​	考虑代码块的每个部分用冒号分割：</p>
+</li>
+<li><p>Linux提供命令行（CLI），不仅访问便捷，并且具有强大的脚本化功能。</p>
 <ul>
-<li>redhat01：此组的名称</li>
-<li>x：以前的组密码字段；现在是一个占位符。</li>
-<li>1001：此组的GID编号。</li>
-<li>user01,user02：属于此组成员的用户列表，作为一个补充组。</li>
+<li>Linux构建时的设计理念是用户可以通过CLI执行所有管理任务。它能够轻松实现自动化、部署和配置，并简化本地和远程系统的管理，从而实现易用性和稳定性。</li>
 </ul>
-<h2 id="主要组和补充组"><a href="#主要组和补充组" class="headerlink" title="主要组和补充组"></a>主要组和补充组</h2><p>​	每一个用户有且只有一个主要组。对于本地用户而言，这个组按照GID列在&#x2F;etc&#x2F;passwd文件中。主要组拥有用户创建的文件。</p>
-<p>​	在创建普通用户时，会创建一个与用户名同名的组，作为该用户的主要组。该用户是这个私有组的唯一成员。这种组成员资格设计简化了文件权限的管理，默认为区隔不同的用户组。</p>
-<p>​	用户还可以拥有多个补充组。补充组中的成员资格存储在&#x2F;etc&#x2F;group文件中。根据所在组身份具有访问权限，将授予用户对文件的访问权限，不论这些组是主要组还是补充组。例如，如果user01用户有一个主要组user01以下两个补充组wheel和webadmin，那么该用户就可以读取这三个组中任何一个组，有权读取的文件。</p>
-<p>​	id命令可以显示用户的组成员资格。在以下示例中，kiosk用户具有组kiosk作为自己的主要组（gid）。groups项列出此用户的所以组成员资格，而且用户还具有libvirt组作为补充组。</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[kiosk@foundation0 ~]$ <span class="built_in">id</span></span><br><span class="line">uid=1000(kiosk) gid=1000(kiosk) <span class="built_in">groups</span>=1000(kiosk),982(libvirt) context=unconfined_u:unconfined_r:unconfined_t:s0-s0:c0.c1023</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Linux是一种模块化的操作系统，管理员可以轻松替换或删除组件</p>
+<ul>
+<li>需要时，可以对系统组件进行升级和更新，Linux是一个通用开发工作站，也可以是特意精简化的软件设备</li>
+</ul>
+</li>
+</ul>
+<h3 id="RedHat是谁？"><a href="#RedHat是谁？" class="headerlink" title="RedHat是谁？"></a>RedHat是谁？</h3><p>​	RedHat翻译过来就是红色的帽子，同时它的LoGo也是一顶红色的帽子，在国内统称为红帽。</p>
+<p>​	红帽是目前世界领先的开源软件解决方案供应商，使用社区驱动的方式提供可靠和高性能的云、Linux、中间件、存储和虚拟化技术。</p>
+<h3 id="什么是Linux发行版"><a href="#什么是Linux发行版" class="headerlink" title="什么是Linux发行版"></a>什么是Linux发行版</h3><p>​	Linux发行版是有一种可安装的操作系统，由Linux内核以及提供支持的用户程序和库构建而成。完整的Linux系统又多个独立的开发社区开发，这些社区协同处理各个组件。发行版让用户能够轻松安装和管理正常运行的Linux系统。</p>
+<p>​	1991年，名为Linus Torvalds的人开发了Unix内核，将其命名为Linux，作为开源软件进行授权。内核是操作系统的核心，它管理着硬件、内存以及运行中的程序调度。Linux内核可通过其他开源软件加以补充，如来自GNU项目的实用工具和程序、来自MIT的X window Systen的图形界面或Apache HTTP Web服务器等其他开源组件，以构建成一个完整、开源的类Unix操作系统</p>
+<h2 id="访问命令行"><a href="#访问命令行" class="headerlink" title="访问命令行"></a>访问命令行</h2><h3 id="Bash-Shell简介"><a href="#Bash-Shell简介" class="headerlink" title="Bash Shell简介"></a>Bash Shell简介</h3><p>​		命令行是基于文本的界面，可用于向计算机系统输入指令。Linux命令行由名为Shell的程序提供。</p>
+<p>​		红帽 Linux中为用户提供的默认shell是GNU Bourne-Again Shell简称(bash)。bash shell是UNIX系统上原始 Bourne shell简称(sh)的改进版本。</p>
+<p>​		Shell在等待用户输入时会显示有一个字符串，称为Shell提示符。当普通用户启用Shell时，提示符为（$）美元符结尾的字符。kiosk则为当前所使用的用户名，foundation0则为当前您操作的主机名称</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[kiosk@foundation0 ~]$</span><br></pre></td></tr></table></figure>
+
+
+
+<p>​		如果以超级用户root运行Shell，则美元符则会被替换为（#）井号字符。次字符表明当前是在超级用户下进行操作Shell，有助于避免权限过大导致的误操作，从而影响到整个系统的异常破坏。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[root@foundation0 ~]# </span><br></pre></td></tr></table></figure>
+
+
+
+<p>​		bash命令是非常强大的。bash shell提供了脚本语言，可支持自动化任务。同时shell还可以实现图形化工具难以规模化完成的操作。</p>
+<h3 id="Shell基础知识"><a href="#Shell基础知识" class="headerlink" title="Shell基础知识"></a>Shell基础知识</h3><p>在shell提示符下输入的命令需要由三个基本部分组成：</p>
+<ul>
+<li>要运行的命令</li>
+<li>用于命令的行为选项</li>
+<li>通常作为命令的目标参数</li>
+</ul>
+<p>命令是也要运行的程序名称。其后可能跟着一个或多个选项，用于表示该命令的行为或作用。选项通常以一个或两个破折号开头（例如：-a或 –all），有一个破折号代表选项简写，两个代表选项全称。命令和后面可能会跟着一个或多个参数，这些参数通常用于指明应在其中运行命令的目标。</p>
+<p>例如：usermod -L user01，usermod是命令，-L是选项，而user01则是参数。此命令用于锁定user01用户账号的密码。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[root@foundation0 home]# usermod -L user01</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="登录远程系统"><a href="#登录远程系统" class="headerlink" title="登录远程系统"></a>登录远程系统</h3><p>​		Linux与用户和管理员通常需要通过网络连接到远程系统来获得对远程系统的shell访问权限。</p>
+<p>​		在Linux中，获取远程系统上的shell提示符最常用的方式是使用Secure Shell（SSH）。大多数Linux系统都会默认提供SSH的命令行程序来满足这样一用途需求。</p>
+<p>​		在以下示例中，在计算机上的shell提示符中使用sshmingl以student用户身份远程登录Linux系统名为servera的主机</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[student@workstation ~]$ ssh servera@student</span><br><span class="line">The authenticity of host <span class="string">&#x27;servera (172.25.250.10)&#x27;</span> can<span class="string">&#x27;t be established.</span></span><br><span class="line"><span class="string">ED25519 key fingerprint is SHA256:peUGgfxFNw6Jt6WK4CB2rs+jql1/LhA32M1+8zBawLI.</span></span><br><span class="line"><span class="string">This key is not known by any other names</span></span><br><span class="line"><span class="string"># 验证指纹</span></span><br><span class="line"><span class="string">Are you sure you want to continue connecting (yes/no/[fingerprint])? yes</span></span><br><span class="line"><span class="string">Warning: Permanently added &#x27;</span>servera<span class="string">&#x27; (ED25519) to the list of known hosts.</span></span><br><span class="line"><span class="string">student@servera&#x27;</span>s password:  <span class="comment"># 输入远程服务器的student用户密码</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>​		ssh命令通过加密连接来防止同学被窃听或截获密码和内容。</p>
+<p>​		在一些场景中，不允许ssh使用密码进行登录，以加强安全性，在不输入密码的情况下对远程计算机进行身份验证的另一种方式是利用公元幺身份验证。</p>
+<p>​		使用这种身份验证时，用户需要拥有内含私钥的的特殊身份文件，这相当于与用户的加密密码。在远程服务器上的账户配置有匹配的公钥，公钥不是保密的。在登录时，用户可以指定ssh私钥，如果该远程服务器上的对应账户中安装了他们的匹配公钥就会在不询问密码的情况下让用户登录</p>
+<p>​		以下示例中，计算机使用shell提示符的用户通过ssh使用公钥身份验证的方式以student用户身份登录servera主机。ssh是命令，-i选项可用于只用你当前主机的私钥文件，即.ssh&#x2F;lab_rsa。当该私钥用于远程主机servera下的student用户所拥有的公钥相互匹配，则无需密码，可直接登录到servera的shell提示符中</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[student@workstation ~]$ ssh -i .ssh/lab_rsa servera</span><br><span class="line">Activate the web console with: systemctl <span class="built_in">enable</span> --now cockpit.socket</span><br><span class="line"></span><br><span class="line">Register this system with Red Hat Insights: insights-client --register</span><br><span class="line">Create an account or view all your systems at https://red.ht/insights-dashboard</span><br><span class="line">Last login: Wed Feb 26 05:09:03 2025 from 172.25.250.9</span><br><span class="line">[student@servera ~]$ </span><br></pre></td></tr></table></figure>
+
+
+
+<p>​		为保证连接正常，只有拥有该私钥文件的用户才能读取私钥文件。在上述示例中，私钥位于.ssh&#x2F;lab_rsa文件中，可以使用chmod 600 .ssh&#x2F;lab_rsa来确保只有其所有者才能够读取该文件。后面的文章将会详细讨论如何设置文件权限。</p>
+<p>​		此外，用户还可能配置了无需指定私钥的方式，省略上述示例中 -i 指定私钥的操作，在后续章节也会陆续详细讨论。</p>
+<h3 id="从远程系统中注销退出"><a href="#从远程系统中注销退出" class="headerlink" title="从远程系统中注销退出"></a>从远程系统中注销退出</h3><p>​	当您对ssh远程主机的操作完成后，想退出远程主机的shell时，可以悬着以下方式来结束本次远程会话。</p>
+<ul>
+<li>快捷键：Ctrl+D来结束会话</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[student@servera ~]$ </span><br><span class="line"><span class="built_in">logout</span></span><br><span class="line">Connection to servera closed.</span><br><span class="line">[student@workstation ~]$</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>命令行：exit</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[student@servera ~]$ <span class="built_in">exit</span></span><br><span class="line"><span class="built_in">logout</span></span><br><span class="line">Connection to servera closed.</span><br><span class="line">[student@workstation ~]$ </span><br></pre></td></tr></table></figure>
 
 
 
 
 
-<h1 id="获取超级用户访问权限"><a href="#获取超级用户访问权限" class="headerlink" title="获取超级用户访问权限"></a>获取超级用户访问权限</h1><h2 id="超级用户"><a href="#超级用户" class="headerlink" title="超级用户"></a>超级用户</h2><p>​	大多数操作系统具有一个超级用户，该用户拥有系统的全部权限。在红帽Linux中，此为root用户。此用户的特权高于文件系统上的一般特权，您可以使用它来管理系统。若要执行诸如安装或删除软件以及管理系统文件和目录任务，必须将特权升级到root用户。</p>
-<p>​	通常，普通用户中只有root用户才能控制大部分设备，但也有一些例外。例如，普通用户可以控制可移动设备，如USB设备。因此，虽然普通用户可以添加和删除文件并可管理可移动的设备，但默认情况下，只有root用户才能管理硬盘。</p>
-<p>​	尽管如此，这种无限制的特权也带来了职责问题。root用户拥有足以破坏系统的无限制特权：删除文件和目录、删除用户账户，以及添加后门等。一旦root用户账户被盗，系统将处于危险之中，您也可能会失去管理控制。红帽建议系统管理员始终以普通用户身份登录，仅在需要时升级到root用户特权。</p>
-<p>​	Linux上root账户大致相当于Windows上的本地Admininstrator账户。在Linux中，大多数系统管理员都作为无特权的用户登录，然后使用特种工具临时获得root特权。</p>
-<p>​	<code>警告：Windows用户可能熟悉以本地Administrator用户身份登录以执行系统管理员职责的做法。如今不建议这样做，用户通过Administrator组中的成员资格来获取执行管理的特权。RHEL中同样如此，红帽建议系统管理员不要直接以root身份登录。取而代之，系统管理员以普通用户身份登录，然后使用其他机制（例如：su、sudo或policykit）临时获得超级用户特权。</code></p>
-<h2 id="切换用户账户"><a href="#切换用户账户" class="headerlink" title="切换用户账户"></a>切换用户账户</h2><p>​	通过使用su命令，用户可以切换至另一个用户账户。如果从普通用户账户运行su命令并将另一用户账户作为参数，则必须提供要切换到的用户账户密码。以root用户身份运行su时，则无需输入用户密码。</p>
-<p>​	本示例从kiosk账户运行su命令来切换到redhat01账户：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[kiosk@foundation0 ~]$ su redhat01</span><br><span class="line">Password: <span class="comment"># redhat01的密码</span></span><br><span class="line">[redhat01@foundation0 kiosk]$ <span class="built_in">id</span></span><br><span class="line">uid=1001(redhat01) gid=1001(redhat01) <span class="built_in">groups</span>=1001(redhat01) context=unconfined_u:unconfined_r:unconfined_t:s0-s0:c0.c1023</span><br><span class="line">[redhat01@foundation0 kiosk]$</span><br></pre></td></tr></table></figure>
+<h2 id="使用Bash-Shell执行命令"><a href="#使用Bash-Shell执行命令" class="headerlink" title="使用Bash Shell执行命令"></a>使用Bash Shell执行命令</h2><h3 id="基本命令语法"><a href="#基本命令语法" class="headerlink" title="基本命令语法"></a>基本命令语法</h3><p>​	GNU Bourne-Again Shell（bash）这个程序可以理解为用户输入的命令窗口。输入到shell中的每一个字符串最多有三个部分：命令、选项（通常以-或–开头）、参数。输入到Shell中的每个单词通过空格与其他单次间隔开。命令则是系统中安装的程序名称。每个命令都具有自己的选项和参数。</p>
+<p>​	在单独的行上输入每个命令。系统会显示命令的输出结果，然后显示下一行shell提示符。此命令是输出当前使用的用户名称。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[kiosk@foundation0 ~]$ <span class="built_in">whoami</span> </span><br><span class="line">kiosk</span><br><span class="line">[kiosk@foundation0 ~]$</span><br></pre></td></tr></table></figure>
 
-<p>​	如果省略用户名作为su命令的参数，则默认情况下su 或 su - 命令会尝试切换到root。</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[redhat01@foundation0 kiosk]$ su -</span><br><span class="line">Password: </span><br><span class="line">Last login: Thu Apr  3 18:01:23 CST 2025 on pts/6</span><br><span class="line">[root@foundation0 ~]# <span class="built_in">id</span></span><br><span class="line">uid=0(root) gid=0(root) <span class="built_in">groups</span>=0(root) context=unconfined_u:unconfined_r:unconfined_t:s0-s0:c0.c1023</span><br><span class="line">[root@foundation0 ~]#</span><br></pre></td></tr></table></figure>
 
-<p>​	命令su将启动非登录shell，而命令su - （带有短划线选项）会启动登录shell。两个命令的主要区别在于，su - 会将shell环境变量设置为如同该用户身份重新登录一样，而su以该用户身份启动shell，但使用的是原始用户环境变量设置。</p>
-<p>​	<code>注意：su命令最常用于获得另一个用户身份（通常root）运行的命令行界面（shell提示符）。但是，您还可以通过su命令结合-c选项，以另一个用户身份运行任意程序。具体su命令更多选项可通过man su(1)查看</code></p>
-<h2 id="通过sudo运行命令"><a href="#通过sudo运行命令" class="headerlink" title="通过sudo运行命令"></a>通过sudo运行命令</h2><p>​	出于安全原因，在某些情况下，系统管理员会将root用户配置为没有有限的密码。因此，用户无法使用密码直接以root身份登录系统。此外，您也无法使用su来获取交互式shell。在这种情况下，您可以使用sudo命令来获取root访问权限。</p>
-<p>​	与su命令不同，sudo通常要求用户输入自己的密码以进行身份验证，而不是输入他们正尝试访问的用户账户的密码。也就是说，用户使用sudo命令以root身份运行命令时，是不需要知道root密码。相反，他们将使用自己的密码来验证访问权限。</p>
-<p>​	下表总结了su、su - 和sudo命令之间的区别：</p>
+
+<p>​	如果要在一行shell提示符中输入多个命令，则可以使用分号进行分割（;）。分号是一类成为元字符的字符成员，对于bash具有特殊的解读作用。这时系统会分别执行你输入的多个命令，并分别显示多个命令的输出结果，最后显示下一行shell提示符。</p>
+<p>​	whoami为第一个命令，（;）分号分割，hostname为第二个命令，作用输输出当前主机名称</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[kiosk@foundation0 ~]$ <span class="built_in">whoami</span> ; hostname</span><br><span class="line">kiosk</span><br><span class="line">foundation0.ilt.example.com</span><br><span class="line">[kiosk@foundation0 ~]$ </span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h3 id="编写简单命令"><a href="#编写简单命令" class="headerlink" title="编写简单命令"></a>编写简单命令</h3><p>​	date命令可显示当前的日期和时间。超级用户或者特权用户也可以使用date来设置系统时钟。使用（+）号作为参数，指定日期命令的格式字符串。</p>
+<p>​	下列示例分别使用date命令显示当前时间，以及date加参数+%R指定输出格式，只输出时、分。以及+%x显示年月日。+%Y-%m-%d:%H-%M-%S则是按照你给出的参数分别自定义日期输出格式。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[kiosk@foundation0 ~]$ <span class="built_in">date</span></span><br><span class="line">Thu Feb 27 10:48:35 AM CST 2025</span><br><span class="line">[kiosk@foundation0 ~]$ <span class="built_in">date</span> +%R</span><br><span class="line">10:48</span><br><span class="line">[kiosk@foundation0 ~]$ <span class="built_in">date</span> +%x</span><br><span class="line">02/27/2025</span><br><span class="line">[kiosk@foundation0 ~]$ <span class="built_in">date</span> +%Y-%m-%d:%H-%M-%S</span><br><span class="line">2025-02-27:10-49-03</span><br><span class="line">[kiosk@foundation0 ~]$ </span><br></pre></td></tr></table></figure>
+
+
+
+<p>​	不带选项的passwd命令将更改当前用户的密码。若要更改密码，请先指定账户原始密码（当前密码）。默认情况passwd命令配置为需要强密码，其包含小写字母、大写字母、数字呵呵字符，并且不以字典中的标准单词为基础。超级用户或者特权用户可以使用passwd命令更改其他用户的密码。</p>
+<p>​	输入当前密码以及新密码时，你的输入不会在shell窗口显示，所以修改避免输入错误，建议在外部将密码粘贴进来</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[kiosk@foundation0 ~]$ passwd </span><br><span class="line">Changing password <span class="keyword">for</span> user kiosk.</span><br><span class="line">Current password: <span class="comment"># redhat</span></span><br><span class="line">New password: <span class="comment"># Rey@183dv</span></span><br><span class="line">Retype new password: <span class="comment"># Rey@183dv</span></span><br><span class="line">passwd: all authentication tokens updated successfully.</span><br><span class="line">[kiosk@foundation0 ~]$</span><br></pre></td></tr></table></figure>
+
+
+
+<p>​	如果输入的密码安全级别过低，是无法正常进行修改的，例如下方示例：</p>
+<p>​		1、输入的密码少于8为字符，修改失败</p>
+<p>​		2、密码存在于标准字典中，安全级别过低，修改失败</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[kiosk@foundation0 ~]$ passwd </span><br><span class="line">Changing password <span class="keyword">for</span> user kiosk.</span><br><span class="line">Current password: <span class="comment"># redhat</span></span><br><span class="line">New password: <span class="comment"># redhat1</span></span><br><span class="line">BAD PASSWORD: The password is shorter than 8 characters</span><br><span class="line">passwd: Authentication token manipulation error</span><br><span class="line"></span><br><span class="line">[kiosk@foundation0 ~]$ passwd </span><br><span class="line">Changing password <span class="keyword">for</span> user kiosk.</span><br><span class="line">Current password: <span class="comment"># redhat</span></span><br><span class="line">New password: <span class="comment"># 1q2w3e4r</span></span><br><span class="line">BAD PASSWORD: The password fails the dictionary check - it is based on a dictionary word</span><br><span class="line">passwd: Authentication token manipulation error</span><br></pre></td></tr></table></figure>
+
+
+
+<p>​	Linux中不需要文件扩展名来区分文件类型。file命令扫描文件的已编译标头中的2位数字magic number，并显示其类型。文本文件可被识别，因为它们没有经过编译。</p>
+<p>​	如下示例，分别查看了三个文件的类型，第一个为txt文本类型，第二个可执行文件，第三个为文件夹（目录）</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[kiosk@foundation0 ~]$ file /etc/passwd</span><br><span class="line">/etc/passwd: ASCII text</span><br><span class="line">[kiosk@foundation0 ~]$ file /bin/passwd </span><br><span class="line">/bin/passwd: setuid ELF 64-bit LSB pie executable, x86-64, version 1 (SYSV), dynamically linked, interpreter /lib64/ld-linux-x86-64.so.2, BuildID[sha1]=a467cb9c8fa7306d41b96a820b0178f3a9c66055, <span class="keyword">for</span> GNU/Linux 3.2.0, stripped</span><br><span class="line">[kiosk@foundation0 ~]$ file /home/</span><br><span class="line">/home/: directory</span><br><span class="line">[kiosk@foundation0 ~]$ </span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<p>​	magic number是什么，可以理解为你的文本文件里面的内容，它是的编码格式是什么，然后file命令就会根据你文本内容的前两个数值去分辨你当前的文件属于什么类型</p>
+<p>​	例如，我当前的ssh.sh里面是一些字符串，我的fiel命令解释改文本属于txt文本类型。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[kiosk@foundation0 ~]$ <span class="built_in">cat</span> ssh.sh </span><br><span class="line">afadsad</span><br><span class="line">[kiosk@foundation0 ~]$ file ssh.sh </span><br><span class="line">ssh.sh: ASCII text</span><br></pre></td></tr></table></figure>
+
+<p>​	那么我对改文本的内容进行修改，修改为了标准的shell脚本格式，此时fiile命令就会解释该文本是一个可执行文件，类似于Windows的.exe文件</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[kiosk@foundation0 ~]$ <span class="built_in">cat</span> ssh.sh </span><br><span class="line"><span class="comment">#!/bin/bash</span></span><br><span class="line">[kiosk@foundation0 ~]$ file ssh.sh </span><br><span class="line">ssh.sh: Bourne-Again shell script, ASCII text executable</span><br><span class="line">[kiosk@foundation0 ~]$</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="查看文件的内容"><a href="#查看文件的内容" class="headerlink" title="查看文件的内容"></a>查看文件的内容</h3><p>​	Linux中最简单最常用的命令是cat命令。通过这个命令您可以创建单个或多个文件以及查看文件内容，串联不同文件中的内容，以及文件内容重定向到终端或文件内。</p>
+<p>​	以下示例演示如何查看&#x2F;etc&#x2F;passwd文件的内容</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[kiosk@foundation0 ~]$ <span class="built_in">cat</span> /etc/passwd</span><br><span class="line">root:x:0:0:root:/root:/bin/bash</span><br><span class="line">bin:x:1:1:bin:/bin:/sbin/nologin</span><br><span class="line">daemon:x:2:2:daemon:/sbin:/sbin/nologin</span><br><span class="line">adm:x:3:4:adm:/var/adm:/sbin/nologin</span><br><span class="line">lp:x:4:7:lp:/var/spool/lpd:/sbin/nologin</span><br><span class="line"><span class="built_in">sync</span>:x:5:0:<span class="built_in">sync</span>:/sbin:/bin/sync</span><br><span class="line">shutdown:x:6:0:shutdown:/sbin:/sbin/shutdown</span><br><span class="line">halt:x:7:0:halt:/sbin:/sbin/halt</span><br><span class="line">mail:x:8:12:mail:/var/spool/mail:/sbin/nologin</span><br><span class="line">operator:x:11:0:operator:/root:/sbin/nologin</span><br><span class="line">games:x:12:100:games:/usr/games:/sbin/nologin</span><br><span class="line">......省略......</span><br></pre></td></tr></table></figure>
+
+
+
+<p>​	如果要显示多个文件的内容，请再cat命令后将文件名作为参数进行传入</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">kiosk@foundation0 ~]$ <span class="built_in">cat</span> file1 file2 </span><br><span class="line">HHA</span><br><span class="line">XIXIXI</span><br><span class="line">[kiosk@foundation0 ~]$ </span><br></pre></td></tr></table></figure>
+
+
+
+<p>​	如果一些文件内容较长，可能比shell终端提供的显示空间还要多很多，cat命令不会将文件的内容显示为多个页面。这时您可以使用less命令一次显示文件的一个页面，然后通过鼠标滚轮或键盘的上下键来进行翻页查看，键盘按q退出查看。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">[kiosk@foundation0 ~]$ less file1 </span><br></pre></td></tr></table></figure>
+
+
+
+<p>​	head和tail命令分别显示文件的开头和结尾部分。默认情况下这两个命令显示文件的开头10行或结尾10行，但您可以通过它的选项-n 来指定一次显示自定义行数。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[kiosk@foundation0 ~]$ <span class="built_in">head</span> -n 2 /etc/passwd</span><br><span class="line">root:x:0:0:root:/root:/bin/bash</span><br><span class="line">bin:x:1:1:bin:/bin:/sbin/nologin</span><br><span class="line"></span><br><span class="line">[kiosk@foundation0 ~]$ <span class="built_in">tail</span> -n 5 /etc/passwd</span><br><span class="line">systemd-oom:x:977:977:systemd Userspace OOM Killer:/:/usr/sbin/nologin</span><br><span class="line">kiosk:x:1000:1000::/home/kiosk:/bin/bash</span><br><span class="line">apache:x:48:48:Apache:/usr/share/httpd:/sbin/nologin</span><br><span class="line">named:x:25:25:Named:/var/named:/sbin/nologin</span><br><span class="line">dhcpd:x:177:177:DHCP server:/:/sbin/nologin</span><br></pre></td></tr></table></figure>
+
+
+
+<p>​	wc命令可计算文件中的行、字和字符数量。使用-l、-w或-c选项，分别可以仅显示行数、字数或字符数</p>
+<p>​	以下示例中，我们可以看到file1文件中有一行数据，Ha Xi分别两个字数，以及加上他俩中间的空格分割符，共5个字符。分别对应上wc输出的1、2、6。这时你可能会有疑问，该文件里我怎么数都是5个字母，怎么会统计出6个字符数呢？</p>
+<p>​	那是因为wc也是通过类似cat这样的命令去先去输出了文本里的内容，然后进行统计的，cat这样输出的内容会自带一个换行符，所以我们肉眼是看不出来的，但是换行符实际是存在的。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[kiosk@foundation0 ~]$ <span class="built_in">cat</span> file1 </span><br><span class="line">Ha Xi</span><br><span class="line">[kiosk@foundation0 ~]$ <span class="built_in">wc</span> file1 </span><br><span class="line">1 2 6 file1</span><br><span class="line">[kiosk@foundation0 ~]$</span><br></pre></td></tr></table></figure>
+
+<p>​	如果您想把这个换行符去掉，可以使用如下命令，其中|符号，称为管道符，作用是将它前面命令的输出结果，传递到后面的命令中去使用，tr -d ‘\n’则表示删除换行符。这些目前在后面的章节会陆续进行详细讨论，目前知道我们wc时，所统计的字符数为什么会多一个的原理即可。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">[kiosk@foundation0 ~]$ cat file1 | tr -d &#x27;\n&#x27; | wc </span><br><span class="line">      0       2       5</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="了解Tab补全"><a href="#了解Tab补全" class="headerlink" title="了解Tab补全"></a>了解Tab补全</h3><p>​	通过之后的学习，我们将会遇到许多命令，包括一些命令、选项、参数等很多很长，做为人很难全部一个字符都不差的记住，这时就得用上我们的Tab补全功能，这对我们记命令、找命令的帮助是很大的，它可以帮助你快速的找到你想找的命令。</p>
+<p>​	例如：我们要修改密码，但是我只知道它是pa开头的，后面的字母我记不清了，那么我们则可以通过输入pa，随后快速按两下键盘上的Tab键，他会在你主机的众多软件命令中找关于pa开头的命令，如果你主机众多软件里只有一个pa开头的，那么直接会给你把后面的字母全部自动补充上来，如果存在多个，则它会将pa开头的命令列出来，您则可以根据你的记忆去寻找相似的，勾起你粉红色的回忆。</p>
+<p>​	此时，它会列出pa开头的相关命令，然后我们就在里面找，找了一圈发现，我的回忆勾起来一些了，好像是pas后面的我又记不起来了，那么我就继续pas加TAB，缩小范围，这是选择的范围就小了，目前只出现三个pas相关的了，我一看到passwd的单词就是密码的意思，我的回忆被完全勾起来了，那就再pas的基础上再加上s，pass+TAB+TAB，再主机命令中唯一了，剩下的wd就自动给补充到shell提示符中了</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[kiosk@foundation0 ~]$ pa <span class="comment"># 快速按两下TAB+TAB</span></span><br><span class="line">pacat                 pam_timestamp_check   parted</span><br><span class="line">pack200               pango-list            partprobe</span><br><span class="line">packer                pango-segmentation    partx</span><br><span class="line">pacmd                 pango-view            passwd</span><br><span class="line">pactl                 paperconf             <span class="built_in">paste</span></span><br><span class="line">page_owner_sort       paperconfig           pasuspender</span><br><span class="line">pam_console_apply     paplay                patch</span><br><span class="line">pam_namespace_helper  parec                 <span class="built_in">pathchk</span></span><br><span class="line">pamon                 parecord              pax11publish</span><br><span class="line">[kiosk@foundation0 ~]$ pas  <span class="comment"># 快速按两下TAB+TAB</span></span><br><span class="line">passwd       <span class="built_in">paste</span>        pasuspender  </span><br><span class="line">[kiosk@foundation0 ~]$ pass <span class="comment"># 快速按两下TAB+TAB</span></span><br><span class="line">[kiosk@foundation0 ~]$ passwd <span class="comment"># pass唯一了，则剩下的全部字符都自动补充上来了</span></span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<p>​	相同，每个命令的选项很多我们也是可以通过Tab的方式查找补充，TAB功能很强大，强烈建于不管现在还是工作中尽量都使用Tab进行命令、选项、参数的补充，这样可以减少我们手动输入导致的很多执行错误的问题。</p>
+<p>​	我们输入命令后，选项是由一个或多个减号（-）组成的，所以我们打上一个或两个减号，在按两下tab，则可以列出该命令的全部选项，同样也支持–g这样的模糊搜索示例如下：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[kiosk@foundation0 ~]$ useradd --  <span class="comment"># 列出useradd所有的选项</span></span><br><span class="line">--badnames              --<span class="built_in">help</span>                  --prefix</span><br><span class="line">--base-dir              --home-dir              --root</span><br><span class="line">--btrfs-subvolume-home  --inactive              --selinux-user</span><br><span class="line">--comment               --key                   --shell</span><br><span class="line">--create-home           --no-create-home        --skel</span><br><span class="line">--defaults              --no-log-init           --system</span><br><span class="line">--expiredate            --non-unique            --uid</span><br><span class="line">--gid                   --no-user-group         --user-group</span><br><span class="line">--<span class="built_in">groups</span>                --password              </span><br><span class="line">[kiosk@foundation0 ~]$ useradd --g  <span class="comment"># 列出useradd --g开头选项</span></span><br><span class="line">--gid     --<span class="built_in">groups</span>  </span><br><span class="line">[kiosk@foundation0 ~]$ useradd --g</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="在Shell上编辑多行长命令"><a href="#在Shell上编辑多行长命令" class="headerlink" title="在Shell上编辑多行长命令"></a>在Shell上编辑多行长命令</h3><p>​	在以后的学习及工作中，我们可能会遇到命令+多个选项、参数组成的一个很长的执行命令，在一行Shell提示符中无法一次展示，且阅读性很差。这时我们可以选择将该命令分成多行来书写，我们直接回车换行，回车的含义（作用）是执行，这样我们的命令就直接被执行，无法达到换行书写的效果。</p>
+<p>​	这时我们可以通过反斜杠（\）也称为转义符，它在Linux中的作用是忽略后续字符的含义，所有我们在需要换行书写的结尾接上反斜杠（\）我们的回车执行的含义就会被忽略，也就达到了换行书写的效果。</p>
+<p>​	以下示例中，head -n 3表示查询文件内容的头3行，通过反斜杠（\）将我们之后要回车执行的含义给忽略掉，这样我们的命令行就切换到了下一行，我们接着写了两个路径较长的文件，查看这两个文件的内容，当我们要执行的时候最后一行不加反斜杠（\）则就是回车原本在Linux中的含义（执行）</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[kiosk@foundation0 ~]$ <span class="built_in">head</span> -n 3 \</span><br><span class="line">&gt; /usr/share/dict/words \</span><br><span class="line">&gt; /usr/share/dict/linux.words </span><br><span class="line"><span class="comment"># 以下是head查询出来的文件内容输出</span></span><br><span class="line">==&gt; /usr/share/dict/words &lt;==</span><br><span class="line">1080</span><br><span class="line">10-point</span><br><span class="line">10th</span><br><span class="line"></span><br><span class="line">==&gt; /usr/share/dict/linux.words &lt;==</span><br><span class="line">1080</span><br><span class="line">10-point</span><br><span class="line">10th</span><br><span class="line">[kiosk@foundation0 ~]$</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h3 id="显示命令历史记录"><a href="#显示命令历史记录" class="headerlink" title="显示命令历史记录"></a>显示命令历史记录</h3><p>​	在学习和工作中我们可能会遇到重复的命令需要重复用到的情况，但是又不想老是重复输入较长的命令，以及我想看看我之前都执行了哪些命令等情况。这时我们就可能需要用到历史命令记录功能，方法又两种可以查看到我们的历史命令。</p>
+<ul>
+<li><p>​	方法一：在shell提示符中，使用键盘中的 <code>↑</code>【PgUp】或 <code>↓</code>【PgDn】，上下箭头来翻页查找之前输入过的命令。</p>
+</li>
+<li><p>方法二：通过history命令，可以将您输入的命令以结果输出的方式展示出来，并且带有每条命令的number序号</p>
+<p>我们通过history查看到历史命令后，我们还可以通过<code>!String</code>命令或<code>!number</code>序号，去直接执行最近或指定的命令。</p>
+<p><code>!String</code>命令是执行你最近一次执行过的类似命令。</p>
+<p>​	例如：<code>!ls</code>，则是执行您最近一次执行过的 <code>!ls</code> 的命令。</p>
+<p><code>!number </code>则是根据你history命令查询出来的每条命令的序号指定执行。</p>
+<p>​	例如：<code>!46</code>则是执行你history结果中的序号46的命令</p>
+</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">kiosk@foundation0 ~]$ <span class="built_in">history</span> </span><br><span class="line">  ...忽略...</span><br><span class="line">   46  <span class="built_in">date</span>+%x</span><br><span class="line">   47  <span class="built_in">date</span> +%x</span><br><span class="line">   48  <span class="built_in">date</span> +%Y-%m-%d:%H-%M-%S</span><br><span class="line">   49  passwd </span><br><span class="line">   50  ll</span><br><span class="line">   51  file History-7.x.txt </span><br><span class="line">   52  file Foundation-20221114.tgz </span><br><span class="line">   53  <span class="built_in">ls</span> -a</span><br><span class="line">   54  <span class="built_in">ls</span> -la</span><br><span class="line">   55  <span class="built_in">ls</span> -n</span><br><span class="line">   56  file Foundation-20221114.tgz</span><br><span class="line">  ...忽略...</span><br><span class="line">  [kiosk@foundation0 home]$ !<span class="built_in">ls</span>  </span><br><span class="line"><span class="built_in">ls</span> -n  <span class="comment"># 我最近执行的ls命令是ls -n</span></span><br><span class="line">total 4</span><br><span class="line">drwx------. 18 1000 1000 4096 Feb 27 15:08 kiosk</span><br><span class="line"></span><br><span class="line">[kiosk@foundation0 home]$ !47</span><br><span class="line"><span class="built_in">date</span> +%x  <span class="comment"># 我的序号47是date +%x的命令</span></span><br><span class="line">02/27/2025</span><br><span class="line">[kiosk@foundation0 home]$</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="编辑命令行"><a href="#编辑命令行" class="headerlink" title="编辑命令行"></a>编辑命令行</h3><p>​	以交互方式使用时，bash具有命令行编辑功能。使用文本编辑器命令在当前输入的命令内移动并且进行修改，使用箭头键可以在当前命令内移动，也可以访问历史命令，在本章的界面部分以及做了介绍。下列表格中将介绍更强大的编辑命令方式，学会它可以帮助您在编辑命令时更加游刃有余，编辑命令更加娴熟、迅速。</p>
 <table>
 <thead>
 <tr>
-<th></th>
-<th>su</th>
-<th>su -</th>
-<th>sudo</th>
+<th>快捷键</th>
+<th>描述</th>
 </tr>
 </thead>
 <tbody><tr>
-<td>成为新用户</td>
-<td>是</td>
-<td>是</td>
-<td>权限升级的命令</td>
+<td>Ctrl+A</td>
+<td>光标跳到命令行开头</td>
 </tr>
 <tr>
-<td>环境</td>
-<td>新用户的</td>
-<td>新用户的</td>
-<td>当前用户的</td>
+<td>Ctrl+E</td>
+<td>光标跳到命令行末尾</td>
 </tr>
 <tr>
-<td>需要密码</td>
-<td>新用户的</td>
-<td>新用户的</td>
-<td>当前用户的</td>
+<td>Ctrl+U</td>
+<td>将光标处到命令行开头的内容删除</td>
 </tr>
 <tr>
-<td>特权</td>
-<td>与新用户相同</td>
-<td>与新用户相同</td>
-<td>有配置定义</td>
+<td>Ctrl+K</td>
+<td>将给光标处到命令行末尾内容删除</td>
 </tr>
 <tr>
-<td>记录的活动</td>
-<td>仅su命令</td>
-<td>仅su命令</td>
-<td>权限升级的命令</td>
+<td>Ctrl+LeftArrow（<code>←</code>）</td>
+<td>以当前光标为起点跳到命令行前一个字的开头</td>
+</tr>
+<tr>
+<td>Ctrl+RightArrow（<code>→</code>）</td>
+<td>以当前光标为起点跳到命令行后一个字的末尾</td>
+</tr>
+<tr>
+<td>Ctrl+R</td>
+<td>在历史命令记录列表中搜索模糊搜索历史命令</td>
+</tr>
+<tr>
+<td>Ctrl+W</td>
+<td>删除光标前的一个字</td>
 </tr>
 </tbody></table>
-<p>​	此外，您可以将sudo配置为允许特定用户像某个其他用户一样运行任何命令，或仅允许以该用户是否允许部分命令。例如，如果您将sudo命令配置为允许redhat01用户以root身份允许usermod命令，那么您可以允许一下命令来锁定或解锁用户账户：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[kiosk@foundation0 home]$ <span class="built_in">sudo</span> usermod -L redhat01 </span><br><span class="line">[<span class="built_in">sudo</span>] password <span class="keyword">for</span> kiosk: </span><br><span class="line">[kiosk@foundation0 home]$ su - redhat01 </span><br><span class="line">Password: </span><br><span class="line">su: Authentication failure</span><br><span class="line">[kiosk@foundation0 home]$</span><br></pre></td></tr></table></figure>
-
-<p>​	如果某用户尝试以另一用户身份允许命令，但sudo配置不允许，则bash会阻止该命令，记录这次尝试，并向root发送一封邮件。</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[root@foundation0 ~]# <span class="built_in">tail</span> -f /var/log/secure</span><br><span class="line">Apr 17 15:53:04 foundation0 su[2569]: pam_unix(su-l:auth): authentication failure; <span class="built_in">logname</span>=kiosk uid=1000 euid=0 <span class="built_in">tty</span>=/dev/pts/0 ruser=kiosk rhost=  user=redhat01</span><br></pre></td></tr></table></figure>
-
-<p>​	sudo的另一个好处是默认将所有执行的命令记录到&#x2F;var&#x2F;log&#x2F;secure中。</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">[root@foundation0 ~]# tail -f /var/log/secure</span><br><span class="line">Apr 17 15:50:06 foundation0 sudo[2373]:   kiosk : command not allowed ; TTY=pts/0 ; PWD=/home ; USER=root ; COMMAND=/sbin/usermod -L redhat01</span><br></pre></td></tr></table></figure>
-
-<p>​	在红帽Linux中，wheel组所有成员都可以使用自己的密码通过sudo以任何用户身份允许命令，包括root在内</p>
-<h2 id="通过Sudo获取交互式Root-Shell"><a href="#通过Sudo获取交互式Root-Shell" class="headerlink" title="通过Sudo获取交互式Root Shell"></a>通过Sudo获取交互式Root Shell</h2><p>​	要通过sudo访问root账户，请使用sudo -i命令。此命令将切换root账户并运行该用户的默认shell及关联的交互式登录脚本。要在没有交互式脚本的情况下运行shell，请使用sudo -s命令。</p>
-<p>​	例如，管理员可以获取kiosk实例上root用户的交互式shell，方法是使用SSH公钥身份验证作为普通用户kiosk登录，在运行sudo -i命令获取root用户的shell。</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[kiosk@foundation0 home]$ <span class="built_in">sudo</span> -i</span><br><span class="line">[<span class="built_in">sudo</span>] password <span class="keyword">for</span> kiosk: </span><br><span class="line">[root@foundation0 ~]# </span><br></pre></td></tr></table></figure>
-
-
-
-<h2 id="配置Sudo"><a href="#配置Sudo" class="headerlink" title="配置Sudo"></a>配置Sudo</h2><p>​	&#x2F;etc&#x2F;sudoers文件是sudo命令的主要配置文件。如果多个管理员试图编辑该文件，为了避免出现问题，您只能特殊的visudo命令进行编辑。visudo编辑器也会验证该文件，确保没有语法错误。</p>
-<p>​	例如，以下来自&#x2F;etc&#x2F;sudoers文件的这一行可为wheel组成员启用sudo访问权限：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">%wheel  ALL=(ALL)       ALL</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>%wheel字符串是规则所应用到的用户或组。词语wheel前的%符号指定该是对一个组进行权限的设置。</li>
-<li>ALL&#x3D;(ALL:ALL)命令指定在具有此文件的任何主机上（第一个ALL），wheel组中的用户可以在系统上以任何其他用户（第二个ALL）和任何其他组（第三个ALL）运行命令。</li>
-<li>最后的ALL命令指定wheel组中的用户可以运行任何命令。</li>
-</ul>
-<p>​	默认情况下，&#x2F;etc&#x2F;sudoers文件还包含&#x2F;etc&#x2F;sudoers.d目录中所有文件的内容，作为配置文件的一部分。通过使用这种层次结构，您只需将相应的文件放入该目录中，即可为用户添加sudo访问权限。</p>
-<p>​	<code>注意：将配置文件放在/etc/sudoers.d目录下比较方便。将文件复制到目录中或从目录中删除文件，即可启用或禁用sudo访问权限。通常每个文件都会以用户或组来进行命名，当要启用或是禁用时，只需将文件在该目录中复制或删除即可。避免一个文件长篇大论，难以维护</code></p>
-<p>​	要为redhat01用户启用完整的sudo访问权限，您可以创建含有以下内容的&#x2F;etc&#x2F;sudoers.d&#x2F;redhat01文件：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[root@foundation0 ~]# <span class="built_in">cat</span> /etc/sudoers.d/redhat01 </span><br><span class="line">redhat01 ALL=(ALL) ALL</span><br></pre></td></tr></table></figure>
-
-<p>​	要为group01组启用完整的sudo访问权限，您可以创建含有以下内容的&#x2F;etc&#x2F;sudoers.d&#x2F;group01文件：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">[root@foundation0 ~]# cat /etc/sudoers.d/group01</span><br><span class="line">%group01 ALL=(ALL) ALL</span><br></pre></td></tr></table></figure>
-
-<p>​	要使games组中的用户能够以operator用户身份运行id命令，您可以创建含有以下内容的&#x2F;etc&#x2F;sudoers.d&#x2F;games文件：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">[root@foundation0 ~]# cat /etc/sudoers.d/games</span><br><span class="line">%games ALL=(operator) /bin/id</span><br></pre></td></tr></table></figure>
-
-<p>​	此外，也可以设置sudo，以允许用户通过使用NOPASSWD:ALL命令在不输入密码的前提下以其他用户身份允许命令：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">[root@foundation0 ~]# cat /etc/sudoers.d/ansible</span><br><span class="line">%ansible ALL=(ALL) NOPASSWD:ALL</span><br></pre></td></tr></table></figure>
-
-<p>​	虽然授权用户或组这种级别的访问权限存在明显的安全风险，但系统会将这种做法用于云实例、虚拟机和调配系统，以配置服务器。您必须谨慎地保护具有此访问权限的账户，并且要求使用SSH公钥身份验证，以便远程系统上的用户能访问它。</p>
-<h1 id="管理本地用户账户"><a href="#管理本地用户账户" class="headerlink" title="管理本地用户账户"></a>管理本地用户账户</h1><h2 id="从命令行创建用户"><a href="#从命令行创建用户" class="headerlink" title="从命令行创建用户"></a>从命令行创建用户</h2><p>​	useradd username命令可以创建名为username的用户。它会设置用户的主目录和账户信息，并为名为username的用户创建一个私有组。此时，该账户尚未设置有效密码，用户也要设置了密码后才能登录。</p>
-<p>​	useradd –help 命令将显示可用于覆盖默认设置的基本选项。大多数情形中，您可以将相同的选项用于usermod命令，以修改现有用户。</p>
-<p>​	在红帽linux9中，useradd命令为新用户分配的第一个大于或等于1000的可用UID，除非您通过-u选项进行明确指定。</p>
-<h2 id="从命令行修改现有的用户"><a href="#从命令行修改现有的用户" class="headerlink" title="从命令行修改现有的用户"></a>从命令行修改现有的用户</h2><p>​	usermod –help命令显示用于修改账户的基本选项。一些常见的选项如下：</p>
-<table>
-<thead>
-<tr>
-<th>usermod选项</th>
-<th>用法</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>-a，–append</td>
-<td>与-G选项一起使用，将补充组添加到用户当前的组成员集合中，而不是将补充组集合替换为新的集合。</td>
-</tr>
-<tr>
-<td>-c，–comment COMMENT</td>
-<td>将COMMENT文本添加到注释字段。</td>
-</tr>
-<tr>
-<td>-d，–home HOME_DIR</td>
-<td>为用户账户指定一个主目录。</td>
-</tr>
-<tr>
-<td>-g， –gid GROUP</td>
-<td>为用户账户指定主要组。</td>
-</tr>
-<tr>
-<td>-G，–groups GROUPS</td>
-<td>为用户账户指定补充组，多个补充组用逗号分割列表。</td>
-</tr>
-<tr>
-<td>-L， –lock</td>
-<td>锁定用户账户。</td>
-</tr>
-<tr>
-<td>-m，–move-home</td>
-<td>将用户的主目录移送到新的位置。您必须将它于-d选项搭配使用。</td>
-</tr>
-<tr>
-<td>-s，–shell SHELL</td>
-<td>为用户账户指定特定的登录shell。</td>
-</tr>
-<tr>
-<td>-U，–unlock</td>
-<td>解锁用户账户。</td>
-</tr>
-</tbody></table>
-<h2 id="从命令行删除用户"><a href="#从命令行删除用户" class="headerlink" title="从命令行删除用户"></a>从命令行删除用户</h2><p>​	userdel username 命令从&#x2F;etc&#x2F;passwd中删除用户的详细信息，但用户的主目录保持不变。userdel -r username 命令从&#x2F;etc&#x2F;passwd 中删除用户，同时删除用户的主目录。</p>
-<p>​	<code>警告：如果您在不指定userdel -r 选项的情况下删除用户，则用户的文件归为未分配的UID所有。如果您创建了一个用户，并且该用户被分配了已删除用户的UID，则新账户将用有这些文件，这存在安全风险。通常，组织安全策略不允许删除用户账户，而是锁定它们不被使用，以避免这种情况。</code></p>
-<p>​	以下示例演示了这如何导致信息泄露：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[root@foundation0 kiosk]# useradd user01</span><br><span class="line">[root@foundation0 ~]# <span class="built_in">ls</span> -l /home/</span><br><span class="line">total 1</span><br><span class="line">drwx------.  3 user01   user01     78 May 13 10:57 user01</span><br><span class="line"><span class="comment"># 删除用户</span></span><br><span class="line">[root@foundation0 ~]# userdel user01 </span><br><span class="line"><span class="comment"># 为加-r选项，此时用户的主目录处于未分配状态，他之前所属用户UID为：1002</span></span><br><span class="line">[root@foundation0 ~]# <span class="built_in">ls</span> -l /home/</span><br><span class="line">total 1</span><br><span class="line">drwx------.  3     1002     1002   78 May 13 10:57 user01</span><br><span class="line"><span class="comment"># 创建用户，-u 指定该用户的UID为：1002</span></span><br><span class="line">[root@foundation0 ~]# useradd -u 1002 user02</span><br><span class="line"><span class="comment"># 由于于之前的user01的UID一致，user01的主目录则自动归属为user02</span></span><br><span class="line">[root@foundation0 ~]# <span class="built_in">ls</span> -l /home/</span><br><span class="line">total 2</span><br><span class="line">drwx------.  3 user02   user02     78 May 13 10:57 user01</span><br><span class="line">drwx------.  3 user02   user02     78 May 13 11:02 user02</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>​	<code>请注意，user02现在拥有之前归为user01所属的所有文件。root用户可以使用find / -nouser -o -nogroup 命令来查找无人拥有的文件和目录。</code></p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[root@foundation0 ~]# userdel user02 </span><br><span class="line">[root@foundation0 ~]# <span class="built_in">ls</span> -l /home/</span><br><span class="line">total 2</span><br><span class="line">drwx------.  3     1002     1002   78 May 13 10:57 user01</span><br><span class="line">drwx------.  3     1002     1002   78 May 13 11:02 user02</span><br><span class="line"><span class="comment"># nouser表示没有归属用户的条件，nogroup表示没有归属用户的组，-o选项表示【或】的意思，用于多个条件的拼接</span></span><br><span class="line">[root@foundation0 ~]# find / -nouser -o -nogroup </span><br><span class="line">...忽略...</span><br><span class="line">/home/user01/.mozilla</span><br><span class="line">/home/user01/.mozilla/extensions</span><br><span class="line">/home/user01/.mozilla/plugins</span><br><span class="line">/home/user01/.bash_logout</span><br><span class="line">/home/user01/.bash_profile</span><br><span class="line">/home/user01/.bashrc</span><br><span class="line">/home/user02</span><br><span class="line">....忽略....</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-
-
-<h2 id="从命令行设置密码"><a href="#从命令行设置密码" class="headerlink" title="从命令行设置密码"></a>从命令行设置密码</h2><p>​	passwd username 命令可为username用户设置初始密码，或更改其现有密码。root用户可以将密码设置为任何值。如果密码不符合最低建议标准，终端会显示消息；不顾哦，之后您可以重新键入该新密码，passwd也会成功更新该密码。</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 创建用户</span></span><br><span class="line">[root@foundation0 ~]# useradd -u 1002 user01</span><br><span class="line">useradd: warning: the home directory /home/user01 already exists.</span><br><span class="line">useradd: Not copying any file from skel directory into it.</span><br><span class="line">Creating mailbox file: File exists</span><br><span class="line"><span class="comment"># 为用户设置初始密码，密码：123456，虽会提示密码过于简单，未通过字典检查，但再次确认密码后任然可以成功设置。</span></span><br><span class="line">[root@foundation0 home]# passwd user01 </span><br><span class="line">Changing password <span class="keyword">for</span> user user01.</span><br><span class="line">New password: </span><br><span class="line">BAD PASSWORD: The password fails the dictionary check - it is too simplistic/systematic</span><br><span class="line">Retype new password: </span><br><span class="line">passwd: all authentication tokens updated successfully.</span><br><span class="line">[root@foundation0 home]# </span><br></pre></td></tr></table></figure>
-
-<p>​	<code>建议普通用户必须选择至少八个字符长的密码。不要使用字典词语、用户名或旧密码。</code></p>
-<h2 id="UID范围"><a href="#UID范围" class="headerlink" title="UID范围"></a>UID范围</h2><ul>
-<li>UID 0：超级用户(root)账户UID。</li>
-<li>UID 1-200：静态分配给系统进程的系统账户UID。</li>
-<li>UID 201-999：分配给不拥有此系统上文件的系统进程的UID。需要非特权UID的软件将从这个可用池中动态分配UID。</li>
-<li>UID 1000+：分配给普通非特权用户的UID范围。</li>
-</ul>
-<p>注意：RedHat6及更早的版本对系统用户使用的范围1-499的UID，对普通用户使用高于500的UID。您可以在&#x2F;etc&#x2F;login.defs文件中更改useradd和groupadd默认范围。</p>
-<p><img src="/2025/04/03/01-RHCE/01-124/Linux-RHCE-124-%E7%AC%AC%E4%BA%94%E7%AB%A0%E8%8A%82/image-20250513112428467.png" alt="image-20250513112428467"></p>
-<h1 id="管理本地组账户"><a href="#管理本地组账户" class="headerlink" title="管理本地组账户"></a>管理本地组账户</h1><h2 id="从命令行创建组"><a href="#从命令行创建组" class="headerlink" title="从命令行创建组"></a>从命令行创建组</h2><p>​	groupadd命令用于创建组。不带选项时，groupadd命令会使用&#x2F;etc&#x2F;login.defs文件中通过GID_MIN和GID_MAX 变量指定的范围内的下一个可用GID。默认情况下，该命令分配的GID值大于任何其他现有的GID，即使有较低的值可用。</p>
-<p>​	groupadd 命令 -g选项指定该组使用的特定GID。</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[root@foundation0 ~]# groupadd -g 10000 group1</span><br><span class="line">[root@foundation0 ~]# <span class="built_in">tail</span> /etc/group</span><br><span class="line">....忽略...</span><br><span class="line">group1:x:10000:</span><br></pre></td></tr></table></figure>
-
-<p>​	<code>注意：由于创建用户时会自动为该用户生成一个私有组（GID 1000+），一些管理员会留出了一个单独的GID范围，用于创建补充组来满足其目的。但是，这种额外的管理是不必要的，因为用户的UID和主要组GID是不需要是相同的数字。</code></p>
-<p>​	groupadd 命令 -r 选项用于创建系统组。与普通一样，系统组使用&#x2F;etc&#x2F;login.defs文件中列出的有效系统GID范围内的GID。&#x2F;etc&#x2F;login.defs文件中的SYS_GID_MIN和SYS_GID_MAX配置项定义系统GID的范围。</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[root@foundation0 ~]# <span class="built_in">tail</span> /etc/group</span><br><span class="line">...忽略...</span><br><span class="line">group1:x:10000:</span><br><span class="line">group2:x:976:</span><br></pre></td></tr></table></figure>
-
-
-
-<h2 id="从命令行修改现有的组"><a href="#从命令行修改现有的组" class="headerlink" title="从命令行修改现有的组"></a>从命令行修改现有的组</h2><p>​	groupmod 命令可以更改现有组的属性。groupmod命令-n选项可指定组的新名称。</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[root@foundation0 ~]# groupmod -n group002 group2 </span><br><span class="line">[root@foundation0 ~]# <span class="built_in">tail</span> /etc/group</span><br><span class="line">...忽略...</span><br><span class="line">group1:x:10000:</span><br><span class="line">group002:x:976:</span><br><span class="line">[root@foundation0 ~]#</span><br></pre></td></tr></table></figure>
-
-<p>​	注意组名称从group2更改为group002，groupmod命令-g选项可更改GID</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[root@foundation0 ~]# groupmod -g 975 group002 </span><br><span class="line">[root@foundation0 ~]# <span class="built_in">tail</span> /etc/group</span><br><span class="line">...忽略...</span><br><span class="line">group1:x:10000:</span><br><span class="line">group002:x:975:</span><br></pre></td></tr></table></figure>
-
-<p>​	注意GID从原来的976变更为975.</p>
-<h2 id="从命令行删除组"><a href="#从命令行删除组" class="headerlink" title="从命令行删除组"></a>从命令行删除组</h2><p>​	groupdel 命令可删除组。</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[root@foundation0 ~]# groupdel group002 </span><br><span class="line">[root@foundation0 ~]# <span class="built_in">tail</span> /etc/group</span><br><span class="line">...忽略...</span><br><span class="line">group1:x:10000:</span><br></pre></td></tr></table></figure>
-
-<p>​	<code>注意：如果删除的组是现有用户的主要组，则您无法删除它。于使用userdel命令类似，首先检查以确保找到该组拥有的文件，避免信息泄露</code></p>
-<h2 id="从命令行更改组成员资格"><a href="#从命令行更改组成员资格" class="headerlink" title="从命令行更改组成员资格"></a>从命令行更改组成员资格</h2><p>​	组成员资格通过用户管理进行控制。使用usermod -g命令来更改用户的主要组。</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[root@foundation0 home]# <span class="built_in">id</span> user01 </span><br><span class="line">uid=1002(user01) gid=1002(user01) <span class="built_in">groups</span>=1002(user01)</span><br><span class="line">[root@foundation0 home]# usermod -g group01 user01 </span><br><span class="line">[root@foundation0 home]# <span class="built_in">id</span> user01 </span><br><span class="line">uid=1002(user01) gid=10000(group1) <span class="built_in">groups</span>=10000(group1)</span><br><span class="line">[root@foundation0 home]# </span><br></pre></td></tr></table></figure>
-
-<p>​	使用usermod -aG命令，将用户太你家到某一补充组。</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[root@foundation0 home]# <span class="built_in">id</span> user01 </span><br><span class="line">uid=1002(user01) gid=10000(group1) <span class="built_in">groups</span>=10000(group1)</span><br><span class="line">[root@foundation0 home]# usermod -aG user01 user01 </span><br><span class="line">[root@foundation0 home]# <span class="built_in">id</span> user01 </span><br><span class="line">uid=1002(user01) gid=10000(group1) <span class="built_in">groups</span>=10000(group1),1002(user01)</span><br></pre></td></tr></table></figure>
-
-<p>​	<code>重要：usermod命令的-a选项可启用附加模式。不带-a选项时，命令会从当前未包含在 -G 选项列表中的任何补充组从该用户中删除。</code></p>
-<h2 id="比较主要组和补充组成员资格"><a href="#比较主要组和补充组成员资格" class="headerlink" title="比较主要组和补充组成员资格"></a>比较主要组和补充组成员资格</h2><p>​	用户的主要组是在&#x2F;etc&#x2F;passwd文件中查看的用户账户和组。一个用户一次只能属于一个主要组。</p>
-<p>​	用户的补充组是为用户配置的额外组，可在&#x2F;etc&#x2F;group文件中的用户条目中查看。一个用户可以属于任意数量的补充组，以有效实施文件访问和权限。</p>
-<p>​	对于配置基于组的文件权限而言，用户的主要组和补充组之间没有区别。如果用户所属的组被分配了特定文件的访问权限，则该用户有权访问这些文件。</p>
-<p>​	用户的主要组和补充组成员资格之间唯一的区别体现在用户创建文件时。新文件必须具有用户所有者和组所有者，这是在文件创建时分配的。用户的主要组用于新文件的组所有权，除非被选项命令覆盖。</p>
-<h2 id="临时更改您的主要组"><a href="#临时更改您的主要组" class="headerlink" title="临时更改您的主要组"></a>临时更改您的主要组</h2><p>​	只有用户的主要组才会用于新文件创建属性。但是，您可以暂时将主要组切换到另一个组，但只能从您所属的补充组中去选择。如果您要手动或以脚本方式创建多个新文件，并希望创建时将不通的组分配为所有者，则可以切换组。</p>
-<p>​	在此shell会话中，使用newgrp命令来切换主要组。您可以在所属的任何主要组或补充组之间却换，但一次只能由一个组是主要组。如果您注销并重新登录，主要组将回复为默认值。此示例将user01用户中的补充组user01临时切换为主要组。</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[user01@foundation0 ~]$ <span class="built_in">id</span></span><br><span class="line">uid=1002(user01) gid=10000(group1) <span class="built_in">groups</span>=10000(group1),1002(user01) context=unconfined_u:unconfined_r:unconfined_t:s0-s0:c0.c1023</span><br><span class="line">[user01@foundation0 ~]$ newgrp </span><br><span class="line">group1  user01  </span><br><span class="line">[user01@foundation0 ~]$ newgrp user01 </span><br><span class="line">[user01@foundation0 ~]$ <span class="built_in">id</span></span><br><span class="line">uid=1002(user01) gid=1002(user01) <span class="built_in">groups</span>=1002(user01),10000(group1) context=unconfined_u:unconfined_r:unconfined_t:s0-s0:c0.c1023</span><br></pre></td></tr></table></figure>
-
-
-
-
-
-<h1 id="管理用户密码"><a href="#管理用户密码" class="headerlink" title="管理用户密码"></a>管理用户密码</h1><h2 id="影子密码和密码策略"><a href="#影子密码和密码策略" class="headerlink" title="影子密码和密码策略"></a>影子密码和密码策略</h2><p>​	加密的密码最初存储在全局可读的&#x2F;etc&#x2F;passwd文件中。这曾认为是最妥善的，直到对加密密码的字典式攻击变得常见。加密后的密码已移至&#x2F;etc&#x2F;shadow文件，只有root用户可以读取该文件。</p>
-<p>​	与&#x2F;etc&#x2F;passwd文件一样，每个用户在&#x2F;etc&#x2F;shadow文件中都有一个条目。&#x2F;etc&#x2F;shadow文件中的示例条目具有九个以冒号分割的字段：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">redhat01:$6$N4i94UcIEydvTFzp<span class="variable">$pf9W0C4I6w4BFxyK</span>/ver6M7DVPnvupuGoYK/ZP24Y9ojBLN1/VYuJSucRtIDrICSSzhvmc31iUeXuBNnV3oBm0:20195:0:99999:7:::</span><br></pre></td></tr></table></figure>
-
-<p>​	以此代码块为例，每个字段用冒号分割：</p>
-<ul>
-<li>redhat01：用户账户名称。</li>
-<li>$6$N4i94UcIEydv…省略：用户的加密密码，$6开头（SHA-512）加密。</li>
-<li>20195：上次更改密码时间距离纪元的天数；纪元是UTC时区的1970-01-01。</li>
-<li>0：自上次更改密码以来到用户可再次更改密码之前必须经过的最短天数。</li>
-<li>99999：在密码过期之前不进行密码更改的最长天数。空字段表示密码永不过期，自最后一次修改密码截至多少天过期。</li>
-<li>7：在密码过期前提前多少天警告用户。</li>
-<li>空：自密码过期之日起，在账户自动锁定前能够活动的天数，宽限天数。</li>
-<li>空：密码到期之日距离纪元的天数。空字段表示密码永不过期，密码过期天数。</li>
-<li>空：保留字段，预留给未来使用。</li>
-</ul>
-<h2 id="加密密码的格式"><a href="#加密密码的格式" class="headerlink" title="加密密码的格式"></a>加密密码的格式</h2><p>​	加密密码字段中存储了三段信息：所用的哈希算法、salt及加密哈希值。每段信息由美元符号（$）字符分割。</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$6$N4i94UcIEydvTFzp<span class="variable">$pf9W0C4I6w4BFxyK</span>/ver6M7DVPnvupuGoYK/ZP24Y9ojBLN1/VYuJSucRtIDrICSSzhvmc31iUeXuBNnV3oBm0</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>$6：此密码所使用的哈希算法。6表示SHA-512,这是RedHat默认算法；1表示MD5，而5则表示SHA-256。</li>
-<li>$N4i94UcIEydvTFzp：用于加密密码的salt；最初是随机选择的。</li>
-<li>$pf9W0C4I6w4BFxyK&#x2F;ver…忽略：用户密码的加密后的哈希；将salt和未加密密码组合并加密，生成密码哈希。</li>
-</ul>
-<p>​	将salt与密码组合的主要原因是为了防止使用预先计算的密码哈希列表攻击。添加salt会改变生成的哈希值，使预先计算的列表毫无用处。如果攻击者获得了使用salt的&#x2F;etc&#x2F;shadow文件的副本，则它们需要通过暴力破解来猜测密码，这将花费更多的时间和精力。</p>
-<h2 id="密码验证"><a href="#密码验证" class="headerlink" title="密码验证"></a>密码验证</h2><p>​	用户尝试登录时，系统在&#x2F;etc&#x2F;shadow文件中查询用户的条目，将用户的salt和键入的未加密密码组合，在使用制定的哈希算法加密组合。如何加密组合后的结果与已加密的哈希匹配，则用户键入了正确的密码。如果结果与已加密的密码不符合，则用户键入了错误的密码，登录尝试也会失败。这种方式允许系统半段用户是否键入了正确的密码，同时又不以用于登录的密码形式来存储密码。</p>
-<h2 id="配置密码期限"><a href="#配置密码期限" class="headerlink" title="配置密码期限"></a>配置密码期限</h2><p>​	下图显示了相关的密码期限参数，可以通过chage命令对起调整实施密码期限策略。</p>
-<p><img src="/2025/04/03/01-RHCE/01-124/Linux-RHCE-124-%E7%AC%AC%E4%BA%94%E7%AB%A0%E8%8A%82/image-20250520145616305.png" alt="image-20250520145616305"></p>
-<p>​	以下示例演示使用chage命令修改redhat01用户的密码策略。该命令定义密码修改间隔最短期限（-m）为0天，密码最长有效期（-M）为90天，警告期（-W）7天，以及过期后宽限（-I）14天后自动过期为不活动状态。</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[root@foundation0 ~]# chage -m 0 -M 90 -W 7 -I 14 redhat01</span><br><span class="line">[root@foundation0 ~]# chage -l redhat01 </span><br><span class="line">Last password change					: Apr 17, 2025</span><br><span class="line">Password expires					: Jul 16, 2025</span><br><span class="line">Password inactive					: Jul 30, 2025</span><br><span class="line">Account expires						: never</span><br><span class="line">Minimum number of days between password change		: 0</span><br><span class="line">Maximum number of days between password change		: 90</span><br><span class="line">Number of days of warning before password expires	: 7</span><br></pre></td></tr></table></figure>
-
-<p>​	假设您在RedHat上管理用户密码策略。user01用户是系统中的新用户，您要设置自定义密码期限策略。您希望将账户的到期之间设置为，即日起30天后到期，因此您可以使用以下命令。</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[root@foundation0 ~]# <span class="built_in">date</span> +%F</span><br><span class="line">2025-05-20</span><br><span class="line">[root@foundation0 ~]# <span class="built_in">date</span> -d <span class="string">&quot;+30 days&quot;</span> +%F</span><br><span class="line">2025-06-19</span><br><span class="line">[root@foundation0 ~]# chage -E $(<span class="built_in">date</span> -d <span class="string">&quot;+30 days&quot;</span> +%F) user01</span><br><span class="line">[root@foundation0 ~]# chage -l user01 | grep <span class="string">&quot;Account expires&quot;</span></span><br><span class="line">Account expires						: Jun 19, 2025</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>使用date命令获取当前时间，并通过+%F选项，调整date命令输出的日期格式。</li>
-<li>使用date命令的-d选项以及“+30 days”参数获取即日起30天后的日期，并转换日期格式。</li>
-<li>使用chage命令的-E选项，将获得的截至日期作为参数赋予该选项。</li>
-<li>使用chage命令的-l选项，并且通过grep命令筛选出命令输出结果中的“Account expires”行，最终查看user01用户的过期时间成功设置为30天后。</li>
-</ul>
-<p>​	几天后，您在&#x2F;var&#x2F;log&#x2F;secure日志文件中发现user01用户有一个奇怪的行为。用户尝试使用sudo与其他用户的文件交互。您怀疑用户可能忘记关闭在另一台计算机上工作时打开的ssh会话。您希望user01用户在下次登录时更改密码，因此您可以使用以下命令。</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[root@foundation0 ~]# chage -d 0 user01 </span><br><span class="line">[root@foundation0 ~]# chage -l user01</span><br><span class="line">Last password change					: password must be changed</span><br><span class="line">Password expires					: password must be changed</span><br><span class="line">Password inactive					: password must be changed</span><br><span class="line">Account expires						: Jun 19, 2025</span><br><span class="line">Minimum number of days between password change		: 0</span><br><span class="line">Maximum number of days between password change		: 99999</span><br><span class="line">Number of days of warning before password expires	: 7</span><br></pre></td></tr></table></figure>
-
-<p>​	此时user01的密码策略中提示，用户必须修改密码的结果，下次用户登录时就必须要求修改密码了。</p>
-<p>​	<code>注意：date命令可以计算未来的时间。-u选项报告UTC时间。</code></p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">[root@foundation0 ~]# date -d &quot;+5 days&quot; -u +%F</span><br><span class="line">2025-05-25</span><br></pre></td></tr></table></figure>
-
-<p>​	您可以在&#x2F;etc&#x2F;login.defs文件中更改默认密码期限配置。PASS_MAX_DAYS和PASS_MIN_DAYS选项分别设置密码的默认最长和最短期限。PASS_WARN_AGE设置密码的默认警告期限。默认密码期限策略中的任何更改都会影响更改后新创建的用户。现有用户继续使用就密码期限设置，而非新密码设置。</p>
-<h2 id="限制访问"><a href="#限制访问" class="headerlink" title="限制访问"></a>限制访问</h2><p>​	您可以使用usermod命令来修改用户的账户到期日期。例如，usermod命令-L选项可锁定用户账户，并且该用户无法登录系统。</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[root@foundation0 ~]# usermod -L user03</span><br><span class="line">[kiosk@foundation0 ~]$ su - user03 </span><br><span class="line">Password: </span><br><span class="line">su: Authentication failure</span><br></pre></td></tr></table></figure>
-
-<p>​	如果用户在特定日期从公司离职，您可以通过usermod命令锁定并使其到期。该日期必须是从1970-01-01的天开始算起，或者使用YYYY-MM-DD格式。以下示例中，usermod命令于2025-05-21锁定user03用户并使其过期。</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[root@foundation0 ~]# usermod -L -e 2025-05-21 user03 </span><br><span class="line">[root@foundation0 ~]# chage -l user03 </span><br><span class="line">Last password change					: May 20, 2025</span><br><span class="line">Password expires					: never</span><br><span class="line">Password inactive					: never</span><br><span class="line">Account expires						: May 21, 2025</span><br><span class="line">Minimum number of days between password change		: 0</span><br><span class="line">Maximum number of days between password change		: 99999</span><br><span class="line">Number of days of warning before password expires	: 7</span><br></pre></td></tr></table></figure>
-
-<p>​	账户锁定后，您可以防止用户使用密码向系统进行验证。简易使用此方法防止前员工访问账户。使用usermod命令-U选项可以重新启用账户的访问权限。</p>
-<h2 id="非登录Shell"><a href="#非登录Shell" class="headerlink" title="非登录Shell"></a>非登录Shell</h2><p>​	nologin shell用作不打算以交互方式登录系统的用户账户的代替shell。从安全角度来看，在账户不需要登录系统时，禁止账户登录系统是一个明智的选择。例如，邮件服务器可能需要账户来存储邮件，需要密码供用户通过检索邮件所用的邮件客户端进行身份验证。用户不需要直接登录该系统。</p>
-<p>​	这种情况的常用解决方案是将用户的登录shell设置为&#x2F;sbin&#x2F;nologin。如果用户试图直接登录系统，nologin shell将关闭该连接。</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[root@foundation0 ~]# usermod -s /sbin/nologin user03 </span><br><span class="line">[root@foundation0 ~]# su - user03</span><br><span class="line">Last login: Tue May 20 14:49:37 CST 2025 on pts/0</span><br><span class="line">Last failed login: Tue May 20 14:51:02 CST 2025 on pts/0</span><br><span class="line">There were 4 failed login attempts since the last successful login.</span><br><span class="line">This account is currently not available.</span><br></pre></td></tr></table></figure>
-
-<p>​	<code>重要：nologin shell可以防止以交互式使用系统，但不会阻止访问。如果用户使用密码进行身份验证，它们有时可以通过身份验证，并使用web应用、文件传输程序或邮件读取程序等应用上传或检索文件。</code></p>
 ]]></content>
       <categories>
         <category>RHCE</category>
@@ -1247,22 +912,337 @@
 </tr>
 </thead>
 <tbody><tr>
-<td></td>
-<td></td>
+<td>user01</td>
+<td>user01、user04</td>
 </tr>
 <tr>
-<td></td>
-<td></td>
+<td>user02</td>
+<td>user02、user04</td>
 </tr>
 <tr>
-<td></td>
-<td></td>
+<td>user03</td>
+<td>user03、operator2</td>
 </tr>
 <tr>
-<td></td>
-<td></td>
+<td>user04</td>
+<td>user04、operator2</td>
 </tr>
 </tbody></table>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[root@foundation0 home]# <span class="built_in">id</span> user01 user02 user03 user04 </span><br><span class="line">uid=1001(user01) gid=1001(user01) <span class="built_in">groups</span>=1001(user01),1004(user04)</span><br><span class="line">uid=1002(user02) gid=1002(user02) <span class="built_in">groups</span>=1002(user02),1004(user04)</span><br><span class="line">uid=1003(user03) gid=1003(user03) <span class="built_in">groups</span>=1003(user03),10001(operator2)</span><br><span class="line">uid=1004(user04) gid=1004(user04) <span class="built_in">groups</span>=1004(user04),10001(operator2)</span><br></pre></td></tr></table></figure>
+
+<p>​	这些用户将使用dir目录中的文件。如下是改目录中文件的长列表：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[user02@foundation0 <span class="built_in">dir</span>]$ <span class="built_in">ls</span> -la</span><br><span class="line">total 4</span><br><span class="line">drwxrwxr-x.  2 user02 user04        70 May 21 11:16 .</span><br><span class="line">drwxr-xr-x. 20 root   root        4096 May 21 11:18 ..</span><br><span class="line">-rw-rw-r--.  1 user01 user01         0 May 21 11:15 app1.log</span><br><span class="line">-rw-r--rw-.  1 user01 consultantl    0 May 21 11:15 app2.log</span><br><span class="line">-rw-rw-r--.  1 user02 consultantl    0 May 21 11:16 db1.conf</span><br><span class="line">-rw-r-----.  1 user02 consultantl    0 May 21 11:16 db2.conf</span><br></pre></td></tr></table></figure>
+
+<p>​	ls 命令-a选项可显示隐藏文件的权限，包含用于表示目录及其父目录的特殊权限。在本示例中，.（点）特殊目录反映了dir本身的目录权限，而..（点点）特殊目录则反映了其父目录的权限。</p>
+<p>​	对于db1.conf文件，拥有该文件的用户（user02）具有读取、写入权限，但没有执行权限。拥有该文件的组（user04）具有读取和写入权限，但没有执行权限。所有其他用户具有读取权限，但没有写入和执行权限。</p>
+<p>​	下表探讨了这组权限对这些用户的一些影响：</p>
+<table>
+<thead>
+<tr>
+<th>影响</th>
+<th>为什么会有此影响？</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>user01用户可以更改db1.conf文件的内容。</td>
+<td>user01用户是consultantl组的成员，并且该组对db1.conf文件具有读取、写入权限。</td>
+</tr>
+<tr>
+<td>user02用户可以查看和修改db2.conf文件的内容。</td>
+<td>user02用户拥有db2.conf文件，并对其具有读取和写入访问权限。</td>
+</tr>
+<tr>
+<td>user01可以查看db2.conf文件的内容，但不能修改其内容。</td>
+<td>user01用户是consultantl组的成员，并且该组对db2.conf文件仅有读取、写入权限，无写入权限。</td>
+</tr>
+<tr>
+<td>user03和user04用户没有对db2.conf的内容的任何访问权限。</td>
+<td>other权限适用于user03和user04用户，并且这些权限不包括读取或写入权限。</td>
+</tr>
+<tr>
+<td>user01用户是唯一能够更改app1.log文件内容的用户</td>
+<td>仅有user01用户和user01组的成员对该文件具有写入权限，而其他用户没用该权限，而user01组的唯一组成员是user01用户。</td>
+</tr>
+<tr>
+<td>user03用户可以更改app2.log文件的内容。</td>
+<td>user03用户不是app2.log文件的所有者，也不是consultantl组成员，因此他仅适用于other权限，other权限具有读、写去权限。</td>
+</tr>
+<tr>
+<td>user02用户可以查看app2.log文件的内容，但不能修改app2.log文件的内容。</td>
+<td>user02用户是consultantl组的成员，并且该组对app2.log文件具有读权限，虽然other具有读、写权限。但是组的优先级大于other，所以会覆盖other的权限。</td>
+</tr>
+<tr>
+<td>user02用户可以删除app1.log和app2.log文件。</td>
+<td>user02用户对dir目录又有写入权限（如.（点）特殊目录所示），因此可以删除该目录中的任何文件。即使user02用户没有直接对文件具有写入权限，依然是可以进行删除的。</td>
+</tr>
+</tbody></table>
+<h2 id="从命令行管理文件系统权限"><a href="#从命令行管理文件系统权限" class="headerlink" title="从命令行管理文件系统权限"></a>从命令行管理文件系统权限</h2><h3 id="更改文件和目录权限"><a href="#更改文件和目录权限" class="headerlink" title="更改文件和目录权限"></a>更改文件和目录权限</h3><p>​	chmod命令可从命令行更改文件和目录权限。chmod命令可以解释为“更改模式”，因为文件的模式是吻技安权限的另一个名称。chmod命令在要更改的文件或目录列表后面列出了权限说明。您可以通过符号或八进制（数字）表示法设置权限指令。</p>
+<h3 id="通过符号法更改权限"><a href="#通过符号法更改权限" class="headerlink" title="通过符号法更改权限"></a>通过符号法更改权限</h3><p>​	使用chmod命令修改文件和目录权限。以下示例可以帮助您了解chmod命令的用法：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">chmod</span> <span class="built_in">who</span>/what/which file|directory</span><br></pre></td></tr></table></figure>
+
+<p>​	who是用户的类，如下表所示。如果您不提供用户类，则chmod命令将使用all组作为默认值。</p>
+<table>
+<thead>
+<tr>
+<th>who</th>
+<th>集合</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>u</td>
+<td>user</td>
+<td>文件所有者</td>
+</tr>
+<tr>
+<td>g</td>
+<td>group</td>
+<td>文件所属组成员</td>
+</tr>
+<tr>
+<td>o</td>
+<td>other</td>
+<td>既不是文件所有者也不是文件所属组成员的用户</td>
+</tr>
+<tr>
+<td>a</td>
+<td>all</td>
+<td>所有前面三组</td>
+</tr>
+</tbody></table>
+<p>​	what 是修改which的操作符，如下表中所示。</p>
+<table>
+<thead>
+<tr>
+<th>what</th>
+<th>操作</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>+</td>
+<td>add</td>
+<td>向文件添加权限。</td>
+</tr>
+<tr>
+<td>-</td>
+<td>remove</td>
+<td>从文件删除权限。</td>
+</tr>
+<tr>
+<td>&#x3D;</td>
+<td>set exactly</td>
+<td>精确设置所提供的文件权限。</td>
+</tr>
+</tbody></table>
+<p>​	which是模式，指定文件或目录的权限，如下表所示。</p>
+<table>
+<thead>
+<tr>
+<th>which</th>
+<th>模式</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>r</td>
+<td>read</td>
+<td>文件的读取权限。目录的列出权限。</td>
+</tr>
+<tr>
+<td>w</td>
+<td>write</td>
+<td>文件或目录的写入权限。</td>
+</tr>
+<tr>
+<td>x（小写）</td>
+<td>execute</td>
+<td>文件的执行权限。允许进入目录，以及访问该目录中的文件和子目录。</td>
+</tr>
+<tr>
+<td>X（大写）</td>
+<td>special execute</td>
+<td>目录的执行权限，或者文件的执行权限（如果是文件，则该文件需要至少有一个执行权限，否则不会生效）</td>
+</tr>
+</tbody></table>
+<p>​	用于更改文件权限的符号使用字母代表不同的权限组：u表示用户，g表示组，o表示其他，a表示全部。</p>
+<p>​	使用符号法时，您不需要设置一组全新的权限。取而代之，您可以更改现有的一个或多个权限，或者使用等号（&#x3D;）来替换一组权限的整个集合。</p>
+<p>​	权限自身由单个字母来表示：r表示读取，w表示写入，x表示执行。只有文件是目录或者以为用户、组或其他人设置了执行权限，您才可以使用大写X作为权限标志来添加执行权限。</p>
+<p>​	以下列表显示了使用符号方法更改权限的一些示例：</p>
+<p>​	对于document.pdf文件，为组和其他添加删除、读取和写入权限：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[root@foundation0 <span class="built_in">dir</span>]# <span class="built_in">chmod</span> go+rw document.pdf</span><br></pre></td></tr></table></figure>
+
+<p>​	对于myscript.sh文件，为所有人添加执行权限：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[root@foundation0 <span class="built_in">dir</span>]# <span class="built_in">chmod</span> a+x myscript.sh</span><br></pre></td></tr></table></figure>
+
+<p>​	您可以使用chmod命令-R选项，以递归方式对整个目录树中的文件设置权限。例如下一个命令的递归方式为拥有myfolder目录的组成员以及其中的文件和目录添加读取、写入和执行权限。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[root@foundation0 ~]# <span class="built_in">chmod</span> -R g+rwx /root/myfolder/</span><br></pre></td></tr></table></figure>
+
+<p>​	您还可以使用chmod命令-R选项以及X选项，以符号方式设置权限。使用chmod命令X选项，您可以对目录设置执行（搜索）权限，以便在不更改大部分文件权限的情况下，访问这些目录的内容。不过，使用X选项是要谨慎，因为如果某个文件设置有任何执行权限，则X选项也将会对该文件设置指定的执行权限。</p>
+<p>​	例如，以下命令会以递归方式为组所有者设置对demodir目录及其所有子文件和目录的读、写权限，但将仅向以为用户、组或其他目录设置了执行权限的目录和文件应用组执行权限。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[root@foundation0 ~]# <span class="built_in">chmod</span> -R g+rwX demodir/</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="通过八进制法更改权限"><a href="#通过八进制法更改权限" class="headerlink" title="通过八进制法更改权限"></a>通过八进制法更改权限</h3><p>​	您可以使用chmod命令，通过八进制法（而非符号法）来更改文件权限。在以下实例中，#字符代表以为数字。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">chmod ### file|directory</span><br></pre></td></tr></table></figure>
+
+<p>​	如果使用八进制法，您可以用三位（火灾设置高级权限时为四位）八进制数来表示权限。单个八进制数字可以表示0-7的任何单个值。</p>
+<p>​	在权限的三位八进制表示法中，每一位数字表示一个访问级别，从左至右为：用户、组和其他。要确定每个数字：</p>
+<ul>
+<li>从0开始。</li>
+<li>如果要为此访问级别添加读取权限，请加4。</li>
+<li>如果要添加写入权限，请加2。</li>
+<li>如果要添加执行权限，请加1。</li>
+</ul>
+<p>​	有经验的管理员通常使用八进制权限，因为它们更容易对单个或匹配的文件实施权限变更。并且仍然提供完整的权限控制。</p>
+<p>​	以下列表显示了使用八进制法更改权限的一些示例：</p>
+<p>​	对于sample.txt文件，为用户设置读取和写入权限，并为组和其他人设置读取权限。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[root@foundation0 demodir]# <span class="built_in">chmod</span> 644 sample.txt</span><br></pre></td></tr></table></figure>
+
+<p>​	对sampledor目录，为用户设置读取、写入和执行权限，为组设置读取和执行权限，而为其他人设置权限。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[root@foundation0 demodir]# <span class="built_in">chmod</span> 750 sampledor</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="更改文件和目录的用户或组所有权"><a href="#更改文件和目录的用户或组所有权" class="headerlink" title="更改文件和目录的用户或组所有权"></a>更改文件和目录的用户或组所有权</h3><p>​	用户拥有其创建的文件。默认情况下，新文件的组所有权为创建该文件的主要用户组。在RedHat Linux 中，用户的主要组通常为仅有该用户作为成员的私有组。要根据组成员资格授予文件的访问权限，可能需要更改拥有该文件的组。</p>
+<p>​	只有root用户能够更改拥有文件的用户。但是，文件的所有者和root用户可以设置组所有权。root用户可以将文件所有权授予任何组。但只有普通用户是目标组的成员才能更改文件的组所有权。</p>
+<p>​	您可以使用chown（更改所有者）命令更改文件所有权。例如，要将app.conf的所有权授予user01用户，您可以使用以下命令：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[root@foundation0 demodir]# <span class="built_in">chown</span> user01 app.conf</span><br></pre></td></tr></table></figure>
+
+<p>​	chown命令 -R 选项可以递归更改整个目录树的所有权。以下命令可将Pictures目录以及其下的所有文件和子目录的所有权授予给user01用户：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[root@foundation0 demodir]# <span class="built_in">chown</span> -R user01 Pictures</span><br></pre></td></tr></table></figure>
+
+<p>​	也可以使用chown命令更改文件的组所有权，只需要在组名称之前加上冒号（:）。例如，以下命令将Pictures目录的组所有权更改为user02：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[root@foundation0 demodir]# <span class="built_in">chown</span> :user02 Pictures</span><br></pre></td></tr></table></figure>
+
+<p>​	您可以使用chown命令也可以同时更改所有者和组，使用owner:group语法即可。例如，要将Pictures目录的所有权更改到user03用户，同时将组所有权更改为user04，可以使用以下命令：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[root@foundation0 demodir]# <span class="built_in">chown</span> user03:user04 Pictures</span><br></pre></td></tr></table></figure>
+
+<p>​	有些用户并不使用chown命令，而是使用chgrp命令来更改组所有权。该命令的作用与chown类似，不同之处在于，您只能用它来更改组所有权，而组名前也不需要加冒号（:）。</p>
+<p>​	<code>重要：您可能会遇到chown用句点而不是冒号来分割所有者和组的情况：</code></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[root@foundation0 demodir]# <span class="built_in">chown</span> user03.user04 Pictures</span><br></pre></td></tr></table></figure>
+
+<p>​	<code>虽然同样可以更改成功，但RedHat官方不建议使用此语法，而应始终使用冒号。因为句点是用户名中有效的字符，因此chown命令可能会误解您的意图。同时命令可能会将用户和组解释为文件名。取而代之，仅可在同时设置用户和组时使用冒号字符。</code></p>
+<h2 id="管理默认权限和文件访问"><a href="#管理默认权限和文件访问" class="headerlink" title="管理默认权限和文件访问"></a>管理默认权限和文件访问</h2><h3 id="特殊权限"><a href="#特殊权限" class="headerlink" title="特殊权限"></a>特殊权限</h3><p>​	特殊权限是除了基本用户、组和其他类型之外的第四种特权类型。顾名思义，特殊权限提供了额外的访问相关功能，超出了基本权限类型允许的范畴。本章节介绍特殊权限的影响，具体参见下表的总结。</p>
+<p><strong>特殊权限对文件和目录的影响</strong></p>
+<table>
+<thead>
+<tr>
+<th>权限</th>
+<th>对文件的影响</th>
+<th>对目录的影响</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>u+s（suid）</td>
+<td>以拥有文件的用户身份，而不是以允许文件的用户身份执行文件。</td>
+<td>无影响。</td>
+</tr>
+<tr>
+<td>g+s（sgid）</td>
+<td>已拥有文件的组身份执行文件。</td>
+<td>目录中创建的文件的组所有者与目录的组所有者相匹配。</td>
+</tr>
+<tr>
+<td>o+t（sticky）</td>
+<td>无影响。</td>
+<td>对目录具有写入访问权限的用户仅可以删除其所拥有的文件，而无法删除或强制保存到其他用户所拥有的文件。</td>
+</tr>
+</tbody></table>
+<p>​	对可执行文件的setuid权限表示，将以拥有该文件的用户的身份运行命令，而不是以运行命令的用户身份，以passwd为例：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[user01@foundation0 demodir]$ <span class="built_in">ls</span> -l /usr/bin/passwd </span><br><span class="line">-rwsr-xr-x. 1 root root 32648 Aug 10  2021 /usr/bin/passwd</span><br></pre></td></tr></table></figure>
+
+<p>​	在长列表中，您可以通过小写的s字符辨别出setuid权限，此处通常是x字符（所有者执行权限）。如果所有者不具有执行权限，这个字符将由大写的S字符取代。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 如该文件所有者的执行权限x是存在的</span></span><br><span class="line">[root@foundation0 bin]# <span class="built_in">ls</span> -l passwd </span><br><span class="line">-rwxr-xr-x. 1 root root 32648 Aug 10  2021 passwd</span><br><span class="line"><span class="comment"># 此时为所有者设置setuid权限</span></span><br><span class="line">[root@foundation0 bin]# <span class="built_in">chmod</span> 4755 passwd</span><br><span class="line"><span class="comment"># 则x将替换为小写的s，表示该文件具有执行权限以及setuid权限</span></span><br><span class="line">[root@foundation0 bin]# <span class="built_in">ls</span> -l passwd </span><br><span class="line">-rwsr-xr-x. 1 root root 32648 Aug 10  2021 passwd</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 假设当前文件所有者无该x权限。</span></span><br><span class="line">[root@foundation0 bin]# <span class="built_in">ls</span> -l passwd </span><br><span class="line">-rw-r--r--. 1 root root 32648 Aug 10  2021 passwd</span><br><span class="line"><span class="comment"># 此时为所有者无x权限去设置setuid权限</span></span><br><span class="line">[root@foundation0 bin]# <span class="built_in">chmod</span> 4644 passwd</span><br><span class="line"><span class="comment"># 则由大写的S取代。</span></span><br><span class="line">[root@foundation0 bin]# <span class="built_in">ls</span> -l passwd </span><br><span class="line">-rwSr--r--. 1 root root 32648 Aug 10  2021 passwd</span><br></pre></td></tr></table></figure>
+
+<p>​	对于目录的setgid特殊权限，表现在该目录中创建的文件将继承该父目录的组所有权，而不是从创建用户继承组所有权。此功能通常用于协作目录，将文件从默认的私有组自动更改为共享组，或者当文件始终都应由特定的组所使用时使用。这种行为的一个示例是&#x2F;run&#x2F;log&#x2F;journal目录：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[root@foundation0 bin]# <span class="built_in">ls</span> -ld /run/log/journal/</span><br><span class="line">drwxr-sr-x+ 3 root systemd-journal 60 May 22 09:41 /run/log/journal/</span><br></pre></td></tr></table></figure>
+
+<p>​	如果对可执行文件设置了setgid，则命令将以拥有该文件的用户的身份运行，而不是运行命令的用户身份。此情况类似于setuid的工作方式。以locate命令为例：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[root@foundation0 bin]# <span class="built_in">ls</span> -l /usr/bin/locate </span><br><span class="line">-rwx--s--x. 1 root slocate 41032 Aug 10  2021 /usr/bin/locate</span><br></pre></td></tr></table></figure>
+
+<p>​	在长列表中，您可以通过小写的s字符来表别出setgid，此处通常是x字符（组执行权限）。如果组不具有执行权限，这个字符将由大写的S字符取代。</p>
+<p>​	最后，针对目录的粘滞位将对目录中的文件删除设置特殊限制。只有文件的所有者（及root用户）才能删除该目录中的文件。一个示例是&#x2F;tmp目录：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[root@foundation0 bin]# <span class="built_in">ls</span> -ld /tmp/</span><br><span class="line">drwxrwxrwt. 21 root root 4096 May 22 16:17 /tmp/</span><br></pre></td></tr></table></figure>
+
+<p>​	在长列表中，您可以通过小写的t字符辨别出粘滞位权限，此处通常是x字符（其他人执行权限）。如果其他人不具备执行权限，这个字符将由大写的T字符取代。</p>
+<p>​	<strong>设置特殊权限</strong></p>
+<ul>
+<li>符号：setuid&#x3D;u+s；setgid&#x3D;g+s；粘滞位&#x3D;o+t</li>
+<li>八进制：添加在三个序位前；setuid&#x3D;4；setgid&#x3D;2；粘滞位&#x3D;1</li>
+</ul>
+<p>​	特殊权限示例通过使用符号法在example目录中添加setgid位：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[root@foundation0 ~]# <span class="built_in">ls</span> -ld example/</span><br><span class="line">drwsr-xr-x. 2 user02 user04 6 May 22 17:09 example/</span><br><span class="line">[root@foundation0 ~]# <span class="built_in">chmod</span> g+s example/</span><br><span class="line">[root@foundation0 ~]# <span class="built_in">ls</span> -ld example/</span><br><span class="line">drwsr-sr-x. 2 user02 user04 6 May 22 17:09 example/</span><br></pre></td></tr></table></figure>
+
+<p>​	通过使用符号法删除example目录上的setuid</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[root@foundation0 ~]# <span class="built_in">ls</span> -ld example/</span><br><span class="line">drwsr-sr-x. 2 user02 user04 6 May 22 17:09 example/</span><br><span class="line">[root@foundation0 ~]# <span class="built_in">chmod</span> u-s example/</span><br><span class="line">[root@foundation0 ~]# <span class="built_in">ls</span> -ld example/</span><br><span class="line">drwxr-sr-x. 2 user02 user04 6 May 22 17:09 example/</span><br></pre></td></tr></table></figure>
+
+<p>​	使用八进制法，对example目录设置setgid位，并为用户和组添加读取、写入和执行权限，但其他用户不具备任何访问权限：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[root@foundation0 ~]# <span class="built_in">ls</span> -ld example/</span><br><span class="line">drwxr--r--. 2 user02 user04 6 May 22 17:09 example/</span><br><span class="line">[root@foundation0 ~]# <span class="built_in">chmod</span> 2770 example/</span><br><span class="line">[root@foundation0 ~]# <span class="built_in">ls</span> -ld example/</span><br><span class="line">drwxrws---. 2 user02 user04 6 May 22 17:09 example/</span><br></pre></td></tr></table></figure>
+
+<p>​	使用八进制法，对example目录删除setgid位，并未用户和组添加读取、写入和执行权限，但其他人不具备任何访问权限。请注意，使用八进制法删除特殊权限时，您需要在权限值的开头添加额外的0：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[root@foundation0 ~]# <span class="built_in">ls</span> -ld example/</span><br><span class="line">drwxrws---. 2 user02 user04 6 May 22 17:09 example/</span><br><span class="line">[root@foundation0 ~]# <span class="built_in">chmod</span> 00770 example </span><br><span class="line">[root@foundation0 ~]# <span class="built_in">ls</span> -ld example</span><br><span class="line">drwxrwx---. 2 user02 user04 6 May 22 17:09 example</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="默认文件权限"><a href="#默认文件权限" class="headerlink" title="默认文件权限"></a>默认文件权限</h3><p>​	在创建时，文件被分配初始权限。有两个因素会影响这些初始权限。其一是您要创建的是常规文件还是目录。其二是当前的umask，它代表用户文件创建掩码。</p>
+<p>​	如果创建目录，则其初始八进制权限为0777（drwxrwxrwx）。如果您创建常规文件，则其初始八进制权限为0666（-rw-rw-rw-）。必须始终不为常规文件添加执行权限。这一步可使攻击者更难破坏系统，创建和运行恶意文件</p>
+<p>​	此外，shell会话会设置umask，进一步限制文件的初始权限。umask是一个八进制位掩码，可以清除由进程创建的新文件和目录的权限。如果在umask中设置了一个位，则新文件中的对应的权限将被清楚。例如，umask 0002 可清楚其他用户的写入位。前导零表示特殊权限、用户和组权限未被清楚。umask为0077时，清楚新创建文件的所有组和其他权限。</p>
+<p>​	不带参数运行umask命令可显示当前shell的umask值：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[root@foundation0 ~]# <span class="built_in">umask</span> </span><br><span class="line">0022</span><br></pre></td></tr></table></figure>
+
+<p>​	通过一个八进制参数使用umask命令，可以更改当前shell的umask。该参数应当是与新umask值对应的八进制值。umask中第一个特殊权限的前导零均可以省略。例如，umask 077与umask 0077相同。</p>
+<p>​	Bash shell用户的系统默认 umask值在 &#x2F;etc&#x2F;login.defs和&#x2F;etc&#x2F;bashrc文件中定义。普通用户可以在其主目录的 .bash_profile 或 .bashrc 文件中覆盖系统默认值。</p>
+<p>​	<code>重要：在RedHat Linux 8和更早的版本中，如果用户账户的UID为200或更大的值，并且用户名和账户的主要组相同，则默认的umask为0002.否则，其默认的umask为0022.</code></p>
+<p>​	<code>红帽RedHat Linux 9正更改了这一设定，所有账户的umask都为0022。当您启动登录shell时，您的umask为0022。但是，当您启动交互式非登录shell时（例如当您在图形UI中启动gnome-terminal时），如果您账户的UID为200或更大值，并且您的主要组与您的用户账户同名，则您的umask为0002。未来RedHat会将所有用户都更改为同样的0022。</code></p>
+<p><img src="/2025/05/20/01-RHCE/01-124/Linux-RHCE-124-%E7%AC%AC%E5%85%AD%E7%AB%A0%E8%8A%82/image-20250522182353825.png" alt="image-20250522182353825"></p>
+<p><img src="/2025/05/20/01-RHCE/01-124/Linux-RHCE-124-%E7%AC%AC%E5%85%AD%E7%AB%A0%E8%8A%82/image-20250522182245664.png" alt="image-20250522182245664"></p>
+<h3 id="umask使用程序对权限的影响"><a href="#umask使用程序对权限的影响" class="headerlink" title="umask使用程序对权限的影响"></a>umask使用程序对权限的影响</h3><p>​	以下示例说明umask如何影响文件合目录的权限。查看当前shell中文件和目录的默认umask权限。<code>重要：假设umask当前值为0022。</code></p>
+<p>​	如果您创建常规文件，则其初始八进制权限为0666（二进制表示为 000 110 110 110）。然后0022的umask（000 000 010 010）将禁用组合其他对象的写入权限位。因此，所有者对文件具有读取和写入权限，组合其他对象设置为读取权限（000 110 100 100）.</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[kiosk@foundation0 ~]$ <span class="built_in">umask</span> </span><br><span class="line">0022</span><br><span class="line">[kiosk@foundation0 ~]$ <span class="built_in">touch</span> test.txt</span><br><span class="line">[kiosk@foundation0 ~]$ <span class="built_in">ls</span> -l test.txt </span><br><span class="line">-rw-r--r--. 1 kiosk kiosk 0 May 23 14:40 test.txt</span><br></pre></td></tr></table></figure>
+
+<p>​	如果创建目录，则其初始的八进制权限为0777（000 111 111 111）.然后umask为0022（000 000 010 010）将禁用组和其他对象的写入权限位。因此所有者对目录具有读取、写入和执行权限，组合其他对象设置为读取和执行权限（000 111 101 101）。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[kiosk@foundation0 ~]$ <span class="built_in">umask</span> </span><br><span class="line">0022</span><br><span class="line">[kiosk@foundation0 ~]$ <span class="built_in">mkdir</span> default</span><br><span class="line">[kiosk@foundation0 ~]$ <span class="built_in">ls</span> -ld default/</span><br><span class="line">drwxr-xr-x. 2 kiosk kiosk 6 May 23 14:44 default/</span><br></pre></td></tr></table></figure>
+
+<p>​	通过将umask值设置为0，其他用户的文件权限将从读取改为读取和写入。其他用户的目录权限将从读取和执行改为读取、写入和执行。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[kiosk@foundation0 ~]$ <span class="built_in">umask</span> 0</span><br><span class="line">[kiosk@foundation0 ~]$ <span class="built_in">touch</span> zero.txt</span><br><span class="line">[kiosk@foundation0 ~]$ <span class="built_in">ls</span> -l zero.txt </span><br><span class="line">-rw-rw-rw-. 1 kiosk kiosk 0 May 23 17:21 zero.txt</span><br><span class="line">[kiosk@foundation0 ~]$ <span class="built_in">mkdir</span> zero </span><br><span class="line">[kiosk@foundation0 ~]$ <span class="built_in">ls</span> -ld zero</span><br><span class="line">drwxrwxrwx. 2 kiosk kiosk 6 May 23 17:22 zero</span><br></pre></td></tr></table></figure>
+
+<p>​	要屏蔽其他用户的所有文件和目录权限，请将umask值设置为007。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[kiosk@foundation0 ~]$ <span class="built_in">umask</span> 007</span><br><span class="line">[kiosk@foundation0 ~]$ <span class="built_in">touch</span> seven.txt</span><br><span class="line">[kiosk@foundation0 ~]$ <span class="built_in">ls</span> -l seven.txt </span><br><span class="line">-rw-rw----. 1 kiosk kiosk 0 May 23 17:23 seven.txt</span><br><span class="line">[kiosk@foundation0 ~]$ <span class="built_in">mkdir</span> seven</span><br><span class="line">[kiosk@foundation0 ~]$ <span class="built_in">ls</span> -ld seven</span><br><span class="line">drwxrwx---. 2 kiosk kiosk 6 May 23 17:23 seven</span><br></pre></td></tr></table></figure>
+
+<p>​	umask为027可确保用户对新文件具有读写权限，组具有读取权限。组对新目录具有读取和执行权限，而其他用户则没有任何权限。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[kiosk@foundation0 ~]$ <span class="built_in">umask</span> 027</span><br><span class="line">[kiosk@foundation0 ~]$ <span class="built_in">touch</span> two-seven.txt</span><br><span class="line">[kiosk@foundation0 ~]$ <span class="built_in">ls</span> -l two-seven.txt</span><br><span class="line">-rw-r-----. 1 kiosk kiosk 0 May 23 17:27 two-seven.txt</span><br><span class="line">[kiosk@foundation0 ~]$ <span class="built_in">mkdir</span> two-seven</span><br><span class="line">[kiosk@foundation0 ~]$ <span class="built_in">ls</span> -ld two-seven</span><br><span class="line">drwxr-x---. 2 kiosk kiosk 6 May 23 17:28 two-seven</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="更改默认权限"><a href="#更改默认权限" class="headerlink" title="更改默认权限"></a>更改默认权限</h3><p>​	在RedHat Linux 9中，&#x2F;etc&#x2F;logindefs文件为用户设置默认的umask。默认情况下，其umask行指定的默认umask为0022。</p>
+<p>​	在RedHat Linux 9.0和9.1中，这只影响登录shell。如果您启动新的终端窗口或以其他方式启动交互式飞登录shell，&#x2F;etc&#x2F;bashrc中的设置仍然适用。对于这些shell，如果账户UID为200或更大值，并且用户名和主要组名相同，就会向账户分配一个值为0002的umask。否则，其umask为0022。</p>
+<p>​	root用户可以通过在&#x2F;etc&#x2F;profile.d&#x2F;目录中添加local-umask.sh的shell启动脚本来更改交互式非登录shell的默认umask。以下示例显示了一个local-umask.sh文件。</p>
+<p><img src="/2025/05/20/01-RHCE/01-124/Linux-RHCE-124-%E7%AC%AC%E5%85%AD%E7%AB%A0%E8%8A%82/image-20250523175818661.png" alt="image-20250523175818661"></p>
+<p>​	对于UID大于199且用户名和主要组相匹配的用户，上面的示例会将umask设置为0007，其余全部设置为0022。（前导零可以省略）如果想将所有人的umask都设置为0022，可以使用以下内容创建该文件。</p>
+<p>总结：交互式非登录bashrc生效，交互式登录bash_profile生效。</p>
+<p>​	可以通过shopt login_shell验证是否是登录还是非登录，如果为on则表示当前是登录式，off则是非登录式</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">[kiosk@foundation0 ~]$ shopt login_shell </span><br><span class="line">login_shell    	on</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 ]]></content>
       <categories>
         <category>RHCE</category>
@@ -1616,6 +1596,341 @@
 
 
 
+]]></content>
+      <categories>
+        <category>RHCE</category>
+      </categories>
+      <tags>
+        <tag>RHCE</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Linux-RHCE-124-第五章节</title>
+    <url>/2025/04/03/01-RHCE/01-124/Linux-RHCE-124-%E7%AC%AC%E4%BA%94%E7%AB%A0%E8%8A%82/</url>
+    <content><![CDATA[<h1 id="管理本地用户和组"><a href="#管理本地用户和组" class="headerlink" title="管理本地用户和组"></a>管理本地用户和组</h1><h2 id="什么是用户？"><a href="#什么是用户？" class="headerlink" title="什么是用户？"></a>什么是用户？</h2><p>​	用户账户在可以运行命令的不同人员和程序之间提供安全界限。</p>
+<p>​	用户使用用户名想人类用户标识自己并加强操作的便利性。在内部，系统通过分配的唯一标识号（用户ID或UID）来区分不同的用户账户。在大多数情况下，如果有人使用用户账号，则系统会位改用户分配一个机密密码，以证明他们是登录的授权用户。</p>
+<p>​	用户账户构成了系统安全的基础。系统中的每个进程（运行的程序）都作为一个特定用户运行。每个文件都有一个特定用户作为其所有者。借助文件所有权，系统可以对文件的用户实施访问控制。与运行进程相关联的用户可确定该进程可访问的文件和目录。</p>
+<p>​	用户账户有以下三种主要类型：超级用户、系统用户和普通用户。</p>
+<ul>
+<li>超级用户账户负责管理系统。超级用户的名称为root，其账户的UID为0.超级用户具有完全的系统访问权限。</li>
+<li>系统用户账户提供支持服务进程使用。这些进程（或守护进程）通常不需要以超级用户身份运行。系统会为它们分配非特权账户，确保其文件和其他资源不受彼此以及系统上普通用户的影响。用户无法使用系统用户账户以交互式登录。</li>
+<li>大多数用户都有用于日常工作的普通用户账户。与系统用户一样，普通用户对系统具有有限的访问权限。</li>
+</ul>
+<p>​	使用id命令可显示有关当前已登录用户的信息。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[kiosk@foundation0 ~]$ <span class="built_in">id</span></span><br><span class="line">uid=1000(kiosk) gid=1000(kiosk) <span class="built_in">groups</span>=1000(kiosk),982(libvirt) context=unconfined_u:unconfined_r:unconfined_t:s0-s0:c0.c1023</span><br><span class="line">[kiosk@foundation0 ~]$ </span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>​	要查看有关其他用户的基本信息，请将用户作为参数传递给id命令：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[kiosk@foundation0 home]$ <span class="built_in">id</span> redhat01 </span><br><span class="line">uid=1001(redhat01) gid=1001(redhat01) <span class="built_in">groups</span>=1001(redhat01)</span><br><span class="line">[kiosk@foundation0 home]$ </span><br></pre></td></tr></table></figure>
+
+<p>​	使用ls -l命令可查看文件的所有者。使用ls -ld命令可查看目录的所有者，而不是该目录的内容。在以下出书中，第三列显示所有者的用户名。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[kiosk@foundation0 ~]$ <span class="built_in">ls</span> -l test1.txt </span><br><span class="line">-rw-r--r--. 1 kiosk kiosk 1 Mar  6 16:46 test1.txt</span><br><span class="line">[kiosk@foundation0 ~]$ <span class="built_in">ls</span> -ld Music/</span><br><span class="line">drwxr-xr-x. 2 kiosk kiosk 6 Feb  1  2023 Music/</span><br><span class="line">[kiosk@foundation0 ~]$ </span><br></pre></td></tr></table></figure>
+
+<p>​	使用ps命令可查看进程信息。默认为仅显示当前shell中的进程。使用ps命令-a选项可查看与某一终端相关的所有进程。使用ps命令-u选项可查看与进程关联的用户。在以下输出中，第一列显示用户名。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[kiosk@foundation0 ~]$ ps -au</span><br><span class="line">USER         PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND</span><br><span class="line">kiosk       2342  0.0  0.0 374120  5872 tty2     Ssl+ 14:28   0:00 /usr/libexec/gdm-wayland-session --register-s</span><br><span class="line">kiosk       2352  0.0  0.1 521392 19632 tty2     Sl+  14:28   0:00 /usr/libexec/gnome-session-binary</span><br><span class="line">kiosk       3200  0.0  0.0 224212  5800 pts/0    Ss+  14:29   0:00 bash</span><br><span class="line">kiosk       4447  0.0  0.0 224228  5768 pts/6    Ss   14:35   0:00 -bash</span><br><span class="line">kiosk       4918  1.5  0.0 224096  5556 pts/7    Ss+  15:13   0:00 -bash</span><br><span class="line">kiosk       4952  0.0  0.0 225500  3648 pts/6    R+   15:13   0:00 ps -au</span><br></pre></td></tr></table></figure>
+
+<p>​	以上命令输出按名称显示用户名，但操作系统内部利用UID来跟踪用户。用户名到UID的映射在账户信息数据库中定义。默认情况下，系统使用&#x2F;etc&#x2F;passwd文件存储有关本地用户的信息。</p>
+<p>​	&#x2F;etc&#x2F;passwd文件的每一行都包含了有关某个用户的信息。该文件划分为7个以上的冒号分割的字段。以下是来自&#x2F;etc&#x2F;passwd行的示例。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[kiosk@foundation0 ~]$ <span class="built_in">cat</span> /etc/passwd</span><br><span class="line">redhat01:x:1001:1001:User One:/home/redhat01:/bin/bash</span><br></pre></td></tr></table></figure>
+
+<p>​	代码块的每个部分，用冒号分割</p>
+<ul>
+<li>redhat01：此为用户的用户名</li>
+<li>x：用户的加密密码历来存储在这里；但在此是一个占位符。</li>
+<li>1001：此用户账户的UID编号</li>
+<li>1001：此用户账户的主要组的GID编号。本章节稍后将对组进行讨论</li>
+<li>User One：此用户的简短注释、描述或真实姓名等。</li>
+<li>&#x2F;home&#x2F;redhat01：用户的主目录，以及登录shell启动时的初始工作目录。</li>
+<li>&#x2F;bin&#x2F;bash：此用户的默认shell程序，在登陆时运行，一些账户使用&#x2F;sbin&#x2F;nologin shell来禁止该用户使用交互式登录。</li>
+</ul>
+<h2 id="什么是组"><a href="#什么是组" class="headerlink" title="什么是组"></a>什么是组</h2><p>​	组是需要共享文件和其他系统资源访问权限的用户集合。组可用于向一组用户授予文件访问权限，而非向一个用户授予访问权限。</p>
+<p>​	与用户一样，组也具有组名以便识别。在内部，系统通过分配的唯一标识号（组ID或GID）来区分不同的组。组名到GID映射在组账户信息身份管理数据库中定义。默认情况下，系统使用&#x2F;etc&#x2F;group文件存储有关本地组的信息。</p>
+<p>​	&#x2F;etc&#x2F;group文件的每行都包含了有关某个组的信息。每个组条目被分为四个以冒号分割的字段。以下来自&#x2F;etc&#x2F;group行的示例：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">...忽略...</span><br><span class="line">redhat01:x:1001:user01,user02</span><br></pre></td></tr></table></figure>
+
+<p>​	考虑代码块的每个部分用冒号分割：</p>
+<ul>
+<li>redhat01：此组的名称</li>
+<li>x：以前的组密码字段；现在是一个占位符。</li>
+<li>1001：此组的GID编号。</li>
+<li>user01,user02：属于此组成员的用户列表，作为一个补充组。</li>
+</ul>
+<h2 id="主要组和补充组"><a href="#主要组和补充组" class="headerlink" title="主要组和补充组"></a>主要组和补充组</h2><p>​	每一个用户有且只有一个主要组。对于本地用户而言，这个组按照GID列在&#x2F;etc&#x2F;passwd文件中。主要组拥有用户创建的文件。</p>
+<p>​	在创建普通用户时，会创建一个与用户名同名的组，作为该用户的主要组。该用户是这个私有组的唯一成员。这种组成员资格设计简化了文件权限的管理，默认为区隔不同的用户组。</p>
+<p>​	用户还可以拥有多个补充组。补充组中的成员资格存储在&#x2F;etc&#x2F;group文件中。根据所在组身份具有访问权限，将授予用户对文件的访问权限，不论这些组是主要组还是补充组。例如，如果user01用户有一个主要组user01以下两个补充组wheel和webadmin，那么该用户就可以读取这三个组中任何一个组，有权读取的文件。</p>
+<p>​	id命令可以显示用户的组成员资格。在以下示例中，kiosk用户具有组kiosk作为自己的主要组（gid）。groups项列出此用户的所以组成员资格，而且用户还具有libvirt组作为补充组。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[kiosk@foundation0 ~]$ <span class="built_in">id</span></span><br><span class="line">uid=1000(kiosk) gid=1000(kiosk) <span class="built_in">groups</span>=1000(kiosk),982(libvirt) context=unconfined_u:unconfined_r:unconfined_t:s0-s0:c0.c1023</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h1 id="获取超级用户访问权限"><a href="#获取超级用户访问权限" class="headerlink" title="获取超级用户访问权限"></a>获取超级用户访问权限</h1><h2 id="超级用户"><a href="#超级用户" class="headerlink" title="超级用户"></a>超级用户</h2><p>​	大多数操作系统具有一个超级用户，该用户拥有系统的全部权限。在红帽Linux中，此为root用户。此用户的特权高于文件系统上的一般特权，您可以使用它来管理系统。若要执行诸如安装或删除软件以及管理系统文件和目录任务，必须将特权升级到root用户。</p>
+<p>​	通常，普通用户中只有root用户才能控制大部分设备，但也有一些例外。例如，普通用户可以控制可移动设备，如USB设备。因此，虽然普通用户可以添加和删除文件并可管理可移动的设备，但默认情况下，只有root用户才能管理硬盘。</p>
+<p>​	尽管如此，这种无限制的特权也带来了职责问题。root用户拥有足以破坏系统的无限制特权：删除文件和目录、删除用户账户，以及添加后门等。一旦root用户账户被盗，系统将处于危险之中，您也可能会失去管理控制。红帽建议系统管理员始终以普通用户身份登录，仅在需要时升级到root用户特权。</p>
+<p>​	Linux上root账户大致相当于Windows上的本地Admininstrator账户。在Linux中，大多数系统管理员都作为无特权的用户登录，然后使用特种工具临时获得root特权。</p>
+<p>​	<code>警告：Windows用户可能熟悉以本地Administrator用户身份登录以执行系统管理员职责的做法。如今不建议这样做，用户通过Administrator组中的成员资格来获取执行管理的特权。RHEL中同样如此，红帽建议系统管理员不要直接以root身份登录。取而代之，系统管理员以普通用户身份登录，然后使用其他机制（例如：su、sudo或policykit）临时获得超级用户特权。</code></p>
+<h2 id="切换用户账户"><a href="#切换用户账户" class="headerlink" title="切换用户账户"></a>切换用户账户</h2><p>​	通过使用su命令，用户可以切换至另一个用户账户。如果从普通用户账户运行su命令并将另一用户账户作为参数，则必须提供要切换到的用户账户密码。以root用户身份运行su时，则无需输入用户密码。</p>
+<p>​	本示例从kiosk账户运行su命令来切换到redhat01账户：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[kiosk@foundation0 ~]$ su redhat01</span><br><span class="line">Password: <span class="comment"># redhat01的密码</span></span><br><span class="line">[redhat01@foundation0 kiosk]$ <span class="built_in">id</span></span><br><span class="line">uid=1001(redhat01) gid=1001(redhat01) <span class="built_in">groups</span>=1001(redhat01) context=unconfined_u:unconfined_r:unconfined_t:s0-s0:c0.c1023</span><br><span class="line">[redhat01@foundation0 kiosk]$</span><br></pre></td></tr></table></figure>
+
+<p>​	如果省略用户名作为su命令的参数，则默认情况下su 或 su - 命令会尝试切换到root。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[redhat01@foundation0 kiosk]$ su -</span><br><span class="line">Password: </span><br><span class="line">Last login: Thu Apr  3 18:01:23 CST 2025 on pts/6</span><br><span class="line">[root@foundation0 ~]# <span class="built_in">id</span></span><br><span class="line">uid=0(root) gid=0(root) <span class="built_in">groups</span>=0(root) context=unconfined_u:unconfined_r:unconfined_t:s0-s0:c0.c1023</span><br><span class="line">[root@foundation0 ~]#</span><br></pre></td></tr></table></figure>
+
+<p>​	命令su将启动非登录shell，而命令su - （带有短划线选项）会启动登录shell。两个命令的主要区别在于，su - 会将shell环境变量设置为如同该用户身份重新登录一样，而su以该用户身份启动shell，但使用的是原始用户环境变量设置。</p>
+<p>​	<code>注意：su命令最常用于获得另一个用户身份（通常root）运行的命令行界面（shell提示符）。但是，您还可以通过su命令结合-c选项，以另一个用户身份运行任意程序。具体su命令更多选项可通过man su(1)查看</code></p>
+<h2 id="通过sudo运行命令"><a href="#通过sudo运行命令" class="headerlink" title="通过sudo运行命令"></a>通过sudo运行命令</h2><p>​	出于安全原因，在某些情况下，系统管理员会将root用户配置为没有有限的密码。因此，用户无法使用密码直接以root身份登录系统。此外，您也无法使用su来获取交互式shell。在这种情况下，您可以使用sudo命令来获取root访问权限。</p>
+<p>​	与su命令不同，sudo通常要求用户输入自己的密码以进行身份验证，而不是输入他们正尝试访问的用户账户的密码。也就是说，用户使用sudo命令以root身份运行命令时，是不需要知道root密码。相反，他们将使用自己的密码来验证访问权限。</p>
+<p>​	下表总结了su、su - 和sudo命令之间的区别：</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>su</th>
+<th>su -</th>
+<th>sudo</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>成为新用户</td>
+<td>是</td>
+<td>是</td>
+<td>权限升级的命令</td>
+</tr>
+<tr>
+<td>环境</td>
+<td>新用户的</td>
+<td>新用户的</td>
+<td>当前用户的</td>
+</tr>
+<tr>
+<td>需要密码</td>
+<td>新用户的</td>
+<td>新用户的</td>
+<td>当前用户的</td>
+</tr>
+<tr>
+<td>特权</td>
+<td>与新用户相同</td>
+<td>与新用户相同</td>
+<td>有配置定义</td>
+</tr>
+<tr>
+<td>记录的活动</td>
+<td>仅su命令</td>
+<td>仅su命令</td>
+<td>权限升级的命令</td>
+</tr>
+</tbody></table>
+<p>​	此外，您可以将sudo配置为允许特定用户像某个其他用户一样运行任何命令，或仅允许以该用户是否允许部分命令。例如，如果您将sudo命令配置为允许redhat01用户以root身份允许usermod命令，那么您可以允许一下命令来锁定或解锁用户账户：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[kiosk@foundation0 home]$ <span class="built_in">sudo</span> usermod -L redhat01 </span><br><span class="line">[<span class="built_in">sudo</span>] password <span class="keyword">for</span> kiosk: </span><br><span class="line">[kiosk@foundation0 home]$ su - redhat01 </span><br><span class="line">Password: </span><br><span class="line">su: Authentication failure</span><br><span class="line">[kiosk@foundation0 home]$</span><br></pre></td></tr></table></figure>
+
+<p>​	如果某用户尝试以另一用户身份允许命令，但sudo配置不允许，则bash会阻止该命令，记录这次尝试，并向root发送一封邮件。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[root@foundation0 ~]# <span class="built_in">tail</span> -f /var/log/secure</span><br><span class="line">Apr 17 15:53:04 foundation0 su[2569]: pam_unix(su-l:auth): authentication failure; <span class="built_in">logname</span>=kiosk uid=1000 euid=0 <span class="built_in">tty</span>=/dev/pts/0 ruser=kiosk rhost=  user=redhat01</span><br></pre></td></tr></table></figure>
+
+<p>​	sudo的另一个好处是默认将所有执行的命令记录到&#x2F;var&#x2F;log&#x2F;secure中。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">[root@foundation0 ~]# tail -f /var/log/secure</span><br><span class="line">Apr 17 15:50:06 foundation0 sudo[2373]:   kiosk : command not allowed ; TTY=pts/0 ; PWD=/home ; USER=root ; COMMAND=/sbin/usermod -L redhat01</span><br></pre></td></tr></table></figure>
+
+<p>​	在红帽Linux中，wheel组所有成员都可以使用自己的密码通过sudo以任何用户身份允许命令，包括root在内</p>
+<h2 id="通过Sudo获取交互式Root-Shell"><a href="#通过Sudo获取交互式Root-Shell" class="headerlink" title="通过Sudo获取交互式Root Shell"></a>通过Sudo获取交互式Root Shell</h2><p>​	要通过sudo访问root账户，请使用sudo -i命令。此命令将切换root账户并运行该用户的默认shell及关联的交互式登录脚本。要在没有交互式脚本的情况下运行shell，请使用sudo -s命令。</p>
+<p>​	例如，管理员可以获取kiosk实例上root用户的交互式shell，方法是使用SSH公钥身份验证作为普通用户kiosk登录，在运行sudo -i命令获取root用户的shell。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[kiosk@foundation0 home]$ <span class="built_in">sudo</span> -i</span><br><span class="line">[<span class="built_in">sudo</span>] password <span class="keyword">for</span> kiosk: </span><br><span class="line">[root@foundation0 ~]# </span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="配置Sudo"><a href="#配置Sudo" class="headerlink" title="配置Sudo"></a>配置Sudo</h2><p>​	&#x2F;etc&#x2F;sudoers文件是sudo命令的主要配置文件。如果多个管理员试图编辑该文件，为了避免出现问题，您只能特殊的visudo命令进行编辑。visudo编辑器也会验证该文件，确保没有语法错误。</p>
+<p>​	例如，以下来自&#x2F;etc&#x2F;sudoers文件的这一行可为wheel组成员启用sudo访问权限：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">%wheel  ALL=(ALL)       ALL</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>%wheel字符串是规则所应用到的用户或组。词语wheel前的%符号指定该是对一个组进行权限的设置。</li>
+<li>ALL&#x3D;(ALL:ALL)命令指定在具有此文件的任何主机上（第一个ALL），wheel组中的用户可以在系统上以任何其他用户（第二个ALL）和任何其他组（第三个ALL）运行命令。</li>
+<li>最后的ALL命令指定wheel组中的用户可以运行任何命令。</li>
+</ul>
+<p>​	默认情况下，&#x2F;etc&#x2F;sudoers文件还包含&#x2F;etc&#x2F;sudoers.d目录中所有文件的内容，作为配置文件的一部分。通过使用这种层次结构，您只需将相应的文件放入该目录中，即可为用户添加sudo访问权限。</p>
+<p>​	<code>注意：将配置文件放在/etc/sudoers.d目录下比较方便。将文件复制到目录中或从目录中删除文件，即可启用或禁用sudo访问权限。通常每个文件都会以用户或组来进行命名，当要启用或是禁用时，只需将文件在该目录中复制或删除即可。避免一个文件长篇大论，难以维护</code></p>
+<p>​	要为redhat01用户启用完整的sudo访问权限，您可以创建含有以下内容的&#x2F;etc&#x2F;sudoers.d&#x2F;redhat01文件：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[root@foundation0 ~]# <span class="built_in">cat</span> /etc/sudoers.d/redhat01 </span><br><span class="line">redhat01 ALL=(ALL) ALL</span><br></pre></td></tr></table></figure>
+
+<p>​	要为group01组启用完整的sudo访问权限，您可以创建含有以下内容的&#x2F;etc&#x2F;sudoers.d&#x2F;group01文件：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">[root@foundation0 ~]# cat /etc/sudoers.d/group01</span><br><span class="line">%group01 ALL=(ALL) ALL</span><br></pre></td></tr></table></figure>
+
+<p>​	要使games组中的用户能够以operator用户身份运行id命令，您可以创建含有以下内容的&#x2F;etc&#x2F;sudoers.d&#x2F;games文件：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">[root@foundation0 ~]# cat /etc/sudoers.d/games</span><br><span class="line">%games ALL=(operator) /bin/id</span><br></pre></td></tr></table></figure>
+
+<p>​	此外，也可以设置sudo，以允许用户通过使用NOPASSWD:ALL命令在不输入密码的前提下以其他用户身份允许命令：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">[root@foundation0 ~]# cat /etc/sudoers.d/ansible</span><br><span class="line">%ansible ALL=(ALL) NOPASSWD:ALL</span><br></pre></td></tr></table></figure>
+
+<p>​	虽然授权用户或组这种级别的访问权限存在明显的安全风险，但系统会将这种做法用于云实例、虚拟机和调配系统，以配置服务器。您必须谨慎地保护具有此访问权限的账户，并且要求使用SSH公钥身份验证，以便远程系统上的用户能访问它。</p>
+<h1 id="管理本地用户账户"><a href="#管理本地用户账户" class="headerlink" title="管理本地用户账户"></a>管理本地用户账户</h1><h2 id="从命令行创建用户"><a href="#从命令行创建用户" class="headerlink" title="从命令行创建用户"></a>从命令行创建用户</h2><p>​	useradd username命令可以创建名为username的用户。它会设置用户的主目录和账户信息，并为名为username的用户创建一个私有组。此时，该账户尚未设置有效密码，用户也要设置了密码后才能登录。</p>
+<p>​	useradd –help 命令将显示可用于覆盖默认设置的基本选项。大多数情形中，您可以将相同的选项用于usermod命令，以修改现有用户。</p>
+<p>​	在红帽linux9中，useradd命令为新用户分配的第一个大于或等于1000的可用UID，除非您通过-u选项进行明确指定。</p>
+<h2 id="从命令行修改现有的用户"><a href="#从命令行修改现有的用户" class="headerlink" title="从命令行修改现有的用户"></a>从命令行修改现有的用户</h2><p>​	usermod –help命令显示用于修改账户的基本选项。一些常见的选项如下：</p>
+<table>
+<thead>
+<tr>
+<th>usermod选项</th>
+<th>用法</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>-a，–append</td>
+<td>与-G选项一起使用，将补充组添加到用户当前的组成员集合中，而不是将补充组集合替换为新的集合。</td>
+</tr>
+<tr>
+<td>-c，–comment COMMENT</td>
+<td>将COMMENT文本添加到注释字段。</td>
+</tr>
+<tr>
+<td>-d，–home HOME_DIR</td>
+<td>为用户账户指定一个主目录。</td>
+</tr>
+<tr>
+<td>-g， –gid GROUP</td>
+<td>为用户账户指定主要组。</td>
+</tr>
+<tr>
+<td>-G，–groups GROUPS</td>
+<td>为用户账户指定补充组，多个补充组用逗号分割列表。</td>
+</tr>
+<tr>
+<td>-L， –lock</td>
+<td>锁定用户账户。</td>
+</tr>
+<tr>
+<td>-m，–move-home</td>
+<td>将用户的主目录移送到新的位置。您必须将它于-d选项搭配使用。</td>
+</tr>
+<tr>
+<td>-s，–shell SHELL</td>
+<td>为用户账户指定特定的登录shell。</td>
+</tr>
+<tr>
+<td>-U，–unlock</td>
+<td>解锁用户账户。</td>
+</tr>
+</tbody></table>
+<h2 id="从命令行删除用户"><a href="#从命令行删除用户" class="headerlink" title="从命令行删除用户"></a>从命令行删除用户</h2><p>​	userdel username 命令从&#x2F;etc&#x2F;passwd中删除用户的详细信息，但用户的主目录保持不变。userdel -r username 命令从&#x2F;etc&#x2F;passwd 中删除用户，同时删除用户的主目录。</p>
+<p>​	<code>警告：如果您在不指定userdel -r 选项的情况下删除用户，则用户的文件归为未分配的UID所有。如果您创建了一个用户，并且该用户被分配了已删除用户的UID，则新账户将用有这些文件，这存在安全风险。通常，组织安全策略不允许删除用户账户，而是锁定它们不被使用，以避免这种情况。</code></p>
+<p>​	以下示例演示了这如何导致信息泄露：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[root@foundation0 kiosk]# useradd user01</span><br><span class="line">[root@foundation0 ~]# <span class="built_in">ls</span> -l /home/</span><br><span class="line">total 1</span><br><span class="line">drwx------.  3 user01   user01     78 May 13 10:57 user01</span><br><span class="line"><span class="comment"># 删除用户</span></span><br><span class="line">[root@foundation0 ~]# userdel user01 </span><br><span class="line"><span class="comment"># 为加-r选项，此时用户的主目录处于未分配状态，他之前所属用户UID为：1002</span></span><br><span class="line">[root@foundation0 ~]# <span class="built_in">ls</span> -l /home/</span><br><span class="line">total 1</span><br><span class="line">drwx------.  3     1002     1002   78 May 13 10:57 user01</span><br><span class="line"><span class="comment"># 创建用户，-u 指定该用户的UID为：1002</span></span><br><span class="line">[root@foundation0 ~]# useradd -u 1002 user02</span><br><span class="line"><span class="comment"># 由于于之前的user01的UID一致，user01的主目录则自动归属为user02</span></span><br><span class="line">[root@foundation0 ~]# <span class="built_in">ls</span> -l /home/</span><br><span class="line">total 2</span><br><span class="line">drwx------.  3 user02   user02     78 May 13 10:57 user01</span><br><span class="line">drwx------.  3 user02   user02     78 May 13 11:02 user02</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>​	<code>请注意，user02现在拥有之前归为user01所属的所有文件。root用户可以使用find / -nouser -o -nogroup 命令来查找无人拥有的文件和目录。</code></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[root@foundation0 ~]# userdel user02 </span><br><span class="line">[root@foundation0 ~]# <span class="built_in">ls</span> -l /home/</span><br><span class="line">total 2</span><br><span class="line">drwx------.  3     1002     1002   78 May 13 10:57 user01</span><br><span class="line">drwx------.  3     1002     1002   78 May 13 11:02 user02</span><br><span class="line"><span class="comment"># nouser表示没有归属用户的条件，nogroup表示没有归属用户的组，-o选项表示【或】的意思，用于多个条件的拼接</span></span><br><span class="line">[root@foundation0 ~]# find / -nouser -o -nogroup </span><br><span class="line">...忽略...</span><br><span class="line">/home/user01/.mozilla</span><br><span class="line">/home/user01/.mozilla/extensions</span><br><span class="line">/home/user01/.mozilla/plugins</span><br><span class="line">/home/user01/.bash_logout</span><br><span class="line">/home/user01/.bash_profile</span><br><span class="line">/home/user01/.bashrc</span><br><span class="line">/home/user02</span><br><span class="line">....忽略....</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="从命令行设置密码"><a href="#从命令行设置密码" class="headerlink" title="从命令行设置密码"></a>从命令行设置密码</h2><p>​	passwd username 命令可为username用户设置初始密码，或更改其现有密码。root用户可以将密码设置为任何值。如果密码不符合最低建议标准，终端会显示消息；不顾哦，之后您可以重新键入该新密码，passwd也会成功更新该密码。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 创建用户</span></span><br><span class="line">[root@foundation0 ~]# useradd -u 1002 user01</span><br><span class="line">useradd: warning: the home directory /home/user01 already exists.</span><br><span class="line">useradd: Not copying any file from skel directory into it.</span><br><span class="line">Creating mailbox file: File exists</span><br><span class="line"><span class="comment"># 为用户设置初始密码，密码：123456，虽会提示密码过于简单，未通过字典检查，但再次确认密码后任然可以成功设置。</span></span><br><span class="line">[root@foundation0 home]# passwd user01 </span><br><span class="line">Changing password <span class="keyword">for</span> user user01.</span><br><span class="line">New password: </span><br><span class="line">BAD PASSWORD: The password fails the dictionary check - it is too simplistic/systematic</span><br><span class="line">Retype new password: </span><br><span class="line">passwd: all authentication tokens updated successfully.</span><br><span class="line">[root@foundation0 home]# </span><br></pre></td></tr></table></figure>
+
+<p>​	<code>建议普通用户必须选择至少八个字符长的密码。不要使用字典词语、用户名或旧密码。</code></p>
+<h2 id="UID范围"><a href="#UID范围" class="headerlink" title="UID范围"></a>UID范围</h2><ul>
+<li>UID 0：超级用户(root)账户UID。</li>
+<li>UID 1-200：静态分配给系统进程的系统账户UID。</li>
+<li>UID 201-999：分配给不拥有此系统上文件的系统进程的UID。需要非特权UID的软件将从这个可用池中动态分配UID。</li>
+<li>UID 1000+：分配给普通非特权用户的UID范围。</li>
+</ul>
+<p>注意：RedHat6及更早的版本对系统用户使用的范围1-499的UID，对普通用户使用高于500的UID。您可以在&#x2F;etc&#x2F;login.defs文件中更改useradd和groupadd默认范围。</p>
+<p><img src="/2025/04/03/01-RHCE/01-124/Linux-RHCE-124-%E7%AC%AC%E4%BA%94%E7%AB%A0%E8%8A%82/image-20250513112428467.png" alt="image-20250513112428467"></p>
+<h1 id="管理本地组账户"><a href="#管理本地组账户" class="headerlink" title="管理本地组账户"></a>管理本地组账户</h1><h2 id="从命令行创建组"><a href="#从命令行创建组" class="headerlink" title="从命令行创建组"></a>从命令行创建组</h2><p>​	groupadd命令用于创建组。不带选项时，groupadd命令会使用&#x2F;etc&#x2F;login.defs文件中通过GID_MIN和GID_MAX 变量指定的范围内的下一个可用GID。默认情况下，该命令分配的GID值大于任何其他现有的GID，即使有较低的值可用。</p>
+<p>​	groupadd 命令 -g选项指定该组使用的特定GID。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[root@foundation0 ~]# groupadd -g 10000 group1</span><br><span class="line">[root@foundation0 ~]# <span class="built_in">tail</span> /etc/group</span><br><span class="line">....忽略...</span><br><span class="line">group1:x:10000:</span><br></pre></td></tr></table></figure>
+
+<p>​	<code>注意：由于创建用户时会自动为该用户生成一个私有组（GID 1000+），一些管理员会留出了一个单独的GID范围，用于创建补充组来满足其目的。但是，这种额外的管理是不必要的，因为用户的UID和主要组GID是不需要是相同的数字。</code></p>
+<p>​	groupadd 命令 -r 选项用于创建系统组。与普通一样，系统组使用&#x2F;etc&#x2F;login.defs文件中列出的有效系统GID范围内的GID。&#x2F;etc&#x2F;login.defs文件中的SYS_GID_MIN和SYS_GID_MAX配置项定义系统GID的范围。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[root@foundation0 ~]# <span class="built_in">tail</span> /etc/group</span><br><span class="line">...忽略...</span><br><span class="line">group1:x:10000:</span><br><span class="line">group2:x:976:</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="从命令行修改现有的组"><a href="#从命令行修改现有的组" class="headerlink" title="从命令行修改现有的组"></a>从命令行修改现有的组</h2><p>​	groupmod 命令可以更改现有组的属性。groupmod命令-n选项可指定组的新名称。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[root@foundation0 ~]# groupmod -n group002 group2 </span><br><span class="line">[root@foundation0 ~]# <span class="built_in">tail</span> /etc/group</span><br><span class="line">...忽略...</span><br><span class="line">group1:x:10000:</span><br><span class="line">group002:x:976:</span><br><span class="line">[root@foundation0 ~]#</span><br></pre></td></tr></table></figure>
+
+<p>​	注意组名称从group2更改为group002，groupmod命令-g选项可更改GID</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[root@foundation0 ~]# groupmod -g 975 group002 </span><br><span class="line">[root@foundation0 ~]# <span class="built_in">tail</span> /etc/group</span><br><span class="line">...忽略...</span><br><span class="line">group1:x:10000:</span><br><span class="line">group002:x:975:</span><br></pre></td></tr></table></figure>
+
+<p>​	注意GID从原来的976变更为975.</p>
+<h2 id="从命令行删除组"><a href="#从命令行删除组" class="headerlink" title="从命令行删除组"></a>从命令行删除组</h2><p>​	groupdel 命令可删除组。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[root@foundation0 ~]# groupdel group002 </span><br><span class="line">[root@foundation0 ~]# <span class="built_in">tail</span> /etc/group</span><br><span class="line">...忽略...</span><br><span class="line">group1:x:10000:</span><br></pre></td></tr></table></figure>
+
+<p>​	<code>注意：如果删除的组是现有用户的主要组，则您无法删除它。于使用userdel命令类似，首先检查以确保找到该组拥有的文件，避免信息泄露</code></p>
+<h2 id="从命令行更改组成员资格"><a href="#从命令行更改组成员资格" class="headerlink" title="从命令行更改组成员资格"></a>从命令行更改组成员资格</h2><p>​	组成员资格通过用户管理进行控制。使用usermod -g命令来更改用户的主要组。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[root@foundation0 home]# <span class="built_in">id</span> user01 </span><br><span class="line">uid=1002(user01) gid=1002(user01) <span class="built_in">groups</span>=1002(user01)</span><br><span class="line">[root@foundation0 home]# usermod -g group01 user01 </span><br><span class="line">[root@foundation0 home]# <span class="built_in">id</span> user01 </span><br><span class="line">uid=1002(user01) gid=10000(group1) <span class="built_in">groups</span>=10000(group1)</span><br><span class="line">[root@foundation0 home]# </span><br></pre></td></tr></table></figure>
+
+<p>​	使用usermod -aG命令，将用户太你家到某一补充组。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[root@foundation0 home]# <span class="built_in">id</span> user01 </span><br><span class="line">uid=1002(user01) gid=10000(group1) <span class="built_in">groups</span>=10000(group1)</span><br><span class="line">[root@foundation0 home]# usermod -aG user01 user01 </span><br><span class="line">[root@foundation0 home]# <span class="built_in">id</span> user01 </span><br><span class="line">uid=1002(user01) gid=10000(group1) <span class="built_in">groups</span>=10000(group1),1002(user01)</span><br></pre></td></tr></table></figure>
+
+<p>​	<code>重要：usermod命令的-a选项可启用附加模式。不带-a选项时，命令会从当前未包含在 -G 选项列表中的任何补充组从该用户中删除。</code></p>
+<h2 id="比较主要组和补充组成员资格"><a href="#比较主要组和补充组成员资格" class="headerlink" title="比较主要组和补充组成员资格"></a>比较主要组和补充组成员资格</h2><p>​	用户的主要组是在&#x2F;etc&#x2F;passwd文件中查看的用户账户和组。一个用户一次只能属于一个主要组。</p>
+<p>​	用户的补充组是为用户配置的额外组，可在&#x2F;etc&#x2F;group文件中的用户条目中查看。一个用户可以属于任意数量的补充组，以有效实施文件访问和权限。</p>
+<p>​	对于配置基于组的文件权限而言，用户的主要组和补充组之间没有区别。如果用户所属的组被分配了特定文件的访问权限，则该用户有权访问这些文件。</p>
+<p>​	用户的主要组和补充组成员资格之间唯一的区别体现在用户创建文件时。新文件必须具有用户所有者和组所有者，这是在文件创建时分配的。用户的主要组用于新文件的组所有权，除非被选项命令覆盖。</p>
+<h2 id="临时更改您的主要组"><a href="#临时更改您的主要组" class="headerlink" title="临时更改您的主要组"></a>临时更改您的主要组</h2><p>​	只有用户的主要组才会用于新文件创建属性。但是，您可以暂时将主要组切换到另一个组，但只能从您所属的补充组中去选择。如果您要手动或以脚本方式创建多个新文件，并希望创建时将不通的组分配为所有者，则可以切换组。</p>
+<p>​	在此shell会话中，使用newgrp命令来切换主要组。您可以在所属的任何主要组或补充组之间却换，但一次只能由一个组是主要组。如果您注销并重新登录，主要组将回复为默认值。此示例将user01用户中的补充组user01临时切换为主要组。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[user01@foundation0 ~]$ <span class="built_in">id</span></span><br><span class="line">uid=1002(user01) gid=10000(group1) <span class="built_in">groups</span>=10000(group1),1002(user01) context=unconfined_u:unconfined_r:unconfined_t:s0-s0:c0.c1023</span><br><span class="line">[user01@foundation0 ~]$ newgrp </span><br><span class="line">group1  user01  </span><br><span class="line">[user01@foundation0 ~]$ newgrp user01 </span><br><span class="line">[user01@foundation0 ~]$ <span class="built_in">id</span></span><br><span class="line">uid=1002(user01) gid=1002(user01) <span class="built_in">groups</span>=1002(user01),10000(group1) context=unconfined_u:unconfined_r:unconfined_t:s0-s0:c0.c1023</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h1 id="管理用户密码"><a href="#管理用户密码" class="headerlink" title="管理用户密码"></a>管理用户密码</h1><h2 id="影子密码和密码策略"><a href="#影子密码和密码策略" class="headerlink" title="影子密码和密码策略"></a>影子密码和密码策略</h2><p>​	加密的密码最初存储在全局可读的&#x2F;etc&#x2F;passwd文件中。这曾认为是最妥善的，直到对加密密码的字典式攻击变得常见。加密后的密码已移至&#x2F;etc&#x2F;shadow文件，只有root用户可以读取该文件。</p>
+<p>​	与&#x2F;etc&#x2F;passwd文件一样，每个用户在&#x2F;etc&#x2F;shadow文件中都有一个条目。&#x2F;etc&#x2F;shadow文件中的示例条目具有九个以冒号分割的字段：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">redhat01:$6$N4i94UcIEydvTFzp<span class="variable">$pf9W0C4I6w4BFxyK</span>/ver6M7DVPnvupuGoYK/ZP24Y9ojBLN1/VYuJSucRtIDrICSSzhvmc31iUeXuBNnV3oBm0:20195:0:99999:7:::</span><br></pre></td></tr></table></figure>
+
+<p>​	以此代码块为例，每个字段用冒号分割：</p>
+<ul>
+<li>redhat01：用户账户名称。</li>
+<li>$6$N4i94UcIEydv…省略：用户的加密密码，$6开头（SHA-512）加密。</li>
+<li>20195：上次更改密码时间距离纪元的天数；纪元是UTC时区的1970-01-01。</li>
+<li>0：自上次更改密码以来到用户可再次更改密码之前必须经过的最短天数。</li>
+<li>99999：在密码过期之前不进行密码更改的最长天数。空字段表示密码永不过期，自最后一次修改密码截至多少天过期。</li>
+<li>7：在密码过期前提前多少天警告用户。</li>
+<li>空：自密码过期之日起，在账户自动锁定前能够活动的天数，宽限天数。</li>
+<li>空：密码到期之日距离纪元的天数。空字段表示密码永不过期，密码过期天数。</li>
+<li>空：保留字段，预留给未来使用。</li>
+</ul>
+<h2 id="加密密码的格式"><a href="#加密密码的格式" class="headerlink" title="加密密码的格式"></a>加密密码的格式</h2><p>​	加密密码字段中存储了三段信息：所用的哈希算法、salt及加密哈希值。每段信息由美元符号（$）字符分割。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$6$N4i94UcIEydvTFzp<span class="variable">$pf9W0C4I6w4BFxyK</span>/ver6M7DVPnvupuGoYK/ZP24Y9ojBLN1/VYuJSucRtIDrICSSzhvmc31iUeXuBNnV3oBm0</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>$6：此密码所使用的哈希算法。6表示SHA-512,这是RedHat默认算法；1表示MD5，而5则表示SHA-256。</li>
+<li>$N4i94UcIEydvTFzp：用于加密密码的salt；最初是随机选择的。</li>
+<li>$pf9W0C4I6w4BFxyK&#x2F;ver…忽略：用户密码的加密后的哈希；将salt和未加密密码组合并加密，生成密码哈希。</li>
+</ul>
+<p>​	将salt与密码组合的主要原因是为了防止使用预先计算的密码哈希列表攻击。添加salt会改变生成的哈希值，使预先计算的列表毫无用处。如果攻击者获得了使用salt的&#x2F;etc&#x2F;shadow文件的副本，则它们需要通过暴力破解来猜测密码，这将花费更多的时间和精力。</p>
+<h2 id="密码验证"><a href="#密码验证" class="headerlink" title="密码验证"></a>密码验证</h2><p>​	用户尝试登录时，系统在&#x2F;etc&#x2F;shadow文件中查询用户的条目，将用户的salt和键入的未加密密码组合，在使用制定的哈希算法加密组合。如何加密组合后的结果与已加密的哈希匹配，则用户键入了正确的密码。如果结果与已加密的密码不符合，则用户键入了错误的密码，登录尝试也会失败。这种方式允许系统半段用户是否键入了正确的密码，同时又不以用于登录的密码形式来存储密码。</p>
+<h2 id="配置密码期限"><a href="#配置密码期限" class="headerlink" title="配置密码期限"></a>配置密码期限</h2><p>​	下图显示了相关的密码期限参数，可以通过chage命令对起调整实施密码期限策略。</p>
+<p><img src="/2025/04/03/01-RHCE/01-124/Linux-RHCE-124-%E7%AC%AC%E4%BA%94%E7%AB%A0%E8%8A%82/image-20250520145616305.png" alt="image-20250520145616305"></p>
+<p>​	以下示例演示使用chage命令修改redhat01用户的密码策略。该命令定义密码修改间隔最短期限（-m）为0天，密码最长有效期（-M）为90天，警告期（-W）7天，以及过期后宽限（-I）14天后自动过期为不活动状态。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[root@foundation0 ~]# chage -m 0 -M 90 -W 7 -I 14 redhat01</span><br><span class="line">[root@foundation0 ~]# chage -l redhat01 </span><br><span class="line">Last password change					: Apr 17, 2025</span><br><span class="line">Password expires					: Jul 16, 2025</span><br><span class="line">Password inactive					: Jul 30, 2025</span><br><span class="line">Account expires						: never</span><br><span class="line">Minimum number of days between password change		: 0</span><br><span class="line">Maximum number of days between password change		: 90</span><br><span class="line">Number of days of warning before password expires	: 7</span><br></pre></td></tr></table></figure>
+
+<p>​	假设您在RedHat上管理用户密码策略。user01用户是系统中的新用户，您要设置自定义密码期限策略。您希望将账户的到期之间设置为，即日起30天后到期，因此您可以使用以下命令。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[root@foundation0 ~]# <span class="built_in">date</span> +%F</span><br><span class="line">2025-05-20</span><br><span class="line">[root@foundation0 ~]# <span class="built_in">date</span> -d <span class="string">&quot;+30 days&quot;</span> +%F</span><br><span class="line">2025-06-19</span><br><span class="line">[root@foundation0 ~]# chage -E $(<span class="built_in">date</span> -d <span class="string">&quot;+30 days&quot;</span> +%F) user01</span><br><span class="line">[root@foundation0 ~]# chage -l user01 | grep <span class="string">&quot;Account expires&quot;</span></span><br><span class="line">Account expires						: Jun 19, 2025</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>使用date命令获取当前时间，并通过+%F选项，调整date命令输出的日期格式。</li>
+<li>使用date命令的-d选项以及“+30 days”参数获取即日起30天后的日期，并转换日期格式。</li>
+<li>使用chage命令的-E选项，将获得的截至日期作为参数赋予该选项。</li>
+<li>使用chage命令的-l选项，并且通过grep命令筛选出命令输出结果中的“Account expires”行，最终查看user01用户的过期时间成功设置为30天后。</li>
+</ul>
+<p>​	几天后，您在&#x2F;var&#x2F;log&#x2F;secure日志文件中发现user01用户有一个奇怪的行为。用户尝试使用sudo与其他用户的文件交互。您怀疑用户可能忘记关闭在另一台计算机上工作时打开的ssh会话。您希望user01用户在下次登录时更改密码，因此您可以使用以下命令。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[root@foundation0 ~]# chage -d 0 user01 </span><br><span class="line">[root@foundation0 ~]# chage -l user01</span><br><span class="line">Last password change					: password must be changed</span><br><span class="line">Password expires					: password must be changed</span><br><span class="line">Password inactive					: password must be changed</span><br><span class="line">Account expires						: Jun 19, 2025</span><br><span class="line">Minimum number of days between password change		: 0</span><br><span class="line">Maximum number of days between password change		: 99999</span><br><span class="line">Number of days of warning before password expires	: 7</span><br></pre></td></tr></table></figure>
+
+<p>​	此时user01的密码策略中提示，用户必须修改密码的结果，下次用户登录时就必须要求修改密码了。</p>
+<p>​	<code>注意：date命令可以计算未来的时间。-u选项报告UTC时间。</code></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">[root@foundation0 ~]# date -d &quot;+5 days&quot; -u +%F</span><br><span class="line">2025-05-25</span><br></pre></td></tr></table></figure>
+
+<p>​	您可以在&#x2F;etc&#x2F;login.defs文件中更改默认密码期限配置。PASS_MAX_DAYS和PASS_MIN_DAYS选项分别设置密码的默认最长和最短期限。PASS_WARN_AGE设置密码的默认警告期限。默认密码期限策略中的任何更改都会影响更改后新创建的用户。现有用户继续使用就密码期限设置，而非新密码设置。</p>
+<h2 id="限制访问"><a href="#限制访问" class="headerlink" title="限制访问"></a>限制访问</h2><p>​	您可以使用usermod命令来修改用户的账户到期日期。例如，usermod命令-L选项可锁定用户账户，并且该用户无法登录系统。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[root@foundation0 ~]# usermod -L user03</span><br><span class="line">[kiosk@foundation0 ~]$ su - user03 </span><br><span class="line">Password: </span><br><span class="line">su: Authentication failure</span><br></pre></td></tr></table></figure>
+
+<p>​	如果用户在特定日期从公司离职，您可以通过usermod命令锁定并使其到期。该日期必须是从1970-01-01的天开始算起，或者使用YYYY-MM-DD格式。以下示例中，usermod命令于2025-05-21锁定user03用户并使其过期。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[root@foundation0 ~]# usermod -L -e 2025-05-21 user03 </span><br><span class="line">[root@foundation0 ~]# chage -l user03 </span><br><span class="line">Last password change					: May 20, 2025</span><br><span class="line">Password expires					: never</span><br><span class="line">Password inactive					: never</span><br><span class="line">Account expires						: May 21, 2025</span><br><span class="line">Minimum number of days between password change		: 0</span><br><span class="line">Maximum number of days between password change		: 99999</span><br><span class="line">Number of days of warning before password expires	: 7</span><br></pre></td></tr></table></figure>
+
+<p>​	账户锁定后，您可以防止用户使用密码向系统进行验证。简易使用此方法防止前员工访问账户。使用usermod命令-U选项可以重新启用账户的访问权限。</p>
+<h2 id="非登录Shell"><a href="#非登录Shell" class="headerlink" title="非登录Shell"></a>非登录Shell</h2><p>​	nologin shell用作不打算以交互方式登录系统的用户账户的代替shell。从安全角度来看，在账户不需要登录系统时，禁止账户登录系统是一个明智的选择。例如，邮件服务器可能需要账户来存储邮件，需要密码供用户通过检索邮件所用的邮件客户端进行身份验证。用户不需要直接登录该系统。</p>
+<p>​	这种情况的常用解决方案是将用户的登录shell设置为&#x2F;sbin&#x2F;nologin。如果用户试图直接登录系统，nologin shell将关闭该连接。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[root@foundation0 ~]# usermod -s /sbin/nologin user03 </span><br><span class="line">[root@foundation0 ~]# su - user03</span><br><span class="line">Last login: Tue May 20 14:49:37 CST 2025 on pts/0</span><br><span class="line">Last failed login: Tue May 20 14:51:02 CST 2025 on pts/0</span><br><span class="line">There were 4 failed login attempts since the last successful login.</span><br><span class="line">This account is currently not available.</span><br></pre></td></tr></table></figure>
+
+<p>​	<code>重要：nologin shell可以防止以交互式使用系统，但不会阻止访问。如果用户使用密码进行身份验证，它们有时可以通过身份验证，并使用web应用、文件传输程序或邮件读取程序等应用上传或检索文件。</code></p>
 ]]></content>
       <categories>
         <category>RHCE</category>
