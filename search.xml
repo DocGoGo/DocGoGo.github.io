@@ -1194,6 +1194,359 @@
       </tags>
   </entry>
   <entry>
+    <title>Linux-RHCE-124-第四章节</title>
+    <url>/2025/03/10/01-RHCE/01-124/Linux-RHCE-124-%E7%AC%AC%E5%9B%9B%E7%AB%A0%E8%8A%82/</url>
+    <content><![CDATA[<h1 id="创建、查看和编辑文本文件"><a href="#创建、查看和编辑文本文件" class="headerlink" title="创建、查看和编辑文本文件"></a>创建、查看和编辑文本文件</h1><h2 id="将输出重定向到文件或程序"><a href="#将输出重定向到文件或程序" class="headerlink" title="将输出重定向到文件或程序"></a>将输出重定向到文件或程序</h2><p>标准输入、标准输出和标准错误</p>
+<p>​	运行中的程序或进程会读取输入并写入输出。从shell提示符运行命令时，通常会从键盘读取其输入，并将输出发送到终端窗口。</p>
+<p>​	进程使用称为文件描述符的编号通道来获取输入并发送输出。所有进程在开始时至少要有三个文件描述符。标准输入（通道0）从键盘读取输入。标准输出（通道1）将正常输出发送到终端。标准错误（通道2）将错误消息发送到终端。</p>
+<p>​	如果程序打开连接至其他文件的单独连接，则可能要使用更大编号的文件描述符。</p>
+<p><img src="/2025/03/10/01-RHCE/01-124/Linux-RHCE-124-%E7%AC%AC%E5%9B%9B%E7%AB%A0%E8%8A%82/image-20250310171941393.png" alt="image-20250310171941393"></p>
+<blockquote>
+<p>​													进程I&#x2F;O通道（文件描述符）</p>
+</blockquote>
+<p>​	下表总结了有关文件夫描述符的信息：</p>
+<table>
+<thead>
+<tr>
+<th>编号</th>
+<th>通道名称</th>
+<th>描述</th>
+<th>默认连接</th>
+<th>用法</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>0</td>
+<td>stdin</td>
+<td>标准输入</td>
+<td>键盘</td>
+<td>仅读取</td>
+</tr>
+<tr>
+<td>1</td>
+<td>stdout</td>
+<td>标准输出</td>
+<td>终端</td>
+<td>仅写入</td>
+</tr>
+<tr>
+<td>2</td>
+<td>stderr</td>
+<td>标准错误</td>
+<td>终端</td>
+<td>仅写入</td>
+</tr>
+<tr>
+<td>3</td>
+<td>filename</td>
+<td>其他文件</td>
+<td>无</td>
+<td>读取或写入</td>
+</tr>
+</tbody></table>
+<h2 id="将输出重定向到文件"><a href="#将输出重定向到文件" class="headerlink" title="将输出重定向到文件"></a>将输出重定向到文件</h2><p>​	输入&#x2F;输出（I&#x2F;O）重定向可给更改进程获取其输入或输出的方式。进程可以执行文件读取或写入，而不从键盘获取输入，也不将输出和错误发送到终端。通过重定向，您可以将消息保存到文件，而不在终端上显示输出。或者，您也可以使用重定向丢弃输出或错误输出，这样它们就不会显示在终端上或保存下来。</p>
+<p>​	您可以重定向进程stdout以阻止进程输出显示在终端上。如果您将stdout重定向到某个文件，单该文件不存在，则会为您创建该文件。如果文件确实存在，但是您选择的重定向不是附加到文件，则重定向会覆盖文件原有内容。要丢弃进程的输出，您可以重定向到空的&#x2F;dev&#x2F;null特殊文件，该文件会静默丢弃重定向到该进程的通道输出。</p>
+<p>​	如下表，仅对stdout重定向不会阻止stderr错误消息显示在终端上。</p>
+<table>
+<thead>
+<tr>
+<th>用法</th>
+<th>说明</th>
+<th>视觉辅助</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>&gt; file</td>
+<td>重定向stdout以覆盖文件</td>
+<td><img src="/2025/03/10/01-RHCE/01-124/Linux-RHCE-124-%E7%AC%AC%E5%9B%9B%E7%AB%A0%E8%8A%82/image-20250310180118758.png" alt="image-20250310180118758"></td>
+</tr>
+<tr>
+<td>&gt;&gt; file</td>
+<td>重定向stdout以追加到文件</td>
+<td><img src="/2025/03/10/01-RHCE/01-124/Linux-RHCE-124-%E7%AC%AC%E5%9B%9B%E7%AB%A0%E8%8A%82/image-20250310180306263.png" alt="image-20250310180306263"></td>
+</tr>
+<tr>
+<td>2&gt; file</td>
+<td>重定向stderr以覆盖文件</td>
+<td><img src="/2025/03/10/01-RHCE/01-124/Linux-RHCE-124-%E7%AC%AC%E5%9B%9B%E7%AB%A0%E8%8A%82/image-20250310180426539.png" alt="image-20250310180426539"></td>
+</tr>
+<tr>
+<td>2&gt; &#x2F;dev&#x2F;null</td>
+<td>重定向stderr错误消息到&#x2F;dev&#x2F;null，从而丢弃它</td>
+<td><img src="/2025/03/10/01-RHCE/01-124/Linux-RHCE-124-%E7%AC%AC%E5%9B%9B%E7%AB%A0%E8%8A%82/image-20250310180600483.png" alt="image-20250310180600483"></td>
+</tr>
+<tr>
+<td>&gt; file 2&gt;&amp;1 和 &amp;&gt; file</td>
+<td>重定向stdout和stderr以覆盖同一文件</td>
+<td><img src="/2025/03/10/01-RHCE/01-124/Linux-RHCE-124-%E7%AC%AC%E5%9B%9B%E7%AB%A0%E8%8A%82/image-20250310180738265.png" alt="image-20250310180738265"></td>
+</tr>
+<tr>
+<td>&gt;&gt; file 2&gt;&amp;1 和 &amp;&gt;&gt; file</td>
+<td>重定向stdout和stderr以追加到同一文件</td>
+<td><img src="/2025/03/10/01-RHCE/01-124/Linux-RHCE-124-%E7%AC%AC%E5%9B%9B%E7%AB%A0%E8%8A%82/image-20250310180849243.png" alt="image-20250310180849243"></td>
+</tr>
+<tr>
+<td>&gt; file 2&gt; file</td>
+<td>分别将stdout和stderr以覆盖到不同的文件</td>
+<td><img src="/2025/03/10/01-RHCE/01-124/Linux-RHCE-124-%E7%AC%AC%E5%9B%9B%E7%AB%A0%E8%8A%82/image-20250310181244864.png" alt="image-20250310181244864"></td>
+</tr>
+<tr>
+<td>&gt;&gt; file 2&gt;&gt; file</td>
+<td>分别将stdout和stderr以追加到不同的文件</td>
+<td><img src="/2025/03/10/01-RHCE/01-124/Linux-RHCE-124-%E7%AC%AC%E5%9B%9B%E7%AB%A0%E8%8A%82/image-20250310181402294.png" alt="image-20250310181402294"></td>
+</tr>
+</tbody></table>
+<h2 id="输出重定向示例"><a href="#输出重定向示例" class="headerlink" title="输出重定向示例"></a>输出重定向示例</h2><p>​	通过重定向来简化许多日常管理任务。在是思考下列示例时，请参考前面表格。</p>
+<p>​	在&#x2F;tmp&#x2F;saved-timestamp文件中保存时间戳以供日后参考。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[kiosk@foundation0 ~]$ <span class="built_in">date</span> &gt; /tmp/saved-timestamp</span><br><span class="line">[kiosk@foundation0 ~]$ <span class="built_in">cat</span> /tmp/saved-timestamp</span><br><span class="line">Tue Mar 18 04:54:43 PM CST 2025</span><br><span class="line">[kiosk@foundation0 ~]$ </span><br></pre></td></tr></table></figure>
+
+<p>​	将&#x2F;var&#x2F;log&#x2F;secure文件的最后100行复制到&#x2F;tmp&#x2F;last-100-secure文件，这里需要使用root账户。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[root@foundation0 ~]# <span class="built_in">tail</span> -n 100 /var/log/secure &gt; /tmp/last-100-secure</span><br><span class="line">[root@foundation0 ~]# </span><br></pre></td></tr></table></figure>
+
+<p>​	将所有四个step文件内容连接为一个，并保存到&#x2F;tmp&#x2F;all-four-steps-in-one文件中，没有该step文件可自行创建。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[root@foundation0 step]# <span class="built_in">cat</span> step1.txt step2.txt step3.txt step4.txt </span><br><span class="line">step1</span><br><span class="line">step2</span><br><span class="line">step3</span><br><span class="line">step4</span><br><span class="line">[root@foundation0 step]# <span class="built_in">cat</span> step1.txt step2.txt step3.txt step4.txt &gt; /tmp/all-four-steps-in-one</span><br><span class="line">[root@foundation0 step]# <span class="built_in">cat</span> /tmp/all-four-steps-in-one</span><br><span class="line">step1</span><br><span class="line">step2</span><br><span class="line">step3</span><br><span class="line">step4</span><br><span class="line">[root@foundation0 step]#</span><br></pre></td></tr></table></figure>
+
+<p>​	列出主目录的隐藏文件名和常规文件名，并输出保存到my-file-names文件中。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[root@foundation0 ~]# <span class="built_in">ls</span> -a &gt; my-file-names</span><br><span class="line">[root@foundation0 ~]# <span class="built_in">cat</span> my-file-names </span><br><span class="line">.....忽略.....</span><br><span class="line">ClassroomSetup-RHCSA-9.0-1.r2022052407gitdd6fbd2.txt</span><br><span class="line">ClassroomSetup-RHCSA-9.0-1.r2022092007git75b8165.txt</span><br><span class="line">ClassroomTroubleshooting-9.x-7.r2022112118git21c9ff2.txt</span><br><span class="line">.cshrc</span><br><span class="line">.dbus</span><br><span class="line">foundation0-config-9.x-7.r2022112118git21c9ff2.noarch.rpm</span><br><span class="line">foundation0-config-post.log</span><br><span class="line">.....忽略.....</span><br><span class="line">[root@foundation0 ~]#</span><br></pre></td></tr></table></figure>
+
+<p>​	在现有的&#x2F;tmp&#x2F;many-lines-of-information文件中附加一行内容。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[root@foundation0 ~]# <span class="built_in">cat</span> /tmp/many-lines-of-information</span><br><span class="line">hahaha</span><br><span class="line">[root@foundation0 ~]# <span class="built_in">echo</span> <span class="string">&quot;new line of information&quot;</span> &gt; /tmp/many-lines-of-information</span><br><span class="line">[root@foundation0 ~]# <span class="built_in">cat</span> /tmp/many-lines-of-information</span><br><span class="line">new line of information</span><br><span class="line">[root@foundation0 ~]#</span><br></pre></td></tr></table></figure>
+
+<p>​	接下来几个命令会产生错误消息，因为普通用户无法访问某些系统目录。观察错误消息的重定向。</p>
+<p>​	在终端上查看普通命令输出时，将find命令的错误重定向到&#x2F;tmp&#x2F;errors文件。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[kiosk@foundation0 ~]$ find /etc -name passwd 2&gt; /tmp/errors</span><br><span class="line">/etc/pam.d/passwd</span><br><span class="line">/etc/passwd</span><br><span class="line">[kiosk@foundation0 ~]$ <span class="built_in">cat</span> /tmp/errors</span><br><span class="line">...忽略...</span><br><span class="line">find: ‘/etc/lvm/backup’: Permission denied</span><br><span class="line">find: ‘/etc/lvm/cache’: Permission denied</span><br><span class="line">find: ‘/etc/lvm/devices’: Permission denied</span><br><span class="line">...忽略...</span><br><span class="line">[kiosk@foundation0 ~]$</span><br></pre></td></tr></table></figure>
+
+<p>​	将进程输出保存到&#x2F;tmp&#x2F;output文件，并将错误消息保存到&#x2F;tmp&#x2F;errorss文件。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[kiosk@foundation0 ~]$ find /etc -name passwd &gt; /tmp/output 2&gt; /tmp/errors</span><br><span class="line">[kiosk@foundation0 ~]$ <span class="built_in">cat</span> /tmp/output </span><br><span class="line">/etc/pam.d/passwd</span><br><span class="line">/etc/passwd</span><br><span class="line">[kiosk@foundation0 ~]$ <span class="built_in">cat</span> /tmp/errors </span><br><span class="line">...忽略...</span><br><span class="line">find: ‘/etc/lvm/backup’: Permission denied</span><br><span class="line">find: ‘/etc/lvm/cache’: Permission denied</span><br><span class="line">find: ‘/etc/lvm/devices’: Permission denied</span><br><span class="line">...忽略...</span><br><span class="line">[kiosk@foundation0 ~]$ </span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>​	将进程输出保存到&#x2F;tmp&#x2F;output文件，并丢弃错误消息。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[kiosk@foundation0 ~]$ find /etc -name passwd &gt; /tmp/output 2&gt; /dev/null </span><br><span class="line">[kiosk@foundation0 ~]$ <span class="built_in">cat</span> /tmp/output </span><br><span class="line">/etc/pam.d/passwd</span><br><span class="line">/etc/passwd</span><br><span class="line">[kiosk@foundation0 ~]$ <span class="built_in">cat</span> /tmp/errors</span><br><span class="line"><span class="built_in">cat</span>: /tmp/errors: No such file or directory</span><br><span class="line">[kiosk@foundation0 ~]$ </span><br></pre></td></tr></table></figure>
+
+<p>​	将输出和生成的错误消息一起存储到&#x2F;tmp&#x2F;all-message-output文件。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[kiosk@foundation0 ~]$ find /etc -name passwd &gt; /tmp/all-message-output 2&gt;&amp;1</span><br><span class="line">[kiosk@foundation0 ~]$ <span class="built_in">cat</span> /tmp/all-message-output </span><br><span class="line">find: ‘/etc/pki/rsyslog’: Permission denied</span><br><span class="line">find: ‘/etc/dhcp’: Permission denied</span><br><span class="line">find: ‘/etc/ssh/sshd_config.d’: Permission denied</span><br><span class="line">/etc/pam.d/passwd</span><br><span class="line">find: ‘/etc/lvm/archive’: Permission denied</span><br><span class="line">find: ‘/etc/lvm/backup’: Permission denied</span><br><span class="line">find: ‘/etc/lvm/cache’: Permission denied</span><br><span class="line">find: ‘/etc/lvm/devices’: Permission denied</span><br><span class="line">/etc/passwd</span><br><span class="line">find: ‘/etc/grub.d’: Permission denied</span><br><span class="line">find: ‘/etc/polkit-1/rules.d’: Permission denied</span><br><span class="line">...忽略...</span><br><span class="line">[kiosk@foundation0 ~]$ </span><br></pre></td></tr></table></figure>
+
+<p>​	将输出和生成的错误附加到&#x2F;tmp&#x2F;all-message-output文件。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[kiosk@foundation0 ~]$ find /etc -name passwd &gt;&gt; /tmp/all-message-output 2&gt;&amp;1</span><br><span class="line">[kiosk@foundation0 ~]$ </span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="构建管道"><a href="#构建管道" class="headerlink" title="构建管道"></a>构建管道</h2><p>​	管道是一个或多个命令的序列，永竖线字符（|）分割。管道将第一个命令的标准输出连接到下一个命令的标准输入。</p>
+<p><img src="/2025/03/10/01-RHCE/01-124/Linux-RHCE-124-%E7%AC%AC%E5%9B%9B%E7%AB%A0%E8%8A%82/image-20250318180725621.png" alt="image-20250318180725621"></p>
+<p>​	在某个进程输出到终端之前，使用管道来操作另一个进程并格式化进程的输出。可以想象一下，数据正在通过一个管道从一个进程“流”向另一个进程，并且在其流过的管道中每个命令都会对其做出些改动。</p>
+<p>​	<code>注意：管道和I/O重定向都可以操作标准输出和输入。重定向会向文件发送标准输出或从文件获取标准输入。管道会将一个进程的标准输出发送到另一个进程的标准输入。</code></p>
+<h2 id="管道示例"><a href="#管道示例" class="headerlink" title="管道示例"></a>管道示例</h2><p>​	以下列表显示了一些管道示例：</p>
+<p>​	将ls命令的输出重定向到less命令，以在终端上以一次一屏的方式显示输出。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[kiosk@foundation0 ~]$ <span class="built_in">ls</span> /usr/bin/ | less</span><br></pre></td></tr></table></figure>
+
+<p>​	将ls命令的输出重定向到wc -l命令，以统计ls收到的行数并将这个值显示在终端上。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[kiosk@foundation0 ~]$ <span class="built_in">ls</span> | <span class="built_in">wc</span> -l</span><br><span class="line">23</span><br><span class="line">[kiosk@foundation0 ~]$ </span><br></pre></td></tr></table></figure>
+
+<p>​	将ls -t命令的输出重定向到head命令，以显示前十行，并将最终结果重定向到&#x2F;tmp&#x2F;first-ten-changed-files文件。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[kiosk@foundation0 ~]$ <span class="built_in">ls</span> -t | <span class="built_in">head</span> -n 10 &gt; /tmp/first-ten-changed-files</span><br><span class="line">[kiosk@foundation0 ~]$ <span class="built_in">cat</span> /tmp/first-ten-changed-files</span><br><span class="line">ssh.sh</span><br><span class="line">test1.txt</span><br><span class="line">Videos</span><br><span class="line">configfiles</span><br><span class="line">Documents</span><br><span class="line">Downloads</span><br><span class="line">Music</span><br><span class="line">Pictures</span><br><span class="line">Public</span><br><span class="line">Templates</span><br><span class="line">[kiosk@foundation0 ~]$ </span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="管道、重定向和附加到文件"><a href="#管道、重定向和附加到文件" class="headerlink" title="管道、重定向和附加到文件"></a>管道、重定向和附加到文件</h2><p>​	如果将重定向与管道组合，shell会首先设置整个管道，然后重定向输入&#x2F;输出。如果在管道的中间使用重定向，则输出将转至文件，而不会前往管道中的下一个命令。</p>
+<p>​	在以下示例中，ls命令的输出将转至&#x2F;tmp&#x2F;saved-output文件，并且less命令不在终端上显示任何内容。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[kiosk@foundation0 ~]$ <span class="built_in">ls</span> &gt; /tmp/saved-output | less</span><br></pre></td></tr></table></figure>
+
+<p>​	tee命令克服了这个限制。在管道中，tee将其标准输入复制到其标准输出中，并且还将标准输出重定向到指定的命令参数的文件。如果您将数据想象成流经管道的水，那么可将tee视觉化为管道中的T形接头，它负责输出在两个方向上的流向，所以该命令也称为“三通”。</p>
+<p><img src="/2025/03/10/01-RHCE/01-124/Linux-RHCE-124-%E7%AC%AC%E5%9B%9B%E7%AB%A0%E8%8A%82/image-20250318180625486.png" alt="image-20250318180625486"></p>
+<h2 id="使用tee命令的管道示例"><a href="#使用tee命令的管道示例" class="headerlink" title="使用tee命令的管道示例"></a>使用tee命令的管道示例</h2><p>​	以下示例将ls命令的输出重定向到&#x2F;tmp&#x2F;saved-output文件，并且将它传递到less命令，以便在终端上一次一屏的方式显示。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[kiosk@foundation0 ~]$ <span class="built_in">ls</span> | <span class="built_in">tee</span> /tmp/saved-output | less</span><br></pre></td></tr></table></figure>
+
+<p>​	如果在管道末尾使用tee命令，则终端将显示管道中的命令输出，同时将其保存到文件中。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[kiosk@foundation0 ~]$ <span class="built_in">ls</span> -t | <span class="built_in">head</span> -n 10 | <span class="built_in">tee</span> /tmp/ten-last-changed-files</span><br><span class="line">ssh.sh</span><br><span class="line">test1.txt</span><br><span class="line">Videos</span><br><span class="line">configfiles</span><br><span class="line">Documents</span><br><span class="line">Downloads</span><br><span class="line">Music</span><br><span class="line">Pictures</span><br><span class="line">Public</span><br><span class="line">Templates</span><br></pre></td></tr></table></figure>
+
+<p>​	使用tee命令配合-a选项将内容追加到文件，并非是覆盖它。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[kiosk@foundation0 ~]$ <span class="built_in">ls</span> -t | <span class="built_in">head</span> -n 10 | <span class="built_in">tee</span> -a /tmp/ten-last-changed-files</span><br><span class="line">ssh.sh</span><br><span class="line">test1.txt</span><br><span class="line">Videos</span><br><span class="line">configfiles</span><br><span class="line">Documents</span><br><span class="line">Downloads</span><br><span class="line">Music</span><br><span class="line">Pictures</span><br><span class="line">Public</span><br><span class="line">Templates</span><br><span class="line">[kiosk@foundation0 ~]$ <span class="built_in">cat</span> /tmp/ten-last-changed-files</span><br><span class="line">ssh.sh</span><br><span class="line">...忽略...</span><br><span class="line">Templates</span><br><span class="line">ssh.sh</span><br><span class="line">...忽略...</span><br><span class="line">Templates</span><br><span class="line">[kiosk@foundation0 ~]$ </span><br></pre></td></tr></table></figure>
+
+
+
+<p>​	注意：您可以使用管道来重定向比标准错误，但不能使用合并重定向操作符（&amp;&gt;和&amp;&gt;&gt;）执行此操作。以下示例是通过管道重定向标准输出和标准错误的正确方法：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[kiosk@foundation0 ~]$ find /etc/ -name passwd 2&gt;&amp;1 | less</span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="从shell提示符编辑文本文件"><a href="#从shell提示符编辑文本文件" class="headerlink" title="从shell提示符编辑文本文件"></a>从shell提示符编辑文本文件</h1><h2 id="使用vim编辑文件"><a href="#使用vim编辑文件" class="headerlink" title="使用vim编辑文件"></a>使用vim编辑文件</h2><p>​	Linux的基本设计原则是支持将信息和配置设置存储再基于文件的文件中。这些文件可以采用各种结构，如设置列表、INI格式、结构化XML或YAML等等。以基于文本的结构存储文件的优点是可以使用任何简单的文本编辑器轻松的完成编辑。</p>
+<h2 id="VIM编辑器的优势"><a href="#VIM编辑器的优势" class="headerlink" title="VIM编辑器的优势"></a>VIM编辑器的优势</h2><p>​	当系统使用纯文本shell提示符时，您应该知道如何至少一个文本编辑器来编辑文本。然后您可以从终端窗口，或是通过ssh或web控制台远程登录的方式来编辑基于文本的配置文件。您不需要访问图形桌面，就能编辑服务器上的文件，而且该服务器可能根本不需要运行图形桌面环境。</p>
+<p>​	学习vim的关键在于，它几乎总是默认安装再服务器上，用于编辑基于文本的文件。可移植操作系统接口或POSIX标准制定了Linux上vi编辑器，许多其他类UNIX操作系统大致如此。</p>
+<p>​	vim还经常被用作vi在其他标准操作系统或发行版上实现。例如，macOS目前默认是Vim的轻量级安装。因此，面向Linux学习vim技能也可能在别处有用。</p>
+<h2 id="VIM入门"><a href="#VIM入门" class="headerlink" title="VIM入门"></a>VIM入门</h2><p>​	您可以使用如下两个软件包中的任何一个，在红帽Linux中安装vim编辑器。两个软件包为编辑基于文本的文件提供了不通的功能和vim命令。</p>
+<p>​	通过vim-minimal软件包，您可以安装具有核心功能的vi编辑器。这是一个轻量级安装，仅包含核心功能和基本vi命令。您可以使用vi命令打开文本进行编辑。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[kiosk@foundation0 ~]$ vi filename</span><br></pre></td></tr></table></figure>
+
+<p>​	或者您可以使用vim-enhanced软件包安装vim编辑器。此软件包提供一套更完整的功能、一个在线帮助系统和一个教程系统。使用vim命令，在这种增强模式下启动vim编辑文本文件。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[kiosk@foundation0 ~]$ vim filename</span><br></pre></td></tr></table></figure>
+
+<p>​	如果安装了vim-enhanced，则会设置一个shell别名，普通用户可设置一个shell别名，以便在运行vi命令时自动获取vim命令。此别名不适合于root用户及其UID小于200的用户（这些用户供系统服务使用）。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">[kiosk@foundation0 ~]$ alias vi=&quot;vim&quot;</span><br><span class="line">[kiosk@foundation0 ~]$ alias </span><br><span class="line">...忽略...</span><br><span class="line">alias vi=&#x27;vim&#x27;</span><br><span class="line">...忽略...</span><br></pre></td></tr></table></figure>
+
+<p>​	如果安装了vim-enhanced，并且普通用户想要使用vi命令，则它们可能必须使用\vi命令来临时覆盖别名。您可以使用\vi –version和vim –version来比较两个命令的功能集。</p>
+<h2 id="VIM操作模式"><a href="#VIM操作模式" class="headerlink" title="VIM操作模式"></a>VIM操作模式</h2><p>​	vim编辑器提供各种操作模式，如命令模式、扩展命令模式、编辑模式和可视模式。作为vim用户，您要始终了解当前的模式，因为击键在不同模式下具有不通的效果。</p>
+<p>​	<img src="/2025/03/10/01-RHCE/01-124/Linux-RHCE-124-%E7%AC%AC%E5%9B%9B%E7%AB%A0%E8%8A%82/image-20250319110333114.png" alt="image-20250319110333114"></p>
+<p>​	第一次打开vim时，它会以命令模式启动，可用于导航、剪切和粘贴，以及其他文本修改。按所需的案件可访问特定的编辑模式。</p>
+<ul>
+<li><p>按i建进入插入模式，之后键入的所有文本将变为文件内容。按Esc键返回到命令模式。</p>
+</li>
+<li><p>按v键进入可视模式，可在其中选择多个字符进行文本操作。使用shift+V选择多行，使用 Ctrl+V可选择文本块。要退出可视模式，请按v、sheift+V或ctrl+V键。</p>
+</li>
+<li><p>按：键启动扩展命令模式，可执行的任务包含写入文件（保存文件），以及退出vim编辑器等。</p>
+<p><code>注意：如果您不确定所使用的模式，可以按几次Esc来返回到命令模式。在命令模式重复按Esc键是安全的。</code></p>
+</li>
+</ul>
+<h2 id="最低程度的基于vim工作流"><a href="#最低程度的基于vim工作流" class="headerlink" title="最低程度的基于vim工作流"></a>最低程度的基于vim工作流</h2><p>​	vim具有高效的组合击键操作，可进行高级编辑任务。虽说熟能生巧，但vim功能可能会难道新用户。</p>
+<p>​	工贸建议学习一下vim键和命令。</p>
+<ul>
+<li>u键可撤销最近的编辑内容。</li>
+<li>x键可删除单子字符。</li>
+<li>:w 命令可写入（保存）文件，并停留在命令模式中以进行之后更多的编辑任务。</li>
+<li>:wq 命令可写入（保存）文件并退出vim编辑页。</li>
+<li>:q! 命令可退出vim，同时放弃一次写入以来进行的所有更改。</li>
+</ul>
+<p>​	学习这些命令有助于vim用户完成任何编辑任务</p>
+<h2 id="重排现有文本"><a href="#重排现有文本" class="headerlink" title="重排现有文本"></a>重排现有文本</h2><p>​	在vim中，您可以通过使用y和p命令字符来执行拖拉和放置（复制和粘贴）。将光标定位到要选择的第一个字符，然后进去可视模式（按住v）。使用键盘左右箭头选择要操作的字符。选中所要操作的字符后，按y将所选内容拖拉（复制）到内存中。将光标定位到新位置，然后按p将所选内容放置（粘贴）到光标处。</p>
+<h2 id="vim中的可视模式"><a href="#vim中的可视模式" class="headerlink" title="vim中的可视模式"></a>vim中的可视模式</h2><p>​	可视化模式可用于突出显示和操作不同行和列中的文本。您可以使用以下组合键在vim中进入可视模式。</p>
+<ul>
+<li>字符模式： v</li>
+<li>行模式：shift+v</li>
+<li>块（列）模式：ctrl+v</li>
+</ul>
+<p>字符模式可突出西安市文本块中的句子。屏幕底部会出现VISUAL一词。按v可进入可视字符模式。按shift+v可进入行模式。底部会出现VISUAL LINE一词。</p>
+<p>可视块模式非常适合于操作数据文件。从光标处按Ctrl+v键进入可视块。屏幕底部会出现VISUAL BLOCK。使用左右箭头键可以来突出选择要更改的部分。</p>
+<h2 id="vim配置文件"><a href="#vim配置文件" class="headerlink" title="vim配置文件"></a>vim配置文件</h2><p>​	&#x2F;etc&#x2F;vimrc和<del>&#x2F;.vimr配置文件分别用来该表整个系统或特定用户的vim编辑器行为。在这些配置文件中您可以指定行为，如默认的制表符间距、语法突出显示、颜色方案等。在使用yaml等具有严格语法要求的语言时，修改vim编辑器的行为非常有用。请考虑以下</del>&#x2F;.vimrc文件，他将在编辑yaml文件时将默认制表位（有ts字符表述）原先的四个空格，修改为两个空格。该文件还包括set number参数，可在表记所有文件时显示行号。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[kiosk@foundation0 ~]$ <span class="built_in">cat</span> .vimrc </span><br><span class="line">autocmd FileType yaml setlocal ts=2</span><br><span class="line"><span class="built_in">set</span> number</span><br><span class="line">[kiosk@foundation0 ~]$ </span><br></pre></td></tr></table></figure>
+
+<p>​	其余更多参数资料可使用man vim（5）进行查看。</p>
+<h1 id="更改shell环境"><a href="#更改shell环境" class="headerlink" title="更改shell环境"></a>更改shell环境</h1><h2 id="shell变量用法"><a href="#shell变量用法" class="headerlink" title="shell变量用法"></a>shell变量用法</h2><p>​	使用Bash Shell时，您可以设置shell变量，来帮助运行命令或修改shell的行为。它们会自动复制到从改shell运行的程序中。您可以使用变量来更轻松的运行带有长参数的命令，或者将常用设置应用于该shell运行的命令。</p>
+<p>​	shell变量对于特定的shell会话是唯一的。如果您打开两个终端窗口，或者通过两个独立的登录会话登录同以远程服务器，那么您在运行两个shell。每个shell都会有自己的一组shell变量值。</p>
+<h2 id="为变量分配值"><a href="#为变量分配值" class="headerlink" title="为变量分配值"></a>为变量分配值</h2><p>​	使用以下语法将值分配给shell变量，VARIABLENAME（变量名）、value（变量值）：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[kiosk@foundation0 ~]$ VARIABLENAME=value</span><br></pre></td></tr></table></figure>
+
+<p>​	变量名可以包含大写或小写、数字和下划线字符（_）。例如以下命令可设置shell变量。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[kiosk@foundation0 ~]$ COUNT=40</span><br><span class="line">[kiosk@foundation0 ~]$ first_name=LiWeiHu</span><br><span class="line">[kiosk@foundation0 ~]$ file1=/tmp/abc</span><br><span class="line">[kiosk@foundation0 ~]$ _ID=RH124</span><br><span class="line">[kiosk@foundation0 ~]$ </span><br></pre></td></tr></table></figure>
+
+<p>​	请记住，此更改仅会影响在其中运行命令的shell环境中，而不影响您可能在在服务器上运行的其他任何shell。</p>
+<p>​	您可以使用set命令列出当前设置的所有shell变量。（它还会列出所有shell喊出，您可以忽略它们）要提高可读性，您可以将输出通过管道传输到less命令，以便一次一页的查看</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">[kiosk@foundation0 ~]$ set | less</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2025/03/10/01-RHCE/01-124/Linux-RHCE-124-%E7%AC%AC%E5%9B%9B%E7%AB%A0%E8%8A%82/image-20250319162742725.png" alt="image-20250319162742725"></p>
+<p>​	</p>
+<h2 id="使用变量扩展检索值"><a href="#使用变量扩展检索值" class="headerlink" title="使用变量扩展检索值"></a>使用变量扩展检索值</h2><p>​	您可以使用变量扩展来指代您设置的变量值。要使用变量扩展，您在变量名前加上美元符号（$）。</p>
+<p>例如：以下命令可将变量COUNT设置为40.</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[kiosk@foundation0 ~]$ COUNT=40</span><br></pre></td></tr></table></figure>
+
+<p>如果echo COUNT，他会显示COUNT字符串</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[kiosk@foundation0 ~]$ <span class="built_in">echo</span> COUNT</span><br><span class="line">COUNT</span><br></pre></td></tr></table></figure>
+
+<p>如果输入echo $COUNT，他会显示COUNT变量的值。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[kiosk@foundation0 ~]$ <span class="built_in">echo</span> <span class="variable">$COUNT</span></span><br><span class="line">40</span><br></pre></td></tr></table></figure>
+
+<p>您也可以使用变量来指代多个命令的长文件名。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[kiosk@foundation0 ~]$ file1=/tmp/tmp.Z9s32js242</span><br><span class="line">[kiosk@foundation0 ~]$ <span class="built_in">touch</span> <span class="variable">$file1</span></span><br><span class="line">[kiosk@foundation0 ~]$ <span class="built_in">ls</span> <span class="variable">$file1</span></span><br><span class="line">/tmp/tmp.Z9s32js242</span><br><span class="line">[kiosk@foundation0 ~]$ <span class="built_in">rm</span> <span class="variable">$file1</span></span><br><span class="line">[kiosk@foundation0 ~]$ <span class="built_in">ls</span> <span class="variable">$file1</span></span><br><span class="line"><span class="built_in">ls</span>: cannot access <span class="string">&#x27;/tmp/tmp.Z9s32js242&#x27;</span>: No such file or directory</span><br><span class="line">[kiosk@foundation0 ~]$ </span><br></pre></td></tr></table></figure>
+
+<p>​	重要：您始终可以在变量扩展中使用花括号，尽管它们通常是不必要的。</p>
+<p>​		在以下示例中，echo命令尝试扩展不存在的变量COUNTx，但不返回任何内容。该命令也不会报告任何错误。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[kiosk@foundation0 ~]$ <span class="built_in">echo</span> new <span class="variable">$COUNTx</span></span><br><span class="line">new</span><br></pre></td></tr></table></figure>
+
+<p>​		如果变量名旁边有任何尾随字符，可以使用花括号来划定变量名称的界限。在以下示例中，echo命令现在扩展了COUNT变量。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[kiosk@foundation0 ~]$ <span class="built_in">echo</span> new <span class="variable">$&#123;COUNT&#125;</span>x</span><br><span class="line">new 40x</span><br><span class="line">[kiosk@foundation0 ~]$ </span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="使用Shell变量配置Bash"><a href="#使用Shell变量配置Bash" class="headerlink" title="使用Shell变量配置Bash"></a>使用Shell变量配置Bash</h2><p>​	一些shell变量在Bash启动时设置。您可以修改它们来调整shell的行为。</p>
+<p>​	例如，HISTFILE、HISTFILESIZE和HISTTIMEFORMAT等shell变量可影响shell历史记录的history命令。HISTFILE变量指定要将shell历史记录保存到哪个文件，默认为~&#x2F;.bash_history。HISTTIMEFORMAT变量定义历史记录中每个命令的时间戳格式。默认情况下，此变量不存在。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">[kiosk@foundation0 ~]$ history </span><br><span class="line">   15  vim filename</span><br><span class="line">   16  vim --version</span><br><span class="line">   17  \vi --version</span><br><span class="line">   18  alias </span><br><span class="line">   19  alias vi=&quot;vim&quot;</span><br><span class="line">   20  alias </span><br><span class="line">   21  vim filename </span><br><span class="line">[kiosk@foundation0 ~]$ HISTTIMEFORMAT=&quot;%F %T &quot;</span><br><span class="line">[kiosk@foundation0 ~]$ history </span><br><span class="line">   15  2025-03-19 10:16:06 vim filename</span><br><span class="line">   16  2025-03-19 10:17:37 vim --version</span><br><span class="line">   17  2025-03-19 10:17:43 \vi --version</span><br><span class="line">   18  2025-03-19 10:21:55 alias </span><br><span class="line">   19  2025-03-19 10:23:06 alias vi=&quot;vim&quot;</span><br><span class="line">   20  2025-03-19 10:23:10 alias </span><br><span class="line">   21  2025-03-19 11:31:39 vim filename </span><br></pre></td></tr></table></figure>
+
+<p>​	另一个示例是PS1变量，该变量控制shell提示符的外观。如果更改此值，他将改变shell提示符的外观。bash（1）man page的“PROMPTING”部分列出了提示符支持的多个特殊字符扩展。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[kiosk@foundation0 ~]$ PS1=<span class="string">&quot;bash\$ &quot;</span></span><br><span class="line">bash$ PS1=<span class="string">&quot;[\u@\h \w]\$ &quot;</span></span><br><span class="line">[kiosk@foundation0 ~]$</span><br></pre></td></tr></table></figure>
+
+<p>​	由于PS1变量设置的值是提示符，红帽建议以空格结尾。另外每当变量值包含某种形式的空格（包括空格、制表符（TAB）或回车）时，该值必须用单引号或双引号括起来。如果省略引号，可能会出现意外结果。前面的PS1变量符合尾随空格建议和引号规则。</p>
+<h2 id="使用环境变量配置程序"><a href="#使用环境变量配置程序" class="headerlink" title="使用环境变量配置程序"></a>使用环境变量配置程序</h2><p>​	shell提供了一个环境，供您从该shell中运行程序。例如，此环境包括有关文件系统上当前工作目录的信息、传递给程序的命令行选项，以及环境变量的值。程序可以使用这些环境变量来更改其行为或其默认设置。</p>
+<p>​	如果shell变量不是环境变量，则只有shell可以使用它。但是如果shell变量是环境变量，则shell和从该shell运行的任何程序都可以使用该变量。</p>
+<p>​	您可以将shell中定义的任何变量分配为环境变量，方法是将它们用export命令导出。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[kiosk@foundation0 ~]$ EDITOR=vim</span><br><span class="line">[kiosk@foundation0 ~]$ <span class="built_in">echo</span> <span class="variable">$EDITOR</span></span><br><span class="line">vim</span><br><span class="line">[kiosk@foundation0 ~]$ <span class="built_in">export</span> EDITOR</span><br><span class="line">[kiosk@foundation0 ~]$ <span class="built_in">export</span></span><br><span class="line">...忽略...</span><br><span class="line"><span class="built_in">declare</span> -x EDITOR=<span class="string">&quot;vim&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>​	另一个重要的环境变量是PATH。PATH变量包含一个含有程序目录的冒号分割列表：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[kiosk@foundation0 ~]$ <span class="built_in">echo</span> <span class="variable">$PATH</span></span><br><span class="line">/home/kiosk/.local/bin:/home/kiosk/bin:/usr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin</span><br><span class="line">[kiosk@foundation0 ~]$ </span><br></pre></td></tr></table></figure>
+
+<p>​	当您运行如ls等命令时，shell会按顺序逐一在这些目录中查找可执行文件ls，并且允许它找到的第一个匹配文件。（在经典的系统中，此文件位于&#x2F;usr&#x2F;bin&#x2F;ls）。</p>
+<p>​	那您可以轻松地将目录附加到PATH变量。例如，您可能希望像常规命令一样允许&#x2F;home&#x2F;user&#x2F;sbin中一些可执行程序或脚本。您可以将&#x2F;home&#x2F;user&#x2F;sbin目录加到当前会话的PATH中。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">[kiosk@foundation0 ~]$ export PATH=$&#123;PATH&#125;:/home/kiosk/sbin</span><br><span class="line">[kiosk@foundation0 ~]$ cat &gt; /home/kiosk/sbin/haha &lt;&lt; EOF</span><br><span class="line">#!/bin/bash</span><br><span class="line">echo &quot;这是/home/kiosk/sbin目录下的一个可执行文件&quot;</span><br><span class="line">EOF</span><br><span class="line">[kiosk@foundation0 ~]$ haha</span><br><span class="line">这是/home/kiosk/sbin目录下的一个可执行文件</span><br><span class="line">[kiosk@foundation0 ~]$ </span><br></pre></td></tr></table></figure>
+
+<p>​	要列出特定的shell的所有环境变量，请运行env命令：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">[kiosk@foundation0 ~]$ env</span><br><span class="line">SHELL=/bin/bash</span><br><span class="line">HISTCONTROL=ignoredups</span><br><span class="line">HISTSIZE=1000</span><br><span class="line">...忽略...</span><br><span class="line">PATH=/home/kiosk/.local/bin:/home/kiosk/bin:/usr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/home/kiosk/sbin</span><br><span class="line">SELINUX_LEVEL_REQUESTED=</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="设置默认文本编辑器"><a href="#设置默认文本编辑器" class="headerlink" title="设置默认文本编辑器"></a>设置默认文本编辑器</h2><p>​	EDITOR环境变量是指定要用于命令行程序的默认文本编辑器。如果不指定，很多系统会使用vi或者vim，您也可以覆盖原有选项，这里可以换成nano编辑器。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[kiosk@foundation0 ~]$ <span class="built_in">export</span> EDITOR=nano</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h2 id="自动设置变量"><a href="#自动设置变量" class="headerlink" title="自动设置变量"></a>自动设置变量</h2><p>​	当Bash启动时，会运行几个含有shell命令的文本文件，以初始化shell环境。要在shell启动时自动设置shell或环境变量，您可以编辑Bash启动脚本。也就是配置永久变量或环境变量。</p>
+<p>​	运行的确切脚本取决于shell是交互式还是非交互式的，以及是登录还是非登录shell。用户直接在交互式shell中输入命令，而非交互式shell则是在后台运行且无需用户干预，例如脚本。当用户通过终端本地登录或通过SSH协议远程登录时，将调用登录shell。非登录shell从现有会话调用，例如从GNOME GUI打开终端。</p>
+<p>​	对于交互式登录shell，&#x2F;etc&#x2F;profile和<del>&#x2F;.bash_profile文件配置Bash环境，&#x2F;etc&#x2F;profile和</del>&#x2F;.bash_profile文件也分别提供&#x2F;etc&#x2F;bashrc和<del>&#x2F;.bashrc文件。对于交互式非登录shell，只有&#x2F;etc&#x2F;bashrc和</del>&#x2F;.bashrc文件配置Bash环境。&#x2F;etc&#x2F;profile和&#x2F;etc&#x2F;bashrc文件适用于整个系统（全局Bash环境），而<del>&#x2F;.bash_profile和</del>&#x2F;.bashrc文件则是特定用户的（局部用户Bash环境）。非交互式shell调用BASH_ENV变量定义的任何文件。默认情况下不定义此变量。</p>
+<p>​	要创建可供所有交互式shell使用的变量，请编辑<del>&#x2F;.bashrc文件。若也要在用户登录后使用的变量，可在</del>&#x2F;.bash_profile文件中定义。</p>
+<p>​	例如，若要更改通过SSH登录时的默认编辑器，您可以修改~&#x2F;.bash_profile文件中的EDITOR变量：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[kiosk@foundation0 ~]$ <span class="built_in">echo</span> <span class="string">&quot;export EDITOR=nano&quot;</span> &gt; ~/.bash_profile</span><br></pre></td></tr></table></figure>
+
+<p>​	<code>注意：若要调整作用于所有用户账户的设置，最佳的方式是带有.sh扩展名的文件，并在改文件中包含对应的/etc/porfile.d目录中更改。要在/etc/porfile.d目录中创建文件，请以root用户身份登录。</code></p>
+<h2 id="Bash-别名"><a href="#Bash-别名" class="headerlink" title="Bash 别名"></a>Bash 别名</h2><p>​	Bash别名是其他Bash命令的快捷方式。例如，如果必须繁琐的键入一个长命令，您可以创建一个较短的别名来调用它。使用alias命令来创建别名。例如，一下示例为echo命令创建hello别名。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">[kiosk@foundation0 ~]$ alias hello=&#x27;echo &quot;Hello, this is a long string.&quot;&#x27;</span><br></pre></td></tr></table></figure>
+
+<p>​	然后，您可以运行hello命令，它会调用echo命令。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[kiosk@foundation0 ~]$ hello </span><br><span class="line">Hello, this is a long string.</span><br><span class="line">[kiosk@foundation0 ~]$ </span><br></pre></td></tr></table></figure>
+
+<p>​	将别名添加到用户的~&#x2F;.bashrc文件中，以便它们在任何交互shell中可用。</p>
+<h2 id="取消设置和取消导出变量于别名"><a href="#取消设置和取消导出变量于别名" class="headerlink" title="取消设置和取消导出变量于别名"></a>取消设置和取消导出变量于别名</h2><p>​	要取消设置和取消导出变量，请使用unset命令：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[kiosk@foundation0 ~]$ <span class="built_in">echo</span> <span class="variable">$file1</span></span><br><span class="line">/tmp/tmp.Z9sdai2W2c</span><br><span class="line">[kiosk@foundation0 ~]$ <span class="built_in">unset</span> file1 </span><br><span class="line">[kiosk@foundation0 ~]$ <span class="built_in">echo</span> <span class="variable">$file1</span></span><br><span class="line"></span><br><span class="line">[kiosk@foundation0 ~]$ </span><br></pre></td></tr></table></figure>
+
+
+
+<p>​	要取消导出变量但不取消设置它，请使用export -n命令：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[kiosk@foundation0 ~]$ <span class="built_in">export</span> -n PS1</span><br></pre></td></tr></table></figure>
+
+
+
+<p>​	要取消设置别名，请使用unalias命令：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[kiosk@foundation0 ~]$ <span class="built_in">unalias</span> hello </span><br><span class="line">[kiosk@foundation0 ~]$ hello</span><br><span class="line">bash: hello: <span class="built_in">command</span> not found...</span><br><span class="line">^C</span><br><span class="line">[kiosk@foundation0 ~]$ </span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+]]></content>
+      <categories>
+        <category>RHCE</category>
+      </categories>
+      <tags>
+        <tag>RHCE</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Linux-RHCE-124-第六章节</title>
     <url>/2025/05/20/01-RHCE/01-124/Linux-RHCE-124-%E7%AC%AC%E5%85%AD%E7%AB%A0%E8%8A%82/</url>
     <content><![CDATA[<h1 id="第六章-控制对文件的访问"><a href="#第六章-控制对文件的访问" class="headerlink" title="第六章-控制对文件的访问"></a>第六章-控制对文件的访问</h1><h2 id="解释Linux文件系统权限"><a href="#解释Linux文件系统权限" class="headerlink" title="解释Linux文件系统权限"></a>解释Linux文件系统权限</h2><h3 id="Linux文件系统权限"><a href="#Linux文件系统权限" class="headerlink" title="Linux文件系统权限"></a>Linux文件系统权限</h3><p>​	文件权限控制对文件的访问。Linux文件权限简单又灵活，能够应对大多数的常见权限情况。</p>
@@ -1572,359 +1925,6 @@
 <p>总结：交互式非登录bashrc生效，交互式登录bash_profile生效。</p>
 <p>​	可以通过shopt login_shell验证是否是登录还是非登录，如果为on则表示当前是登录式，off则是非登录式</p>
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">[kiosk@foundation0 ~]$ shopt login_shell </span><br><span class="line">login_shell    	on</span><br></pre></td></tr></table></figure>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-]]></content>
-      <categories>
-        <category>RHCE</category>
-      </categories>
-      <tags>
-        <tag>RHCE</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Linux-RHCE-124-第四章节</title>
-    <url>/2025/03/10/01-RHCE/01-124/Linux-RHCE-124-%E7%AC%AC%E5%9B%9B%E7%AB%A0%E8%8A%82/</url>
-    <content><![CDATA[<h1 id="创建、查看和编辑文本文件"><a href="#创建、查看和编辑文本文件" class="headerlink" title="创建、查看和编辑文本文件"></a>创建、查看和编辑文本文件</h1><h2 id="将输出重定向到文件或程序"><a href="#将输出重定向到文件或程序" class="headerlink" title="将输出重定向到文件或程序"></a>将输出重定向到文件或程序</h2><p>标准输入、标准输出和标准错误</p>
-<p>​	运行中的程序或进程会读取输入并写入输出。从shell提示符运行命令时，通常会从键盘读取其输入，并将输出发送到终端窗口。</p>
-<p>​	进程使用称为文件描述符的编号通道来获取输入并发送输出。所有进程在开始时至少要有三个文件描述符。标准输入（通道0）从键盘读取输入。标准输出（通道1）将正常输出发送到终端。标准错误（通道2）将错误消息发送到终端。</p>
-<p>​	如果程序打开连接至其他文件的单独连接，则可能要使用更大编号的文件描述符。</p>
-<p><img src="/2025/03/10/01-RHCE/01-124/Linux-RHCE-124-%E7%AC%AC%E5%9B%9B%E7%AB%A0%E8%8A%82/image-20250310171941393.png" alt="image-20250310171941393"></p>
-<blockquote>
-<p>​													进程I&#x2F;O通道（文件描述符）</p>
-</blockquote>
-<p>​	下表总结了有关文件夫描述符的信息：</p>
-<table>
-<thead>
-<tr>
-<th>编号</th>
-<th>通道名称</th>
-<th>描述</th>
-<th>默认连接</th>
-<th>用法</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>0</td>
-<td>stdin</td>
-<td>标准输入</td>
-<td>键盘</td>
-<td>仅读取</td>
-</tr>
-<tr>
-<td>1</td>
-<td>stdout</td>
-<td>标准输出</td>
-<td>终端</td>
-<td>仅写入</td>
-</tr>
-<tr>
-<td>2</td>
-<td>stderr</td>
-<td>标准错误</td>
-<td>终端</td>
-<td>仅写入</td>
-</tr>
-<tr>
-<td>3</td>
-<td>filename</td>
-<td>其他文件</td>
-<td>无</td>
-<td>读取或写入</td>
-</tr>
-</tbody></table>
-<h2 id="将输出重定向到文件"><a href="#将输出重定向到文件" class="headerlink" title="将输出重定向到文件"></a>将输出重定向到文件</h2><p>​	输入&#x2F;输出（I&#x2F;O）重定向可给更改进程获取其输入或输出的方式。进程可以执行文件读取或写入，而不从键盘获取输入，也不将输出和错误发送到终端。通过重定向，您可以将消息保存到文件，而不在终端上显示输出。或者，您也可以使用重定向丢弃输出或错误输出，这样它们就不会显示在终端上或保存下来。</p>
-<p>​	您可以重定向进程stdout以阻止进程输出显示在终端上。如果您将stdout重定向到某个文件，单该文件不存在，则会为您创建该文件。如果文件确实存在，但是您选择的重定向不是附加到文件，则重定向会覆盖文件原有内容。要丢弃进程的输出，您可以重定向到空的&#x2F;dev&#x2F;null特殊文件，该文件会静默丢弃重定向到该进程的通道输出。</p>
-<p>​	如下表，仅对stdout重定向不会阻止stderr错误消息显示在终端上。</p>
-<table>
-<thead>
-<tr>
-<th>用法</th>
-<th>说明</th>
-<th>视觉辅助</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>&gt; file</td>
-<td>重定向stdout以覆盖文件</td>
-<td><img src="/2025/03/10/01-RHCE/01-124/Linux-RHCE-124-%E7%AC%AC%E5%9B%9B%E7%AB%A0%E8%8A%82/image-20250310180118758.png" alt="image-20250310180118758"></td>
-</tr>
-<tr>
-<td>&gt;&gt; file</td>
-<td>重定向stdout以追加到文件</td>
-<td><img src="/2025/03/10/01-RHCE/01-124/Linux-RHCE-124-%E7%AC%AC%E5%9B%9B%E7%AB%A0%E8%8A%82/image-20250310180306263.png" alt="image-20250310180306263"></td>
-</tr>
-<tr>
-<td>2&gt; file</td>
-<td>重定向stderr以覆盖文件</td>
-<td><img src="/2025/03/10/01-RHCE/01-124/Linux-RHCE-124-%E7%AC%AC%E5%9B%9B%E7%AB%A0%E8%8A%82/image-20250310180426539.png" alt="image-20250310180426539"></td>
-</tr>
-<tr>
-<td>2&gt; &#x2F;dev&#x2F;null</td>
-<td>重定向stderr错误消息到&#x2F;dev&#x2F;null，从而丢弃它</td>
-<td><img src="/2025/03/10/01-RHCE/01-124/Linux-RHCE-124-%E7%AC%AC%E5%9B%9B%E7%AB%A0%E8%8A%82/image-20250310180600483.png" alt="image-20250310180600483"></td>
-</tr>
-<tr>
-<td>&gt; file 2&gt;&amp;1 和 &amp;&gt; file</td>
-<td>重定向stdout和stderr以覆盖同一文件</td>
-<td><img src="/2025/03/10/01-RHCE/01-124/Linux-RHCE-124-%E7%AC%AC%E5%9B%9B%E7%AB%A0%E8%8A%82/image-20250310180738265.png" alt="image-20250310180738265"></td>
-</tr>
-<tr>
-<td>&gt;&gt; file 2&gt;&amp;1 和 &amp;&gt;&gt; file</td>
-<td>重定向stdout和stderr以追加到同一文件</td>
-<td><img src="/2025/03/10/01-RHCE/01-124/Linux-RHCE-124-%E7%AC%AC%E5%9B%9B%E7%AB%A0%E8%8A%82/image-20250310180849243.png" alt="image-20250310180849243"></td>
-</tr>
-<tr>
-<td>&gt; file 2&gt; file</td>
-<td>分别将stdout和stderr以覆盖到不同的文件</td>
-<td><img src="/2025/03/10/01-RHCE/01-124/Linux-RHCE-124-%E7%AC%AC%E5%9B%9B%E7%AB%A0%E8%8A%82/image-20250310181244864.png" alt="image-20250310181244864"></td>
-</tr>
-<tr>
-<td>&gt;&gt; file 2&gt;&gt; file</td>
-<td>分别将stdout和stderr以追加到不同的文件</td>
-<td><img src="/2025/03/10/01-RHCE/01-124/Linux-RHCE-124-%E7%AC%AC%E5%9B%9B%E7%AB%A0%E8%8A%82/image-20250310181402294.png" alt="image-20250310181402294"></td>
-</tr>
-</tbody></table>
-<h2 id="输出重定向示例"><a href="#输出重定向示例" class="headerlink" title="输出重定向示例"></a>输出重定向示例</h2><p>​	通过重定向来简化许多日常管理任务。在是思考下列示例时，请参考前面表格。</p>
-<p>​	在&#x2F;tmp&#x2F;saved-timestamp文件中保存时间戳以供日后参考。</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[kiosk@foundation0 ~]$ <span class="built_in">date</span> &gt; /tmp/saved-timestamp</span><br><span class="line">[kiosk@foundation0 ~]$ <span class="built_in">cat</span> /tmp/saved-timestamp</span><br><span class="line">Tue Mar 18 04:54:43 PM CST 2025</span><br><span class="line">[kiosk@foundation0 ~]$ </span><br></pre></td></tr></table></figure>
-
-<p>​	将&#x2F;var&#x2F;log&#x2F;secure文件的最后100行复制到&#x2F;tmp&#x2F;last-100-secure文件，这里需要使用root账户。</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[root@foundation0 ~]# <span class="built_in">tail</span> -n 100 /var/log/secure &gt; /tmp/last-100-secure</span><br><span class="line">[root@foundation0 ~]# </span><br></pre></td></tr></table></figure>
-
-<p>​	将所有四个step文件内容连接为一个，并保存到&#x2F;tmp&#x2F;all-four-steps-in-one文件中，没有该step文件可自行创建。</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[root@foundation0 step]# <span class="built_in">cat</span> step1.txt step2.txt step3.txt step4.txt </span><br><span class="line">step1</span><br><span class="line">step2</span><br><span class="line">step3</span><br><span class="line">step4</span><br><span class="line">[root@foundation0 step]# <span class="built_in">cat</span> step1.txt step2.txt step3.txt step4.txt &gt; /tmp/all-four-steps-in-one</span><br><span class="line">[root@foundation0 step]# <span class="built_in">cat</span> /tmp/all-four-steps-in-one</span><br><span class="line">step1</span><br><span class="line">step2</span><br><span class="line">step3</span><br><span class="line">step4</span><br><span class="line">[root@foundation0 step]#</span><br></pre></td></tr></table></figure>
-
-<p>​	列出主目录的隐藏文件名和常规文件名，并输出保存到my-file-names文件中。</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[root@foundation0 ~]# <span class="built_in">ls</span> -a &gt; my-file-names</span><br><span class="line">[root@foundation0 ~]# <span class="built_in">cat</span> my-file-names </span><br><span class="line">.....忽略.....</span><br><span class="line">ClassroomSetup-RHCSA-9.0-1.r2022052407gitdd6fbd2.txt</span><br><span class="line">ClassroomSetup-RHCSA-9.0-1.r2022092007git75b8165.txt</span><br><span class="line">ClassroomTroubleshooting-9.x-7.r2022112118git21c9ff2.txt</span><br><span class="line">.cshrc</span><br><span class="line">.dbus</span><br><span class="line">foundation0-config-9.x-7.r2022112118git21c9ff2.noarch.rpm</span><br><span class="line">foundation0-config-post.log</span><br><span class="line">.....忽略.....</span><br><span class="line">[root@foundation0 ~]#</span><br></pre></td></tr></table></figure>
-
-<p>​	在现有的&#x2F;tmp&#x2F;many-lines-of-information文件中附加一行内容。</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[root@foundation0 ~]# <span class="built_in">cat</span> /tmp/many-lines-of-information</span><br><span class="line">hahaha</span><br><span class="line">[root@foundation0 ~]# <span class="built_in">echo</span> <span class="string">&quot;new line of information&quot;</span> &gt; /tmp/many-lines-of-information</span><br><span class="line">[root@foundation0 ~]# <span class="built_in">cat</span> /tmp/many-lines-of-information</span><br><span class="line">new line of information</span><br><span class="line">[root@foundation0 ~]#</span><br></pre></td></tr></table></figure>
-
-<p>​	接下来几个命令会产生错误消息，因为普通用户无法访问某些系统目录。观察错误消息的重定向。</p>
-<p>​	在终端上查看普通命令输出时，将find命令的错误重定向到&#x2F;tmp&#x2F;errors文件。</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[kiosk@foundation0 ~]$ find /etc -name passwd 2&gt; /tmp/errors</span><br><span class="line">/etc/pam.d/passwd</span><br><span class="line">/etc/passwd</span><br><span class="line">[kiosk@foundation0 ~]$ <span class="built_in">cat</span> /tmp/errors</span><br><span class="line">...忽略...</span><br><span class="line">find: ‘/etc/lvm/backup’: Permission denied</span><br><span class="line">find: ‘/etc/lvm/cache’: Permission denied</span><br><span class="line">find: ‘/etc/lvm/devices’: Permission denied</span><br><span class="line">...忽略...</span><br><span class="line">[kiosk@foundation0 ~]$</span><br></pre></td></tr></table></figure>
-
-<p>​	将进程输出保存到&#x2F;tmp&#x2F;output文件，并将错误消息保存到&#x2F;tmp&#x2F;errorss文件。</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[kiosk@foundation0 ~]$ find /etc -name passwd &gt; /tmp/output 2&gt; /tmp/errors</span><br><span class="line">[kiosk@foundation0 ~]$ <span class="built_in">cat</span> /tmp/output </span><br><span class="line">/etc/pam.d/passwd</span><br><span class="line">/etc/passwd</span><br><span class="line">[kiosk@foundation0 ~]$ <span class="built_in">cat</span> /tmp/errors </span><br><span class="line">...忽略...</span><br><span class="line">find: ‘/etc/lvm/backup’: Permission denied</span><br><span class="line">find: ‘/etc/lvm/cache’: Permission denied</span><br><span class="line">find: ‘/etc/lvm/devices’: Permission denied</span><br><span class="line">...忽略...</span><br><span class="line">[kiosk@foundation0 ~]$ </span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>​	将进程输出保存到&#x2F;tmp&#x2F;output文件，并丢弃错误消息。</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[kiosk@foundation0 ~]$ find /etc -name passwd &gt; /tmp/output 2&gt; /dev/null </span><br><span class="line">[kiosk@foundation0 ~]$ <span class="built_in">cat</span> /tmp/output </span><br><span class="line">/etc/pam.d/passwd</span><br><span class="line">/etc/passwd</span><br><span class="line">[kiosk@foundation0 ~]$ <span class="built_in">cat</span> /tmp/errors</span><br><span class="line"><span class="built_in">cat</span>: /tmp/errors: No such file or directory</span><br><span class="line">[kiosk@foundation0 ~]$ </span><br></pre></td></tr></table></figure>
-
-<p>​	将输出和生成的错误消息一起存储到&#x2F;tmp&#x2F;all-message-output文件。</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[kiosk@foundation0 ~]$ find /etc -name passwd &gt; /tmp/all-message-output 2&gt;&amp;1</span><br><span class="line">[kiosk@foundation0 ~]$ <span class="built_in">cat</span> /tmp/all-message-output </span><br><span class="line">find: ‘/etc/pki/rsyslog’: Permission denied</span><br><span class="line">find: ‘/etc/dhcp’: Permission denied</span><br><span class="line">find: ‘/etc/ssh/sshd_config.d’: Permission denied</span><br><span class="line">/etc/pam.d/passwd</span><br><span class="line">find: ‘/etc/lvm/archive’: Permission denied</span><br><span class="line">find: ‘/etc/lvm/backup’: Permission denied</span><br><span class="line">find: ‘/etc/lvm/cache’: Permission denied</span><br><span class="line">find: ‘/etc/lvm/devices’: Permission denied</span><br><span class="line">/etc/passwd</span><br><span class="line">find: ‘/etc/grub.d’: Permission denied</span><br><span class="line">find: ‘/etc/polkit-1/rules.d’: Permission denied</span><br><span class="line">...忽略...</span><br><span class="line">[kiosk@foundation0 ~]$ </span><br></pre></td></tr></table></figure>
-
-<p>​	将输出和生成的错误附加到&#x2F;tmp&#x2F;all-message-output文件。</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[kiosk@foundation0 ~]$ find /etc -name passwd &gt;&gt; /tmp/all-message-output 2&gt;&amp;1</span><br><span class="line">[kiosk@foundation0 ~]$ </span><br></pre></td></tr></table></figure>
-
-
-
-<h2 id="构建管道"><a href="#构建管道" class="headerlink" title="构建管道"></a>构建管道</h2><p>​	管道是一个或多个命令的序列，永竖线字符（|）分割。管道将第一个命令的标准输出连接到下一个命令的标准输入。</p>
-<p><img src="/2025/03/10/01-RHCE/01-124/Linux-RHCE-124-%E7%AC%AC%E5%9B%9B%E7%AB%A0%E8%8A%82/image-20250318180725621.png" alt="image-20250318180725621"></p>
-<p>​	在某个进程输出到终端之前，使用管道来操作另一个进程并格式化进程的输出。可以想象一下，数据正在通过一个管道从一个进程“流”向另一个进程，并且在其流过的管道中每个命令都会对其做出些改动。</p>
-<p>​	<code>注意：管道和I/O重定向都可以操作标准输出和输入。重定向会向文件发送标准输出或从文件获取标准输入。管道会将一个进程的标准输出发送到另一个进程的标准输入。</code></p>
-<h2 id="管道示例"><a href="#管道示例" class="headerlink" title="管道示例"></a>管道示例</h2><p>​	以下列表显示了一些管道示例：</p>
-<p>​	将ls命令的输出重定向到less命令，以在终端上以一次一屏的方式显示输出。</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[kiosk@foundation0 ~]$ <span class="built_in">ls</span> /usr/bin/ | less</span><br></pre></td></tr></table></figure>
-
-<p>​	将ls命令的输出重定向到wc -l命令，以统计ls收到的行数并将这个值显示在终端上。</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[kiosk@foundation0 ~]$ <span class="built_in">ls</span> | <span class="built_in">wc</span> -l</span><br><span class="line">23</span><br><span class="line">[kiosk@foundation0 ~]$ </span><br></pre></td></tr></table></figure>
-
-<p>​	将ls -t命令的输出重定向到head命令，以显示前十行，并将最终结果重定向到&#x2F;tmp&#x2F;first-ten-changed-files文件。</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[kiosk@foundation0 ~]$ <span class="built_in">ls</span> -t | <span class="built_in">head</span> -n 10 &gt; /tmp/first-ten-changed-files</span><br><span class="line">[kiosk@foundation0 ~]$ <span class="built_in">cat</span> /tmp/first-ten-changed-files</span><br><span class="line">ssh.sh</span><br><span class="line">test1.txt</span><br><span class="line">Videos</span><br><span class="line">configfiles</span><br><span class="line">Documents</span><br><span class="line">Downloads</span><br><span class="line">Music</span><br><span class="line">Pictures</span><br><span class="line">Public</span><br><span class="line">Templates</span><br><span class="line">[kiosk@foundation0 ~]$ </span><br></pre></td></tr></table></figure>
-
-
-
-<h2 id="管道、重定向和附加到文件"><a href="#管道、重定向和附加到文件" class="headerlink" title="管道、重定向和附加到文件"></a>管道、重定向和附加到文件</h2><p>​	如果将重定向与管道组合，shell会首先设置整个管道，然后重定向输入&#x2F;输出。如果在管道的中间使用重定向，则输出将转至文件，而不会前往管道中的下一个命令。</p>
-<p>​	在以下示例中，ls命令的输出将转至&#x2F;tmp&#x2F;saved-output文件，并且less命令不在终端上显示任何内容。</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[kiosk@foundation0 ~]$ <span class="built_in">ls</span> &gt; /tmp/saved-output | less</span><br></pre></td></tr></table></figure>
-
-<p>​	tee命令克服了这个限制。在管道中，tee将其标准输入复制到其标准输出中，并且还将标准输出重定向到指定的命令参数的文件。如果您将数据想象成流经管道的水，那么可将tee视觉化为管道中的T形接头，它负责输出在两个方向上的流向，所以该命令也称为“三通”。</p>
-<p><img src="/2025/03/10/01-RHCE/01-124/Linux-RHCE-124-%E7%AC%AC%E5%9B%9B%E7%AB%A0%E8%8A%82/image-20250318180625486.png" alt="image-20250318180625486"></p>
-<h2 id="使用tee命令的管道示例"><a href="#使用tee命令的管道示例" class="headerlink" title="使用tee命令的管道示例"></a>使用tee命令的管道示例</h2><p>​	以下示例将ls命令的输出重定向到&#x2F;tmp&#x2F;saved-output文件，并且将它传递到less命令，以便在终端上一次一屏的方式显示。</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[kiosk@foundation0 ~]$ <span class="built_in">ls</span> | <span class="built_in">tee</span> /tmp/saved-output | less</span><br></pre></td></tr></table></figure>
-
-<p>​	如果在管道末尾使用tee命令，则终端将显示管道中的命令输出，同时将其保存到文件中。</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[kiosk@foundation0 ~]$ <span class="built_in">ls</span> -t | <span class="built_in">head</span> -n 10 | <span class="built_in">tee</span> /tmp/ten-last-changed-files</span><br><span class="line">ssh.sh</span><br><span class="line">test1.txt</span><br><span class="line">Videos</span><br><span class="line">configfiles</span><br><span class="line">Documents</span><br><span class="line">Downloads</span><br><span class="line">Music</span><br><span class="line">Pictures</span><br><span class="line">Public</span><br><span class="line">Templates</span><br></pre></td></tr></table></figure>
-
-<p>​	使用tee命令配合-a选项将内容追加到文件，并非是覆盖它。</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[kiosk@foundation0 ~]$ <span class="built_in">ls</span> -t | <span class="built_in">head</span> -n 10 | <span class="built_in">tee</span> -a /tmp/ten-last-changed-files</span><br><span class="line">ssh.sh</span><br><span class="line">test1.txt</span><br><span class="line">Videos</span><br><span class="line">configfiles</span><br><span class="line">Documents</span><br><span class="line">Downloads</span><br><span class="line">Music</span><br><span class="line">Pictures</span><br><span class="line">Public</span><br><span class="line">Templates</span><br><span class="line">[kiosk@foundation0 ~]$ <span class="built_in">cat</span> /tmp/ten-last-changed-files</span><br><span class="line">ssh.sh</span><br><span class="line">...忽略...</span><br><span class="line">Templates</span><br><span class="line">ssh.sh</span><br><span class="line">...忽略...</span><br><span class="line">Templates</span><br><span class="line">[kiosk@foundation0 ~]$ </span><br></pre></td></tr></table></figure>
-
-
-
-<p>​	注意：您可以使用管道来重定向比标准错误，但不能使用合并重定向操作符（&amp;&gt;和&amp;&gt;&gt;）执行此操作。以下示例是通过管道重定向标准输出和标准错误的正确方法：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[kiosk@foundation0 ~]$ find /etc/ -name passwd 2&gt;&amp;1 | less</span><br></pre></td></tr></table></figure>
-
-
-
-<h1 id="从shell提示符编辑文本文件"><a href="#从shell提示符编辑文本文件" class="headerlink" title="从shell提示符编辑文本文件"></a>从shell提示符编辑文本文件</h1><h2 id="使用vim编辑文件"><a href="#使用vim编辑文件" class="headerlink" title="使用vim编辑文件"></a>使用vim编辑文件</h2><p>​	Linux的基本设计原则是支持将信息和配置设置存储再基于文件的文件中。这些文件可以采用各种结构，如设置列表、INI格式、结构化XML或YAML等等。以基于文本的结构存储文件的优点是可以使用任何简单的文本编辑器轻松的完成编辑。</p>
-<h2 id="VIM编辑器的优势"><a href="#VIM编辑器的优势" class="headerlink" title="VIM编辑器的优势"></a>VIM编辑器的优势</h2><p>​	当系统使用纯文本shell提示符时，您应该知道如何至少一个文本编辑器来编辑文本。然后您可以从终端窗口，或是通过ssh或web控制台远程登录的方式来编辑基于文本的配置文件。您不需要访问图形桌面，就能编辑服务器上的文件，而且该服务器可能根本不需要运行图形桌面环境。</p>
-<p>​	学习vim的关键在于，它几乎总是默认安装再服务器上，用于编辑基于文本的文件。可移植操作系统接口或POSIX标准制定了Linux上vi编辑器，许多其他类UNIX操作系统大致如此。</p>
-<p>​	vim还经常被用作vi在其他标准操作系统或发行版上实现。例如，macOS目前默认是Vim的轻量级安装。因此，面向Linux学习vim技能也可能在别处有用。</p>
-<h2 id="VIM入门"><a href="#VIM入门" class="headerlink" title="VIM入门"></a>VIM入门</h2><p>​	您可以使用如下两个软件包中的任何一个，在红帽Linux中安装vim编辑器。两个软件包为编辑基于文本的文件提供了不通的功能和vim命令。</p>
-<p>​	通过vim-minimal软件包，您可以安装具有核心功能的vi编辑器。这是一个轻量级安装，仅包含核心功能和基本vi命令。您可以使用vi命令打开文本进行编辑。</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[kiosk@foundation0 ~]$ vi filename</span><br></pre></td></tr></table></figure>
-
-<p>​	或者您可以使用vim-enhanced软件包安装vim编辑器。此软件包提供一套更完整的功能、一个在线帮助系统和一个教程系统。使用vim命令，在这种增强模式下启动vim编辑文本文件。</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[kiosk@foundation0 ~]$ vim filename</span><br></pre></td></tr></table></figure>
-
-<p>​	如果安装了vim-enhanced，则会设置一个shell别名，普通用户可设置一个shell别名，以便在运行vi命令时自动获取vim命令。此别名不适合于root用户及其UID小于200的用户（这些用户供系统服务使用）。</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">[kiosk@foundation0 ~]$ alias vi=&quot;vim&quot;</span><br><span class="line">[kiosk@foundation0 ~]$ alias </span><br><span class="line">...忽略...</span><br><span class="line">alias vi=&#x27;vim&#x27;</span><br><span class="line">...忽略...</span><br></pre></td></tr></table></figure>
-
-<p>​	如果安装了vim-enhanced，并且普通用户想要使用vi命令，则它们可能必须使用\vi命令来临时覆盖别名。您可以使用\vi –version和vim –version来比较两个命令的功能集。</p>
-<h2 id="VIM操作模式"><a href="#VIM操作模式" class="headerlink" title="VIM操作模式"></a>VIM操作模式</h2><p>​	vim编辑器提供各种操作模式，如命令模式、扩展命令模式、编辑模式和可视模式。作为vim用户，您要始终了解当前的模式，因为击键在不同模式下具有不通的效果。</p>
-<p>​	<img src="/2025/03/10/01-RHCE/01-124/Linux-RHCE-124-%E7%AC%AC%E5%9B%9B%E7%AB%A0%E8%8A%82/image-20250319110333114.png" alt="image-20250319110333114"></p>
-<p>​	第一次打开vim时，它会以命令模式启动，可用于导航、剪切和粘贴，以及其他文本修改。按所需的案件可访问特定的编辑模式。</p>
-<ul>
-<li><p>按i建进入插入模式，之后键入的所有文本将变为文件内容。按Esc键返回到命令模式。</p>
-</li>
-<li><p>按v键进入可视模式，可在其中选择多个字符进行文本操作。使用shift+V选择多行，使用 Ctrl+V可选择文本块。要退出可视模式，请按v、sheift+V或ctrl+V键。</p>
-</li>
-<li><p>按：键启动扩展命令模式，可执行的任务包含写入文件（保存文件），以及退出vim编辑器等。</p>
-<p><code>注意：如果您不确定所使用的模式，可以按几次Esc来返回到命令模式。在命令模式重复按Esc键是安全的。</code></p>
-</li>
-</ul>
-<h2 id="最低程度的基于vim工作流"><a href="#最低程度的基于vim工作流" class="headerlink" title="最低程度的基于vim工作流"></a>最低程度的基于vim工作流</h2><p>​	vim具有高效的组合击键操作，可进行高级编辑任务。虽说熟能生巧，但vim功能可能会难道新用户。</p>
-<p>​	工贸建议学习一下vim键和命令。</p>
-<ul>
-<li>u键可撤销最近的编辑内容。</li>
-<li>x键可删除单子字符。</li>
-<li>:w 命令可写入（保存）文件，并停留在命令模式中以进行之后更多的编辑任务。</li>
-<li>:wq 命令可写入（保存）文件并退出vim编辑页。</li>
-<li>:q! 命令可退出vim，同时放弃一次写入以来进行的所有更改。</li>
-</ul>
-<p>​	学习这些命令有助于vim用户完成任何编辑任务</p>
-<h2 id="重排现有文本"><a href="#重排现有文本" class="headerlink" title="重排现有文本"></a>重排现有文本</h2><p>​	在vim中，您可以通过使用y和p命令字符来执行拖拉和放置（复制和粘贴）。将光标定位到要选择的第一个字符，然后进去可视模式（按住v）。使用键盘左右箭头选择要操作的字符。选中所要操作的字符后，按y将所选内容拖拉（复制）到内存中。将光标定位到新位置，然后按p将所选内容放置（粘贴）到光标处。</p>
-<h2 id="vim中的可视模式"><a href="#vim中的可视模式" class="headerlink" title="vim中的可视模式"></a>vim中的可视模式</h2><p>​	可视化模式可用于突出显示和操作不同行和列中的文本。您可以使用以下组合键在vim中进入可视模式。</p>
-<ul>
-<li>字符模式： v</li>
-<li>行模式：shift+v</li>
-<li>块（列）模式：ctrl+v</li>
-</ul>
-<p>字符模式可突出西安市文本块中的句子。屏幕底部会出现VISUAL一词。按v可进入可视字符模式。按shift+v可进入行模式。底部会出现VISUAL LINE一词。</p>
-<p>可视块模式非常适合于操作数据文件。从光标处按Ctrl+v键进入可视块。屏幕底部会出现VISUAL BLOCK。使用左右箭头键可以来突出选择要更改的部分。</p>
-<h2 id="vim配置文件"><a href="#vim配置文件" class="headerlink" title="vim配置文件"></a>vim配置文件</h2><p>​	&#x2F;etc&#x2F;vimrc和<del>&#x2F;.vimr配置文件分别用来该表整个系统或特定用户的vim编辑器行为。在这些配置文件中您可以指定行为，如默认的制表符间距、语法突出显示、颜色方案等。在使用yaml等具有严格语法要求的语言时，修改vim编辑器的行为非常有用。请考虑以下</del>&#x2F;.vimrc文件，他将在编辑yaml文件时将默认制表位（有ts字符表述）原先的四个空格，修改为两个空格。该文件还包括set number参数，可在表记所有文件时显示行号。</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[kiosk@foundation0 ~]$ <span class="built_in">cat</span> .vimrc </span><br><span class="line">autocmd FileType yaml setlocal ts=2</span><br><span class="line"><span class="built_in">set</span> number</span><br><span class="line">[kiosk@foundation0 ~]$ </span><br></pre></td></tr></table></figure>
-
-<p>​	其余更多参数资料可使用man vim（5）进行查看。</p>
-<h1 id="更改shell环境"><a href="#更改shell环境" class="headerlink" title="更改shell环境"></a>更改shell环境</h1><h2 id="shell变量用法"><a href="#shell变量用法" class="headerlink" title="shell变量用法"></a>shell变量用法</h2><p>​	使用Bash Shell时，您可以设置shell变量，来帮助运行命令或修改shell的行为。它们会自动复制到从改shell运行的程序中。您可以使用变量来更轻松的运行带有长参数的命令，或者将常用设置应用于该shell运行的命令。</p>
-<p>​	shell变量对于特定的shell会话是唯一的。如果您打开两个终端窗口，或者通过两个独立的登录会话登录同以远程服务器，那么您在运行两个shell。每个shell都会有自己的一组shell变量值。</p>
-<h2 id="为变量分配值"><a href="#为变量分配值" class="headerlink" title="为变量分配值"></a>为变量分配值</h2><p>​	使用以下语法将值分配给shell变量，VARIABLENAME（变量名）、value（变量值）：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[kiosk@foundation0 ~]$ VARIABLENAME=value</span><br></pre></td></tr></table></figure>
-
-<p>​	变量名可以包含大写或小写、数字和下划线字符（_）。例如以下命令可设置shell变量。</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[kiosk@foundation0 ~]$ COUNT=40</span><br><span class="line">[kiosk@foundation0 ~]$ first_name=LiWeiHu</span><br><span class="line">[kiosk@foundation0 ~]$ file1=/tmp/abc</span><br><span class="line">[kiosk@foundation0 ~]$ _ID=RH124</span><br><span class="line">[kiosk@foundation0 ~]$ </span><br></pre></td></tr></table></figure>
-
-<p>​	请记住，此更改仅会影响在其中运行命令的shell环境中，而不影响您可能在在服务器上运行的其他任何shell。</p>
-<p>​	您可以使用set命令列出当前设置的所有shell变量。（它还会列出所有shell喊出，您可以忽略它们）要提高可读性，您可以将输出通过管道传输到less命令，以便一次一页的查看</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">[kiosk@foundation0 ~]$ set | less</span><br></pre></td></tr></table></figure>
-
-<p><img src="/2025/03/10/01-RHCE/01-124/Linux-RHCE-124-%E7%AC%AC%E5%9B%9B%E7%AB%A0%E8%8A%82/image-20250319162742725.png" alt="image-20250319162742725"></p>
-<p>​	</p>
-<h2 id="使用变量扩展检索值"><a href="#使用变量扩展检索值" class="headerlink" title="使用变量扩展检索值"></a>使用变量扩展检索值</h2><p>​	您可以使用变量扩展来指代您设置的变量值。要使用变量扩展，您在变量名前加上美元符号（$）。</p>
-<p>例如：以下命令可将变量COUNT设置为40.</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[kiosk@foundation0 ~]$ COUNT=40</span><br></pre></td></tr></table></figure>
-
-<p>如果echo COUNT，他会显示COUNT字符串</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[kiosk@foundation0 ~]$ <span class="built_in">echo</span> COUNT</span><br><span class="line">COUNT</span><br></pre></td></tr></table></figure>
-
-<p>如果输入echo $COUNT，他会显示COUNT变量的值。</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[kiosk@foundation0 ~]$ <span class="built_in">echo</span> <span class="variable">$COUNT</span></span><br><span class="line">40</span><br></pre></td></tr></table></figure>
-
-<p>您也可以使用变量来指代多个命令的长文件名。</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[kiosk@foundation0 ~]$ file1=/tmp/tmp.Z9s32js242</span><br><span class="line">[kiosk@foundation0 ~]$ <span class="built_in">touch</span> <span class="variable">$file1</span></span><br><span class="line">[kiosk@foundation0 ~]$ <span class="built_in">ls</span> <span class="variable">$file1</span></span><br><span class="line">/tmp/tmp.Z9s32js242</span><br><span class="line">[kiosk@foundation0 ~]$ <span class="built_in">rm</span> <span class="variable">$file1</span></span><br><span class="line">[kiosk@foundation0 ~]$ <span class="built_in">ls</span> <span class="variable">$file1</span></span><br><span class="line"><span class="built_in">ls</span>: cannot access <span class="string">&#x27;/tmp/tmp.Z9s32js242&#x27;</span>: No such file or directory</span><br><span class="line">[kiosk@foundation0 ~]$ </span><br></pre></td></tr></table></figure>
-
-<p>​	重要：您始终可以在变量扩展中使用花括号，尽管它们通常是不必要的。</p>
-<p>​		在以下示例中，echo命令尝试扩展不存在的变量COUNTx，但不返回任何内容。该命令也不会报告任何错误。</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[kiosk@foundation0 ~]$ <span class="built_in">echo</span> new <span class="variable">$COUNTx</span></span><br><span class="line">new</span><br></pre></td></tr></table></figure>
-
-<p>​		如果变量名旁边有任何尾随字符，可以使用花括号来划定变量名称的界限。在以下示例中，echo命令现在扩展了COUNT变量。</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[kiosk@foundation0 ~]$ <span class="built_in">echo</span> new <span class="variable">$&#123;COUNT&#125;</span>x</span><br><span class="line">new 40x</span><br><span class="line">[kiosk@foundation0 ~]$ </span><br></pre></td></tr></table></figure>
-
-
-
-<h2 id="使用Shell变量配置Bash"><a href="#使用Shell变量配置Bash" class="headerlink" title="使用Shell变量配置Bash"></a>使用Shell变量配置Bash</h2><p>​	一些shell变量在Bash启动时设置。您可以修改它们来调整shell的行为。</p>
-<p>​	例如，HISTFILE、HISTFILESIZE和HISTTIMEFORMAT等shell变量可影响shell历史记录的history命令。HISTFILE变量指定要将shell历史记录保存到哪个文件，默认为~&#x2F;.bash_history。HISTTIMEFORMAT变量定义历史记录中每个命令的时间戳格式。默认情况下，此变量不存在。</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">[kiosk@foundation0 ~]$ history </span><br><span class="line">   15  vim filename</span><br><span class="line">   16  vim --version</span><br><span class="line">   17  \vi --version</span><br><span class="line">   18  alias </span><br><span class="line">   19  alias vi=&quot;vim&quot;</span><br><span class="line">   20  alias </span><br><span class="line">   21  vim filename </span><br><span class="line">[kiosk@foundation0 ~]$ HISTTIMEFORMAT=&quot;%F %T &quot;</span><br><span class="line">[kiosk@foundation0 ~]$ history </span><br><span class="line">   15  2025-03-19 10:16:06 vim filename</span><br><span class="line">   16  2025-03-19 10:17:37 vim --version</span><br><span class="line">   17  2025-03-19 10:17:43 \vi --version</span><br><span class="line">   18  2025-03-19 10:21:55 alias </span><br><span class="line">   19  2025-03-19 10:23:06 alias vi=&quot;vim&quot;</span><br><span class="line">   20  2025-03-19 10:23:10 alias </span><br><span class="line">   21  2025-03-19 11:31:39 vim filename </span><br></pre></td></tr></table></figure>
-
-<p>​	另一个示例是PS1变量，该变量控制shell提示符的外观。如果更改此值，他将改变shell提示符的外观。bash（1）man page的“PROMPTING”部分列出了提示符支持的多个特殊字符扩展。</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[kiosk@foundation0 ~]$ PS1=<span class="string">&quot;bash\$ &quot;</span></span><br><span class="line">bash$ PS1=<span class="string">&quot;[\u@\h \w]\$ &quot;</span></span><br><span class="line">[kiosk@foundation0 ~]$</span><br></pre></td></tr></table></figure>
-
-<p>​	由于PS1变量设置的值是提示符，红帽建议以空格结尾。另外每当变量值包含某种形式的空格（包括空格、制表符（TAB）或回车）时，该值必须用单引号或双引号括起来。如果省略引号，可能会出现意外结果。前面的PS1变量符合尾随空格建议和引号规则。</p>
-<h2 id="使用环境变量配置程序"><a href="#使用环境变量配置程序" class="headerlink" title="使用环境变量配置程序"></a>使用环境变量配置程序</h2><p>​	shell提供了一个环境，供您从该shell中运行程序。例如，此环境包括有关文件系统上当前工作目录的信息、传递给程序的命令行选项，以及环境变量的值。程序可以使用这些环境变量来更改其行为或其默认设置。</p>
-<p>​	如果shell变量不是环境变量，则只有shell可以使用它。但是如果shell变量是环境变量，则shell和从该shell运行的任何程序都可以使用该变量。</p>
-<p>​	您可以将shell中定义的任何变量分配为环境变量，方法是将它们用export命令导出。</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[kiosk@foundation0 ~]$ EDITOR=vim</span><br><span class="line">[kiosk@foundation0 ~]$ <span class="built_in">echo</span> <span class="variable">$EDITOR</span></span><br><span class="line">vim</span><br><span class="line">[kiosk@foundation0 ~]$ <span class="built_in">export</span> EDITOR</span><br><span class="line">[kiosk@foundation0 ~]$ <span class="built_in">export</span></span><br><span class="line">...忽略...</span><br><span class="line"><span class="built_in">declare</span> -x EDITOR=<span class="string">&quot;vim&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p>​	另一个重要的环境变量是PATH。PATH变量包含一个含有程序目录的冒号分割列表：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[kiosk@foundation0 ~]$ <span class="built_in">echo</span> <span class="variable">$PATH</span></span><br><span class="line">/home/kiosk/.local/bin:/home/kiosk/bin:/usr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin</span><br><span class="line">[kiosk@foundation0 ~]$ </span><br></pre></td></tr></table></figure>
-
-<p>​	当您运行如ls等命令时，shell会按顺序逐一在这些目录中查找可执行文件ls，并且允许它找到的第一个匹配文件。（在经典的系统中，此文件位于&#x2F;usr&#x2F;bin&#x2F;ls）。</p>
-<p>​	那您可以轻松地将目录附加到PATH变量。例如，您可能希望像常规命令一样允许&#x2F;home&#x2F;user&#x2F;sbin中一些可执行程序或脚本。您可以将&#x2F;home&#x2F;user&#x2F;sbin目录加到当前会话的PATH中。</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">[kiosk@foundation0 ~]$ export PATH=$&#123;PATH&#125;:/home/kiosk/sbin</span><br><span class="line">[kiosk@foundation0 ~]$ cat &gt; /home/kiosk/sbin/haha &lt;&lt; EOF</span><br><span class="line">#!/bin/bash</span><br><span class="line">echo &quot;这是/home/kiosk/sbin目录下的一个可执行文件&quot;</span><br><span class="line">EOF</span><br><span class="line">[kiosk@foundation0 ~]$ haha</span><br><span class="line">这是/home/kiosk/sbin目录下的一个可执行文件</span><br><span class="line">[kiosk@foundation0 ~]$ </span><br></pre></td></tr></table></figure>
-
-<p>​	要列出特定的shell的所有环境变量，请运行env命令：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">[kiosk@foundation0 ~]$ env</span><br><span class="line">SHELL=/bin/bash</span><br><span class="line">HISTCONTROL=ignoredups</span><br><span class="line">HISTSIZE=1000</span><br><span class="line">...忽略...</span><br><span class="line">PATH=/home/kiosk/.local/bin:/home/kiosk/bin:/usr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/home/kiosk/sbin</span><br><span class="line">SELINUX_LEVEL_REQUESTED=</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-
-
-<h2 id="设置默认文本编辑器"><a href="#设置默认文本编辑器" class="headerlink" title="设置默认文本编辑器"></a>设置默认文本编辑器</h2><p>​	EDITOR环境变量是指定要用于命令行程序的默认文本编辑器。如果不指定，很多系统会使用vi或者vim，您也可以覆盖原有选项，这里可以换成nano编辑器。</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[kiosk@foundation0 ~]$ <span class="built_in">export</span> EDITOR=nano</span><br></pre></td></tr></table></figure>
-
-
-
-
-
-<h2 id="自动设置变量"><a href="#自动设置变量" class="headerlink" title="自动设置变量"></a>自动设置变量</h2><p>​	当Bash启动时，会运行几个含有shell命令的文本文件，以初始化shell环境。要在shell启动时自动设置shell或环境变量，您可以编辑Bash启动脚本。也就是配置永久变量或环境变量。</p>
-<p>​	运行的确切脚本取决于shell是交互式还是非交互式的，以及是登录还是非登录shell。用户直接在交互式shell中输入命令，而非交互式shell则是在后台运行且无需用户干预，例如脚本。当用户通过终端本地登录或通过SSH协议远程登录时，将调用登录shell。非登录shell从现有会话调用，例如从GNOME GUI打开终端。</p>
-<p>​	对于交互式登录shell，&#x2F;etc&#x2F;profile和<del>&#x2F;.bash_profile文件配置Bash环境，&#x2F;etc&#x2F;profile和</del>&#x2F;.bash_profile文件也分别提供&#x2F;etc&#x2F;bashrc和<del>&#x2F;.bashrc文件。对于交互式非登录shell，只有&#x2F;etc&#x2F;bashrc和</del>&#x2F;.bashrc文件配置Bash环境。&#x2F;etc&#x2F;profile和&#x2F;etc&#x2F;bashrc文件适用于整个系统（全局Bash环境），而<del>&#x2F;.bash_profile和</del>&#x2F;.bashrc文件则是特定用户的（局部用户Bash环境）。非交互式shell调用BASH_ENV变量定义的任何文件。默认情况下不定义此变量。</p>
-<p>​	要创建可供所有交互式shell使用的变量，请编辑<del>&#x2F;.bashrc文件。若也要在用户登录后使用的变量，可在</del>&#x2F;.bash_profile文件中定义。</p>
-<p>​	例如，若要更改通过SSH登录时的默认编辑器，您可以修改~&#x2F;.bash_profile文件中的EDITOR变量：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[kiosk@foundation0 ~]$ <span class="built_in">echo</span> <span class="string">&quot;export EDITOR=nano&quot;</span> &gt; ~/.bash_profile</span><br></pre></td></tr></table></figure>
-
-<p>​	<code>注意：若要调整作用于所有用户账户的设置，最佳的方式是带有.sh扩展名的文件，并在改文件中包含对应的/etc/porfile.d目录中更改。要在/etc/porfile.d目录中创建文件，请以root用户身份登录。</code></p>
-<h2 id="Bash-别名"><a href="#Bash-别名" class="headerlink" title="Bash 别名"></a>Bash 别名</h2><p>​	Bash别名是其他Bash命令的快捷方式。例如，如果必须繁琐的键入一个长命令，您可以创建一个较短的别名来调用它。使用alias命令来创建别名。例如，一下示例为echo命令创建hello别名。</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">[kiosk@foundation0 ~]$ alias hello=&#x27;echo &quot;Hello, this is a long string.&quot;&#x27;</span><br></pre></td></tr></table></figure>
-
-<p>​	然后，您可以运行hello命令，它会调用echo命令。</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[kiosk@foundation0 ~]$ hello </span><br><span class="line">Hello, this is a long string.</span><br><span class="line">[kiosk@foundation0 ~]$ </span><br></pre></td></tr></table></figure>
-
-<p>​	将别名添加到用户的~&#x2F;.bashrc文件中，以便它们在任何交互shell中可用。</p>
-<h2 id="取消设置和取消导出变量于别名"><a href="#取消设置和取消导出变量于别名" class="headerlink" title="取消设置和取消导出变量于别名"></a>取消设置和取消导出变量于别名</h2><p>​	要取消设置和取消导出变量，请使用unset命令：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[kiosk@foundation0 ~]$ <span class="built_in">echo</span> <span class="variable">$file1</span></span><br><span class="line">/tmp/tmp.Z9sdai2W2c</span><br><span class="line">[kiosk@foundation0 ~]$ <span class="built_in">unset</span> file1 </span><br><span class="line">[kiosk@foundation0 ~]$ <span class="built_in">echo</span> <span class="variable">$file1</span></span><br><span class="line"></span><br><span class="line">[kiosk@foundation0 ~]$ </span><br></pre></td></tr></table></figure>
-
-
-
-<p>​	要取消导出变量但不取消设置它，请使用export -n命令：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[kiosk@foundation0 ~]$ <span class="built_in">export</span> -n PS1</span><br></pre></td></tr></table></figure>
-
-
-
-<p>​	要取消设置别名，请使用unalias命令：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[kiosk@foundation0 ~]$ <span class="built_in">unalias</span> hello </span><br><span class="line">[kiosk@foundation0 ~]$ hello</span><br><span class="line">bash: hello: <span class="built_in">command</span> not found...</span><br><span class="line">^C</span><br><span class="line">[kiosk@foundation0 ~]$ </span><br></pre></td></tr></table></figure>
-
-
-
-
-
-
-
-
 
 
 
