@@ -1,0 +1,981 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>CKA-kubernetes-第一章 | 欢迎来到李维虎的在线博客</title><meta name="author" content="李维虎"><meta name="copyright" content="李维虎"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="初时微服务​	在了解Kubernetes之前，我们需要先认识什么是微服务，并且它与传统的单体式架构的区别以及优劣处。 ​	微服务它是将一个庞大的应用系统拆分成为多个小块的独立服务，再把这些独立的小块服务进行串联起来的一种架构设计，它是具有比传统架构：内聚更强，更加敏捷。 ​	类似于蜂巢，将多个不同的服务聚合为一个功能强大的应用服务。  基于微服务的系统架构​	微服务的核心思路就是拆分。将单体项目的">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CKA-kubernetes-第一章">
+<meta property="og:url" content="http://example.com/2025/06/05/03-Kubernetes/CKA-kubernetes-%E7%AC%AC%E4%B8%80%E7%AB%A0/index.html">
+<meta property="og:site_name" content="欢迎来到李维虎的在线博客">
+<meta property="og:description" content="初时微服务​	在了解Kubernetes之前，我们需要先认识什么是微服务，并且它与传统的单体式架构的区别以及优劣处。 ​	微服务它是将一个庞大的应用系统拆分成为多个小块的独立服务，再把这些独立的小块服务进行串联起来的一种架构设计，它是具有比传统架构：内聚更强，更加敏捷。 ​	类似于蜂巢，将多个不同的服务聚合为一个功能强大的应用服务。  基于微服务的系统架构​	微服务的核心思路就是拆分。将单体项目的">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/img/doc_img/Kubernetes.webp">
+<meta property="article:published_time" content="2025-06-05T02:38:53.000Z">
+<meta property="article:modified_time" content="2025-07-02T09:13:13.063Z">
+<meta property="article:author" content="李维虎">
+<meta property="article:tag" content="Kubernetes">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/img/doc_img/Kubernetes.webp"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "CKA-kubernetes-第一章",
+  "url": "http://example.com/2025/06/05/03-Kubernetes/CKA-kubernetes-%E7%AC%AC%E4%B8%80%E7%AB%A0/",
+  "image": "http://example.com/img/doc_img/Kubernetes.webp",
+  "datePublished": "2025-06-05T02:38:53.000Z",
+  "dateModified": "2025-07-02T09:13:13.063Z",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "李维虎",
+      "url": "http://example.com/"
+    }
+  ]
+}</script><link rel="shortcut icon" href="/img/index_img/logo.png"><link rel="canonical" href="http://example.com/2025/06/05/03-Kubernetes/CKA-kubernetes-%E7%AC%AC%E4%B8%80%E7%AB%A0/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!true && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script async="async" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script><script>(adsbygoogle = window.adsbygoogle || []).push({
+  google_ad_client: '',
+  enable_page_level_ads: 'true'
+});</script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":true,"top_n_per_article":1,"unescape":false,"languages":{"hits_empty":"未找到符合您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"簡"},
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: true,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'CKA-kubernetes-第一章',
+  isHighlightShrink: false,
+  isToc: true,
+  pageType: 'post'
+}</script><meta name="generator" content="Hexo 7.3.0"></head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">加载中...</div></div></div><script>(()=>{
+  const $loadingBox = document.getElementById('loading-box')
+  const $body = document.body
+  const preloader = {
+    endLoading: () => {
+      $body.style.overflow = ''
+      $loadingBox.classList.add('loaded')
+    },
+    initLoading: () => {
+      $body.style.overflow = 'hidden'
+      $loadingBox.classList.remove('loaded')
+    }
+  }
+
+  preloader.initLoading()
+  window.addEventListener('load', preloader.endLoading)
+
+  if (true) {
+    btf.addGlobalFn('pjaxSend', preloader.initLoading, 'preloader_init')
+    btf.addGlobalFn('pjaxComplete', preloader.endLoading, 'preloader_end')
+  }
+})()</script><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="/img/head/head.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">10</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">3</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">3</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url(img/doc_img/Kubernetes.webp);"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><img class="site-icon" src="/img/index_img/butterfly-icon.png" alt="Logo"></a><a class="nav-page-title" href="/"><span class="site-name">CKA-kubernetes-第一章</span></a></span><div id="menus"><div id="search-button"><span class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></span></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="post-info"><h1 class="post-title">CKA-kubernetes-第一章<a class="post-edit-link" href="null_posts/03-Kubernetes/CKA-kubernetes-第一章.md" title="编辑" target="_blank"><i class="fas fa-pencil-alt"></i></a></h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2025-06-05T02:38:53.000Z" title="发表于 2025-06-05 10:38:53">2025-06-05</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2025-07-02T09:13:13.063Z" title="更新于 2025-07-02 17:13:13">2025-07-02</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/Kubernetes/">Kubernetes</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">总字数:</span><span class="word-count">16.6k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>67分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">浏览量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><h1 id="初时微服务"><a href="#初时微服务" class="headerlink" title="初时微服务"></a>初时微服务</h1><p>​	在了解Kubernetes之前，我们需要先认识什么是微服务，并且它与传统的单体式架构的区别以及优劣处。</p>
+<p>​	微服务它是将一个庞大的应用系统拆分成为多个小块的独立服务，再把这些独立的小块服务进行串联起来的一种架构设计，它是具有比传统架构：内聚更强，更加敏捷。</p>
+<p>​	类似于蜂巢，将多个不同的服务聚合为一个功能强大的应用服务。</p>
+<p><img src="/2025/06/05/03-Kubernetes/CKA-kubernetes-%E7%AC%AC%E4%B8%80%E7%AB%A0/image-20250605170824165.png" alt="image-20250605170824165"></p>
+<h2 id="基于微服务的系统架构"><a href="#基于微服务的系统架构" class="headerlink" title="基于微服务的系统架构"></a>基于微服务的系统架构</h2><p>​	微服务的核心思路就是拆分。将单体项目的问题，通过把项目拆分为一个个小项目，如下图：</p>
+<p><img src="/2025/06/05/03-Kubernetes/CKA-kubernetes-%E7%AC%AC%E4%B8%80%E7%AB%A0/image-20250606110721445.png" alt="image-20250606110721445"></p>
+<h2 id="传统单体架构VS微服务架构"><a href="#传统单体架构VS微服务架构" class="headerlink" title="传统单体架构VS微服务架构"></a>传统单体架构VS微服务架构</h2><p>​	例如一个电商系统，电商系统中具备着很多功能，比如：登录、人员账号、商品库存、订单、购物车等等，随着业务功能的迭代，项目的业务越来越复杂，开发人员越来越多，相应的开发、编译、部署、水平扩展等都会受到不同程度的限制。</p>
+<p>​	传统架构中，你商城系统中所有的前端后端，以及所有的服务都部署在一台服务器上，那么这台服务器的性能要求就会随着你的业务复杂度，以及客户访问量急剧增加。如果系统中要对收藏功能进行更新，那么你需要提前发布公告对客户说明凌晨几点到早上几点将停机维护升级，这不光是对客户的体验感极度下降，同时我们的开发、运维等人员还要通宵达旦的对系统进行升级。</p>
+<p>​	而在微服务架构中，它将功能拆分成多个不同的组件，一个功能对应一个组件，你的前端和后端是分离的，你的登录、人员账号、库存等等功能都是每个不同的组件，它们是秒级分别部署在不同的容器中，当你需要对收藏功能进行升级时，你只需要发布在某一时间段收藏夹功能暂不可用，但不会影响到你其他的业务，并且他的部署是秒级的，客户根本感受不到升级带来的影响，最有可能的也就是在的升级的同一秒，客户点击了这个功能，下一秒又恢复了，客户都只会认为是自己网络当时卡了一下。</p>
+<p>​	下图是应用架构是发展史。</p>
+<p><img src="/2025/06/05/03-Kubernetes/CKA-kubernetes-%E7%AC%AC%E4%B8%80%E7%AB%A0/image-20250605172934284.png" alt="image-20250605172934284"></p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>单体架构</th>
+<th>微服务架构</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>迭代速度</td>
+<td>较慢</td>
+<td>快</td>
+</tr>
+<tr>
+<td>部署频率</td>
+<td>较慢不经常部署，部署风险高</td>
+<td>经常发布，部署风险小</td>
+</tr>
+<tr>
+<td>系统性能</td>
+<td>吞吐量小</td>
+<td>吞吐量大</td>
+</tr>
+<tr>
+<td>系统扩展</td>
+<td>扩展性差</td>
+<td>扩展性强</td>
+</tr>
+<tr>
+<td>技术栈多样性</td>
+<td>单一、封闭</td>
+<td>多样、开放</td>
+</tr>
+<tr>
+<td>运维</td>
+<td>简单</td>
+<td>运维复杂</td>
+</tr>
+<tr>
+<td>部署</td>
+<td>容易部署</td>
+<td>较难部署</td>
+</tr>
+<tr>
+<td>架构复杂度</td>
+<td>复杂度不高</td>
+<td>复杂度高</td>
+</tr>
+<tr>
+<td>查错</td>
+<td>简单</td>
+<td>定位问题困难</td>
+</tr>
+<tr>
+<td>管理成本</td>
+<td>主要用于开发成本</td>
+<td>服务治理、运维</td>
+</tr>
+</tbody></table>
+<h1 id="容器介绍"><a href="#容器介绍" class="headerlink" title="容器介绍"></a>容器介绍</h1><p>​	容器是一个可以将应用程序以指定格式打包并运行在一个操作系统相关联的环境种的方法，和虚拟机不同的是，容器并不会打包整个操作系统，而只打包允许该应用程序所必须的库和依赖设置等，这将使得容器具备高效率、轻量化、系统隔离性，以上特性将会确保无论在何处部署，容器内允许的应用都会保持完全一致，不会出现所谓的开发在他的环境没问题，但是到生产怎么就出现一堆异常的情况。</p>
+<p>​	主流容器工具：Container、Docker、Podman……..</p>
+<h2 id="传统应用部署痛点"><a href="#传统应用部署痛点" class="headerlink" title="传统应用部署痛点"></a>传统应用部署痛点</h2><p>​	在传统应用部署中，我们经常会遇到以下问题：</p>
+<ul>
+<li>环境不一致：导致开发环境中是没问题，但是应用到生产中可能会出现一堆奇奇怪怪的问题。</li>
+<li>依赖管理复杂：例如该服务器上你将部署你的两类应用，应用一可能需要jdk1.6，应用二可能需要JDK1.8，这就导致一台服务器上两个应用需要的依赖版本不同，导致管理复杂，问题频出的情况。</li>
+<li>资源利用率低：传统服务器或虚机需要一套完整的操作系统，占用大量的磁盘及内存等资源，但你的应用并不是每时每刻都需要着这么大的资源，这就导致资源大量时间处于空闲浪费状态。</li>
+<li>部署复杂：部署多套应用时，每套应用你可能需要重复的手动部署虚机、配置环境、安装依赖等，花费时间长效率低切易出错。</li>
+</ul>
+<h2 id="容器化技术解决方案"><a href="#容器化技术解决方案" class="headerlink" title="容器化技术解决方案"></a>容器化技术解决方案</h2><p>​	容器化技术通过以下方式解决以上传统部署的通点：</p>
+<ul>
+<li>环境标准化：将开发环境中的最小操作系统及依赖等打包在一起，确保在任何一个环境中都能一致的运行。</li>
+<li>轻量级：容器共享宿主机的操作系统内核及资源，比虚机机更轻量。</li>
+<li>快速部署：容器可以在几秒内启动，大大提高部署、升级、重启效率，相对传统部署中的升级就是一次大型手术风险，容器化容错率和效率更为高效。</li>
+<li>可移植：构建一次容器镜像，到处可运行。</li>
+</ul>
+<h2 id="容器化的核心理念"><a href="#容器化的核心理念" class="headerlink" title="容器化的核心理念"></a>容器化的核心理念</h2><p>​	容器化遵循“不氪变基础设施”的理念：</p>
+<ul>
+<li>应用和环境被打包成不可变的镜像</li>
+<li>每次部署都使用相同的镜像</li>
+<li>配置通过环境变量或配置文件注入</li>
+<li>问题修复通过重构镜像而非修改运行中的容器</li>
+</ul>
+<h2 id="Docker的核心概念"><a href="#Docker的核心概念" class="headerlink" title="Docker的核心概念"></a>Docker的核心概念</h2><p><strong>镜像（image）</strong></p>
+<p>​	<strong>定义</strong>：镜像是一个只读的模板，包含了运行应用所需的所有内容：代码、运行时、库文件、环境变量和配置文件。</p>
+<p>​	<strong>特点</strong>：</p>
+<ul>
+<li><strong>分层存储</strong>：镜像由多个层组成，每一层代表一次修改。</li>
+<li><strong>只读性</strong>：镜像本身是只读的，不能直接修改。</li>
+<li><strong>可复用</strong>：同一个镜像可以创建多个容器。</li>
+<li><strong>版本管理</strong>：通过标签（tag）进行版本管理</li>
+</ul>
+<p>类似与镜像就是一个安装程序或模板，它定义了应用运行的所需的一切，但本身是不可直接运行的。</p>
+<p><strong>容器（container）</strong></p>
+<p>​	<strong>定义</strong>：容器是镜像的运行实力，是一个轻量级、可移植的执行环境。</p>
+<p>​	<strong>特点</strong>：</p>
+<ul>
+<li><strong>隔离性</strong>：每个容器都有自己的文件系统、网络和进程。</li>
+<li><strong>临时性</strong>：容器可以被创建、启动、停止、删除。</li>
+<li><strong>可写层</strong>：容器在镜像基础上添加了可写层。</li>
+<li><strong>进程级</strong>：容器内通常运行一个主进程。</li>
+</ul>
+<p><strong>仓库（Repository）</strong></p>
+<p><strong>定义</strong>：仓库是存储和分发镜像的地方，可以包含一个镜像的多个版本。</p>
+<p><strong>分类</strong>：</p>
+<ul>
+<li><strong>公共仓库</strong>：如 Docker Hub，任何人都可以使用</li>
+<li><strong>私有仓库</strong>：企业内部搭建，用于存储私有镜像</li>
+<li><strong>官方仓库</strong>：由软件官方维护的镜像仓库</li>
+</ul>
+<h1 id="离线部署docker"><a href="#离线部署docker" class="headerlink" title="离线部署docker"></a>离线部署docker</h1><table>
+<thead>
+<tr>
+<th>操作系统</th>
+<th>Red Hat Enterprise Linux release 9.4 (Plow)</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Docker版本</strong></td>
+<td><strong>28.2.2</strong></td>
+</tr>
+</tbody></table>
+<p>​	<code>Docker离线安装包下载地址：https://download.docker.com/linux/static/stable/x86_64/</code></p>
+<p>​	<code>阿里云rpm安装包下载地址：https://developer.aliyun.com/mirror/?spm=a2c6h.25603864.0.0.5d256733vSKLL6</code></p>
+<p>​	在虚拟机中创建安装包存放目录，之后利用工具将安装包上传到该目录下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost softapp]# <span class="built_in">mkdir</span> -p /opt/softapp/</span><br><span class="line">[root@localhost softapp]# tree /opt/</span><br><span class="line">/opt/</span><br><span class="line">└── softapp</span><br><span class="line">    └── docker-28.2.2.tgz</span><br><span class="line"></span><br><span class="line">1 directory, 1 file</span><br></pre></td></tr></table></figure>
+
+<p>​	解压docker安装包，会产生docker的一个新目录，新目录内包含以下文件：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost softapp]# tar -zxvf /opt/softapp/docker-28.2.2.tgz -C /opt/softapp/</span><br><span class="line">docker/</span><br><span class="line">docker/containerd-shim-runc-v2</span><br><span class="line">docker/containerd</span><br><span class="line">docker/docker</span><br><span class="line">docker/runc</span><br><span class="line">docker/ctr</span><br><span class="line">docker/dockerd</span><br><span class="line">docker/docker-init</span><br><span class="line">docker/docker-proxy</span><br><span class="line">[root@localhost softapp]# tree /opt/softapp/docker</span><br><span class="line">/opt/softapp/docker</span><br><span class="line">├── containerd</span><br><span class="line">├── containerd-shim-runc-v2</span><br><span class="line">├── ctr</span><br><span class="line">├── docker</span><br><span class="line">├── dockerd</span><br><span class="line">├── docker-init</span><br><span class="line">├── docker-proxy</span><br><span class="line">└── runc</span><br><span class="line"></span><br><span class="line">0 directories, 8 files</span><br></pre></td></tr></table></figure>
+
+<p>​	将解压出来的文件拷贝到&#x2F;usr&#x2F;bin工作目录下</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost softapp]# <span class="built_in">cp</span> /opt/softapp/docker/* /usr/bin/</span><br></pre></td></tr></table></figure>
+
+<p>​	由于此刻docker未加入systemd守护进程，所以此刻利用cat重定向将docker加入守护进程，并做开机自启：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost system]# <span class="built_in">cat</span> &gt; /etc/systemd/system/docker.service &lt;&lt; <span class="string">EOF</span></span><br><span class="line"><span class="string">[Unit]</span></span><br><span class="line"><span class="string">Description=Docker Application Container Engine</span></span><br><span class="line"><span class="string">Documentation=https://docs.docker.com</span></span><br><span class="line"><span class="string">After=network-online.target firewalld.service</span></span><br><span class="line"><span class="string">Wants=network-online.target</span></span><br><span class="line"><span class="string">  </span></span><br><span class="line"><span class="string">[Service]</span></span><br><span class="line"><span class="string">Type=notify</span></span><br><span class="line"><span class="string"># the default is not to use systemd for cgroups because the delegate issues still</span></span><br><span class="line"><span class="string"># exists and systemd currently does not support the cgroup feature set required</span></span><br><span class="line"><span class="string"># for containers run by docker</span></span><br><span class="line"><span class="string">ExecStart=/usr/bin/dockerd -H unix:///var/run/docker.sock --selinux-enabled=false --default-ulimit nofile=65536:65536</span></span><br><span class="line"><span class="string">ExecReload=/bin/kill -s HUP $MAINPID</span></span><br><span class="line"><span class="string"># Having non-zero Limit*s causes performance problems due to accounting overhead</span></span><br><span class="line"><span class="string"># in the kernel. We recommend using cgroups to do container-local accounting.</span></span><br><span class="line"><span class="string">LimitNOFILE=infinity</span></span><br><span class="line"><span class="string">LimitNPROC=infinity</span></span><br><span class="line"><span class="string">LimitCORE=infinity</span></span><br><span class="line"><span class="string"># Uncomment TasksMax if your systemd version supports it.</span></span><br><span class="line"><span class="string"># Only systemd 226 and above support this version.</span></span><br><span class="line"><span class="string">#TasksMax=infinity</span></span><br><span class="line"><span class="string">TimeoutStartSec=0</span></span><br><span class="line"><span class="string"># set delegate yes so that systemd does not reset the cgroups of docker containers</span></span><br><span class="line"><span class="string">Delegate=yes</span></span><br><span class="line"><span class="string"># kill only the docker process, not all processes in the cgroup</span></span><br><span class="line"><span class="string">KillMode=process</span></span><br><span class="line"><span class="string"># restart the docker process if it exits prematurely</span></span><br><span class="line"><span class="string">Restart=on-failure</span></span><br><span class="line"><span class="string">StartLimitBurst=3</span></span><br><span class="line"><span class="string">StartLimitInterval=60s</span></span><br><span class="line"><span class="string">  </span></span><br><span class="line"><span class="string">[Install]</span></span><br><span class="line"><span class="string">WantedBy=multi-user.target</span></span><br><span class="line"><span class="string">EOF</span></span><br></pre></td></tr></table></figure>
+
+<p>​	为文件添加执行权限，并重载守护进程，将docker添加开机自启动：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost system]# <span class="built_in">chmod</span> +x /etc/systemd/system/docker.service</span><br><span class="line">[root@localhost system]# systemctl daemon-reload</span><br><span class="line"><span class="comment">## 设置开启自启并立即启动</span></span><br><span class="line">[root@localhost system]# systemctl <span class="built_in">enable</span> --now docker.service</span><br></pre></td></tr></table></figure>
+
+<p>​	验证docker是否安装及启动成功，并且版本核对：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost system]# systemctl status docker.service </span><br><span class="line">● docker.service - Docker Application Container Engine</span><br><span class="line">     Loaded: loaded (/etc/systemd/system/docker.service; enabled; preset: disabled)</span><br><span class="line">     Active: active (running) since Mon 2025-06-16 15:49:25 CST; 57min ago</span><br><span class="line">....忽略....</span><br><span class="line">[root@localhost system]# docker --version</span><br><span class="line">Docker version 28.2.2, build e6534b4</span><br></pre></td></tr></table></figure>
+
+<p>​	由于dockerHab镜像都位于国外，国内无法直接拉取官网的镜像仓库，所以我们需要配置一个国内的加速器，也就是镜像仓库地址：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost opt]# <span class="built_in">mkdir</span> -p /etc/docker</span><br><span class="line"></span><br><span class="line">[root@localhost opt]# <span class="built_in">cat</span> &gt; /etc/docker/daemon.json &lt;&lt; <span class="string">EOF</span></span><br><span class="line"><span class="string">&#123;</span></span><br><span class="line"><span class="string">  &quot;registry-mirrors&quot;: [</span></span><br><span class="line"><span class="string">    &quot;https://docker.m.daocloud.io&quot;</span></span><br><span class="line"><span class="string">  ]</span></span><br><span class="line"><span class="string">&#125;</span></span><br><span class="line"><span class="string">EOF</span></span><br></pre></td></tr></table></figure>
+
+<p>​	</p>
+<p>​	配置docker命令补全功能，在配置该功能前需先检查您的服务器是否具有bash-completion软件包，如有则跳过安装bash-completion步骤，如没有请先安装bash-completion软件包：</p>
+<p>​	<strong>bash-completion下载地址</strong>：<code>https://developer.aliyun.com/mirror/?spm=a2c6h.25603864.0.0.5d256733vSKLL6</code></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 安装bash-completion</span></span><br><span class="line">rpm -ivh /opt/softapp/bash-completion-2.11-4.el9.noarch.rpm</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 配置你root用户的bashrc源码文件</span></span><br><span class="line">[root@localhost ~]# <span class="built_in">cat</span> &lt;&lt;<span class="string">EOT &gt;&gt; ~/.bashrc</span></span><br><span class="line"><span class="string">if [ -f /etc/bash_completion ]; then</span></span><br><span class="line"><span class="string">    . /etc/bash_completion</span></span><br><span class="line"><span class="string">fi</span></span><br><span class="line"><span class="string">EOT</span></span><br><span class="line">[root@localhost ~]# <span class="built_in">mkdir</span> -p ~/.local/share/bash-completion/completions</span><br><span class="line">[root@localhost ~]# docker completion bash &gt; ~/.local/share/bash-completion/completions/docker</span><br><span class="line"><span class="comment"># 生效配置文件</span></span><br><span class="line">[root@localhost ~]# <span class="built_in">source</span> ~/.bashrc</span><br><span class="line"><span class="comment"># 如不行则重启服务器已生效</span></span><br><span class="line">[root@localhost ~]# reboot</span><br></pre></td></tr></table></figure>
+
+<p>​	安装完Docker后，我们可以简单的拉取一个镜像来验证某一个地址加速地址是否有效，以及docker功能是否可以正常使用（docker为命令，pull为拉取镜像的选项，docker…&#x2F;为仓库地址的前缀，nginx为镜像名称，latest为最新的版本号）：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost system]# docker pull docker.m.daocloud.io/nginx:latest</span><br><span class="line">latest: Pulling from nginx</span><br><span class="line">dad67da3f26b: Pull complete </span><br><span class="line">3b00567da964: Pull complete </span><br><span class="line">56b81cfa547d: Pull complete </span><br><span class="line">1bc5dc8b475d: Pull complete </span><br><span class="line">979e6233a40a: Pull complete </span><br><span class="line">d2a7ba8dbfee: Pull complete </span><br><span class="line">32e44235e1d5: Pull complete </span><br><span class="line">Digest: sha256:6784fb0834aa7dbbe12e3d7471e69c290df3e6ba810dc38b34ae33d3c1c05f7d</span><br><span class="line">Status: Downloaded newer image <span class="keyword">for</span> docker.m.daocloud.io/nginx:latest</span><br><span class="line">docker.m.daocloud.io/nginx:latest</span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="容器的使用"><a href="#容器的使用" class="headerlink" title="容器的使用"></a>容器的使用</h1><h2 id="创建第一个容器"><a href="#创建第一个容器" class="headerlink" title="创建第一个容器"></a>创建第一个容器</h2><p>​	创建一个名字为job-1的容器，基础镜像使用busybox</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost softapp]# docker run --name job-1 docker.m.daocloud.io/library/busybox</span><br></pre></td></tr></table></figure>
+
+<p>​	<strong>参数解析</strong></p>
+<ul>
+<li><code>docker</code>二进制命令。</li>
+<li><code>run</code>运行一个容器。</li>
+<li><code>--name</code>为容器指定命名。</li>
+<li><code>docker.m.daocloud.io/library/busybox</code>指定使用的基础镜像，如果本地镜像存在则直接运行，如不存在则从镜像仓库中拉取后运行</li>
+</ul>
+<p>​	容器创建完成后，可以使用docker命令ps选项查看当前运行的容器，但是此刻我们发现，刚才我们运行了一个名为job-1的容器，并且也成功了，但是我们使用ps查看时未发现容器。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost softapp]# docker ps</span><br><span class="line">CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS     NAMES</span><br></pre></td></tr></table></figure>
+
+<p>​	在使用docker ps -a 命令查看所有的容器，此时我们就可以看到刚才我们创建名为job-1的容器了，但是他的状态是<code>Exited</code>停止状态，那是因为容器相当于一个任务，上面的命令要求的是运行一个容器，当他运行完成后，后台进程停止，也没有其他任何进程在运行了，容器也就自然停止了，所以容器他是一个临时性的。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost softapp]# docker ps -a</span><br><span class="line">CONTAINER ID   IMAGE                                  COMMAND   CREATED          STATUS                      PORTS     NAMES</span><br><span class="line">322d27f38ffd   docker.m.daocloud.io/library/busybox   <span class="string">&quot;sh&quot;</span>      10 minutes ago   Exited (0) 10 minutes ago             job-1</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="创建一个可持续运行的容器"><a href="#创建一个可持续运行的容器" class="headerlink" title="创建一个可持续运行的容器"></a>创建一个可持续运行的容器</h2><p>​	根据上述的实验我们发现容器他是一个临时的，但是在实际业务中，我的服务不可能一启动就停止，那么我们这里就需要来介绍如何运行一个可持续运行的容器。</p>
+<p>​	此时我们运行一个本身就具有可持续后台进程的nginx镜像，运行后发现该容器运行的nginx的进程跑到宿主机前台持续运行中。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost softapp]# docker run  --name job-2 docker.m.daocloud.io/nginx:latest </span><br><span class="line">/docker-entrypoint.sh: /docker-entrypoint.d/ is not empty, will attempt to perform configuration</span><br><span class="line">/docker-entrypoint.sh: Looking <span class="keyword">for</span> shell scripts <span class="keyword">in</span> /docker-entrypoint.d/</span><br><span class="line">/docker-entrypoint.sh: Launching /docker-entrypoint.d/10-listen-on-ipv6-by-default.sh</span><br><span class="line">10-listen-on-ipv6-by-default.sh: info: Getting the checksum of /etc/nginx/conf.d/default.conf</span><br><span class="line">10-listen-on-ipv6-by-default.sh: info: Enabled listen on IPv6 <span class="keyword">in</span> /etc/nginx/conf.d/default.conf</span><br><span class="line">/docker-entrypoint.sh: Sourcing /docker-entrypoint.d/15-local-resolvers.envsh</span><br><span class="line">/docker-entrypoint.sh: Launching /docker-entrypoint.d/20-envsubst-on-templates.sh</span><br><span class="line">/docker-entrypoint.sh: Launching /docker-entrypoint.d/30-tune-worker-processes.sh</span><br><span class="line">/docker-entrypoint.sh: Configuration complete; ready <span class="keyword">for</span> start up</span><br><span class="line">2025/06/19 03:55:18 [notice] 1#1: using the <span class="string">&quot;epoll&quot;</span> event method</span><br><span class="line">2025/06/19 03:55:18 [notice] 1#1: nginx/1.27.5</span><br><span class="line">2025/06/19 03:55:18 [notice] 1#1: built by gcc 12.2.0 (Debian 12.2.0-14) </span><br><span class="line">2025/06/19 03:55:18 [notice] 1#1: OS: Linux 5.14.0-427.13.1.el9_4.x86_64</span><br><span class="line">2025/06/19 03:55:18 [notice] 1#1: getrlimit(RLIMIT_NOFILE): 65536:65536</span><br><span class="line">2025/06/19 03:55:18 [notice] 1#1: start worker processes</span><br><span class="line">2025/06/19 03:55:18 [notice] 1#1: start worker process 29</span><br><span class="line">2025/06/19 03:55:18 [notice] 1#1: start worker process 30</span><br><span class="line">2025/06/19 03:55:18 [notice] 1#1: start worker process 31</span><br><span class="line">2025/06/19 03:55:18 [notice] 1#1: start worker process 32</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>​	这里我们可以再开一个ssh会话来验证job-2的容器是否在持续运行中，状态未up说明没问题，该容器此刻是可以持续运行的。</p>
+<p>[root@localhost softapp]# docker ps<br>CONTAINER ID   IMAGE                               COMMAND                   CREATED         STATUS         PORTS     NAMES<br>5815a4228c1d   docker.m.daocloud.io&#x2F;nginx:latest   “&#x2F;docker-entrypoint.…”   3 minutes ago   Up 3 minutes   80&#x2F;tcp    job-2</p>
+<p>​	那是因为这个nginx镜像文件中指定了，该容器在运行时，会执行一个nginx -g daemon off的命令，这个是nginx服务启动的命令，-g表示在前台运行并输出日志，daemon off表示关闭守护进程。</p>
+<p>​	如要查看容器中具体干了些什么，比如他在运行时会执行什么命令。</p>
+<p>​	<strong>可以使用docker命令，inspect选项，【容器名】</strong>，他的输出格式为josn格式，并且信息很多，我们可以利用Linux的一些知识，筛选出我们想要看的内容，grep -A 表示输出Cmd条件后10行，示例如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost softapp]# docker inspect job-2 | grep -A 10 Cmd </span><br><span class="line">            <span class="string">&quot;Cmd&quot;</span>: [</span><br><span class="line">                <span class="string">&quot;nginx&quot;</span>,</span><br><span class="line">                <span class="string">&quot;-g&quot;</span>,</span><br><span class="line">                <span class="string">&quot;daemon off;&quot;</span></span><br><span class="line">            ],</span><br><span class="line">            <span class="string">&quot;Image&quot;</span>: <span class="string">&quot;docker.m.daocloud.io/nginx:latest&quot;</span>,</span><br><span class="line">            <span class="string">&quot;Volumes&quot;</span>: null,</span><br><span class="line">            <span class="string">&quot;WorkingDir&quot;</span>: <span class="string">&quot;&quot;</span>,</span><br><span class="line">            <span class="string">&quot;Entrypoint&quot;</span>: [</span><br><span class="line">                <span class="string">&quot;/docker-entrypoint.sh&quot;</span></span><br><span class="line">            ],</span><br></pre></td></tr></table></figure>
+
+
+
+<p>​	但是这样我们会遇到另外一个问题，虽然我们知道只要容器只要挂着一个进程不停，容器就会一直持续运行，但是nginx镜像他是直接占用了宿主机的一个ssh前台进程，如果我们Ctrl+c停止掉，容器也会停止掉。</p>
+<p>​	可以使用docker命令，run选项，-d选项将容器置与后台持续运行：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost softapp]# docker run -d --name job-3 docker.m.daocloud.io/nginx:latest </span><br><span class="line">c0e8f1e16d3119f29be09cfe5d83b8429ea08f32f6918f02d7e309b433d3c91a</span><br><span class="line">[root@localhost softapp]# docker ps</span><br><span class="line">CONTAINER ID   IMAGE                               COMMAND                   CREATED          STATUS          PORTS     NAMES</span><br><span class="line">c0e8f1e16d31   docker.m.daocloud.io/nginx:latest   <span class="string">&quot;/docker-entrypoint.…&quot;</span>   22 seconds ago   Up 21 seconds   80/tcp    job-3</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h2 id="尝试进入容器"><a href="#尝试进入容器" class="headerlink" title="尝试进入容器"></a>尝试进入容器</h2><p>​	进入正在运行的容器内部，我们可以使用exec选项和 -it选项进入到容器内部，可查看容器内部是个什么样子，与我们正常的操作系统有什么不同，以及他是如何运行服务的，例如：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost softapp]# docker <span class="built_in">exec</span> -it job-3 /bin/bash</span><br><span class="line"><span class="comment"># 进入容器后，ssh的前导符则会变为容器的ID，以便区分，退出则Ctrl+D或exit命令</span></span><br><span class="line">root@c0e8f1e16d31:/# </span><br></pre></td></tr></table></figure>
+
+<p><strong>命令解析：</strong></p>
+<ul>
+<li>docker：二进制命令。</li>
+<li>exec：在正在运行的容器中运行命令。</li>
+<li>-it：以交互方式建立容器伪终端。</li>
+<li>job-3：容器名或容器ID。</li>
+<li>&#x2F;bin&#x2F;bash：容器中执行打开bash命令</li>
+</ul>
+<p>​	进入容器后我们可以发现常用的ll，top，ps -ef等等命令都不存在，那是因为最后我们介绍过，容器他是轻量化的一个服务打包，他不是最全的，他只包含了满足服务运行最基本的文件操作系统，以支撑例如nginx的运行条件。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line">root@c0e8f1e16d31:/# ll</span><br><span class="line">bash: ll: <span class="built_in">command</span> not found</span><br><span class="line">root@c0e8f1e16d31:/# top</span><br><span class="line">bash: top: <span class="built_in">command</span> not found</span><br><span class="line">root@c0e8f1e16d31:/# ip</span><br><span class="line">bash: ip: <span class="built_in">command</span> not found</span><br><span class="line">root@c0e8f1e16d31:/# ifconfig</span><br><span class="line">bash: ifconfig: <span class="built_in">command</span> not found</span><br><span class="line">root@c0e8f1e16d31:/# <span class="built_in">ls</span></span><br><span class="line">bin  boot  dev	docker-entrypoint.d  docker-entrypoint.sh  etc	home  lib  lib64  media  mnt  opt  proc  root  run  sbin  srv  sys  tmp  usr  var</span><br><span class="line">root@c0e8f1e16d31:/# <span class="built_in">cd</span> /usr/share/nginx/html</span><br><span class="line">root@c0e8f1e16d31:/usr/share/nginx/html# <span class="built_in">ls</span></span><br><span class="line">50x.html  index.html</span><br><span class="line">root@c0e8f1e16d31:/usr/share/nginx/html# curl 127.0.0.1 80</span><br><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">&lt;<span class="built_in">head</span>&gt;</span><br><span class="line">&lt;title&gt;Welcome to nginx!&lt;/title&gt;</span><br><span class="line">&lt;style&gt;</span><br><span class="line">html &#123; color-scheme: light dark; &#125;</span><br><span class="line">body &#123; width: 35em; margin: 0 auto;</span><br><span class="line">font-family: Tahoma, Verdana, Arial, sans-serif; &#125;</span><br><span class="line">&lt;/style&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">&lt;h1&gt;Welcome to nginx!&lt;/h1&gt;</span><br><span class="line">&lt;p&gt;If you see this page, the nginx web server is successfully installed and</span><br><span class="line">working. Further configuration is required.&lt;/p&gt;</span><br><span class="line"></span><br><span class="line">&lt;p&gt;For online documentation and support please refer to</span><br><span class="line">&lt;a href=<span class="string">&quot;http://nginx.org/&quot;</span>&gt;nginx.org&lt;/a&gt;.&lt;br/&gt;</span><br><span class="line">Commercial support is available at</span><br><span class="line">&lt;a href=<span class="string">&quot;http://nginx.com/&quot;</span>&gt;nginx.com&lt;/a&gt;.&lt;/p&gt;</span><br><span class="line"></span><br><span class="line">&lt;p&gt;&lt;em&gt;Thank you <span class="keyword">for</span> using nginx.&lt;/em&gt;&lt;/p&gt;</span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br><span class="line">^C</span><br><span class="line">root@c0e8f1e16d31:/usr/share/nginx/html# <span class="built_in">exit</span></span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+<h1 id="镜像的使用"><a href="#镜像的使用" class="headerlink" title="镜像的使用"></a>镜像的使用</h1><h2 id="镜像概述"><a href="#镜像概述" class="headerlink" title="镜像概述"></a>镜像概述</h2><p>​	镜像是一个用于创建容器的只读模板，镜像中包含着很多额外的参数定于，比如：我们基于centos文件系统构建一个服务这里把他称之为基础层，在这个centos文件系统上我们要再加上我们的服务，例如nginx、tomcat等等，以及他们所需的依赖，每次修改或新增都会增加一个镜像层，从而构建出我们期望的业务镜像。</p>
+<p>​	同时镜像可以有公共镜像仓库或DockerFile自定义获得镜像。并将镜像推送到自己本地仓库或自己私有的镜像仓库进行存储，一遍以后重复构建更新、部署使用。</p>
+<h2 id="公共镜像仓库"><a href="#公共镜像仓库" class="headerlink" title="公共镜像仓库"></a>公共镜像仓库</h2><p>​	Docker Hub是全球最大的公共镜像仓库，许多开源厂商都会将各自的官方开源镜像上传到Hub上供人拉取，这个服务是允许公众连接、创建、拉取、上传镜像使用，虽然便利但注意这是公共开源的仓库，不建议使用云端镜像仓库存放私有镜像，避免被别人拉取泄露。</p>
+<p><strong>Docker Hub官网地址：</strong><code>https://docker.czc.cloudns.biz/</code></p>
+<h2 id="私有镜像仓库"><a href="#私有镜像仓库" class="headerlink" title="私有镜像仓库"></a>私有镜像仓库</h2><p>​	私有镜像仓库的用于与公共镜像仓库类似，唯一的区别就是该仓库是你独自搭建在你内网中的镜像仓库，除了你自己和你授权的人外，无人能访问该镜像仓库，以及无法从你的镜像仓库中拉取任何镜像，具体操作后续介绍。</p>
+<p>​	<strong>常用的私有仓库服务工具</strong>：Docker Hub、Harbor</p>
+<h2 id="查看本地镜像"><a href="#查看本地镜像" class="headerlink" title="查看本地镜像"></a>查看本地镜像</h2><p>​	不管是从公共镜像还是本地镜像拉取下来的镜像都存放在我们宿主机的本地镜像库中，只有拉取到本地镜像库后，才可以从本地镜像库中使用镜像去创建容器，查看我们现在以及拉取存在的镜像有哪些可以通过images进行查看。</p>
+<p>​	<strong>格式</strong>：docker images [镜像名]</p>
+<p>​	不带镜像名则所有进项全部展示，当镜像过多时，我们可以加上镜像名去搜索我们想要看到的镜像，便于查找。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost softapp]# docker images</span><br><span class="line">REPOSITORY                             TAG       IMAGE ID       CREATED          SIZE</span><br><span class="line">job-02                                 latest    a38262e3f7e4   23 minutes ago   4.28MB</span><br><span class="line">job-01                                 latest    af8d6c46c922   30 minutes ago   4.28MB</span><br><span class="line">nginx                                  1.2       e76f04ecad6a   7 hours ago      192MB</span><br><span class="line">nginx                                  v1        a5ca0b814874   4 days ago       192MB</span><br><span class="line">docker.m.daocloud.io/nginx             latest    1e5f3c5b981a   2 months ago     192MB</span><br><span class="line">nginx                                  latest    1e5f3c5b981a   2 months ago     192MB</span><br><span class="line">docker.m.daocloud.io/library/busybox   latest    6d3e4188a38a   9 months ago     4.28MB</span><br><span class="line">[root@localhost softapp]# docker images nginx:v1</span><br><span class="line">REPOSITORY   TAG       IMAGE ID       CREATED      SIZE</span><br><span class="line">nginx        v1        a5ca0b814874   5 days ago   192MB</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h2 id="构建镜像的方式"><a href="#构建镜像的方式" class="headerlink" title="构建镜像的方式"></a>构建镜像的方式</h2><p><strong>docker commit</strong></p>
+<p>​	在使用容器镜像中，容器本身发生了修改，您想将当前状态下的容器制作为一个镜像，则可以使用commit（提交）选项将当前容器的状态保存到本地镜像仓库，以便后续的快速部署搭建。</p>
+<p><strong>DockerFile</strong>（推荐）</p>
+<p>​	从零开始搭建你的镜像服务，在创建镜像前需要将该镜像的所有配置、依赖、基础镜像等自行编写进脚本中，生成的镜像可直接用于业务部署，但是对技术要求有难度，这个后续单独讨论。</p>
+<h2 id="commit镜像构建"><a href="#commit镜像构建" class="headerlink" title="commit镜像构建"></a>commit镜像构建</h2><p>​	结合上述运行容器和进入容器的方式，运行并修改一个容器内容，然后利用commit打包当前状态下的容器为一个新的镜像，示例如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">## 运行一个nginx镜像，容器名为job-01</span></span><br><span class="line">[root@localhost ~]# docker run -d --name job-01 nginx:latest </span><br><span class="line">fca794f38cf76b39a92348d1d81bf3d98deb564b365d8cfb540e810a1e4e298b</span><br><span class="line"><span class="comment"># 进入容器</span></span><br><span class="line">[root@localhost ~]# docker <span class="built_in">exec</span> -it job-01 /bin/bash</span><br><span class="line"><span class="comment"># 修改容器内nginx首页的样式内容</span></span><br><span class="line">root@fca794f38cf7:/# <span class="built_in">echo</span> 这是一个版本为1.2的nginx容器 &gt;/usr/share/nginx/html/index.html</span><br><span class="line"><span class="comment"># 退出容器</span></span><br><span class="line">root@fca794f38cf7:/usr/share/nginx/html# 键入【Ctrl+D】</span><br><span class="line"><span class="built_in">exit</span></span><br><span class="line"><span class="comment"># commit将修改后的job-01容器保存为新的镜像，镜像名称及版本为nginx:1.2</span></span><br><span class="line">[root@localhost ~]# docker commit job-01 nginx:1.2</span><br><span class="line">sha256:e76f04ecad6a841c2f2023fb11f0bd873d6a06c411ea488d661e7e2557cb2952</span><br><span class="line"><span class="comment"># 验证新镜像是否存在</span></span><br><span class="line">[root@localhost ~]# docker images nginx:1.2</span><br><span class="line">REPOSITORY   TAG       IMAGE ID       CREATED          SIZE</span><br><span class="line">nginx        1.2       e76f04ecad6a   55 seconds ago   192MB</span><br><span class="line"><span class="comment"># 使用新容器创建一个新的名为job-02的容器，并在容器内访问nginx的80端口，验证修改后的内容是否在新镜像中有效</span></span><br><span class="line">[root@localhost ~]# docker run -d --name job-02 nginx:1.2 </span><br><span class="line">3c1b5719206b5def9adde8a3b0d76490208226ee41facab45082d6c37c195426</span><br><span class="line">[root@localhost ~]# docker <span class="built_in">exec</span> -it job-02 /bin/bash</span><br><span class="line"><span class="comment"># 验证成功，此刻已成功将基础镜像定制成我们特有的业务镜像</span></span><br><span class="line">root@3c1b5719206b:/# curl 127.0.0.1:80</span><br><span class="line">这是一个版本为1.2的nginx容器</span><br><span class="line">root@3c1b5719206b:/# </span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+
+
+
+
+<h1 id="DockerFile的使用"><a href="#DockerFile的使用" class="headerlink" title="DockerFile的使用"></a>DockerFile的使用</h1><p>​	DockerFile是一个文本文件，包含了构建Docker镜像所有的指令。</p>
+<h2 id="使用DockerFile定制镜像"><a href="#使用DockerFile定制镜像" class="headerlink" title="使用DockerFile定制镜像"></a>使用DockerFile定制镜像</h2><p>​	在一个空目录下，创建一个名为Dockerfile的文本文件，并添加一下内容：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">FROM nginx</span><br><span class="line">RUN echo &quot;这是一个本地构建的Nginx镜像&quot; &gt; /usr/share/nginx/html/index.html</span><br></pre></td></tr></table></figure>
+
+<p><strong>FROM</strong>：定制的镜像都基于FROM的镜像来构建的，也就是基础镜像，后续的所有操作都是建立在这个基础镜像上去进行修改定制。</p>
+<p><strong>RUN</strong>：用于在基础镜像上执行的相应定制化执行shell命令，需要允许的命令可以有一下两种格式写法。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 方式一：</span></span><br><span class="line">RUN &lt;命令行&gt;</span><br><span class="line"><span class="comment">#方式二：</span></span><br><span class="line">RUN [<span class="string">&quot;二进制命令&quot;</span>,<span class="string">&quot;选项/参数&quot;</span>,<span class="string">&quot;选项/参数&quot;</span>]</span><br><span class="line">例如：每一个逗号分割代表一个单词，空格分割</span><br><span class="line">RUN [<span class="string">&quot;tail&quot;</span>,<span class="string">&quot;-n&quot;</span>,<span class="string">&quot;10&quot;</span>,<span class="string">&quot;test.txt&quot;</span>]等效与 RUN <span class="built_in">tail</span> -n 10 test.txt</span><br></pre></td></tr></table></figure>
+
+<p><strong><code>注意：Dockerfile的指令每一行都会在这个镜像上新建一层，所以在书写Dockerfile指令时，避免书写过多没必要的指令，会造成镜像容量过大。</code></strong></p>
+<p>该命令只会创建三层：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">FROM ubuntu</span><br><span class="line">RUN dnf install wget</span><br><span class="line">RUN wget -O redis.tar.gz <span class="string">&quot;http://download.redis.io/releases/redis-5.0.3.tar.gz&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>合理使用【\】换行，【&amp;&amp;】符号多个命令拼接，组成一条命令，这样可以避免重复RUN指令，该条命令则只会生成两层。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">FROM ubuntu</span><br><span class="line">RUN dnf install wget \</span><br><span class="line">    &amp;&amp; wget -O redis.tar.gz <span class="string">&quot;http://download.redis.io/releases/redis-5.0.3.tar.gz&quot;</span> \</span><br><span class="line">    &amp;&amp; tar -zxvf ./redis-5.0.3.tar.gz</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="开始构建镜像"><a href="#开始构建镜像" class="headerlink" title="开始构建镜像"></a>开始构建镜像</h2><p>​	在DockerFile文件目录下进行构建操作。</p>
+<p>​	以下示例通过DockerFile构建一个名为nginx:v1(镜像名称:镜像标签&#x2F;版本号)。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost softapp]# docker build -t nginx:v1 .</span><br><span class="line">DEPRECATED: The legacy builder is deprecated and will be removed <span class="keyword">in</span> a future release.</span><br><span class="line">            Install the buildx component to build images with BuildKit:</span><br><span class="line">            https://docs.docker.com/go/buildx/</span><br><span class="line"></span><br><span class="line">Sending build context to Docker daemon  300.2MB</span><br><span class="line">Step 1/2 : FROM nginx</span><br><span class="line"> ---&gt; 1e5f3c5b981a</span><br><span class="line">Step 2/2 : RUN <span class="built_in">echo</span> <span class="string">&quot;这是一个本地构建的Nginx镜像&quot;</span> &gt; /usr/share/nginx/html/index.html</span><br><span class="line"> ---&gt; Running <span class="keyword">in</span> bbb2493f7b99</span><br><span class="line"> ---&gt; Removed intermediate container bbb2493f7b99</span><br><span class="line"> ---&gt; a5ca0b814874</span><br><span class="line">Successfully built a5ca0b814874</span><br><span class="line">Successfully tagged nginx:v1</span><br><span class="line"><span class="comment"># images查看本地镜像，nginx:v1已经构建完成</span></span><br><span class="line">[root@localhost softapp]# docker images</span><br><span class="line">REPOSITORY                             TAG       IMAGE ID       CREATED          SIZE</span><br><span class="line">nginx                                  v1        a5ca0b814874   31 seconds ago   192MB</span><br><span class="line">nginx                                  latest    1e5f3c5b981a   2 months ago     192MB</span><br><span class="line">docker.m.daocloud.io/nginx             latest    1e5f3c5b981a   2 months ago     192MB</span><br><span class="line">docker.m.daocloud.io/library/busybox   latest    6d3e4188a38a   8 months ago     4.28MB</span><br></pre></td></tr></table></figure>
+
+<p><strong><code>注意：文件名称一定要是Dockerfile，否则会出现我这样的报错，找不到Dockerfile文件。</code></strong></p>
+<p><img src="/2025/06/05/03-Kubernetes/CKA-kubernetes-%E7%AC%AC%E4%B8%80%E7%AB%A0/image-20250619175141092.png" alt="image-20250619175141092"></p>
+<p>​	<strong>解析：在构建镜像的时候，有时候会使用到本机的文件，比如我们需要将本地的文件复制到这个镜像里，docker build得知这个路径后，会将路径下的所有内容打包，由于docker的允许模式是C&#x2F;S。C是我们本机，也称为宿主机，S是docker引擎，实际的构建过程是在docker引擎内完成的，这个时候是无法用到我们宿主机的文件，这就是为什么build得知路径后会将路径下的内容都打包到引擎中，命令中最后的点（.）就是指的这个上下文路径，所以路径中不要防无用的文件，避免构建过慢。</strong></p>
+<h2 id="DockerFile常用指令集"><a href="#DockerFile常用指令集" class="headerlink" title="DockerFile常用指令集"></a>DockerFile常用指令集</h2><table>
+<thead>
+<tr>
+<th>Dockerfile指令</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>FROM</td>
+<td>指定基础镜像，用于后续的指令定制构建</td>
+</tr>
+<tr>
+<td>MAINTAINER</td>
+<td>指定Dockerfile的作者（已启用，推荐使用LABEL）</td>
+</tr>
+<tr>
+<td>LABEL</td>
+<td>添加镜像的元数据\描述，采用键值对的形式</td>
+</tr>
+<tr>
+<td>RUN</td>
+<td>在构建过程中，在镜像需要执行的命令</td>
+</tr>
+<tr>
+<td>CMD</td>
+<td>指定镜像创建容器运行时默认需要运行的命令（可覆盖基础镜像的CMD）</td>
+</tr>
+<tr>
+<td>ENTRYPOINT</td>
+<td>指定镜像创建容器运行时主要的命令。（不可被覆盖）</td>
+</tr>
+<tr>
+<td>EXPOSE</td>
+<td>声明容器运行时监听特定的网络端口，供宿主机及外部进行访问容器内的访问。</td>
+</tr>
+<tr>
+<td>ENV</td>
+<td>在容器中设置环境变量</td>
+</tr>
+<tr>
+<td>ADD</td>
+<td>将文件、目录或远程URL复制到镜像中，如果文件属于tar、gizp等压缩文件会自动为您解压。</td>
+</tr>
+<tr>
+<td>COPY</td>
+<td>将文件或目录复制到镜像中。</td>
+</tr>
+<tr>
+<td>VOLUME</td>
+<td>为容器创建与宿主机磁盘的挂载点，供在宿主机即可操作容器内的重要文件数据。</td>
+</tr>
+<tr>
+<td>WORKDIR</td>
+<td>指定后续镜像构建中的指令执行时的工作目录，如不存在则会自动创建（类似于Linux中的cd命令，不同的是目录不存在会自动创建）</td>
+</tr>
+<tr>
+<td>USER</td>
+<td>指定后续dockerfile指令使用的用户，以及容器运行时服务默认启动的用户，如没有配置默认是root（类似Linux中的su，切换用户）</td>
+</tr>
+<tr>
+<td>ARG</td>
+<td>定义构建镜像中的变量（他与ENV不同，ENV是容器中的环境变量，适用于容器中，ARG仅适用于dockerfile脚本文件中，类似ssh脚本中设置的变量）</td>
+</tr>
+<tr>
+<td>ONBUILD</td>
+<td>触发式执行，本身不会执行，触发条件当该镜像被作为基础镜像构建新镜像时触发相应指定的指令操作，RUN或LABEL指令。</td>
+</tr>
+<tr>
+<td>STOPSIGNAL</td>
+<td>当容器停止进程调用时，用于发送给容器的信号，例如在使用docker stop，Linux的信号可以参考RedHat章节了解。</td>
+</tr>
+<tr>
+<td>HEALTHCHECK</td>
+<td>容器服务的健康检查，容器可能处于启动，但是内部的服务不一定正常运行，需要使用该指令定期检查服务是否存活，如检测失败状态则会标记为unhealthy。</td>
+</tr>
+<tr>
+<td>SHELL</td>
+<td>用于修改默认shell环境，通常修改为&#x2F;bin&#x2F;bash或sh</td>
+</tr>
+</tbody></table>
+<h2 id="LABEL指令的使用"><a href="#LABEL指令的使用" class="headerlink" title="LABEL指令的使用"></a>LABEL指令的使用</h2><p>​	为镜像设置一个元数据【标签】，目前常用为作者等一些个性化定制信息，不管是用于镜像的描述，还是镜像的特殊标识区分</p>
+<p>​	<strong>格式</strong>：LABEL <key>:<value></value></key></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">FROM nginx:1.2</span><br><span class="line">LABEL author:liweihu</span><br><span class="line">RUN <span class="built_in">echo</span> <span class="string">&quot;这是一个本地构建的Nginx镜像&quot;</span> &gt; /usr/share/nginx/html/index.html</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="CMD指令的使用"><a href="#CMD指令的使用" class="headerlink" title="CMD指令的使用"></a>CMD指令的使用</h2><p>​	为镜像设置一个容器启动时默认需要运行的命令，当该命令执行完成后，也就以为容器停止，如果该服务属于持续运行的业务，需要保证该命令能持续运行，例如nginx，后台启动一个nginx服务,该指令可以被docker run创建容器时被参数所覆盖，导致不执行。</p>
+<p>​	<strong>格式</strong>：CMD <shell> 或者 CMD [“可执行文件或命令”,”选项&#x2F;参数”,……]</shell></p>
+<p>​	<code>以下示例中的CMD是nginx官方镜像写的，他是作用是运行nginx并放在前台运行，已保证容器内始终都会有一个进程或终端在运行，从而达到可持久运行的容器，如果在docker run的使用其他的参数将他覆盖，则容器可能启动既停止。</code></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">FROM nginx:1.2</span><br><span class="line">LABEL author:liweihu</span><br><span class="line">RUN <span class="built_in">echo</span> <span class="string">&quot;这是一个本地构建的Nginx镜像&quot;</span> &gt; /usr/share/nginx/html/index.html</span><br><span class="line">CMD [<span class="string">&quot;nginx&quot;</span>,<span class="string">&quot;-g&quot;</span>,<span class="string">&quot;daemon off;&quot;</span>]</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="ENTRYPOINT指令的使用"><a href="#ENTRYPOINT指令的使用" class="headerlink" title="ENTRYPOINT指令的使用"></a>ENTRYPOINT指令的使用</h2><p>​	与CMD同样，区别在于ENTRYPOINT不可被覆盖，他作为该镜像启动容器的主要命令。</p>
+<p>​	<strong>格式</strong>：ENTRYPOINT [“可执行文件或命令”,”选项&#x2F;参数”,……]</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">FROM nginx:1.2</span><br><span class="line">LABEL author:liweihu</span><br><span class="line">RUN <span class="built_in">echo</span> <span class="string">&quot;这是一个本地构建的Nginx镜像&quot;</span> &gt; /usr/share/nginx/html/index.html</span><br><span class="line">CMD [<span class="string">&quot;nginx&quot;</span>,<span class="string">&quot;-g&quot;</span>,<span class="string">&quot;daemon off;&quot;</span>]</span><br><span class="line">ENTRYPOINT [<span class="string">&quot;/docker-entrypoint.sh&quot;</span>]</span><br></pre></td></tr></table></figure>
+
+<p><strong>重要：当dockerfile中只有CMD时，CMD则是作为启动容器服务的语句使用，同时CMD可被docker run覆盖。</strong></p>
+<p>​	<strong>当dockerfile同时存在CMD和ENTRYPOINT时，CMD则不再是启动容器的指令，而是作为参数，传递给ENTRYPOINT去启动容器服务，以下示例来简短验证。</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 编写一个busybox的操作系统，cmd运行一个echo的命令</span></span><br><span class="line">[root@localhost softapp]# <span class="built_in">cat</span> Dockerfile </span><br><span class="line">FROM docker.m.daocloud.io/library/busybox:latest</span><br><span class="line">CMD <span class="built_in">echo</span> <span class="string">&quot;这是cmd运行的指令&quot;</span></span><br><span class="line"><span class="comment"># 构建镜像</span></span><br><span class="line">[root@localhost softapp]# docker build -t job-01:latest .</span><br><span class="line">DEPRECATED: The legacy builder is deprecated and will be removed <span class="keyword">in</span> a future release.</span><br><span class="line">            Install the buildx component to build images with BuildKit:</span><br><span class="line">            https://docs.docker.com/go/buildx/</span><br><span class="line"></span><br><span class="line">Sending build context to Docker daemon  300.2MB</span><br><span class="line">Step 1/2 : FROM docker.m.daocloud.io/library/busybox:latest</span><br><span class="line"> ---&gt; 6d3e4188a38a</span><br><span class="line">Step 2/2 : CMD <span class="built_in">echo</span> <span class="string">&quot;这是cmd运行的指令&quot;</span></span><br><span class="line"> ---&gt; Running <span class="keyword">in</span> 6a5441c4a26b</span><br><span class="line"> ---&gt; Removed intermediate container 6a5441c4a26b</span><br><span class="line"> ---&gt; af8d6c46c922</span><br><span class="line">Successfully built af8d6c46c922</span><br><span class="line">Successfully tagged job-01:latest</span><br><span class="line"><span class="comment"># cmd此时做着容器运行的一个命令去运行</span></span><br><span class="line">[root@localhost softapp]# docker run job-01:latest </span><br><span class="line">这是cmd运行的指令</span><br></pre></td></tr></table></figure>
+
+<p>​	当cmd和ENTRYPOINT同时存在时，他们的shell语法得都用json格式，否则无效。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 当同时存在时，cmd将作为参数赋予ENTRYPOINT去运行容器服务</span></span><br><span class="line">[root@localhost softapp]# <span class="built_in">cat</span> Dockerfile </span><br><span class="line">FROM docker.m.daocloud.io/library/busybox:latest</span><br><span class="line">CMD [<span class="string">&quot;这是cmd运行的指令&quot;</span>]</span><br><span class="line">ENTRYPOINT [<span class="string">&quot;echo&quot;</span>]</span><br><span class="line"><span class="comment"># 构建镜像</span></span><br><span class="line">[root@localhost softapp]# docker build -t job-02 .</span><br><span class="line">DEPRECATED: The legacy builder is deprecated and will be removed <span class="keyword">in</span> a future release.</span><br><span class="line">            Install the buildx component to build images with BuildKit:</span><br><span class="line">            https://docs.docker.com/go/buildx/</span><br><span class="line"></span><br><span class="line">Sending build context to Docker daemon  300.2MB</span><br><span class="line">Step 1/3 : FROM docker.m.daocloud.io/library/busybox:latest</span><br><span class="line"> ---&gt; 6d3e4188a38a</span><br><span class="line">Step 2/3 : CMD [<span class="string">&quot;这是cmd运行的指令&quot;</span>]</span><br><span class="line"> ---&gt; Running <span class="keyword">in</span> 7aae458a0d54</span><br><span class="line"> ---&gt; Removed intermediate container 7aae458a0d54</span><br><span class="line"> ---&gt; 048f8b333e50</span><br><span class="line">Step 3/3 : ENTRYPOINT [<span class="string">&quot;echo&quot;</span>]</span><br><span class="line"> ---&gt; Running <span class="keyword">in</span> dbc0f5115ef6</span><br><span class="line"> ---&gt; Removed intermediate container dbc0f5115ef6</span><br><span class="line"> ---&gt; a38262e3f7e4</span><br><span class="line">Successfully built a38262e3f7e4</span><br><span class="line">Successfully tagged job-02:latest</span><br><span class="line"><span class="comment">## 运行镜像发现，我们CMD没有给任何可执行命令，但是他任然可以执行这段话。</span></span><br><span class="line"><span class="comment">## 那是因为当cmd和ENTRYPOINT同时存在时，CMD则变换了角色，作为参数传递给ENTRYPOINT去实际执行</span></span><br><span class="line">[root@localhost softapp]# docker run job-02:latest </span><br><span class="line">这是cmd运行的指令</span><br><span class="line">[root@localhost softapp]#</span><br></pre></td></tr></table></figure>
+
+<p>​	所以细心的会发现nginx官方镜像中实际运行nginx容器服务的是ENTRYPOINT，有过Linux基础的应该清楚，$0表示脚本文件名，$1、2……N表示传递过来的参数，所以他通过内置的shell脚本加上cmd的参数载入，以及 </p>
+<p>&#x2F;docker-entrypoint.d下的一系列配置脚本，完成了镜像的整个初始化工作有兴趣的可以自行去研究，精力有限这里就不在过多讨论。</p>
+<p><img src="/2025/06/05/03-Kubernetes/CKA-kubernetes-%E7%AC%AC%E4%B8%80%E7%AB%A0/image-20250624170300315.png" alt="image-20250624170300315"></p>
+<p>​	dockerfile指令很多，感兴趣的可以自行挨个操作实验，本文主要是为了讲解如何用k8s管理好docker等容器服务，docker实际的操作我们会用的非常少，过于复杂的东西了解即可。</p>
+<h2 id="删除容器和本地镜像"><a href="#删除容器和本地镜像" class="headerlink" title="删除容器和本地镜像"></a>删除容器和本地镜像</h2><p>​	上诉我们做了很多实验创建了很多容器和镜像，虽然每个镜像都非常小，但是作为管理员过多的镜像对我们运维过程中会造成很多困扰，所以作为管理员还是要定期维护一下我们过期无用的容器和镜像。</p>
+<p>​	<strong>删除容器格式</strong>： docker rm 容器ID&#x2F;容器名</p>
+<p>​	<strong>注意：当要删除的容器处于运行状态时是不能删除的，需先将其docker stop进行停止，或者在结尾加上–force选项，强制删除，但不建议这样做，容易导致容器服务数据异常，尤其容器是数据库服务。</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost softapp]# docker ps</span><br><span class="line">CONTAINER ID   IMAGE       COMMAND                   CREATED          STATUS          PORTS     NAMES</span><br><span class="line">354e8728cf31   nginx:1.2   <span class="string">&quot;/docker-entrypoint.…&quot;</span>   26 minutes ago   Up 26 minutes   80/tcp    nifty_cori</span><br><span class="line"><span class="comment"># 删除正在运行的容器，是不可以的，需要先停止容器</span></span><br><span class="line">[root@localhost softapp]# docker <span class="built_in">rm</span> 354e8728cf31 </span><br><span class="line">Error response from daemon: cannot remove container <span class="string">&quot;354e8728cf31&quot;</span>: container is running: stop the container before removing or force remove</span><br><span class="line"><span class="comment"># 停止容器</span></span><br><span class="line">[root@localhost softapp]# docker stop nifty_cori </span><br><span class="line">nifty_cori</span><br><span class="line"><span class="comment"># 删除容器</span></span><br><span class="line">[root@localhost softapp]# docker <span class="built_in">rm</span> nifty_cori </span><br><span class="line">nifty_cori</span><br></pre></td></tr></table></figure>
+
+
+
+<p>​	<strong>删除镜像格式</strong>： docker rmi 镜像ID&#x2F;镜像名:版本号</p>
+<p>​	<strong>注意：如果该镜像正在被一个容器所使用，即使容器是停止的也是无法删除的，需要先将容器停止删除后方可删除镜像。</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost softapp]# docker images</span><br><span class="line">REPOSITORY                             TAG       IMAGE ID       CREATED          SIZE</span><br><span class="line">job-02                                 latest    a38262e3f7e4   35 minutes ago   4.28MB</span><br><span class="line">job-01                                 latest    af8d6c46c922   42 minutes ago   4.28MB</span><br><span class="line">nginx                                  1.2       e76f04ecad6a   8 hours ago      192MB</span><br><span class="line">nginx                                  v1        a5ca0b814874   5 days ago       192MB</span><br><span class="line">nginx                                  latest    1e5f3c5b981a   2 months ago     192MB</span><br><span class="line">docker.m.daocloud.io/nginx             latest    1e5f3c5b981a   2 months ago     192MB</span><br><span class="line">docker.m.daocloud.io/library/busybox   latest    6d3e4188a38a   9 months ago     4.28MB</span><br><span class="line"><span class="comment"># 删除两个正在被容器所使用的镜像，删除失败。</span></span><br><span class="line"><span class="comment"># 根据提示容器ID为【546d94800abd、d159e8586dd3】正在使用</span></span><br><span class="line">[root@localhost softapp]# docker rmi job-01:latest job-02:latest </span><br><span class="line">Error response from daemon: conflict: unable to remove repository reference <span class="string">&quot;job-01:latest&quot;</span> (must force) - container 546d94800abd is using its referenced image af8d6c46c922</span><br><span class="line">Error response from daemon: conflict: unable to remove repository reference <span class="string">&quot;job-02:latest&quot;</span> (must force) - container d159e8586dd3 is using its referenced image a38262e3f7e4</span><br><span class="line"><span class="comment"># 删除占用镜像的容器</span></span><br><span class="line">[root@localhost softapp]# docker <span class="built_in">rm</span> 546d94800abd d159e8586dd3</span><br><span class="line">546d94800abd</span><br><span class="line">d159e8586dd3</span><br><span class="line"><span class="comment"># 删除镜像</span></span><br><span class="line">[root@localhost softapp]# docker rmi job-01:latest job-02:latest </span><br><span class="line">Untagged: job-01:latest</span><br><span class="line">Deleted: sha256:af8d6c46c922db8c8102aab14568a6a4f1d0982871aae32bab41d564654a20c2</span><br><span class="line">Untagged: job-02:latest</span><br><span class="line">Deleted: sha256:a38262e3f7e42c9c344ad005f8034cffbfcd48dd8b67ee94cd55878032c82b5b</span><br><span class="line">Deleted: sha256:048f8b333e508e2005b52f417f6abdda0df351fcb81b52034774cdecfb5635bd</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h1 id="构建Harbor私有镜像仓库"><a href="#构建Harbor私有镜像仓库" class="headerlink" title="构建Harbor私有镜像仓库"></a>构建Harbor私有镜像仓库</h1><p>​	什么是Harbor?Harbor是一个开源注册中心，它通过策略和基于角色的访问控制来保护工件，确保图像经过扫描且不存在漏洞，并将图像标记为可信。Harbor是CNCF的毕业项目，它提供合规性，性能及互操作性，帮助您在 Kubernetes和 Docker等云原生计算平台上，以一致且安全的方式管理工件（镜像），所以本章节咱们采用它来作为我们的私有镜像仓库。</p>
+<h2 id="确保您的目标主机满足Harbor安装前提条件"><a href="#确保您的目标主机满足Harbor安装前提条件" class="headerlink" title="确保您的目标主机满足Harbor安装前提条件"></a><strong>确保您的目标主机满足Harbor安装前提条件</strong></h2><p><strong>资源需求</strong></p>
+<table>
+<thead>
+<tr>
+<th>资源</th>
+<th>最低要求</th>
+<th>推荐</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>CPU</td>
+<td>2</td>
+<td>4</td>
+</tr>
+<tr>
+<td>内存</td>
+<td>4GB</td>
+<td>8GB</td>
+</tr>
+<tr>
+<td>磁盘</td>
+<td>40GB</td>
+<td>160GB</td>
+</tr>
+</tbody></table>
+<p><strong>服务器软件要求</strong></p>
+<table>
+<thead>
+<tr>
+<th>软件</th>
+<th>版本</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Docker引擎</td>
+<td>版本 &gt; 20.10</td>
+<td>Docker引擎安装</td>
+</tr>
+<tr>
+<td>Docker Compose</td>
+<td>Docker compose &gt; 2.3</td>
+<td>Docker compose是Docker引擎的一部分</td>
+</tr>
+<tr>
+<td>OpenSSL</td>
+<td>最新（可选）</td>
+<td>用于生成Harbor的证书和密钥</td>
+</tr>
+</tbody></table>
+<p><strong>网络端口</strong></p>
+<table>
+<thead>
+<tr>
+<th>端口</th>
+<th>协议</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>443</td>
+<td>HTTPS</td>
+<td>Harbor门户和核心API在此端口接受HTTPS请求。您可以在配置文件中更改此端口。</td>
+</tr>
+<tr>
+<td>80</td>
+<td>HTTP</td>
+<td>Harbor门户和核心API在此端口接受HTTP请求。您可以在配置文件中更改此端口。</td>
+</tr>
+</tbody></table>
+<p><strong>环境配置</strong></p>
+<p>​	将宿主机的主机名及Hosts文件修改为您的镜像仓库地址</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 修改主机名</span></span><br><span class="line">[root@localhost harbor]# hostnamectl hostname reg.liweihu.cn</span><br><span class="line">[root@localhost harbor]# hostname</span><br><span class="line">liweihu.com</span><br><span class="line"><span class="comment"># 刷新shell</span></span><br><span class="line">[root@localhost harbor]# bash</span><br><span class="line"><span class="comment"># 配置hosts域名解析</span></span><br><span class="line">[root@localhost harbor]# <span class="built_in">echo</span> <span class="string">&quot;192.168.8.135 reg.liweihu.cn&quot;</span> &gt;&gt; /etc/hosts</span><br><span class="line"><span class="comment">#关闭防火墙</span></span><br><span class="line">[root@localhost harbor]# systemctl <span class="built_in">disable</span> firewalld  &amp;&amp; systemctl stop firewalld</span><br><span class="line"><span class="comment">#关闭selinux服务</span></span><br><span class="line">[root@localhost harbor]# <span class="built_in">sudo</span> sed -i <span class="string">&#x27;s/^SELINUX=enforcing$/SELINUX=permissive/&#x27;</span> /etc/selinux/config</span><br><span class="line">[root@localhost harbor]# setenforce 0</span><br><span class="line"><span class="comment">#清空iptables规则</span></span><br><span class="line">[root@localhost harbor]# iptables -F &amp;&amp; iptables -X &amp;&amp; iptables -Z</span><br><span class="line">[root@localhost harbor]# iptables -P FORWARD ACCEPT</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="下载Harbor安装程序"><a href="#下载Harbor安装程序" class="headerlink" title="下载Harbor安装程序"></a>下载Harbor安装程序</h2><p>​	<strong>离线安装包下载地址</strong>：<a target="_blank" rel="noopener" href="https://github.com/goharbor/harbor/releases">https://github.com/goharbor/harbor/releases</a></p>
+<p>​	离线安装包较大，在线的较小，由于考虑到生产中我们是很少出现服务器能连通互联网的情况，所以我们尽量都用离线的方式来部署。</p>
+<p><img src="/2025/06/05/03-Kubernetes/CKA-kubernetes-%E7%AC%AC%E4%B8%80%E7%AB%A0/image-20250625104851320.png" alt="image-20250625104851320"></p>
+<h2 id="配置访问Harbor的HTTPS"><a href="#配置访问Harbor的HTTPS" class="headerlink" title="配置访问Harbor的HTTPS"></a><strong>配置访问Harbor的HTTPS</strong></h2><p>​	<strong>生成根CA密钥、证书</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[root@reg /]# <span class="built_in">mkdir</span> ~/ca &amp;&amp; <span class="built_in">cd</span> ~/</span><br><span class="line">[root@localhost harbor]# openssl genrsa -out ca.key 4096</span><br><span class="line">[root@localhost harbor]# openssl req -x509 -new -nodes -sha512 -days 3650 \</span><br><span class="line"> -subj <span class="string">&quot;/C=CN/ST=Beijing/L=Beijing/O=example/OU=Personal/CN=Root&quot;</span> \</span><br><span class="line"> -key ca.key \</span><br><span class="line"> -out ca.crt</span><br></pre></td></tr></table></figure>
+
+
+
+<p>​	<strong>生成服务器CA密钥、证书</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost harbor]# openssl genrsa -out reg.liweihu.cn.key 4096</span><br><span class="line">[root@localhost harbor]# openssl req -sha512 -new \</span><br><span class="line">    -subj <span class="string">&quot;/C=CN/ST=Beijing/L=Beijing/O=example/OU=Personal/CN=reg.liweihu.cn&quot;</span> \</span><br><span class="line">    -key reg.liweihu.cn.key \</span><br><span class="line">    -out reg.liweihu.cn.csr</span><br></pre></td></tr></table></figure>
+
+<p>​	<strong>生成一个X509 V3扩展文件</strong></p>
+<p>​			无论您是使用FQDN还是IP地址来连接您的Harbor主机，都必须创建此文件，以便能够为您的Harbor主机生成符合主题替代名SAN)和x509v3扩展要求的证书。请替换DNS条目以反映您的域名。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">[root@liweihu softapp]# <span class="built_in">cat</span> &gt; v3.ext &lt;&lt;-<span class="string">EOF</span></span><br><span class="line"><span class="string">authorityKeyIdentifier=keyid,issuer</span></span><br><span class="line"><span class="string">basicConstraints=CA:FALSE</span></span><br><span class="line"><span class="string">keyUsage = digitalSignature, nonRepudiation, keyEncipherment, dataEncipherment</span></span><br><span class="line"><span class="string">extendedKeyUsage = serverAuth</span></span><br><span class="line"><span class="string">subjectAltName = @alt_names</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">[alt_names]</span></span><br><span class="line"><span class="string">DNS.1=reg.liweihu.cn</span></span><br><span class="line"><span class="string">EOF</span></span><br></pre></td></tr></table></figure>
+
+<p>​	<strong>使用V3.ext文件为您的Harbor主机生成证书</strong></p>
+<p>​			将CSR和CRT文件名中的liweihu.com替换为Harbor主机名。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[root@liweihu softapp]# openssl x509 -req -sha512 -days 3650 \</span><br><span class="line">    -extfile v3.ext \</span><br><span class="line">    -CA ca.crt -CAkey ca.key -CAcreateserial \</span><br><span class="line">    -<span class="keyword">in</span> reg.liweihu.cn.csr \</span><br><span class="line">    -out reg.liweihu.cn.crt</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="将证书提供给Harbor和Docker"><a href="#将证书提供给Harbor和Docker" class="headerlink" title="将证书提供给Harbor和Docker"></a>将证书提供给Harbor和Docker</h2><p>​	在生成ca.crt、liweihu.com.crt 和liweihu.com.key文件后，您必须将它们提供给Harbor和Docker，并重新配置Harbor以使用这些文件。</p>
+<p>​	1.将服务器证书和密钥复制到Harbor主机上的证书文件夹中。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost softapp]# <span class="built_in">mkdir</span> -p /data/cert</span><br><span class="line">[root@localhost softapp]# <span class="built_in">cp</span> reg.liweihu.cn.crt reg.liweihu.cn.key /data/cert/</span><br></pre></td></tr></table></figure>
+
+<p>​	2、将liweihu.com.crt转换为liweihu.com.cert，以便Docker使用。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost softapp]# openssl x509 -inform PEM -<span class="keyword">in</span> reg.liweihu.cn.crt -out reg.liweihu.cn.cert</span><br></pre></td></tr></table></figure>
+
+<p>​	3、将服务器证书、私钥和 CA 文件复制到Harbor主机的Docker证书文件夹中。首先必须创建相应的文件夹。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost softapp]# <span class="built_in">mkdir</span> -p /etc/docker/certs.d/reg.liweihu.cn/</span><br><span class="line">[root@localhost softapp]# <span class="built_in">cp</span> reg.liweihu.cn.cert reg.liweihu.cn.key ca.crt /etc/docker/certs.d/reg.liweihu.cn/</span><br></pre></td></tr></table></figure>
+
+<p><strong><code>注意：如果你将默认的nginx的HTTPS端口443映射到不同的端口，请将创建文件夹在按照如下格式进行创建：</code></strong><br><strong>&#x2F;etc&#x2F;docker&#x2F;certs.d&#x2F;yourdomain.com:port，或&#x2F;etc&#x2F;docker&#x2F;certs.d&#x2F;你的域名_IP:端口。</strong></p>
+<h2 id="配置HarborYML文件"><a href="#配置HarborYML文件" class="headerlink" title="配置HarborYML文件"></a>配置HarborYML文件</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost softapp]# tar -zxvf /opt/softapp/harbor-offline-installer-v2.13.1.tgz -C /opt/softapp/ &amp;&amp; <span class="built_in">cd</span> /opt/softapp/harbor</span><br><span class="line"></span><br><span class="line">harbor/harbor.v2.13.1.tar.gz</span><br><span class="line">harbor/prepare</span><br><span class="line">harbor/LICENSE</span><br><span class="line">harbor/install.sh</span><br><span class="line">harbor/common.sh</span><br><span class="line">harbor/harbor.yml.tmpl</span><br><span class="line"><span class="comment"># 将配置文件模板复制出来一份</span></span><br><span class="line">[root@localhost harbor]# <span class="built_in">cp</span> /opt/softapp/harbor/harbor.yml.tmpl harbor.yml</span><br><span class="line">[root@localhost harbor]# vim harbor.yml</span><br><span class="line"><span class="comment"># 如果您采用http则#号注释掉https相关参数</span></span><br><span class="line"><span class="comment"># 如果您采用https则#号注释掉http相关参数</span></span><br><span class="line"><span class="comment"># 修改hostname为reg.liweihu.cn【你的仓库域名hosts配置的】</span></span><br><span class="line"><span class="comment"># 修改https处的certificate为/data/cert/reg.liweihu.cn.crt【服务器证书】</span></span><br><span class="line"><span class="comment"># 修改https处的private_key为/data/cert/reg.liweihu.cn.key【服务器密钥】</span></span><br><span class="line"><span class="comment"># 修改harbor_admin_password为admin【Harbor登录密码】</span></span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h2 id="部署Docker-compose"><a href="#部署Docker-compose" class="headerlink" title="部署Docker-compose"></a>部署Docker-compose</h2><p>​	下载地址：<a target="_blank" rel="noopener" href="https://download.docker.com/linux/rhel/9/x86_64/stable/Packages/">https://download.docker.com/linux/rhel/9/x86_64/stable/Packages/</a></p>
+<p>​	rpm安装Docker-compose</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost harbor]# rpm -ivh docker-compose-plugin-2.37.3-1.el9.x86_64.rpm </span><br><span class="line">警告：docker-compose-plugin-2.37.3-1.el9.x86_64.rpm: 头V4 RSA/SHA512 Signature, 密钥 ID 621e9f35: NOKEY</span><br><span class="line">Verifying...                          <span class="comment">################################# [100%]</span></span><br><span class="line">准备中...                          <span class="comment">################################# [100%]</span></span><br><span class="line">正在升级/安装...</span><br><span class="line">   1:docker-compose-plugin-0:2.37.3-1.################################# [100%]</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h2 id="运行安装脚本"><a href="#运行安装脚本" class="headerlink" title="运行安装脚本"></a>运行安装脚本</h2><p>​	我们下载过来离线按照包解压后，解压包里还包含的一个解压包，名为：harbor.v2.13.1.tar.gz，这其实就是将原本需要在线下载的镜像一起打包下载到本地，通过本地进行导入。</p>
+<p><img src="/2025/06/05/03-Kubernetes/CKA-kubernetes-%E7%AC%AC%E4%B8%80%E7%AB%A0/image-20250626103236674.png" alt="image-20250626103236674"></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 导入镜像包进入本地镜像库</span></span><br><span class="line">[root@localhost harbor]# ./install.sh </span><br><span class="line"></span><br><span class="line">[Step 0]: checking <span class="keyword">if</span> docker is installed ...</span><br><span class="line"></span><br><span class="line">Note: docker version: 28.2.2</span><br><span class="line"></span><br><span class="line">[Step 1]: checking docker-compose is installed ...</span><br><span class="line"></span><br><span class="line">Note: Docker Compose version v2.37.3</span><br><span class="line"></span><br><span class="line">[Step 2]: loading Harbor images ...</span><br><span class="line">......忽略.....</span><br><span class="line"></span><br><span class="line"> ✔ Container nginx              Started                                                                                                                                                                                         4.1s </span><br><span class="line"> ✔ Container harbor-jobservice  Started                                                                                                                                                                                         3.8s </span><br><span class="line">✔ ----Harbor has been installed and started successfully.----</span><br><span class="line"><span class="comment"># 检查本地镜像是否存在</span></span><br><span class="line">[root@localhost harbor]# docker images</span><br><span class="line">REPOSITORY                             TAG       IMAGE ID       CREATED        SIZE</span><br><span class="line">...忽略...</span><br><span class="line">goharbor/harbor-exporter               v2.13.1   8323e56fa034   4 weeks ago    127MB</span><br><span class="line">goharbor/redis-photon                  v2.13.1   27079bef6812   4 weeks ago    166MB</span><br><span class="line">goharbor/trivy-adapter-photon          v2.13.1   9d2de710e1bc   4 weeks ago    387MB</span><br><span class="line">goharbor/harbor-registryctl            v2.13.1   1ca7f7dffcb8   4 weeks ago    162MB</span><br><span class="line">goharbor/registry-photon               v2.13.1   251eb949b8fc   4 weeks ago    85.9MB</span><br><span class="line">goharbor/nginx-photon                  v2.13.1   3a0ac2771512   4 weeks ago    151MB</span><br><span class="line">goharbor/harbor-log                    v2.13.1   49f7cdb104f3   4 weeks ago    164MB</span><br><span class="line">goharbor/harbor-jobservice             v2.13.1   b964386ce624   4 weeks ago    174MB</span><br><span class="line">goharbor/harbor-core                   v2.13.1   701038c9f9cf   4 weeks ago    197MB</span><br><span class="line">goharbor/harbor-portal                 v2.13.1   254c145df624   4 weeks ago    159MB</span><br><span class="line">goharbor/harbor-db                     v2.13.1   8645cd204f13   4 weeks ago    273MB</span><br><span class="line">goharbor/prepare                       v2.13.1   eeb5b545352d   4 weeks ago    208MB</span><br><span class="line">...忽略...</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<p><strong>生成docker-compose启动项</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 生成docker-compose启动文件，并启动容器</span></span><br><span class="line">[root@localhost harbor]# ./prepare </span><br><span class="line">prepare base <span class="built_in">dir</span> is <span class="built_in">set</span> to /opt/softapp/harbor</span><br><span class="line">Clearing the configuration file: /config/portal/nginx.conf</span><br><span class="line">Clearing the configuration file: /config/log/logrotate.conf</span><br><span class="line">Clearing the configuration file: /config/log/rsyslog_docker.conf</span><br><span class="line">Clearing the configuration file: /config/nginx/nginx.conf</span><br><span class="line">Clearing the configuration file: /config/core/env</span><br><span class="line">Clearing the configuration file: /config/core/app.conf</span><br><span class="line">Clearing the configuration file: /config/registry/passwd</span><br><span class="line">Clearing the configuration file: /config/registry/config.yml</span><br><span class="line">Clearing the configuration file: /config/registry/root.crt</span><br><span class="line">Clearing the configuration file: /config/registryctl/env</span><br><span class="line">Clearing the configuration file: /config/registryctl/config.yml</span><br><span class="line">Clearing the configuration file: /config/db/env</span><br><span class="line">Clearing the configuration file: /config/jobservice/env</span><br><span class="line">Clearing the configuration file: /config/jobservice/config.yml</span><br><span class="line">Generated configuration file: /config/portal/nginx.conf</span><br><span class="line">Generated configuration file: /config/log/logrotate.conf</span><br><span class="line">Generated configuration file: /config/log/rsyslog_docker.conf</span><br><span class="line">Generated configuration file: /config/nginx/nginx.conf</span><br><span class="line">Generated configuration file: /config/core/env</span><br><span class="line">Generated configuration file: /config/core/app.conf</span><br><span class="line">Generated configuration file: /config/registry/config.yml</span><br><span class="line">Generated configuration file: /config/registryctl/env</span><br><span class="line">Generated configuration file: /config/registryctl/config.yml</span><br><span class="line">Generated configuration file: /config/db/env</span><br><span class="line">Generated configuration file: /config/jobservice/env</span><br><span class="line">Generated configuration file: /config/jobservice/config.yml</span><br><span class="line">copy /data/secret/tls/harbor_internal_ca.crt to shared trust ca <span class="built_in">dir</span> as name harbor_internal_ca.crt ...</span><br><span class="line">ca file /hostfs/data/secret/tls/harbor_internal_ca.crt is not exist</span><br><span class="line">copy  to shared trust ca <span class="built_in">dir</span> as name storage_ca_bundle.crt ...</span><br><span class="line">copy None to shared trust ca <span class="built_in">dir</span> as name redis_tls_ca.crt ...</span><br><span class="line">loaded secret from file: /data/secret/keys/secretkey</span><br><span class="line">Generated configuration file: /compose_location/docker-compose.yml</span><br><span class="line">Clean up the input <span class="built_in">dir</span></span><br><span class="line"><span class="comment"># 检查Harbor容器是否正常启动</span></span><br><span class="line">[root@localhost harbor]# docker ps</span><br><span class="line">CONTAINER ID   IMAGE                                 COMMAND                   CREATED          STATUS                    PORTS                                                                                NAMES</span><br><span class="line">53d7bdcf6d38   goharbor/harbor-jobservice:v2.13.1    <span class="string">&quot;/harbor/entrypoint.…&quot;</span>   16 minutes ago   Up 16 minutes (healthy)                                                                                        harbor-jobservice</span><br><span class="line">4c8477948f20   goharbor/nginx-photon:v2.13.1         <span class="string">&quot;nginx -g &#x27;daemon of…&quot;</span>   16 minutes ago   Up 16 minutes (healthy)   0.0.0.0:80-&gt;8080/tcp, [::]:80-&gt;8080/tcp, 0.0.0.0:443-&gt;8443/tcp, [::]:443-&gt;8443/tcp   nginx</span><br><span class="line">230a18014ab1   goharbor/harbor-core:v2.13.1          <span class="string">&quot;/harbor/entrypoint.…&quot;</span>   16 minutes ago   Up 16 minutes (healthy)                                                                                        harbor-core</span><br><span class="line">500542b8846a   goharbor/harbor-registryctl:v2.13.1   <span class="string">&quot;/home/harbor/start.…&quot;</span>   16 minutes ago   Up 16 minutes (healthy)                                                                                        registryctl</span><br><span class="line">c981c91c8842   goharbor/registry-photon:v2.13.1      <span class="string">&quot;/home/harbor/entryp…&quot;</span>   16 minutes ago   Up 16 minutes (healthy)                                                                                        registry</span><br><span class="line">24fac7ba05eb   goharbor/redis-photon:v2.13.1         <span class="string">&quot;redis-server /etc/r…&quot;</span>   16 minutes ago   Up 16 minutes (healthy)                                                                                        redis</span><br><span class="line">18ddfef136e2   goharbor/harbor-portal:v2.13.1        <span class="string">&quot;nginx -g &#x27;daemon of…&quot;</span>   16 minutes ago   Up 16 minutes (healthy)                                                                                        harbor-portal</span><br><span class="line">585daf92fd4c   goharbor/harbor-db:v2.13.1            <span class="string">&quot;/docker-entrypoint.…&quot;</span>   16 minutes ago   Up 16 minutes (healthy)                                                                                        harbor-db</span><br><span class="line">0291f8c0fff2   goharbor/harbor-log:v2.13.1           <span class="string">&quot;/bin/sh -c /usr/loc…&quot;</span>   16 minutes ago   Up 16 minutes (healthy)   127.0.0.1:1514-&gt;10514/tcp                                                            harbor-log</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>​	验证启动后就可以使用宿主机IP+端口验证一下浏览器是否可能正常Harbor：</p>
+<p>​	默认的管理员账号为：admin，他的密码在harbor.yml配置文件中设置找到：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#查看管理员默认密码</span></span><br><span class="line">[root@localhost harbor]# grep harbor_admin_password  harbor.yml</span><br><span class="line">harbor_admin_password: Harbor12345</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2025/06/05/03-Kubernetes/CKA-kubernetes-%E7%AC%AC%E4%B8%80%E7%AB%A0/image-20250626105008459.png" alt="image-20250626105008459"></p>
+<p><img src="/2025/06/05/03-Kubernetes/CKA-kubernetes-%E7%AC%AC%E4%B8%80%E7%AB%A0/image-20250626105815406.png" alt="image-20250626105815406"></p>
+<h2 id="将Harbor服务加入守护进程"><a href="#将Harbor服务加入守护进程" class="headerlink" title="将Harbor服务加入守护进程"></a>将Harbor服务加入守护进程</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost harbor]# <span class="built_in">cat</span> &gt; /etc/systemd/system/harbor.service &lt;&lt;<span class="string">EOF</span></span><br><span class="line"><span class="string">[Unit]</span></span><br><span class="line"><span class="string">Description=Harbor</span></span><br><span class="line"><span class="string">After=docker.service systemd-networkd.service systemd-resolved.service</span></span><br><span class="line"><span class="string">Requires=docker.service</span></span><br><span class="line"><span class="string">Documentation=http://github.com/vmware/harbor</span></span><br><span class="line"><span class="string">[Service]</span></span><br><span class="line"><span class="string">Type=simple</span></span><br><span class="line"><span class="string">Restart=on-failure</span></span><br><span class="line"><span class="string">RestartSec=5</span></span><br><span class="line"><span class="string">ExecStart=/usr/bin/docker compose -f /opt/softapp/harbor/docker-compose.yml up</span></span><br><span class="line"><span class="string">ExecStop=/usr/bin/docker compose -f /opt/softapp/harbor/docker-compose.yml down</span></span><br><span class="line"><span class="string">[Install]</span></span><br><span class="line"><span class="string">WantedBy=multi-user.target</span></span><br><span class="line"><span class="string">EOF</span></span><br><span class="line">[root@localhost harbor]# <span class="built_in">sudo</span> systemctl daemon-reload</span><br><span class="line">[root@localhost harbor]# systemctl <span class="built_in">enable</span> harbor --now</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="私有镜像的上传及拉取"><a href="#私有镜像的上传及拉取" class="headerlink" title="私有镜像的上传及拉取"></a>私有镜像的上传及拉取</h2><p>​	由于我们采用的是HTTPS协议，之后我们每台docker宿主机需要从这个Harbor私有仓库拉取和上传镜像都需要将我们的服务器证书办法给他们，否则直接拉取会提示未经授权等错误信息。</p>
+<p>​	<strong>配置docker加速文件</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">[root@liweihu docker]# <span class="built_in">cat</span> &gt; /etc/docker/daemon.json &lt;&lt; <span class="string">EOF</span></span><br><span class="line"><span class="string">&#123;</span></span><br><span class="line"><span class="string">  &quot;registry-mirrors&quot;: [</span></span><br><span class="line"><span class="string">    &quot;https://docker.m.daocloud.io&quot;</span></span><br><span class="line"><span class="string">  ],</span></span><br><span class="line"><span class="string">  &quot;exec-opts&quot;:[&quot;native.cgroupdriver=systemd&quot;],</span></span><br><span class="line"><span class="string">  &quot;insecure-registries&quot;: [&quot;reg.liweihu.cn&quot;]</span></span><br><span class="line"><span class="string">&#125;</span></span><br><span class="line"><span class="string">EOF</span></span><br><span class="line"><span class="comment"># 按照如下层级目录创建并下发签名文件</span></span><br><span class="line">[root@liweihu docker]# <span class="built_in">pwd</span></span><br><span class="line">/etc/docker</span><br><span class="line">[root@liweihu docker]# tree /etc/docker/certs.d/</span><br><span class="line">certs.d/</span><br><span class="line">└── reg.liweihu.cn</span><br><span class="line">    ├── ca.crt</span><br><span class="line">    ├── reg.liweihu.cn.cert</span><br><span class="line">    └── reg.liweihu.cn.key</span><br><span class="line"></span><br><span class="line">1 directory, 3 files</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>​	尝试将本地镜像上传至私有仓库，验证服务是否正常</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 将需要上传的镜像使用tag选项将他的标签修改与仓库一直一致</span></span><br><span class="line">[root@localhost harbor]# docker tag docker.m.daocloud.io/nginx:latest reg.liweihu.cn/library/nginx:1.2</span><br><span class="line"><span class="comment"># 登录私有仓库</span></span><br><span class="line">[root@reg ~]# docker login -u admin -p admin reg.liweihu.cn</span><br><span class="line">WARNING! Using --password via the CLI is insecure. Use --password-stdin.</span><br><span class="line">Login Succeeded</span><br><span class="line"><span class="comment"># 上传镜像至私有仓库</span></span><br><span class="line">[root@liweihu docker]# docker push reg.liweihu.cn/library/nginx:1.2</span><br><span class="line">The push refers to repository [reg.liweihu.cn/library/nginx]</span><br><span class="line">79604f2021db: Pushed </span><br><span class="line">7e893c1b6ee8: Pushed </span><br><span class="line">463308bed0c9: Pushed </span><br><span class="line">4197a611afec: Pushed </span><br><span class="line">3e96162769d5: Pushed </span><br><span class="line">892e805f6f4f: Pushed </span><br><span class="line">626ab8a5d57b: Pushed </span><br><span class="line">7fb72a7d1a8e: Pushed </span><br><span class="line">1.2: digest: sha256:5eca17f8607d18e0e0059bb6ae5c7cf3627e472a2b14e2a4b1e2011551377286 size: 1986</span><br></pre></td></tr></table></figure>
+
+<p>​	此时就可以再UI界面查看到我们上传的nginx镜像已经上来了，里面有一个版本号为1.2。</p>
+<p><img src="/2025/06/05/03-Kubernetes/CKA-kubernetes-%E7%AC%AC%E4%B8%80%E7%AB%A0/image-20250626183001529.png" alt="image-20250626183001529"></p>
+<p><img src="/2025/06/05/03-Kubernetes/CKA-kubernetes-%E7%AC%AC%E4%B8%80%E7%AB%A0/image-20250626183056142.png" alt="image-20250626183056142"></p>
+<h1 id="容器的资源配额"><a href="#容器的资源配额" class="headerlink" title="容器的资源配额"></a>容器的资源配额</h1><p>​	服务在运行的时候都是依赖内存、磁盘、I&#x2F;O，那么我们通过docker run命令创建的容器他是一个完全隔离的一个环境，那么他的资源又是从何而来，每个容器的配额又是多少？</p>
+<p>​	通过创建两个容器查看他的资源情况：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 创建容器</span></span><br><span class="line">[root@reg ~]# docker run -d --name job-01 reg.liweihu.cn/library/nginx:1.2 </span><br><span class="line">5416634d099c26bf9e8468b15b2c5aa5845a980244d706a92e7656c47a93dfa0</span><br><span class="line">[root@reg ~]# docker run -d --name job-02 reg.liweihu.cn/library/nginx:1.2 </span><br><span class="line">88566e4d11c95a99289f331b0142cf175b75600a330e17c565c10be65261b23b</span><br><span class="line"></span><br><span class="line"><span class="comment"># 交互式进入容器查看容器内的/proc/meminfo内存文件</span></span><br><span class="line">[root@reg ~]# docker <span class="built_in">exec</span> -it job-01 grep MemTotal /proc/meminfo</span><br><span class="line">MemTotal:        7836684 kB</span><br><span class="line">[root@reg ~]# </span><br><span class="line">[root@reg ~]# docker <span class="built_in">exec</span> -it job-02 grep MemTotal /proc/meminfo</span><br><span class="line">MemTotal:        7836684 kB</span><br><span class="line"><span class="comment"># 查看宿主机的内存配额</span></span><br><span class="line">[root@reg ~]# grep MemTotal /proc/meminfo</span><br><span class="line">MemTotal:        7836684 kB</span><br></pre></td></tr></table></figure>
+
+<p>​	同时实验结论得出，每个容器的内存量全部等于物理宿主机的内存总量，这意味容器的资源都是共享着宿主机的资源，有着更好的性能，同时资源能得到更大的利用，但着也意味着业务量一旦急剧上升，可能会发生资源争抢的情况。</p>
+<h2 id="容器内存限额"><a href="#容器内存限额" class="headerlink" title="容器内存限额"></a><strong>容器内存限额</strong></h2><p>​	这是我们要在规划时要提前规避的，可以使用-m或者–memory分配内存限额。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 运行一个容器，容器内存限额500M</span></span><br><span class="line">[root@reg stress-1.0.4]# docker run -d --name job-03 --memory 500M reg.liweihu.cn/library/nginx:1.2</span><br><span class="line"><span class="comment"># 查看内存限额</span></span><br><span class="line">[root@reg stress-1.0.4]# docker inspect job-03 | grep  Memory</span><br><span class="line">            <span class="string">&quot;Memory&quot;</span>: 524288000</span><br></pre></td></tr></table></figure>
+
+<p>​	之后可以利用了解dockerfile制作一个带有stress服务的镜像进行压力测试，例如：-m限额500M，stress服务压力给到700M，超出后服务会异常宕机。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run -it --name=job-04 -m 500M progrium/stress \--vm 1 --vm-bytes 700M</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="容器CPU限额"><a href="#容器CPU限额" class="headerlink" title="容器CPU限额"></a><strong>容器CPU限额</strong></h2><p>​	默认情况下，所有的容器有使用相同的CPU资源，并且没有任何限制，这和内存是一样的，一但业务上升同样会引起CPU资源争抢，但和内存不同，CPU是通过指定相对权重值来进行配额的。</p>
+<p>​	使用–cpu-shares参数队CPU进行配额，默认情况下这个值是1024。</p>
+<p>​	<strong>注意：当前容器中的业务空闲时，其他的容器有权力使用其空闲的CPU，这将确保业务的性能。</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@reg stress-1.0.4]# docker run -d --name cpu-1 --cpu-shares 1024 reg.liweihu.cn/library/nginx:1.2 </span><br><span class="line">de4ba33171bc5307e9e849db71517a1eea62395027de47e4b6e1dbfdb16c992c</span><br></pre></td></tr></table></figure>
+
+<p>​	总结：CPU限额的分配，只有在宿主机资源不足的时候才会生效，并且是根据进程不同的优先级进行的，当其他容器空闲时，忙碌的容器可以获得全部可用CPU资源。</p>
+<h2 id="管理容器的I-O配额"><a href="#管理容器的I-O配额" class="headerlink" title="管理容器的I&#x2F;O配额"></a>管理容器的I&#x2F;O配额</h2><p>​	默认情况下，所有的容器都可以使用相同的I&#x2F;O资源（500权重），并且没有任何限制，这和内存、CPU一样，一但I&#x2F;O需求上升，磁盘读写会变得非常迟钝，为了更好的提供服务，我们也要对容器使用硬盘方面进行配置。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">[root@reg stress-1.0.4]# docker run -d --name 300io --blkio-weight 300 reg.liweihu.cn/library/nginx:1.2 </span><br><span class="line">ddb0a8ed6abaecde19cacd8c7b905a2f767ced5afab9aa80403659f1d165c183</span><br><span class="line">[root@reg stress-1.0.4]# docker run -d --name 600io --blkio-weight 600 reg.liweihu.cn/library/nginx:1.2 </span><br><span class="line">41d1c2e6c06aef694adb48975a4485d050c38e92aeb366c070ed39d4a9f80639</span><br><span class="line"><span class="comment"># 进入容器</span></span><br><span class="line">[root@reg stress-1.0.4]# docker <span class="built_in">exec</span> -it 600io /bin/bash</span><br><span class="line"><span class="comment"># 使用如下命令输出大文件，限额600的明显是比300的要快一些</span></span><br><span class="line"><span class="comment"># 限额600的容器，耗时9.94961 s</span></span><br><span class="line">root@41d1c2e6c06a:/usr/local# <span class="keyword">time</span> <span class="built_in">dd</span> <span class="keyword">if</span>=/dev/zero of=test.out bs=1M count=1024</span><br><span class="line">1024+0 records <span class="keyword">in</span></span><br><span class="line">1024+0 records out</span><br><span class="line">1073741824 bytes (1.1 GB, 1.0 GiB) copied, 9.94961 s, 108 MB/s</span><br><span class="line"></span><br><span class="line">real	0m9.965s</span><br><span class="line">user	0m0.000s</span><br><span class="line">sys	0m9.789s</span><br><span class="line">root@41d1c2e6c06a:/usr/local# </span><br><span class="line"><span class="built_in">exit</span></span><br><span class="line"><span class="comment"># 进入限额300的容器，耗时10.4424 s</span></span><br><span class="line">[root@reg stress-1.0.4]# docker <span class="built_in">exec</span> -it 300io /bin/bash</span><br><span class="line">root@ddb0a8ed6aba:/# <span class="keyword">time</span> <span class="built_in">dd</span> <span class="keyword">if</span>=/dev/zero of=test.out bs=1M count=1024</span><br><span class="line">1024+0 records <span class="keyword">in</span></span><br><span class="line">1024+0 records out</span><br><span class="line">1073741824 bytes (1.1 GB, 1.0 GiB) copied, 10.4424 s, 103 MB/s</span><br><span class="line"></span><br><span class="line">real	0m10.445s</span><br><span class="line">user	0m0.001s</span><br><span class="line">sys	0m10.270s</span><br><span class="line">root@ddb0a8ed6aba:/#</span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="容器网络"><a href="#容器网络" class="headerlink" title="容器网络"></a>容器网络</h1><p>​	docker run -it m.daocloud.io&#x2F;docker.io&#x2F;library&#x2F;busybox:latest </p>
+<p>​	使用上述命令创建一个容器，尝试ping百度，发现我们在创建容器时并没有添加网卡，也没有设置IP地址，也没有路由，但是我们Ping操作是如何实现的？</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[root@reg stress-1.0.4]# docker run -it m.daocloud.io/docker.io/library/busybox:latest </span><br><span class="line">/ <span class="comment"># ping www.baidu.com</span></span><br><span class="line">PING www.baidu.com (157.148.69.151): 56 data bytes</span><br><span class="line">64 bytes from 157.148.69.151: <span class="built_in">seq</span>=0 ttl=127 <span class="keyword">time</span>=254.003 ms</span><br><span class="line">64 bytes from 157.148.69.151: <span class="built_in">seq</span>=1 ttl=127 <span class="keyword">time</span>=46.644 ms</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+
+
+<h2 id="容器原生网络"><a href="#容器原生网络" class="headerlink" title="容器原生网络"></a>容器原生网络</h2><p>​	docker原生提供了以下几种网络类型，如果我们对原生网络不满意，我们还可与创建自定义网络。</p>
+<p>​	原生网络分为：none、bridge、host，这些网络在docker安装的时候会自动创建，我们可用通过以下命令来查看。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[root@reg stress-1.0.4]# docker network <span class="built_in">ls</span></span><br><span class="line">NETWORK ID     NAME            DRIVER    SCOPE</span><br><span class="line">9b51f9051068   bridge          bridge    <span class="built_in">local</span></span><br><span class="line">745d3d625feb   harbor_harbor   bridge    <span class="built_in">local</span></span><br><span class="line">df38c270ec3c   host            host      <span class="built_in">local</span></span><br><span class="line">874b65d17e40   none            null      <span class="built_in">local</span></span><br></pre></td></tr></table></figure>
+
+
+
+<p><strong>bridge网络</strong></p>
+<p>​	docker容器默认使用的网络类型，可以通过–network&#x3D;bridge在创建容器时指定。他拥有独立的IP，同时也可以与外部进行通信，那是因为每个容器都会连接到一个内部网络的私有网桥，在安装docker的时候，他会自动为您的生成一个docker0的网桥，通过这个网桥使得内部网络与外部网络进行通信。</p>
+<p>​	我们通过示例来理解一下bridge网络，首先我们先在宿主机上查看docker0虚拟网桥的ip段，是与宿主机不同的，这里我们先记住这个ip段：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">[root@reg ~]# ip a s</span><br><span class="line">...忽略...</span><br><span class="line">4: docker0: &lt;BROADCAST,MULTICAST,UP,LOWER_UP&gt; mtu 1500 qdisc noqueue state UP group default </span><br><span class="line">    <span class="built_in">link</span>/ether 42:25:74:09:22:66 brd ff:ff:ff:ff:ff:ff</span><br><span class="line">    inet 172.17.0.1/16 brd 172.17.255.255 scope global docker0</span><br><span class="line">       valid_lft forever preferred_lft forever</span><br><span class="line">    inet6 fe80::4025:74ff:fe09:2266/64 scope <span class="built_in">link</span> </span><br><span class="line">       valid_lft forever preferred_lft forever</span><br><span class="line">...忽略...</span><br></pre></td></tr></table></figure>
+
+<p>​	随后创建一个网络类型为bridge的容器，并进入容器，同样查看他的网卡信息，除了一个lo回环地址外，他还有一个eth0的网卡，这个ip段与上面宿主机查的docker0虚拟网桥的ip段是同一个网段的，最后在容器内ping百度也是正常通信的。</p>
+<p>​	结合以下结论可得出，bridge类型的容器，他使用的是docker0虚拟网桥生成出来的IP段，并将这个接口连接到虚拟桥接上，docker的桥接网络通常使用NAT（网络地址转换）来连接到物理网络，使得容器能够通过宿主机IP地址访问外部网络。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment"># 创建一个网络类型为bridge的容器，并进去容器</span></span><br><span class="line">[root@reg ~]# docker run -it --network=bridge m.daocloud.io/docker.io/library/busybox:latest /bin/sh</span><br><span class="line"><span class="comment"># 查看容器的eth0网卡IP。</span></span><br><span class="line">/ <span class="comment"># ip a s</span></span><br><span class="line">1: lo: &lt;LOOPBACK,UP,LOWER_UP&gt; mtu 65536 qdisc noqueue qlen 1000</span><br><span class="line">    <span class="built_in">link</span>/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00</span><br><span class="line">    inet 127.0.0.1/8 scope host lo</span><br><span class="line">       valid_lft forever preferred_lft forever</span><br><span class="line">    inet6 ::1/128 scope host </span><br><span class="line">       valid_lft forever preferred_lft forever</span><br><span class="line">2: eth0@if18: &lt;BROADCAST,MULTICAST,UP,LOWER_UP,M-DOWN&gt; mtu 1500 qdisc noqueue </span><br><span class="line">    <span class="built_in">link</span>/ether 8a:95:50:50:79:0f brd ff:ff:ff:ff:ff:ff</span><br><span class="line">    inet 172.17.0.2/16 brd 172.17.255.255 scope global eth0</span><br><span class="line">       valid_lft forever preferred_lft forever</span><br><span class="line"><span class="comment">#可以通过</span></span><br><span class="line">/ <span class="comment"># ping www.baidu.com</span></span><br><span class="line">PING www.baidu.com (183.240.99.169): 56 data bytes</span><br><span class="line">64 bytes from 183.240.99.169: <span class="built_in">seq</span>=0 ttl=127 <span class="keyword">time</span>=40.259 ms</span><br><span class="line">^C</span><br><span class="line">--- www.baidu.com ping statistics ---</span><br><span class="line">1 packets transmitted, 1 packets received, 0% packet loss</span><br><span class="line">round-trip min/avg/max = 40.259/40.259/40.259 ms</span><br><span class="line">/ <span class="comment"># </span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<p><strong>none网络</strong></p>
+<p>​	如果容器使用的是none网络，那么此容器将不再具备网卡，只具备lo网络，如果要使用这个网络，在创建容器时需要指定–network&#x3D;none即可。</p>
+<p>​	对一些安全要求较高且不需要外部通信的场景可以使用none网络，使得数据更加私密，例如日志服务只需要通过卷的方式，往服务器中写入数据。</p>
+<p>​	创建一个none网络类型的容器，并进入该容器查看容器网卡，发现none类型他是没有任何网卡的，只有一个lo回环网络，通过ping发现他是不能与外部进行通信的。</p>
+<p>​	结论得出，none他是一个绝对私密的一个容器网络，所有在数据需要极高安全并且不需要进行外部通信，则可以使用none网络类型。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">[root@reg ~]# docker run -it --network=none m.daocloud.io/docker.io/library/busybox:latest /bin/sh</span><br><span class="line">/ <span class="comment"># ip a s</span></span><br><span class="line">1: lo: &lt;LOOPBACK,UP,LOWER_UP&gt; mtu 65536 qdisc noqueue qlen 1000</span><br><span class="line">    <span class="built_in">link</span>/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00</span><br><span class="line">    inet 127.0.0.1/8 scope host lo</span><br><span class="line">       valid_lft forever preferred_lft forever</span><br><span class="line">    inet6 ::1/128 scope host </span><br><span class="line">       valid_lft forever preferred_lft forever</span><br><span class="line">/ <span class="comment"># ping www.baidu.com</span></span><br><span class="line">ping: bad address <span class="string">&#x27;www.baidu.com&#x27;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<p><strong>host网络</strong></p>
+<p>​	Host网络是一个共享宿主机网络的一个容器共享网络，可以通过–network&#x3D;host在创建容器时指定host网络，处于host网络模式的容器，网络配置和宿主机完全一样，也就是说在容器中可以看到宿主机的所有网卡，并且主机名也是宿主机的，他们共用同一个IP网络，这最大的好处就是性能很高，传输效率好，但是宿主机上已经使用的端口，容器是不可以重复使用的，同样容器使用了的端口，宿主机也是不可以使用的。</p>
+<p>​	创建一个host网络类型的容器，并进入容器，查看容器ip后发现，拉出了很多数据，这些数据与宿主机的IP一摸一样，并且容器内也是可以访问外部网络的。</p>
+<p>​	由此得出结论，host是直接与宿主机共享了网络，你的IP以及你所使用的端口都会直接使用到宿主机的网络，同时不存在NAT转换，所以他的网络速率要比桥接更快。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">[root@reg ~]# docker run -it --network=host m.daocloud.io/docker.io/library/busybox:latest /bin/sh</span><br><span class="line">/ <span class="comment"># ip a s</span></span><br><span class="line">....忽略....</span><br><span class="line">2: ens160: &lt;BROADCAST,MULTICAST,UP,LOWER_UP&gt; mtu 1500 qdisc mq qlen 1000</span><br><span class="line">    <span class="built_in">link</span>/ether 00:0c:29:<span class="built_in">cd</span>:fb:4c brd ff:ff:ff:ff:ff:ff</span><br><span class="line">    inet 192.168.8.135/24 brd 192.168.8.255 scope global noprefixroute ens160</span><br><span class="line">       valid_lft forever preferred_lft forever</span><br><span class="line">    inet6 fe80::20c:29ff:fecd:fb4c/64 scope <span class="built_in">link</span> noprefixroute </span><br><span class="line">....忽略....</span><br><span class="line">4: docker0: &lt;NO-CARRIER,BROADCAST,MULTICAST,UP&gt; mtu 1500 qdisc noqueue </span><br><span class="line">    <span class="built_in">link</span>/ether 42:25:74:09:22:66 brd ff:ff:ff:ff:ff:ff</span><br><span class="line">    inet 172.17.0.1/16 brd 172.17.255.255 scope global </span><br><span class="line">....忽略....</span><br><span class="line">/ <span class="comment"># ping www.baidu.com</span></span><br><span class="line">PING www.baidu.com (157.148.69.151): 56 data bytes</span><br><span class="line">64 bytes from 157.148.69.151: <span class="built_in">seq</span>=0 ttl=128 <span class="keyword">time</span>=41.224 ms</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="Docker网络端口映射"><a href="#Docker网络端口映射" class="headerlink" title="Docker网络端口映射"></a>Docker网络端口映射</h2><p>​	我们上述了解完docker的网络，都是针对容器如何进行外部的访问，那么假设我的容器是个nginx服务，我外部需要访问容器内的服务，那么我该怎么做。</p>
+<p>​	创建好nginx容器后，我们ps发现它只有一个容器内部的80端口存在，我们也不知道它的ip是多少，随后我们进入容器发现ip a s查看ip的命令也没有，我们无从得知它的ip，即使我们就算得知它的ip，我们客户端也不可能访问到容器内部的ip，而且容器的IP是随机的，每次重启容器都会随机生成一个内部的虚拟IP或没有IP，但是我们容器内访问这个80端口是能访问到nginx服务是正常的，所以即使我们创建出来了容器，但是满足不了我们实际业务中，客户端要访问这个服务的需求。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">[root@reg ~]# docker run -d --name nginx-01 docker.m.daocloud.io/nginx:latest</span><br><span class="line">9c8de73f0c70f832dc2d7925c32b4fde6f267f82edc077f4878612976818ea04</span><br><span class="line">[root@reg ~]# docker ps </span><br><span class="line">CONTAINER ID   IMAGE                                 COMMAND                   CREATED          STATUS                 PORTS                                                                                NAMES</span><br><span class="line">9c8de73f0c70   docker.m.daocloud.io/nginx:latest     &quot;/docker-entrypoint.…&quot;   18 seconds ago   Up 17 seconds          80/tcp                                                                               nginx-01</span><br><span class="line">[root@reg ~]# docker exec -it nginx-01 /bin/bash</span><br><span class="line">root@9c8de73f0c70:/# ip a s</span><br><span class="line">bash: ip: command not found</span><br><span class="line">root@9c8de73f0c70:/# curl 127.0.0.1 80</span><br><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">&lt;title&gt;Welcome to nginx!&lt;/title&gt;</span><br><span class="line">....忽略....</span><br></pre></td></tr></table></figure>
+
+
+
+<p>​	对于这类情况，我们就要介绍到端口映射的内容，对于需要客户端访问的服务，我们可以将容器的端口通过映射的方式转到我们宿主机的某一指定端口，客户端即可直接访问固定的宿主机IP+映射端口访问到我们的容器服务。</p>
+<p>​	选项说明：</p>
+<ul>
+<li><p>-p（小写）指定宿主机某一端口进行映射。</p>
+</li>
+<li><p>-P（大写）随机宿主机某一端口进行映射。</p>
+<p>以下示例使用-P（大写）将nginx容器中的80端口随机生成一个宿主机端口进行映射，随机产生了宿主机32768端口映射到容器中的80端口，所以我们客户端要访问容器的80服务，就可以使用宿主机的IP+32768端口进行访问。</p>
+</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">[root@reg ~]# docker run -d -P --name nginx-02 docker.m.daocloud.io/nginx:latest</span><br><span class="line">6bc39954ad93248b160b9f059ca6d824b2285fdce530a1e964c89beab3a52439</span><br><span class="line">[root@reg ~]# </span><br><span class="line">[root@reg ~]# </span><br><span class="line">[root@reg ~]# docker ps </span><br><span class="line">CONTAINER ID   IMAGE                                 COMMAND                   CREATED          STATUS                 PORTS                                                                                NAMES</span><br><span class="line">6bc39954ad93   docker.m.daocloud.io/nginx:latest     <span class="string">&quot;/docker-entrypoint.…&quot;</span>   9 seconds ago    Up 8 seconds           0.0.0.0:32768-&gt;80/tcp, [::]:32768-&gt;80/tcp                                            nginx-02</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>​	使用浏览器访问宿主机IP+端口，验证通过。</p>
+<p><img src="/2025/06/05/03-Kubernetes/CKA-kubernetes-%E7%AC%AC%E4%B8%80%E7%AB%A0/image-20250630163338736.png" alt="image-20250630163338736"></p>
+<p>​	以下示例使用-p（小写）创建一个nginx容器服务，它会根据您指定的端口进行映射，指定81端口映射到容器中的80端口。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[root@reg ~]# docker run -d -p 81:80 --name nginx-03 docker.m.daocloud.io/nginx:latest</span><br><span class="line">600d76d166900138f9ddc0ca6d46bbee48b7965992ab171bf161749ce93b1cc3</span><br><span class="line">[root@reg ~]# docker ps </span><br><span class="line">CONTAINER ID   IMAGE                                 COMMAND                   CREATED          STATUS                 PORTS                                                                                NAMES</span><br><span class="line">600d76d16690   docker.m.daocloud.io/nginx:latest     <span class="string">&quot;/docker-entrypoint.…&quot;</span>   3 seconds ago    Up 2 seconds           0.0.0.0:81-&gt;80/tcp, [::]:81-&gt;80/tcp                                                  nginx-03</span><br></pre></td></tr></table></figure>
+
+<p>​	使用浏览器访问宿主机IP+端口，验证通过。</p>
+<p><img src="/2025/06/05/03-Kubernetes/CKA-kubernetes-%E7%AC%AC%E4%B8%80%E7%AB%A0/image-20250630163707191.png" alt="image-20250630163707191"></p>
+<h2 id="配置容器DNS"><a href="#配置容器DNS" class="headerlink" title="配置容器DNS"></a>配置容器DNS</h2><p>​	配置容器的DNS可在宿主机的&#x2F;etc&#x2F;docker&#x2F;daemon.json文件中增加所有容器默认的DNS,在该文件中增加dns参数，重启docker后生效，之后所有的容器默认都有拥有这两个dns。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">[root@liweihu docker]# <span class="built_in">cat</span> &gt; /etc/docker/daemon.json &lt;&lt; <span class="string">EOF</span></span><br><span class="line"><span class="string">&#123;</span></span><br><span class="line"><span class="string">  &quot;registry-mirrors&quot;: [</span></span><br><span class="line"><span class="string">    &quot;https://docker.m.daocloud.io&quot;</span></span><br><span class="line"><span class="string">  ],</span></span><br><span class="line"><span class="string">  &quot;exec-opts&quot;: [&quot;native.cgroupdriver=systemd&quot;],</span></span><br><span class="line"><span class="string">  &quot;insecure-registries&quot;: [&quot;reg.liweihu.cn&quot;],</span></span><br><span class="line"><span class="string">  &quot;dns&quot;: [&quot;114.114.114.114&quot;,&quot;8.8.8.8&quot;]</span></span><br><span class="line"><span class="string">&#125;</span></span><br><span class="line"><span class="string">EOF</span></span><br><span class="line">[root@reg ~]# systemctl daemon-reload </span><br><span class="line">[root@reg ~]# systemctl restart docker.service</span><br></pre></td></tr></table></figure>
+
+<p>​	创建一个容器，执行cat查看容器内的etc&#x2F;resolv.conf文件，验证通过，容器内的dns配置文件默认dns为配置的dns。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">[root@reg ~]# docker run --name dns-1 m.daocloud.io/docker.io/library/busybox:latest <span class="built_in">cat</span> /etc/resolv.conf</span><br><span class="line"><span class="comment"># Generated by Docker Engine.</span></span><br><span class="line"><span class="comment"># This file can be edited; Docker Engine will not make further changes once it</span></span><br><span class="line"><span class="comment"># has been modified.</span></span><br><span class="line"></span><br><span class="line">nameserver 114.114.114.114</span><br><span class="line">nameserver 8.8.8.8</span><br><span class="line">search liweihu.cn</span><br><span class="line"></span><br><span class="line"><span class="comment"># Based on host file: &#x27;/etc/resolv.conf&#x27; (legacy)</span></span><br><span class="line"><span class="comment"># Overrides: [nameservers]</span></span><br></pre></td></tr></table></figure>
+
+
+
+<p>​	如有容器需要指定特殊的dns，则可以在创建容器时使用–dns选项进行指定。</p>
+<ul>
+<li>-dns：为该容器指定一个dns。</li>
+<li>-dns-search：为该容器指定一个dns搜索域，搜索域设置为<code>test.com</code>，请求的域名为<code>example</code>时，系统会将其补全为<code>example.test.com</code></li>
+<li>-h：为该容器设置主机名</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">[root@reg ~]# docker run --name dns-2 --dns 2.2.2.2 --dns-search test.com -h test-dns m.daocloud.io/docker.io/library/busybox:latest <span class="built_in">cat</span> /etc/resolv.conf</span><br><span class="line"><span class="comment"># Generated by Docker Engine.</span></span><br><span class="line"><span class="comment"># This file can be edited; Docker Engine will not make further changes once it</span></span><br><span class="line"><span class="comment"># has been modified.</span></span><br><span class="line"></span><br><span class="line">nameserver 2.2.2.2</span><br><span class="line">search test.com</span><br><span class="line"></span><br><span class="line"><span class="comment"># Based on host file: &#x27;/etc/resolv.conf&#x27; (legacy)</span></span><br><span class="line"><span class="comment"># Overrides: [nameservers search]</span></span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h1 id="容器数据卷"><a href="#容器数据卷" class="headerlink" title="容器数据卷"></a>容器数据卷</h1><h2 id="容器和层"><a href="#容器和层" class="headerlink" title="容器和层"></a>容器和层</h2><p>​	容器和镜像最大的不同在于最顶部的可写层，所有在容器中的数据写入和修改都会直接存储到这个可写层，这就意味着当容器被删除，可写层中的数据就丢失了，虽然每个容器都有自己不同的可写层，但是容器底层的镜像却是可以同时共享的，</p>
+<p><img src="/2025/06/05/03-Kubernetes/CKA-kubernetes-%E7%AC%AC%E4%B8%80%E7%AB%A0/image-20250702155805125.png" alt="image-20250702155805125"></p>
+<h2 id="Copy-on-write策略"><a href="#Copy-on-write策略" class="headerlink" title="Copy-on-write策略"></a>Copy-on-write策略</h2><table>
+<thead>
+<tr>
+<th>操作</th>
+<th>具体执行</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>创建文件</strong></td>
+<td>新文件只能被添加在容器层中</td>
+</tr>
+<tr>
+<td><strong>删除文件</strong></td>
+<td>依据容器分层结构由上往下依次查找。找到后，在容器层中记录该删除操作。具体实现是，UnionFS会在容器层创建一个“whiteout”文件，将被删除的文件“遮挡”起来</td>
+</tr>
+<tr>
+<td><strong>修改文件</strong></td>
+<td>依据容器分层结构由上往下依次查找。找到后，镜像层中的数据复制到容器层进行修改，修改后的数据保存在容器层中。</td>
+</tr>
+<tr>
+<td><strong>读取文件</strong></td>
+<td>依据容器分层结构由上往下依次查找。</td>
+</tr>
+</tbody></table>
+<h2 id="容器数据管理-Volume"><a href="#容器数据管理-Volume" class="headerlink" title="容器数据管理-Volume"></a>容器数据管理-Volume</h2><p>​	如果我们要使用Volume卷挂在的方式来进行容器数据的管理，我们可以使用-v的选项。这样我们将容器内的数据文件映射到宿主机，通过宿主机来管理如容器内的配置文件。</p>
+<p><strong>参数说明：</strong></p>
+<ul>
+<li>-v [容器需挂载的目录]</li>
+</ul>
+<p>​	创建一个容器，将容器内的&#x2F;usr&#x2F;share&#x2F;nginx&#x2F;html&#x2F;“目录做成卷的方式进行管理，查看容器详细信息，发现该容器的数据类型为volume【卷】，卷的名字为【e38a7e9eb……】，该卷在宿主机中的【&#x2F;var&#x2F;lib&#x2F;docker&#x2F;volumes&#x2F;e38a7…..】目录下进行管理，对应挂载了容器内的【”&#x2F;usr&#x2F;share&#x2F;nginx&#x2F;html”】目录</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">[root@reg ~]# docker run -d -v /usr/share/nginx/html/ -p 81:80 docker.m.daocloud.io/nginx:latest </span><br><span class="line">53de2bd999b7cfb2a0b8411176d635462f5680ebf207d9dd838e3b5dead1a2f3</span><br><span class="line"></span><br><span class="line">[root@reg ~]# docker inspect 53de2bd999b7 | grep -A 10 Mounts</span><br><span class="line">        <span class="string">&quot;Mounts&quot;</span>: [</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="string">&quot;Type&quot;</span>: <span class="string">&quot;volume&quot;</span>,</span><br><span class="line">                <span class="string">&quot;Name&quot;</span>: <span class="string">&quot;e38a7e9eb84c1f447ebab4f879c381cd0692b22ae84ef8bd08fe74e3241bb48d&quot;</span>,</span><br><span class="line">                <span class="string">&quot;Source&quot;</span>: <span class="string">&quot;/var/lib/docker/volumes/e38a7e9eb84c1f447ebab4f879c381cd0692b22ae84ef8bd08fe74e3241bb48d/_data&quot;</span>,</span><br><span class="line">                <span class="string">&quot;Destination&quot;</span>: <span class="string">&quot;/usr/share/nginx/html&quot;</span>,</span><br><span class="line">                <span class="string">&quot;Driver&quot;</span>: <span class="string">&quot;local&quot;</span>,</span><br><span class="line">                <span class="string">&quot;Mode&quot;</span>: <span class="string">&quot;&quot;</span>,</span><br><span class="line">                <span class="string">&quot;RW&quot;</span>: <span class="literal">true</span>,</span><br><span class="line">                <span class="string">&quot;Propagation&quot;</span>: <span class="string">&quot;&quot;</span></span><br><span class="line">            &#125;</span><br><span class="line">[root@reg ~]# docker volume <span class="built_in">ls</span> | grep <span class="string">&quot;e38a7e9eb84c1f447ebab4f879c381cd0692b22ae84ef8bd08fe74e3241bb48d&quot;</span></span><br><span class="line"><span class="built_in">local</span>     e38a7e9eb84c1f447ebab4f879c381cd0692b22ae84ef8bd08fe74e3241bb48d</span><br><span class="line"><span class="comment"># 尝试修改挂载到宿主机的容器数据文件</span></span><br><span class="line">[root@reg ~]# <span class="built_in">echo</span> <span class="string">&quot;这是一个lovume的容器卷实验&quot;</span> &gt; /var/lib/docker/volumes/e38a7e9eb84c1f447ebab4f879c381cd0692b22ae84ef8bd08fe74e3241bb48d/_data/index.html</span><br><span class="line"><span class="comment"># 访问容器服务，容器内的数据文件确实已被修改</span></span><br><span class="line">[root@reg ~]# curl 127.0.0.1:81</span><br><span class="line">这是一个lovume的容器卷实验</span><br><span class="line"><span class="comment"># 即使我将容器给删除</span></span><br><span class="line">[root@reg ~]# docker <span class="built_in">rm</span> 53de2bd999b7 --force </span><br><span class="line">53de2bd999b7</span><br><span class="line"><span class="comment"># 他的数据卷依然存在</span></span><br><span class="line">[root@reg ~]# docker volume <span class="built_in">ls</span> | grep <span class="string">&quot;e38a7e9eb84c1f447ebab4f879c381cd0692b22ae84ef8bd08fe74e3241bb48d&quot;</span></span><br><span class="line"><span class="built_in">local</span>     e38a7e9eb84c1f447ebab4f879c381cd0692b22ae84ef8bd08fe74e3241bb48d</span><br><span class="line"><span class="comment"># 以及该目录下的文件依然存在</span></span><br><span class="line">[root@reg _data]# <span class="built_in">cat</span> /var/lib/docker/volumes/e38a7e9eb84c1f447ebab4f879c381cd0692b22ae84ef8bd08fe74e3241bb48d/_data/index.html </span><br><span class="line">这是一个lovume的容器卷实验</span><br></pre></td></tr></table></figure>
+
+<p>​	但是大家会发现容器内的数据文件确认是挂载出来了，但是挂载出来到宿主机的这个目录实在是太长了，而且中间还是一串乱码，并且有过Linux基础的还会发现这个&#x2F;var目录下的都是临时文件，容器关机不会引起数据丢失，但是如果服务器关机重启，数据文件还是一样会丢失，并不能完全满足业务中的持久化存储以及便利性。</p>
+<h2 id="数据管理-bind"><a href="#数据管理-bind" class="headerlink" title="数据管理-bind"></a>数据管理-bind</h2><p>​	为此我们可以使用更优解的方式，将指定的宿主机目录挂载到指定的指定的容器目录，互相mount绑定。</p>
+<p><strong>参数说明：</strong></p>
+<ul>
+<li>-v [宿主机目录]:[容器目录]</li>
+</ul>
+<p>​	创建一个持久化的宿主机目录，然后创建容器并使用-v[宿主机目录]:[容器目录]将互相mount挂载，向宿主机目录写入文件已验证，查看容器详细信息可看到此刻绑定的卷类型为bind，以及他的宿主机源目录以及容器目标目录。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 创建一个我们需要持久化存储的目录</span></span><br><span class="line">[root@reg _data]# <span class="built_in">mkdir</span> /opt/nginx</span><br><span class="line"><span class="comment"># 创建一个容器，宿主机目录/opt/nginx:容器目录/usr/share/nginx/html/</span></span><br><span class="line">[root@reg ~]# docker run -d -v /opt/nginx:/usr/share/nginx/html/ -p 81:80 docker.m.daocloud.io/nginx:latest</span><br><span class="line"><span class="comment"># 像挂载目录写入文件。</span></span><br><span class="line">[root@reg opt]# <span class="built_in">echo</span> <span class="string">&quot;这是一个持久化mount的目录&quot;</span> &gt; /opt/nginx/index.html</span><br><span class="line"><span class="comment"># 验证是否修改了容器内的数据文件</span></span><br><span class="line">[root@reg opt]# curl 127.0.0.1:81</span><br><span class="line">这是一个持久化mount的目录</span><br><span class="line"><span class="comment"># 同时我们可以查看到容器详细信息，他绑定的卷类型为bind</span></span><br><span class="line">[root@reg opt]# docker inspect 5abc1cb9f4a5 | grep -A 10 Mounts</span><br><span class="line">        <span class="string">&quot;Mounts&quot;</span>: [</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="string">&quot;Type&quot;</span>: <span class="string">&quot;bind&quot;</span>,</span><br><span class="line">                <span class="string">&quot;Source&quot;</span>: <span class="string">&quot;/opt/nginx&quot;</span>,</span><br><span class="line">                <span class="string">&quot;Destination&quot;</span>: <span class="string">&quot;/usr/share/nginx/html&quot;</span>,</span><br><span class="line">                <span class="string">&quot;Mode&quot;</span>: <span class="string">&quot;&quot;</span>,</span><br><span class="line">                <span class="string">&quot;RW&quot;</span>: <span class="literal">true</span>,</span><br><span class="line">                <span class="string">&quot;Propagation&quot;</span>: <span class="string">&quot;rprivate&quot;</span></span><br><span class="line">            &#125;</span><br><span class="line">        ],</span><br><span class="line">        <span class="string">&quot;Config&quot;</span>: &#123;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>​	心细的可以他发现volume和bind查看容器详细信息时有个区别，bind少了name卷名称的参数，没错bind是mount挂载的方式，他不会新生成卷，所以你即使docker volume发现他是没有生成卷的。</p>
+<p>​	之前我们介绍的Harbor官方也是采用bind方式来持久化存储我们所有上传的镜像文件，不然我们上传的镜像只要关闭容器或者关闭宿主机，上传的镜像就会丢失，以下示例可以验证以下。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 查看我们harbor-db的服务，这是他的数据库</span></span><br><span class="line"><span class="comment"># 可以看出，他的数据是存放在我们宿主机的/data/database目录中的</span></span><br><span class="line">[root@reg opt]# docker inspect harbor-db | grep -A 10 Mounts</span><br><span class="line">        <span class="string">&quot;Mounts&quot;</span>: [</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="string">&quot;Type&quot;</span>: <span class="string">&quot;bind&quot;</span>,</span><br><span class="line">                <span class="string">&quot;Source&quot;</span>: <span class="string">&quot;/data/database&quot;</span>,</span><br><span class="line">                <span class="string">&quot;Destination&quot;</span>: <span class="string">&quot;/var/lib/postgresql/data&quot;</span>,</span><br><span class="line">                <span class="string">&quot;Mode&quot;</span>: <span class="string">&quot;rw,z&quot;</span>,</span><br><span class="line">                <span class="string">&quot;RW&quot;</span>: <span class="literal">true</span>,</span><br><span class="line">                <span class="string">&quot;Propagation&quot;</span>: <span class="string">&quot;rprivate&quot;</span></span><br><span class="line">            &#125;</span><br><span class="line">        ],</span><br><span class="line">        <span class="string">&quot;Config&quot;</span>: &#123;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="http://example.com">李维虎</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="http://example.com/2025/06/05/03-Kubernetes/CKA-kubernetes-%E7%AC%AC%E4%B8%80%E7%AB%A0/">http://example.com/2025/06/05/03-Kubernetes/CKA-kubernetes-%E7%AC%AC%E4%B8%80%E7%AB%A0/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">此文章版权归博主所有，如有转载，请注明来自原作者，联系方式（微信）：a1253582301</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Kubernetes/">Kubernetes</a></div><div class="post-share"><div class="social-share" data-image="/img/doc_img/Kubernetes.webp" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><div class="post-reward"><div class="reward-button"><i class="fas fa-qrcode"></i>赞助</div><div class="reward-main"><ul class="reward-all"><li class="reward-item"><a href="/img/wx.jpg" target="_blank"><img class="post-qr-code-img" src="/img/wx.jpg" alt="wechat"/></a><div class="post-qr-code-desc">wechat</div></li><li class="reward-item"><a href="/img/zfb.jpg" target="_blank"><img class="post-qr-code-img" src="/img/zfb.jpg" alt="alipay"/></a><div class="post-qr-code-desc">alipay</div></li></ul></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related full-width" href="/2025/06/04/01-RHCE/01-124/Linux-RHCE-124-%E7%AC%AC%E5%85%AB%E7%AB%A0%E8%8A%82/" title="Linux-RHCE-124-第八章节"><img class="cover" src="/img/doc_img/RHCE_cover.jpeg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="info"><div class="info-1"><div class="info-item-1">上一篇</div><div class="info-item-2">Linux-RHCE-124-第八章节</div></div><div class="info-2"><div class="info-item-1">控制服务和守护进程识别自动启动的系统进程Systemd守护进程简介​	Systemd守护进程管理Linux的启动过程，一般包括服务启动和服务管理。systemd守护进程可再系统引导时以及运行中的系统上激活系统资源、服务器守护进程和其他进程。 ​	守护进程是再执行各种任务的后台等待或运行的进程。一般情况下，守护进程再系统引导时自动启用并持续运行至关机或您手动将它停止。按照管理，守护进程的名称以及字母d结尾。 ​	在systemd意义上，服务通常是指一个或多个守护进程。但是，启动或停止服务可能会更改一次系统状态，之后不会留下一个运行中的守护进程（称之为oneshot）。 ​	在红帽企业Linux中，第一个启动的进程（PID1）是systemd守护进程，它提供以下功能：  并行化功能（同时运行多个服务），它可提高系统的启动速度。 按需启动守护进程，而不需要单独的服务。 自动服务依赖关系管理，可以防止长时间超时。例如，只有在网络可用时，依赖网络的服务才会尝试启动。 利用Linux控制组一起追踪相关进程的方式。  服务单元描述​	 </div></div></div></a></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/img/head/head.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">李维虎</div><div class="author-info-description">一个热爱技术分享的有志青年</div><div class="site-data"><a href="/archives/"><div class="headline">文章</div><div class="length-num">10</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">3</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">3</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content"><p>欢迎来到我的<em>博客网站</em>，如对文章内容有疑惑可扫描二维码添加博主微信。</p> <p>文章来之不易，如认为文章不错请在文章底部为博主打赏,你的支持是我持续更新的动力</p> <CENTER><img src="img\index_img/wxewm.png" alt="描述文字" style="width:250px; height:250px;"></CENTER></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content is-expand"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%88%9D%E6%97%B6%E5%BE%AE%E6%9C%8D%E5%8A%A1"><span class="toc-number">1.</span> <span class="toc-text">初时微服务</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9F%BA%E4%BA%8E%E5%BE%AE%E6%9C%8D%E5%8A%A1%E7%9A%84%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84"><span class="toc-number">1.1.</span> <span class="toc-text">基于微服务的系统架构</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BC%A0%E7%BB%9F%E5%8D%95%E4%BD%93%E6%9E%B6%E6%9E%84VS%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%9E%B6%E6%9E%84"><span class="toc-number">1.2.</span> <span class="toc-text">传统单体架构VS微服务架构</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%AE%B9%E5%99%A8%E4%BB%8B%E7%BB%8D"><span class="toc-number">2.</span> <span class="toc-text">容器介绍</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BC%A0%E7%BB%9F%E5%BA%94%E7%94%A8%E9%83%A8%E7%BD%B2%E7%97%9B%E7%82%B9"><span class="toc-number">2.1.</span> <span class="toc-text">传统应用部署痛点</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%B9%E5%99%A8%E5%8C%96%E6%8A%80%E6%9C%AF%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88"><span class="toc-number">2.2.</span> <span class="toc-text">容器化技术解决方案</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%B9%E5%99%A8%E5%8C%96%E7%9A%84%E6%A0%B8%E5%BF%83%E7%90%86%E5%BF%B5"><span class="toc-number">2.3.</span> <span class="toc-text">容器化的核心理念</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Docker%E7%9A%84%E6%A0%B8%E5%BF%83%E6%A6%82%E5%BF%B5"><span class="toc-number">2.4.</span> <span class="toc-text">Docker的核心概念</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%A6%BB%E7%BA%BF%E9%83%A8%E7%BD%B2docker"><span class="toc-number">3.</span> <span class="toc-text">离线部署docker</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%AE%B9%E5%99%A8%E7%9A%84%E4%BD%BF%E7%94%A8"><span class="toc-number">4.</span> <span class="toc-text">容器的使用</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%9B%E5%BB%BA%E7%AC%AC%E4%B8%80%E4%B8%AA%E5%AE%B9%E5%99%A8"><span class="toc-number">4.1.</span> <span class="toc-text">创建第一个容器</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%9B%E5%BB%BA%E4%B8%80%E4%B8%AA%E5%8F%AF%E6%8C%81%E7%BB%AD%E8%BF%90%E8%A1%8C%E7%9A%84%E5%AE%B9%E5%99%A8"><span class="toc-number">4.2.</span> <span class="toc-text">创建一个可持续运行的容器</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B0%9D%E8%AF%95%E8%BF%9B%E5%85%A5%E5%AE%B9%E5%99%A8"><span class="toc-number">4.3.</span> <span class="toc-text">尝试进入容器</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%95%9C%E5%83%8F%E7%9A%84%E4%BD%BF%E7%94%A8"><span class="toc-number">5.</span> <span class="toc-text">镜像的使用</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%95%9C%E5%83%8F%E6%A6%82%E8%BF%B0"><span class="toc-number">5.1.</span> <span class="toc-text">镜像概述</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%AC%E5%85%B1%E9%95%9C%E5%83%8F%E4%BB%93%E5%BA%93"><span class="toc-number">5.2.</span> <span class="toc-text">公共镜像仓库</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%A7%81%E6%9C%89%E9%95%9C%E5%83%8F%E4%BB%93%E5%BA%93"><span class="toc-number">5.3.</span> <span class="toc-text">私有镜像仓库</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9F%A5%E7%9C%8B%E6%9C%AC%E5%9C%B0%E9%95%9C%E5%83%8F"><span class="toc-number">5.4.</span> <span class="toc-text">查看本地镜像</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9E%84%E5%BB%BA%E9%95%9C%E5%83%8F%E7%9A%84%E6%96%B9%E5%BC%8F"><span class="toc-number">5.5.</span> <span class="toc-text">构建镜像的方式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#commit%E9%95%9C%E5%83%8F%E6%9E%84%E5%BB%BA"><span class="toc-number">5.6.</span> <span class="toc-text">commit镜像构建</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#DockerFile%E7%9A%84%E4%BD%BF%E7%94%A8"><span class="toc-number">6.</span> <span class="toc-text">DockerFile的使用</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8DockerFile%E5%AE%9A%E5%88%B6%E9%95%9C%E5%83%8F"><span class="toc-number">6.1.</span> <span class="toc-text">使用DockerFile定制镜像</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BC%80%E5%A7%8B%E6%9E%84%E5%BB%BA%E9%95%9C%E5%83%8F"><span class="toc-number">6.2.</span> <span class="toc-text">开始构建镜像</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#DockerFile%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4%E9%9B%86"><span class="toc-number">6.3.</span> <span class="toc-text">DockerFile常用指令集</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#LABEL%E6%8C%87%E4%BB%A4%E7%9A%84%E4%BD%BF%E7%94%A8"><span class="toc-number">6.4.</span> <span class="toc-text">LABEL指令的使用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#CMD%E6%8C%87%E4%BB%A4%E7%9A%84%E4%BD%BF%E7%94%A8"><span class="toc-number">6.5.</span> <span class="toc-text">CMD指令的使用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ENTRYPOINT%E6%8C%87%E4%BB%A4%E7%9A%84%E4%BD%BF%E7%94%A8"><span class="toc-number">6.6.</span> <span class="toc-text">ENTRYPOINT指令的使用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%A0%E9%99%A4%E5%AE%B9%E5%99%A8%E5%92%8C%E6%9C%AC%E5%9C%B0%E9%95%9C%E5%83%8F"><span class="toc-number">6.7.</span> <span class="toc-text">删除容器和本地镜像</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%9E%84%E5%BB%BAHarbor%E7%A7%81%E6%9C%89%E9%95%9C%E5%83%8F%E4%BB%93%E5%BA%93"><span class="toc-number">7.</span> <span class="toc-text">构建Harbor私有镜像仓库</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%A1%AE%E4%BF%9D%E6%82%A8%E7%9A%84%E7%9B%AE%E6%A0%87%E4%B8%BB%E6%9C%BA%E6%BB%A1%E8%B6%B3Harbor%E5%AE%89%E8%A3%85%E5%89%8D%E6%8F%90%E6%9D%A1%E4%BB%B6"><span class="toc-number">7.1.</span> <span class="toc-text">确保您的目标主机满足Harbor安装前提条件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%8B%E8%BD%BDHarbor%E5%AE%89%E8%A3%85%E7%A8%8B%E5%BA%8F"><span class="toc-number">7.2.</span> <span class="toc-text">下载Harbor安装程序</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%85%8D%E7%BD%AE%E8%AE%BF%E9%97%AEHarbor%E7%9A%84HTTPS"><span class="toc-number">7.3.</span> <span class="toc-text">配置访问Harbor的HTTPS</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B0%86%E8%AF%81%E4%B9%A6%E6%8F%90%E4%BE%9B%E7%BB%99Harbor%E5%92%8CDocker"><span class="toc-number">7.4.</span> <span class="toc-text">将证书提供给Harbor和Docker</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%85%8D%E7%BD%AEHarborYML%E6%96%87%E4%BB%B6"><span class="toc-number">7.5.</span> <span class="toc-text">配置HarborYML文件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%83%A8%E7%BD%B2Docker-compose"><span class="toc-number">7.6.</span> <span class="toc-text">部署Docker-compose</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BF%90%E8%A1%8C%E5%AE%89%E8%A3%85%E8%84%9A%E6%9C%AC"><span class="toc-number">7.7.</span> <span class="toc-text">运行安装脚本</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B0%86Harbor%E6%9C%8D%E5%8A%A1%E5%8A%A0%E5%85%A5%E5%AE%88%E6%8A%A4%E8%BF%9B%E7%A8%8B"><span class="toc-number">7.8.</span> <span class="toc-text">将Harbor服务加入守护进程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%A7%81%E6%9C%89%E9%95%9C%E5%83%8F%E7%9A%84%E4%B8%8A%E4%BC%A0%E5%8F%8A%E6%8B%89%E5%8F%96"><span class="toc-number">7.9.</span> <span class="toc-text">私有镜像的上传及拉取</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%AE%B9%E5%99%A8%E7%9A%84%E8%B5%84%E6%BA%90%E9%85%8D%E9%A2%9D"><span class="toc-number">8.</span> <span class="toc-text">容器的资源配额</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%B9%E5%99%A8%E5%86%85%E5%AD%98%E9%99%90%E9%A2%9D"><span class="toc-number">8.1.</span> <span class="toc-text">容器内存限额</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%B9%E5%99%A8CPU%E9%99%90%E9%A2%9D"><span class="toc-number">8.2.</span> <span class="toc-text">容器CPU限额</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AE%A1%E7%90%86%E5%AE%B9%E5%99%A8%E7%9A%84I-O%E9%85%8D%E9%A2%9D"><span class="toc-number">8.3.</span> <span class="toc-text">管理容器的I&#x2F;O配额</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%AE%B9%E5%99%A8%E7%BD%91%E7%BB%9C"><span class="toc-number">9.</span> <span class="toc-text">容器网络</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%B9%E5%99%A8%E5%8E%9F%E7%94%9F%E7%BD%91%E7%BB%9C"><span class="toc-number">9.1.</span> <span class="toc-text">容器原生网络</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Docker%E7%BD%91%E7%BB%9C%E7%AB%AF%E5%8F%A3%E6%98%A0%E5%B0%84"><span class="toc-number">9.2.</span> <span class="toc-text">Docker网络端口映射</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%85%8D%E7%BD%AE%E5%AE%B9%E5%99%A8DNS"><span class="toc-number">9.3.</span> <span class="toc-text">配置容器DNS</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%AE%B9%E5%99%A8%E6%95%B0%E6%8D%AE%E5%8D%B7"><span class="toc-number">10.</span> <span class="toc-text">容器数据卷</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%B9%E5%99%A8%E5%92%8C%E5%B1%82"><span class="toc-number">10.1.</span> <span class="toc-text">容器和层</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Copy-on-write%E7%AD%96%E7%95%A5"><span class="toc-number">10.2.</span> <span class="toc-text">Copy-on-write策略</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%B9%E5%99%A8%E6%95%B0%E6%8D%AE%E7%AE%A1%E7%90%86-Volume"><span class="toc-number">10.3.</span> <span class="toc-text">容器数据管理-Volume</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E7%AE%A1%E7%90%86-bind"><span class="toc-number">10.4.</span> <span class="toc-text">数据管理-bind</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2025/06/05/03-Kubernetes/CKA-kubernetes-%E7%AC%AC%E4%B8%80%E7%AB%A0/" title="CKA-kubernetes-第一章"><img src="/img/doc_img/Kubernetes.webp" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="CKA-kubernetes-第一章"/></a><div class="content"><a class="title" href="/2025/06/05/03-Kubernetes/CKA-kubernetes-%E7%AC%AC%E4%B8%80%E7%AB%A0/" title="CKA-kubernetes-第一章">CKA-kubernetes-第一章</a><time datetime="2025-06-05T02:38:53.000Z" title="发表于 2025-06-05 10:38:53">2025-06-05</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/06/04/01-RHCE/01-124/Linux-RHCE-124-%E7%AC%AC%E5%85%AB%E7%AB%A0%E8%8A%82/" title="Linux-RHCE-124-第八章节"><img src="/img/doc_img/RHCE_cover.jpeg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Linux-RHCE-124-第八章节"/></a><div class="content"><a class="title" href="/2025/06/04/01-RHCE/01-124/Linux-RHCE-124-%E7%AC%AC%E5%85%AB%E7%AB%A0%E8%8A%82/" title="Linux-RHCE-124-第八章节">Linux-RHCE-124-第八章节</a><time datetime="2025-06-04T08:24:51.000Z" title="发表于 2025-06-04 16:24:51">2025-06-04</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/05/26/01-RHCE/01-124/Linux-RHCE-124-%E7%AC%AC%E4%B8%83%E7%AB%A0%E8%8A%82/" title="Linux-RHCE-124-第七章节"><img src="/img/doc_img/RHCE_cover.jpeg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Linux-RHCE-124-第七章节"/></a><div class="content"><a class="title" href="/2025/05/26/01-RHCE/01-124/Linux-RHCE-124-%E7%AC%AC%E4%B8%83%E7%AB%A0%E8%8A%82/" title="Linux-RHCE-124-第七章节">Linux-RHCE-124-第七章节</a><time datetime="2025-05-26T08:59:32.000Z" title="发表于 2025-05-26 16:59:32">2025-05-26</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/05/20/02-Linux%E5%BC%82%E5%B8%B8%E9%97%AE%E9%A2%98/Linux%E6%A0%B9%E6%8C%82%E8%BD%BD%E7%9B%98%E6%89%A9%E5%AE%B9/" title="Linux根目录磁盘扩容"><img src="/img/doc_img/RHCE_cover.jpeg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Linux根目录磁盘扩容"/></a><div class="content"><a class="title" href="/2025/05/20/02-Linux%E5%BC%82%E5%B8%B8%E9%97%AE%E9%A2%98/Linux%E6%A0%B9%E6%8C%82%E8%BD%BD%E7%9B%98%E6%89%A9%E5%AE%B9/" title="Linux根目录磁盘扩容">Linux根目录磁盘扩容</a><time datetime="2025-05-20T08:45:28.527Z" title="发表于 2025-05-20 16:45:28">2025-05-20</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/05/20/01-RHCE/01-124/Linux-RHCE-124-%E7%AC%AC%E5%85%AD%E7%AB%A0%E8%8A%82/" title="Linux-RHCE-124-第六章节"><img src="/img/doc_img/RHCE_cover.jpeg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Linux-RHCE-124-第六章节"/></a><div class="content"><a class="title" href="/2025/05/20/01-RHCE/01-124/Linux-RHCE-124-%E7%AC%AC%E5%85%AD%E7%AB%A0%E8%8A%82/" title="Linux-RHCE-124-第六章节">Linux-RHCE-124-第六章节</a><time datetime="2025-05-20T08:18:29.000Z" title="发表于 2025-05-20 16:18:29">2025-05-20</time></div></div></div></div></div></div></main><footer id="footer" style="background-image: url(img/doc_img/Kubernetes.webp);"><div id="footer-wrap"><div class="copyright">&copy;2025 By 李维虎</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo 7.3.0</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly 5.3.3</a></div><div class="footer_custom_text">主题框架声明</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="translateLink" type="button" title="简繁转换">繁</button><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/tw_cn.js"></script><div class="js-pjax"></div><div class="aplayer no-destroy" data-id="60198" data-server="netease" data-type="playlist" data-fixed="true" data-autoplay="true"> </div><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/activate-power-mode.min.js"></script><script>POWERMODE.colorful = true;
+POWERMODE.shake = true;
+POWERMODE.mobile = false;
+document.body.addEventListener('input', POWERMODE);
+</script><script id="click-show-text" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/click-show-text.min.js" data-mobile="true" data-text="晚,上,好" data-fontsize="20px" data-random="true" async="async"></script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/metingjs/dist/Meting.min.js"></script><script>(() => {
+  const destroyAplayer = () => {
+    if (window.aplayers) {
+      for (let i = 0; i < window.aplayers.length; i++) {
+        if (!window.aplayers[i].options.fixed) {
+          window.aplayers[i].destroy()
+        }
+      }
+    }
+  }
+
+  const runMetingJS = () => {
+    typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
+  }
+
+  btf.addGlobalFn('pjaxSend', destroyAplayer, 'destroyAplayer')
+  btf.addGlobalFn('pjaxComplete', loadMeting, 'runMetingJS')
+})()</script><script src="https://cdn.jsdelivr.net/npm/pjax/pjax.min.js"></script><script>(() => {
+  const pjaxSelectors = ["head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+
+  window.pjax = new Pjax({
+    elements: 'a:not([target="_blank"])',
+    selectors: pjaxSelectors,
+    cacheBust: false,
+    analytics: false,
+    scrollRestoration: false
+  })
+
+  const triggerPjaxFn = (val) => {
+    if (!val) return
+    Object.values(val).forEach(fn => fn())
+  }
+
+  document.addEventListener('pjax:send', () => {
+    // removeEventListener
+    btf.removeGlobalFnEvent('pjaxSendOnce')
+    btf.removeGlobalFnEvent('themeChange')
+
+    // reset readmode
+    const $bodyClassList = document.body.classList
+    if ($bodyClassList.contains('read-mode')) $bodyClassList.remove('read-mode')
+
+    triggerPjaxFn(window.globalFn.pjaxSend)
+  })
+
+  document.addEventListener('pjax:complete', () => {
+    btf.removeGlobalFnEvent('pjaxCompleteOnce')
+    document.querySelectorAll('script[data-pjax]').forEach(item => {
+      const newScript = document.createElement('script')
+      const content = item.text || item.textContent || item.innerHTML || ""
+      Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+      newScript.appendChild(document.createTextNode(content))
+      item.parentNode.replaceChild(newScript, item)
+    })
+
+    triggerPjaxFn(window.globalFn.pjaxComplete)
+  })
+
+  document.addEventListener('pjax:error', e => {
+    if (e.request.status === 404) {
+      window.location.href = e.request.responseURL
+    }
+  })
+})()</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="text-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div><div id="local-search-stats-wrap"></div></div></div><div id="search-mask"></div><script src="/js/search/local-search.js"></script></div></div></body></html>
